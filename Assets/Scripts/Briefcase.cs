@@ -17,21 +17,22 @@ public class Briefcase : MonoBehaviour
 
     private void Start()
     {
-        _briefCaseBtn.onButtonDown.AddListener(() =>
-        {
-            TriggerOpenCloseAnim();
-        });
+        _briefCaseBtn.onButtonDown.AddListener(TriggerOpenCloseAnim);
+
     }
+
     public void TriggerOpenCloseAnim()
     {
 
         if (isOpen == false)
         {
             _briefCaseAnim.SetTrigger(OpenBriefHash);
+            isOpen = true;
         }
         else
         {
             _briefCaseAnim.SetTrigger(CloseBriefHash);
+            isOpen = false;
         }
     }
 
