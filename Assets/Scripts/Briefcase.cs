@@ -12,6 +12,7 @@ public class Briefcase : MonoBehaviour
     [Header("Reference")]
     [SerializeField] Animator _briefCaseAnim;
     [SerializeField] Button _briefCaseBtn;
+    //[SerializeField] BoxCollider _boxCollider;
 
     bool isOpen = false;
 
