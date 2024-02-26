@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7824860283671528185}
+  - component: {fileID: 6538175031328611227}
   m_Layer: 0
   m_Name: Langkah2Prefab
   m_TagString: Untagged
@@ -37,6 +38,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 400, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &6538175031328611227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2523149710887049346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48f358128f9397846952922fb2990918, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _langkahName: {fileID: 4775166947440964423}
+  _imgLangkahState: {fileID: 6839918018324886352}
+  _buttonLangkah: {fileID: 693301949862532874}
 --- !u!1 &5480258103162911806
 GameObject:
   m_ObjectHideFlags: 0
@@ -245,7 +261,7 @@ GameObject:
   - component: {fileID: 6741533623882954099}
   - component: {fileID: 4775166947440964423}
   m_Layer: 0
-  m_Name: Text (TMP)
+  m_Name: Text_LangkahName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
