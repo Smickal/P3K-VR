@@ -6,6 +6,15 @@ using TMPro;
 public class KitUiManager : MonoBehaviour
 {
     [Header("UI")]
-    [SerializeField] TMP_Text _headingText;
-    [SerializeField] TMP_Text _descriptionText;
+    [SerializeField] BaseKitUI[] _baseUIs;
+
+    public void OpenUI(BaseKitUI KitUI)
+    {
+        foreach (var kit in _baseUIs)
+        {
+            kit.ResetData();
+        }
+
+        KitUI.StartData();
+    }
 }

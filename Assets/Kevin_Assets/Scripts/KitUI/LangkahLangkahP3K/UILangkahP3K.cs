@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-public class UILangkahP3K : MonoBehaviour, IKitUI
+public class UILangkahP3K : BaseKitUI
 {
     [Header("DescriptionDetails")]
 
@@ -50,7 +50,7 @@ public class UILangkahP3K : MonoBehaviour, IKitUI
         _backButton.onClick.AddListener(StartData);
     }
 
-    public void StartData()
+    public override void StartData()
     {
         _masterContainerOBJ.SetActive(true);
 
@@ -60,7 +60,7 @@ public class UILangkahP3K : MonoBehaviour, IKitUI
         ResetProcedureDescription();
     }
 
-    public void ResetData()
+    public override void ResetData()
     {
         _masterContainerOBJ.SetActive(false);
 

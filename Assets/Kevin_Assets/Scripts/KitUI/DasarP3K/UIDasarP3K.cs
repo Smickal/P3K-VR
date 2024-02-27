@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class UIDasarP3K : MonoBehaviour, IKitUI
+public class UIDasarP3K : BaseKitUI
 {
     [TextArea(5,7)][SerializeField] string textData;
 
@@ -17,12 +17,12 @@ public class UIDasarP3K : MonoBehaviour, IKitUI
     }
 
 
-    public void StartData()
+    public override void StartData()
     {
         _containerGO.SetActive(true);       
     }
 
-    public void ResetData()
+    public override void ResetData()
     {
         _containerGO.SetActive(false);
     }
