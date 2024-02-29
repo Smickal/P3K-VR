@@ -19,7 +19,7 @@ public class SOKotakP3K : ScriptableObject
     }
 #endif
 
-    public string KitName;
+    public ENameOfKit KitName;
     public Sprite KitIMG;
 
     [TextArea(7, 7)] public string KitDescText;
