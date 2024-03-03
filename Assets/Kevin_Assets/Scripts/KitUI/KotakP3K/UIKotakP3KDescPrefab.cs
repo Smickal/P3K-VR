@@ -15,10 +15,11 @@ public class UIKotakP3KDescPrefab : MonoBehaviour
 
     SOKotakP3K scriptableData;
  
-    public SOKotakP3K Data { get { return scriptableData; } }
-
-
     bool state = false;
+
+    public SOKotakP3K Data { get { return scriptableData; } }
+    public bool State { get { return state; } }
+
     public void SetData(SOKotakP3K data, UIKotakP3K UIKotakP3K)
     {
         scriptableData = data;

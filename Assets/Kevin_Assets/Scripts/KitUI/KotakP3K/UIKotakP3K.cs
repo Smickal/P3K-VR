@@ -39,7 +39,7 @@ public class UIKotakP3K : BaseKitUI
     {
         CheckUnlock += UnlockAKit;
 
-        UnlockedKitSavedData = new bool[_scriptableDatas.Length];
+        
 
         Load();
     }
@@ -88,8 +88,10 @@ public class UIKotakP3K : BaseKitUI
     {
         foreach(var kitInstance in ListOfDataInstance)
         {
-            if(kitInstance.Data.KitName == scriptableData.KitName)
+            if(kitInstance.Data.KitName == scriptableData.KitName && kitInstance.State == false)
             {
+                //Debug.Log(scriptableData.KitName + " Unlocked");
+
                 kitInstance.SetState(true);
                 UnlockedKitSavedData[(int)kitInstance.Data.KitName] = true;
 
@@ -110,8 +112,18 @@ public class UIKotakP3K : BaseKitUI
 
     private void Load()
     {
-        string loadString = PlayerPrefs.GetString(SaveStateKey);
-        UnlockedKitSavedData = JsonConvert.DeserializeObject<bool[]>(loadString);
+
+        if (PlayerPrefs.HasKey(SaveStateKey))
+        {
+            string loadString = PlayerPrefs.GetString(SaveStateKey);
+            UnlockedKitSavedData = JsonConvert.DeserializeObject<bool[]>(loadString);
+        }
+
+        else
+        {
+            UnlockedKitSavedData = new bool[_scriptableDatas.Length];
+
+        }
 
     }
 }
