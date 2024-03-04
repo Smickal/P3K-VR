@@ -8,6 +8,7 @@ public class KitP3K : GrabbableEvents
     [SerializeField] SOKotakP3K _scriptableData;
     public override void OnTriggerDown()
     {
+        Debug.Log(_scriptableData.KitName);
         UIKotakP3K.CheckUnlock(_scriptableData);
 
         base.OnTriggerDown();
@@ -15,9 +16,9 @@ public class KitP3K : GrabbableEvents
 
     public override void OnGrip(float gripValue)
     {
-        if(gripValue > 0.8f)
+        if (gripValue > 0.8f)
         {
             UIKotakP3K.CheckUnlock(_scriptableData);
         }
-    }
+    }   
 }
