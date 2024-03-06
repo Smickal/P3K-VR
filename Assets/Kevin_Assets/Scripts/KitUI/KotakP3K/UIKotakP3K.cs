@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Newtonsoft.Json;
+using JetBrains.Annotations;
 
 public class UIKotakP3K : BaseKitUI
 {
@@ -34,12 +35,14 @@ public class UIKotakP3K : BaseKitUI
 
     bool[] UnlockedKitSavedData;
     List<UIKotakP3KDescPrefab> ListOfDataInstance = new List<UIKotakP3KDescPrefab>();
+    public int test = 0;
 
     private void Awake()
     {
         CheckUnlock += UnlockAKit;
 
-        
+        test+= 1;
+        Debug.Log("AAA");
 
         Load();
     }
