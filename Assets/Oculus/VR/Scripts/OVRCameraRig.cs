@@ -60,77 +60,77 @@ public class OVRCameraRig : MonoBehaviour
     /// <summary>
     /// Always coincides with the pose of the left eye.
     /// </summary>
-    public Transform leftEyeAnchor { get; private set; }
+    [SerializeField]public Transform leftEyeAnchor { get; private set; }
 
     /// <summary>
     /// Always coincides with average of the left and right eye poses.
     /// </summary>
-    public Transform centerEyeAnchor { get; private set; }
+    [SerializeField]public Transform centerEyeAnchor { get; private set; }
 
     /// <summary>
     /// Always coincides with the pose of the right eye.
     /// </summary>
-    public Transform rightEyeAnchor { get; private set; }
+    [SerializeField]public Transform rightEyeAnchor { get; private set; }
 
     /// <summary>
     /// Always coincides with the pose of the left active input device.
     /// </summary>
-    public Transform leftHandAnchor { get; private set; }
+    [SerializeField]public Transform leftHandAnchor { get; private set; }
 
     /// <summary>
     /// Always coincides with the pose of the right active input device.
     /// </summary>
-    public Transform rightHandAnchor { get; private set; }
+    [SerializeField]public Transform rightHandAnchor { get; private set; }
 
     /// <summary>
     /// Coincides with the pose of the left input device if it is detached.
     /// </summary>
-    public Transform leftHandAnchorDetached { get; private set; }
+    [SerializeField]public Transform leftHandAnchorDetached { get; private set; }
 
     /// <summary>
     /// Coincides with the pose of the left input device if it is detached.
     /// </summary>
-    public Transform rightHandAnchorDetached { get; private set; }
+    [SerializeField]public Transform rightHandAnchorDetached { get; private set; }
 
     /// <summary>
     /// Coincides with the pose of the left controller when it is in a hand
     /// </summary>
-    public Transform leftControllerInHandAnchor { get; private set; }
+    [SerializeField]public Transform leftControllerInHandAnchor { get; private set; }
 
     /// <summary>
     /// Coincides with the pose of the left hand when it is on a controller
     /// </summary>
-    public Transform leftHandOnControllerAnchor { get; private set; }
+    [SerializeField]public Transform leftHandOnControllerAnchor { get; private set; }
 
     /// <summary>
     /// Coincides with the pose of the right controller when it is in a hand
     /// </summary>
-    public Transform rightControllerInHandAnchor { get; private set; }
+    [SerializeField]public Transform rightControllerInHandAnchor { get; private set; }
 
     /// <summary>
     /// Coincides with the pose of the right hand when it is on a controller
     /// </summary>
-    public Transform rightHandOnControllerAnchor { get; private set; }
+    [SerializeField]public Transform rightHandOnControllerAnchor { get; private set; }
 
     /// <summary>
     /// Anchors controller pose to fix offset issues for the left hand.
     /// </summary>
-    public Transform leftControllerAnchor { get; private set; }
+    [SerializeField]public Transform leftControllerAnchor { get; private set; }
 
     /// <summary>
     /// Anchors controller pose to fix offset issues for the right hand.
     /// </summary>
-    public Transform rightControllerAnchor { get; private set; }
+    [SerializeField]public Transform rightControllerAnchor { get; private set; }
 
     /// <summary>
     /// Always coincides with the pose of the sensor.
     /// </summary>
-    public Transform trackerAnchor { get; private set; }
+    [SerializeField]public Transform trackerAnchor { get; private set; }
 
     /// <summary>
     /// Occurs when the eye pose anchors have been set.
     /// </summary>
-    public event System.Action<OVRCameraRig> UpdatedAnchors;
+    [SerializeField]public event System.Action<OVRCameraRig> UpdatedAnchors;
 
     /// <summary>
     /// Occurs when the <see cref="trackingSpace"/>'s transform changes.
@@ -160,18 +160,19 @@ public class OVRCameraRig : MonoBehaviour
     public bool disableEyeAnchorCameras = false;
 
 
+    //I add OVR to some parts - if you wanna revert hapus OVR
     protected bool _skipUpdate = false;
     protected readonly string trackingSpaceName = "TrackingSpace";
     protected readonly string trackerAnchorName = "TrackerAnchor";
     protected readonly string leftEyeAnchorName = "LeftEyeAnchor";
     protected readonly string centerEyeAnchorName = "CenterEyeAnchor";
     protected readonly string rightEyeAnchorName = "RightEyeAnchor";
-    protected readonly string leftHandAnchorName = "LeftHandAnchor";
-    protected readonly string rightHandAnchorName = "RightHandAnchor";
+    protected readonly string leftHandAnchorName = "LeftHandAnchorOVR";
+    protected readonly string rightHandAnchorName = "RightHandAnchorOVR";
     protected readonly string leftControllerAnchorName = "LeftControllerAnchor";
     protected readonly string rightControllerAnchorName = "RightControllerAnchor";
-    protected readonly string leftHandAnchorDetachedName = "LeftHandAnchorDetached";
-    protected readonly string rightHandAnchorDetachedName = "RightHandAnchorDetached";
+    protected readonly string leftHandAnchorDetachedName = "LeftHandAnchorDetachedOVR";
+    protected readonly string rightHandAnchorDetachedName = "RightHandAnchorDetachedOVR";
     protected readonly string leftControllerInHandAnchorName = "LeftControllerInHandAnchor";
     protected readonly string leftHandOnControllerAnchorName = "LeftHandOnControllerAnchor";
     protected readonly string rightControllerInHandAnchorName = "RightControllerInHandAnchor";
