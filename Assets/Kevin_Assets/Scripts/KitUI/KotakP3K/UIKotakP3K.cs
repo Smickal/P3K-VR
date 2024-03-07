@@ -39,7 +39,6 @@ public class UIKotakP3K : BaseKitUI
     {
         CheckUnlock += UnlockAKit;
 
-        
 
         Load();
     }
