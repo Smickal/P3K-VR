@@ -18,6 +18,7 @@
  * limitations under the License.
  */
 
+using System;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -88,6 +89,7 @@ namespace Oculus.Interaction
 
         private float _idleStarted = -1f;
         private IMovement _movement = null;
+        
 
         #region Editor events
         private void Reset()
@@ -136,11 +138,12 @@ namespace Oculus.Interaction
             if (_started)
             {
                 _pointableElement.WhenPointerEventRaised += HandlePointerEventRaised;
-                if (_defaultInteractable != null)
-                {
-                    SetComputeCandidateOverride(() => _defaultInteractable, true);
-                    SetComputeShouldSelectOverride(()=>true, true);
-                }
+                // if (_defaultInteractable != null)
+                // {
+                //     Debug.Log(_defaultInteractable);
+                //     SetComputeCandidateOverride(() => _defaultInteractable, true);
+                //     SetComputeShouldSelectOverride(()=>true, true);
+                // }
             }
         }
 
@@ -224,7 +227,7 @@ namespace Oculus.Interaction
             }
             base.InteractableUnset(interactable);
         }
-
+        
         protected override void InteractableSelected(SnapInteractable interactable)
         {
             base.InteractableSelected(interactable);
@@ -235,6 +238,10 @@ namespace Oculus.Interaction
                 if (_movement != null)
                 {
                     GeneratePointerEvent(PointerEventType.Select);
+                    // Rigidbody.isKinematic = true;
+                    OnSelectInvoke(interactable, this);
+                    // interactable.gameObject.GetComponent<BNG.SnapZone>().getClosestGrabbable();
+                    Debug.Log("Connected");
                 }
             }
         }
@@ -245,6 +252,8 @@ namespace Oculus.Interaction
             if (interactable != null)
             {
                 GeneratePointerEvent(PointerEventType.Unselect);
+                OnUnSelectInvoke(interactable);
+                Debug.Log("DC");
             }
             base.InteractableUnselected(interactable);
             _movement = null;
@@ -403,6 +412,26 @@ namespace Oculus.Interaction
         public void InjectOptionaTimeOut(float timeOut)
         {
             _timeOut = timeOut;
+        }
+        public void SetCandidate(SnapInteractable snapInteractableSet)
+        {
+            base.OnEnable();
+            if (_started)
+            {
+                _pointableElement.WhenPointerEventRaised += HandlePointerEventRaised;
+                if (snapInteractableSet != null)
+                {
+                    SetComputeCandidateOverride(() => snapInteractableSet, true);
+                    SetComputeShouldSelectOverride(()=>true, true);
+                }
+            }
+            
+        }
+        public void UnSetCandidate(SnapInteractable snapInteract)
+        {
+            InteractableUnselected(snapInteract);
+            InteractableUnset(snapInteract);
+            // OnDisable();
         }
         #endregion
     }

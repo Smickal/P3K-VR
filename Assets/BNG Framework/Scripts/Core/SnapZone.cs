@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Oculus.Interaction;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -318,7 +319,7 @@ namespace BNG {
             if (DisableColliders) {
                 disabledColliders = grab.GetComponentsInChildren<Collider>(false).ToList();
                 for (int x = 0; x < disabledColliders.Count; x++) {
-                    disabledColliders[x].enabled = false;
+                    if(disabledColliders[x].name != "SnapInteractor") disabledColliders[x].enabled = false;
                 }
             }
 
@@ -446,6 +447,135 @@ namespace BNG {
             }
 
             HeldItem = null;
+        }
+        
+        public virtual void ReleaseAll_ForSnapHandTrackOnly() {
+
+            // No need to keep checking
+            if (HeldItem == null) {
+                return;
+            }
+
+            // Still need to keep track of item if we can't fully drop it
+            if (!CanDropItem && HeldItem != null) {
+                trackedItem = HeldItem;
+            }
+
+            HeldItem.ResetScale();
+
+            if (DisableColliders && disabledColliders != null) {
+                foreach (var c in disabledColliders) {
+                    if (c) {
+                        c.enabled = true;
+                    }
+                }
+            }
+            disabledColliders = null;
+
+            // Reset Kinematic status
+            if (heldItemRigid) {
+                heldItemRigid.isKinematic = heldItemWasKinematic;
+            }
+
+            HeldItem.enabled = true;
+            HeldItem.transform.parent = null;
+
+            // Play Unsnap sound
+            if (HeldItem != null) {
+                if (SoundOnUnsnap) {
+                    if (Time.timeSinceLevelLoad > 0.1f) {
+                        VRUtils.Instance.PlaySpatialClipAt(SoundOnUnsnap, transform.position, 0.75f);
+                    }
+                }
+
+
+                // Fire Off Grabbable Events
+                // GrabbableEvents[] ge = HeldItem.GetComponents<GrabbableEvents>();
+                // if (ge != null) {
+                //     for (int x = 0; x < ge.Length; x++) {
+                //         ge[x].OnSnapZoneExit();
+                //     }
+                // }
+            }
+
+            HeldItem = null;
+        }
+        public virtual void GrabGrabbable_ForSnapHandTrackOnly(Grabbable grab) {
+
+            // Grab is already in Snap Zone
+            if (grab.transform.parent != null && grab.transform.parent.GetComponent<SnapZone>() != null) {
+                return;
+            }
+
+            if (HeldItem != null) {
+                ReleaseAll_ForSnapHandTrackOnly();
+            }
+
+            HeldItem = grab;
+            heldItemRigid = HeldItem.GetComponent<Rigidbody>();
+
+            // Mark as kinematic so it doesn't fall down
+            if (heldItemRigid) {
+                heldItemWasKinematic = heldItemRigid.isKinematic;
+                heldItemRigid.isKinematic = true;
+            }
+            else {
+                heldItemWasKinematic = false;
+            }
+
+            // Set the parent of the object 
+            grab.transform.parent = transform;
+
+            // Set scale factor            
+            // Use SnapZoneScale if specified
+            if (grab.GetComponent<SnapZoneScale>()) {
+                _scaleTo = grab.GetComponent<SnapZoneScale>().Scale;
+            }
+            else {
+                _scaleTo = ScaleItem;
+            }
+
+            // Is there an offset to apply?
+            SnapZoneOffset off = grab.GetComponent<SnapZoneOffset>();
+            if (off) {
+                offset = off;
+            }
+            else {
+                offset = grab.gameObject.AddComponent<SnapZoneOffset>();
+                offset.LocalPositionOffset = Vector3.zero;
+                offset.LocalRotationOffset = Vector3.zero;
+            }
+
+            // Lock into place
+            if (offset) {
+                HeldItem.transform.localPosition = offset.LocalPositionOffset;
+                HeldItem.transform.localEulerAngles = offset.LocalRotationOffset;
+            }
+            else {
+                HeldItem.transform.localPosition = Vector3.zero;
+                HeldItem.transform.localEulerAngles = Vector3.zero;
+            }
+
+            // Disable the grabbable. This is picked up through a Grab Action
+            disableGrabbable(grab);
+
+
+            // Fire Off Events on Grabbable
+            // GrabbableEvents[] ge = grab.GetComponents<GrabbableEvents>();
+            // if (ge != null) {
+            //     for (int x = 0; x < ge.Length; x++) {
+            //         ge[x].OnSnapZoneEnter();
+            //     }
+            // }
+
+            if (SoundOnSnap) {
+                // Only play the sound if not just starting the scene
+                if (Time.timeSinceLevelLoad > 0.1f) {
+                    VRUtils.Instance.PlaySpatialClipAt(SoundOnSnap, transform.position, 0.75f);
+                }
+            }
+
+            LastSnapTime = Time.time;
         }
     }
 }
