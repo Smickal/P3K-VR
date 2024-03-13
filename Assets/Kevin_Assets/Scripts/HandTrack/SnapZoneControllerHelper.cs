@@ -22,7 +22,7 @@ public class SnapZoneControllerHelper : MonoBehaviour
     {
         if(snapInteractor != null)
         {
-            snapInteractor.UnSetCandidate(chosenInteractable);
+            snapInteractor.UnSetCandidate();
             snapInteractor.enabled = false;
         
             snapInteractor = null;

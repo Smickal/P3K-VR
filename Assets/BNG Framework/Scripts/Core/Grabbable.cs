@@ -15,7 +15,7 @@ namespace BNG {
         /// <summary>
         /// Is this object currently being held by a Grabber
         /// </summary>
-        [SerializeField]private SnapInteractorHelper snapHelper;
+        // [SerializeField]private SnapInteractorHelper snapHelper;
         public bool BeingHeld = false;
 
         /// <summary>
@@ -1809,7 +1809,7 @@ namespace BNG {
 
                     // We know the item is no longer being held. Can set this before calling any drop events
                     BeingHeld = false;
-                    if(snapHelper)snapHelper.ReviveSnapInteractorAfterReleaseController();
+                    // if(snapHelper)snapHelper.ReviveSnapInteractorAfterReleaseController();
                     LastDropTime = Time.time;
 
                     // Release item and apply physics force to it

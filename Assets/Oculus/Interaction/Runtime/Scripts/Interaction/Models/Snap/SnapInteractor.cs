@@ -138,12 +138,12 @@ namespace Oculus.Interaction
             if (_started)
             {
                 _pointableElement.WhenPointerEventRaised += HandlePointerEventRaised;
-                // if (_defaultInteractable != null)
-                // {
-                //     Debug.Log(_defaultInteractable);
-                //     SetComputeCandidateOverride(() => _defaultInteractable, true);
-                //     SetComputeShouldSelectOverride(()=>true, true);
-                // }
+                if (_defaultInteractable != null)
+                {
+                    Debug.Log(_defaultInteractable);
+                    SetComputeCandidateOverride(() => _defaultInteractable, true);
+                    SetComputeShouldSelectOverride(()=>true, true);
+                }
             }
         }
 
@@ -427,11 +427,10 @@ namespace Oculus.Interaction
             }
             
         }
-        public void UnSetCandidate(SnapInteractable snapInteract)
+        public void UnSetCandidate()
         {
-            InteractableUnselected(snapInteract);
-            InteractableUnset(snapInteract);
-            // OnDisable();
+            Unselect();
+            Unhover();
         }
         #endregion
     }
