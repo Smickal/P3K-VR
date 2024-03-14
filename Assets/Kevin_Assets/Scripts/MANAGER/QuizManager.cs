@@ -10,6 +10,7 @@ public class QuizManager : MonoBehaviour
 {
     const string QuizKey = "QuizKeyDAta";
 
+    [SerializeField] bool _isActivated = false;
     [SerializeField] float _maxTimeSlider = 10f;
 
     [Header("Reference")]
@@ -62,6 +63,9 @@ public class QuizManager : MonoBehaviour
     bool isTimerActivated;
     private void Start()
     {
+        if(!_isActivated) { return; }
+
+
         foreach(var question in _scriptableData)
         {
             questionQ.Enqueue(question);

@@ -1,13 +1,12 @@
 using BNG;
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 using UnityEngine;
 
 public class Robot : GrabbableEvents
 {
     Camera mainCam;
-
-
 
     bool isActivated = false;
     public void ActivateLookAt()
@@ -45,5 +44,12 @@ public class Robot : GrabbableEvents
         {
             transform.LookAt(mainCam.transform);
         }
+
+    }
+
+    public void ReleaseRobot()
+    {
+        ActivateLookAt();
+        grab.DropItem(thisGrabber, true, false);
     }
 }
