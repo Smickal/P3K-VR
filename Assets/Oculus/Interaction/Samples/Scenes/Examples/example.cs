@@ -4,11 +4,21 @@ using UnityEngine;
 
 public class example : MonoBehaviour
 {
-    private void OnTriggerEnter(Collider other) 
+    public void CheckBeginHighlight()
     {
-        if(other.CompareTag("Example"))
-        {
-            Debug.Log("Jeder");
-        }
+        Debug.Log("Begin");
     }
+    public void SelectedHoverd()
+    {
+        Debug.Log("SelectHover)");
+    }
+    public void UnSelectedHoverd()
+    {
+        Debug.Log("unSelectHover)");
+    }
+    public void SelectedEmpty()
+    {
+        Debug.Log("Selectempty)");
+    }
+
 }

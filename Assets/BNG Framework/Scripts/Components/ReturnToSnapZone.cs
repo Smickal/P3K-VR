@@ -28,7 +28,7 @@ namespace BNG {
 
         [Tooltip("Initiate snap if distance between the Grabbable and SnapZone is <= SnapDistance")]
         public float SnapDistance = 0.05f;
-        private bool canReturn = true;
+        [SerializeField]private bool onlyReturnOnce = true;
 
         void Start() {
             grab = GetComponent<Grabbable>();
@@ -57,20 +57,16 @@ namespace BNG {
         }
 
         void moveToSnapZone() {
-            
-            if(canReturn)
-            {
-                rigid.useGravity = false;
-            
-                transform.position = Vector3.MoveTowards(transform.position, ReturnTo.transform.position, Time.deltaTime * LerpSpeed);
+            rigid.useGravity = false;
+        
+            transform.position = Vector3.MoveTowards(transform.position, ReturnTo.transform.position, Time.deltaTime * LerpSpeed);
 
-                if (Vector3.Distance(transform.position, ReturnTo.transform.position) < SnapDistance) {
-                    rigid.useGravity = useGravityInitial;
-                    ReturnTo.GrabGrabbable(grab);
-                    this.enabled = false;
-                }
-                
+            if (Vector3.Distance(transform.position, ReturnTo.transform.position) < SnapDistance) {
+                rigid.useGravity = useGravityInitial;
+                ReturnTo.GrabGrabbable(grab);
+                if(onlyReturnOnce)this.enabled = false;
             }
+                
             
         }
     }

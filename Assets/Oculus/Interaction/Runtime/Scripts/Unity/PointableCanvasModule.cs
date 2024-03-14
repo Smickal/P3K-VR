@@ -23,6 +23,9 @@ using UnityEngine.EventSystems;
 using UnityEngine;
 using UnityEngine.Assertions;
 using System;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Oculus.Interaction
 {
@@ -46,6 +49,7 @@ namespace Oculus.Interaction
     /// </summary>
     public class PointableCanvasModule : PointerInputModule
     {
+        public GameObject childCamera;
         public static event Action<PointableCanvasEventArgs> WhenSelected;
 
         public static event Action<PointableCanvasEventArgs> WhenUnselected;
@@ -256,6 +260,8 @@ namespace Oculus.Interaction
             base.OnEnable();
             if (_started)
             {
+                // GameObject objToSpawn = new GameObject("Camera");
+                // objToSpawn.transform.parent = this.gameObject.transform;
                 _pointerEventCamera = gameObject.AddComponent<Camera>();
                 _pointerEventCamera.nearClipPlane = 0.1f;
 
@@ -270,10 +276,21 @@ namespace Oculus.Interaction
             if (_started)
             {
                 Destroy(_pointerEventCamera);
+                // Destroy(_pointerEventCamera.gameObject);
+                // UniversalAdditionalCameraData univ = GetComponent<UniversalAdditionalCameraData>();
+                // Destroy()
                 _pointerEventCamera = null;
             }
 
             base.OnDisable();
+        }
+        public void Disable()
+        {
+            this.OnDisable();
+        }
+        public void Enable()
+        {
+            this.OnEnable();
         }
 
         // Based On FindFirstRaycast
@@ -360,8 +377,20 @@ namespace Oculus.Interaction
 
         public override void Process()
         {
-            ProcessPointers(_pointersForDeletion, true);
-            ProcessPointers(_pointerMap.Values, false);
+            // ProcessPointers(_pointersForDeletion, true);
+            // ProcessPointers(_pointerMap.Values, false);
+            var pointersToLoopOver = _pointersForDeletion.ToArray();
+            // Clear the deleted pointers list so it can start collecting newly delete pointers if those occur as a side effect to this method
+            _pointersForDeletion.Clear();
+            foreach (Pointer pointer in pointersToLoopOver)
+                ProcessPointer(pointer, forceRelease: true);
+
+            // Clone current pointers into a local array to prevent
+            // InvalidOperationException: Collection was modified; enumeration operation may not execute.
+            pointersToLoopOver = _pointerMap.Values.ToArray();
+            foreach (Pointer pointer in pointersToLoopOver)
+                ProcessPointer(pointer);
+            
         }
 
         private void ProcessPointers(ICollection<Pointer> pointers, bool clearAndReleasePointers)

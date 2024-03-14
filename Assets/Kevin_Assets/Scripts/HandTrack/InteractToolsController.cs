@@ -1,39 +1,55 @@
 using System.Collections;
 using System.Collections.Generic;
+using BNG;
+using Oculus.Interaction;
 using UnityEngine;
 
 public class InteractToolsController : MonoBehaviour
 {
+    [SerializeField]private HandActiveState leftHand, rightHand;
     [SerializeField]private GameObject leftControllerGameObject, rightControllerGameObject;
+    [SerializeField]private PointableCanvasModule pointableCanvasModule;
+    [SerializeField]private VRUISystem vRUISystem;
     private int checker = 0; //1 hands, 2 = controller
 
     // Update is called once per frame
     private void Update()
     {
-        if(OVRInput.IsControllerConnected(OVRInput.Controller.Hands))
+        if(leftHand.Active || rightHand.Active)
         {
+            // Debug.Log("???");
             if(checker != 1)
             {
                 ControlSetActive(false);
+                vRUISystem.enabled = false;
+                // pointableCanvasModule.Enable()
+                
             }
             
         }
         else
         {
+            // Debug.Log("what???");
             if(OVRInput.IsControllerConnected(OVRInput.Controller.LTouch) || OVRInput.IsControllerConnected(OVRInput.Controller.RTouch))
             {
-                    if(OVRInput.IsControllerConnected(OVRInput.Controller.LTouch)) leftControllerGameObject.SetActive(true);
-                    if(OVRInput.IsControllerConnected(OVRInput.Controller.RTouch)) rightControllerGameObject.SetActive(true);
+                    leftControllerGameObject.SetActive(true);
+                    rightControllerGameObject.SetActive(true);
                     checker = 2;
+                    // pointableCanvasModule.Disable();
+                    vRUISystem.enabled = true;
+                    vRUISystem.ReAddCameratoCanvas();
+                    
                 
                 
             }
         }
+        Debug.Log(checker);
         
     }
 
     private void ControlSetActive(bool changeBool)
     {
+        Debug.Log("Haloo??");
         leftControllerGameObject.SetActive(changeBool);
         rightControllerGameObject.SetActive(changeBool);
         if(!changeBool) checker = 1;

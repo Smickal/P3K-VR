@@ -241,7 +241,7 @@ namespace Oculus.Interaction
                     // Rigidbody.isKinematic = true;
                     OnSelectInvoke(interactable, this);
                     // interactable.gameObject.GetComponent<BNG.SnapZone>().getClosestGrabbable();
-                    Debug.Log("Connected");
+                    // Debug.Log("Connected");
                 }
             }
         }
@@ -253,7 +253,7 @@ namespace Oculus.Interaction
             {
                 GeneratePointerEvent(PointerEventType.Unselect);
                 OnUnSelectInvoke(interactable);
-                Debug.Log("DC");
+                // Debug.Log("DC");
             }
             base.InteractableUnselected(interactable);
             _movement = null;

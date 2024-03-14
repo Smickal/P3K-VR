@@ -27,13 +27,16 @@ namespace Oculus.Interaction
     {
         [Tooltip("ActiveState will be true while this hand is connected.")]
         [SerializeField, Interface(typeof(IHand))]
+        
         UnityEngine.Object _hand;
         private IHand Hand;
 
         public bool Active => Hand.IsConnected;
+        // public static HandActiveState Instance{get;private set;}
 
         protected virtual void Awake()
         {
+            // Instance = this;
             Hand = _hand as IHand;
         }
 

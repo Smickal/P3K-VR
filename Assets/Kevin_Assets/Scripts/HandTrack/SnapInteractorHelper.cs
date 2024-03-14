@@ -30,14 +30,16 @@ public class SnapInteractorHelper : MonoBehaviour
     }
     public void SetSnapZone(Oculus.Interaction.SnapInteractable interactable, Oculus.Interaction.SnapInteractor interactor)
     {
-        Debug.Log("Here" + OVRInput.IsControllerConnected(OVRInput.Controller.Hands) + interactor.name + " B " + interactable.name);
+        // Debug.Log("Here" + OVRInput.IsControllerConnected(OVRInput.Controller.Hands) + interactor.name + " B " + interactable.name);
         BNG.Grabbable grab = interactor.GetComponentInParent<BNG.Grabbable>();
         snapZone = interactable.gameObject.GetComponent<BNG.SnapZone>();
         if(grab && snapZone)snapZone.GrabGrabbable_ForSnapHandTrackOnly(grab);
+        // Debug.Log("what??");
     }
     public void LeaveSnapZone(Oculus.Interaction.SnapInteractable interactable)
     {
-        Debug.Log("Here" + OVRInput.IsControllerConnected(OVRInput.Controller.Hands));
+        // Debug.Log("Here" + OVRInput.IsControllerConnected(OVRInput.Controller.Hands));
         interactable.gameObject.GetComponent<BNG.SnapZone>().ReleaseAll_ForSnapHandTrackOnly();
+        // Debug.Log("whatthe??");
     }
 }
