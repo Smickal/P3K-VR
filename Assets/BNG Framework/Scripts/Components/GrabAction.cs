@@ -36,7 +36,7 @@ namespace BNG {
 
                 // Don't want to repeatedly do grabs if this is a hold item
                 if(Time.time - lastGrabTime >= minTimeBetweenGrabs) {
-                    if(grabber)OnGrabEvent.Invoke(grabber);
+                    if(grabber != null)OnGrabEvent.Invoke(grabber);
                     lastGrabTime = Time.time;
                 }
             }

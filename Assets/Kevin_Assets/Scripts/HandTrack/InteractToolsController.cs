@@ -21,7 +21,7 @@ public class InteractToolsController : MonoBehaviour
             if(checker != 1)
             {
                 ControlSetActive(false);
-                vRUISystem.enabled = false;
+                if(vRUISystem)vRUISystem.enabled = false;
                 // pointableCanvasModule.Enable()
                 
             }
@@ -34,10 +34,15 @@ public class InteractToolsController : MonoBehaviour
             {
                     leftControllerGameObject.SetActive(true);
                     rightControllerGameObject.SetActive(true);
-                    checker = 2;
+                    
                     // pointableCanvasModule.Disable();
-                    vRUISystem.enabled = true;
-                    vRUISystem.ReAddCameratoCanvas();
+                    // if(checker != 2)
+                    // {
+                        if(vRUISystem)vRUISystem.enabled = true;
+                        if(vRUISystem)vRUISystem.ReAddCameratoCanvas();
+                        checker = 2;
+                    // }
+                    
                     
                 
                 
