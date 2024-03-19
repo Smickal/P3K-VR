@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class BackBlowCollider : MonoBehaviour
 {
-    [SerializeField] BackBlowMovement _backBlow;
     private void OnTriggerEnter(Collider other)
     {
 
