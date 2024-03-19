@@ -546,6 +546,7 @@ namespace BNG {
 
         public virtual bool TryGrab() {
             // Already holding something
+
             if (HeldGrabbable != null) {
                 return false;
             }            
