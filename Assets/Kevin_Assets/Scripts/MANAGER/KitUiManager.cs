@@ -2,19 +2,76 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System.Drawing.Printing;
+using UnityEngine.Events;
 
 public class KitUiManager : MonoBehaviour
 {
-    [Header("UI")]
-    [SerializeField] BaseKitUI[] _baseUIs;
 
-    public void OpenUI(BaseKitUI KitUI)
+    [Header("Reference")]
+    [SerializeField] GameObject _baseUI;
+    [Space(3)]
+    [SerializeField] GameObject _pauseMenuContainer;
+    [SerializeField] GameObject _quizContainer;
+    [SerializeField] GameObject _levelHelperContainer;
+
+    [Header("UI")]
+    [SerializeField] GameObject[] _baseUIContainers;
+    [SerializeField] BaseKitUI[] _basePauseMenuContainer;
+
+    [Header("Reference")]
+    [SerializeField] VisionFollower _vF;
+
+
+    public static event UnityAction OnActivate;
+    public static event UnityAction OnDeactivate;
+
+    public void OpenPauseMenuUI(BaseKitUI KitUI)
     {
-        foreach (var kit in _baseUIs)
+        foreach (var kit in _basePauseMenuContainer)
         {
             kit.ResetData();
         }
 
         KitUI.StartData();
+    }
+
+    public void ActivateBaseUI()
+    {
+        _baseUI.SetActive(true);
+    }
+
+    public void DeactivateBaseUI()
+    {
+        _baseUI.SetActive(false);
+    }
+
+    public void OpenPauseUI()
+    {
+        CloseUI();
+        _pauseMenuContainer.SetActive(true);
+        _vF.Activate();
+    }
+
+    public void OpenQuizUI()
+    {
+        CloseUI();
+        _quizContainer.SetActive(true);
+        _vF.Deactivate();
+    }
+
+    public void OpenLevelHelperUI()
+    {
+        CloseUI();
+        _levelHelperContainer.SetActive(true);
+        _vF.Deactivate();
+    }
+
+    private void CloseUI()
+    {
+        foreach (var obj in _baseUIContainers)
+        {
+            obj.gameObject.SetActive(false);
+        }
     }
 }
