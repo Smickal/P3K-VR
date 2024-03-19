@@ -455,5 +455,11 @@ namespace BNG {
         void OnApplicationQuit() {
             isQuitting = true;
         }
+        
+        public void PlayerHeightControl(bool addPlayerHeight)
+        {
+            if(addPlayerHeight)player.ElevateCameraHeight = Mathf.Clamp(player.ElevateCameraHeight + Time.deltaTime, MinPlayerHeight, MaxPlayerHeight);
+            else player.ElevateCameraHeight = Mathf.Clamp(player.ElevateCameraHeight - Time.deltaTime, MinPlayerHeight, MaxPlayerHeight);
+        }
     }
 }

@@ -11,8 +11,19 @@ public class UIOption : BaseKitUI
     [SerializeField] Slider _bgmSlider;
     [SerializeField] Slider _sfxSlider;
 
+    [Header("Button")]
+    [SerializeField] Button _higherHeightButton;
+    [SerializeField] Button _lowerHeightButton;
+
     [Header("Reference")]
     [SerializeField] GameObject _masterContainerOBJ;
+    [Header("Player")]
+    BNG.VREmulator vrEmulator;
+
+    private void Start() 
+    {
+        vrEmulator = FindObjectOfType<BNG.VREmulator>();
+    }
 
     public override void ResetData()
     {
@@ -23,5 +34,11 @@ public class UIOption : BaseKitUI
     {
         _masterContainerOBJ.SetActive(true);
     }
+
+    public void PlayerHeight(bool addPlayerHeight)
+    {
+        vrEmulator.PlayerHeightControl(addPlayerHeight);
+    }
+    
 
 }
