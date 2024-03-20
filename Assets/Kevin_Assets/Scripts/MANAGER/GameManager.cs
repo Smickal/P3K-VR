@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public enum GameState
 {
@@ -20,6 +21,12 @@ public class GameManager : MonoBehaviour
     [SerializeField]private InGame_Mode inGame_Mode;
     [SerializeField]private LevelMode levelMode;
     private bool isPause;
+    public static Func<LevelMode> CheckLevelModeNow;
+
+    private void Awake() 
+    {
+        CheckLevelModeNow += levelModeNow;
+    }
     public GameState GameStateNow()
     {
         return state;

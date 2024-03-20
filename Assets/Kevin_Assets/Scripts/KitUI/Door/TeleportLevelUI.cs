@@ -1,0 +1,53 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using TMPro;
+using UnityEngine.UI;
+
+public class TeleportLevelUI : MonoBehaviour
+{
+    [SerializeField] TMP_Text _levelTitle;
+    [SerializeField] Image _levelIMG;
+    [SerializeField] GameObject _lockedLevel;
+    [SerializeField] GameObject[] _starsBright;
+    [SerializeField] Button _levelButton;
+
+    private string levelName;
+
+    public void SetData(LevelData levelData, int level)
+    {
+        levelName = levelData.levelType.ToString();
+
+        _levelTitle.SetText("Level " + level);
+        
+        _levelButton.onClick.AddListener(TeleportToLevel);
+
+        if(levelData.levelSprite == null)
+        {
+            _levelIMG.gameObject.SetActive(false);
+        }
+        else
+        {
+            _levelIMG.sprite = levelData.levelSprite;
+        }
+
+        if(!levelData.unlocked)
+        {
+            _lockedLevel.SetActive(true);
+        }
+        else
+        {
+            _lockedLevel.SetActive(false);
+        }
+
+        for(int i=0;i<levelData.totalScore;i++)
+        {
+            _starsBright[i].SetActive(true);
+        }
+    }
+
+    public void TeleportToLevel()
+    {
+        Debug.Log("Teleport to" + levelName);
+    }
+}

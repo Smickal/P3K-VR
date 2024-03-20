@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using Oculus.Interaction;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -362,6 +364,7 @@ namespace BNG {
                         grabber.GrabGrabbable(g);
                     }
                     else {
+
                         ReleaseAll();
 
                         // Position next to grabber if somewhat far away
@@ -404,7 +407,7 @@ namespace BNG {
             if (!CanDropItem && HeldItem != null) {
                 trackedItem = HeldItem;
             }
-
+            
             HeldItem.ResetScale();
 
             if (DisableColliders && disabledColliders != null) {
@@ -423,7 +426,7 @@ namespace BNG {
 
             HeldItem.enabled = true;
             HeldItem.transform.parent = null;
-
+            
             // Play Unsnap sound
             if (HeldItem != null) {
                 if (SoundOnUnsnap) {
@@ -431,15 +434,24 @@ namespace BNG {
                         VRUtils.Instance.PlaySpatialClipAt(SoundOnUnsnap, transform.position, 0.75f);
                     }
                 }
-
+                
                 // Call event
                 if (OnDetachEvent != null) {
+                    // Debug.Log(HeldItem.gameObject.name);
+                    // Debug.Log(totallewat+"this");
                     OnDetachEvent.Invoke(HeldItem);
+                    
                 }
 
                 // Fire Off Grabbable Events
+                
+                // Debug.Log(HeldItem.gameObject.name + HeldItem.GetComponent<GrabbableEvents>()+"held");
+                
                 GrabbableEvents[] ge = HeldItem.GetComponents<GrabbableEvents>();
+                // Debug.Log(totallewat+"thiss");
+                // Debug.Log("HeldItem" + HeldItem);
                 if (ge != null) {
+                    Debug.Log("Masuk sini?");
                     for (int x = 0; x < ge.Length; x++) {
                         ge[x].OnSnapZoneExit();
                     }

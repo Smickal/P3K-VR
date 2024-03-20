@@ -15,12 +15,12 @@ public class SnapInteractorHelper : MonoBehaviour
 
     private void snapInteractor_OnUnSelect(object sender, Oculus.Interaction.SnapInteractor.OnUnSelectEventArgs e)
     {
-        if((!OVRInput.IsControllerConnected(OVRInput.Controller.Hands) && !OVRInput.IsControllerConnected(OVRInput.Controller.LTouch) && !OVRInput.IsControllerConnected(OVRInput.Controller.RTouch)) || OVRInput.IsControllerConnected(OVRInput.Controller.Hands))LeaveSnapZone(e.Interactable);
+        if(InteractToolsController.CheckIsHandTrackOn())LeaveSnapZone(e.Interactable);
     }
 
     private void snapInteractor_OnSelect(object sender, Oculus.Interaction.SnapInteractor.OnSelectEventArgs e)
     {
-        if((!OVRInput.IsControllerConnected(OVRInput.Controller.Hands) && !OVRInput.IsControllerConnected(OVRInput.Controller.LTouch) && !OVRInput.IsControllerConnected(OVRInput.Controller.RTouch)) || OVRInput.IsControllerConnected(OVRInput.Controller.Hands))SetSnapZone(e.Interactable, e.Interactor);
+        if(InteractToolsController.CheckIsHandTrackOn())SetSnapZone(e.Interactable, e.Interactor);
     }
 
     public void ReviveSnapInteractorAfterReleaseController()

@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using System.Drawing.Printing;
 using UnityEngine.Events;
+using System;
 
 public class KitUiManager : MonoBehaviour
 {
@@ -14,10 +15,12 @@ public class KitUiManager : MonoBehaviour
     [SerializeField] GameObject _pauseMenuContainer;
     [SerializeField] GameObject _quizContainer;
     [SerializeField] GameObject _levelHelperContainer;
+    [SerializeField] GameObject _outsideGlossaryContainer;
 
     [Header("UI")]
     [SerializeField] GameObject[] _baseUIContainers;
     [SerializeField] BaseKitUI[] _basePauseMenuContainer;
+    [SerializeField] TMP_Text _titleBase;
 
     [Header("Reference")]
     [SerializeField] VisionFollower _vF;
@@ -36,8 +39,9 @@ public class KitUiManager : MonoBehaviour
         KitUI.StartData();
     }
 
-    public void ActivateBaseUI()
+    public void ActivateBaseUI(String titleBase)
     {
+        _titleBase.text = titleBase;
         _baseUI.SetActive(true);
     }
 
@@ -65,6 +69,17 @@ public class KitUiManager : MonoBehaviour
         CloseUI();
         _levelHelperContainer.SetActive(true);
         _vF.Deactivate();
+    }
+
+    public void OpenDesc_OutsideGlossary()
+    {
+        CloseUI();
+        _outsideGlossaryContainer.SetActive(true);
+    }
+
+    public bool IsBaseUIOpen()
+    {
+        return _baseUI.activeSelf;
     }
 
     private void CloseUI()
