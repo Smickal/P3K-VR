@@ -1,3 +1,4 @@
+using BNG;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,13 +9,18 @@ public class ReturnRobotToStartingPos : MonoBehaviour
     [SerializeField] float _lerpSpeed = 15f;
     [SerializeField] float _snapDistance = 0.05f;
 
+    [SerializeField] Grabber _leftGrabber;
+    [SerializeField] Grabber _rightGrabber; 
+
     
     Rigidbody rigid;
+    Grabbable grabbable;
     bool isMovingToSnapZone = false;
 
     private void Start()
     {
         rigid = GetComponent<Rigidbody>();
+        grabbable = GetComponent<Grabbable>();
     }
 
     private void Update()
@@ -27,10 +33,22 @@ public class ReturnRobotToStartingPos : MonoBehaviour
 
             if (Vector3.Distance(transform.position, _startingPos.transform.position) <= _snapDistance)
             {
-                rigid.velocity = Vector3.zero;
                 isMovingToSnapZone = false;
-            }
+                rigid.velocity = Vector3.zero;
+                rigid.angularVelocity = Vector3.zero;
+                transform.position = _startingPos.transform.position;
+            }   
         }
+        else
+        {
+            if (Vector3.Distance(transform.position, _startingPos.transform.position) <= _snapDistance) return;
+            if ((_leftGrabber.RemoteGrabbingGrabbable == grabbable || _rightGrabber.RemoteGrabbingGrabbable == grabbable)) return;
+            if (grabbable.BeingHeld) return;
+            isMovingToSnapZone = true;
+        }
+
+
+        
     }
 
     public void MoveToSnapZone()

@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using System.Drawing.Printing;
 using UnityEngine.Events;
+using BNG;
 
 public class KitUiManager : MonoBehaviour
 {
@@ -21,7 +22,7 @@ public class KitUiManager : MonoBehaviour
 
     [Header("Reference")]
     [SerializeField] VisionFollower _vF;
-
+    [SerializeField] Grabbable _robotGrab;
 
     public static event UnityAction OnActivate;
     public static event UnityAction OnDeactivate;
@@ -34,6 +35,7 @@ public class KitUiManager : MonoBehaviour
         }
 
         KitUI.StartData();
+        _robotGrab.enabled = false;
     }
 
     public void ActivateBaseUI()
@@ -44,6 +46,7 @@ public class KitUiManager : MonoBehaviour
     public void DeactivateBaseUI()
     {
         _baseUI.SetActive(false);
+        _robotGrab.enabled = true;
     }
 
     public void OpenPauseUI()
