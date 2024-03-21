@@ -70,7 +70,7 @@ public class UIOption : BaseKitUI
     public void ResetPlayerSaveData()
     {
         PlayerManager.ResetPlayerSave();
-
+        if(_resetYesNoContainerOBJ.activeSelf)HideResetYesNo();
         //scenemanagement
     }
     public void ShowResetYesNo()

@@ -24,7 +24,6 @@ public class ButtonRigidExtra : GrabbableEvents
     public override void OnRelease()
     {
         base.OnRelease();
-
         Destroy(fixedJoint);
         fixedJoint = null;
     }
