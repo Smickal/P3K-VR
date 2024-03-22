@@ -2,6 +2,7 @@ using BNG;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Oculus.Interaction;
 
 public class Briefcase : MonoBehaviour
 {
@@ -11,20 +12,25 @@ public class Briefcase : MonoBehaviour
 
     [Header("Reference")]
     [SerializeField] Animator _briefCaseAnim;
-    [SerializeField] Button _briefCaseBtn;
+    [SerializeField] Button _briefCaseBtn_Controller;
+    [SerializeField] InteractableUnityEventWrapper _briefCaseBtn_HandTrack;
     //[SerializeField] BoxCollider _boxCollider;
 
     bool isOpen = false;
+    int i= 0;
 
     private void Start()
     {
-        _briefCaseBtn.onButtonDown.AddListener(TriggerOpenCloseAnim);
+        _briefCaseBtn_Controller.onButtonDown.AddListener(TriggerOpenCloseAnim);
+        _briefCaseBtn_HandTrack.WhenSelect.AddListener(TriggerOpenCloseAnim);
 
     }
 
     public void TriggerOpenCloseAnim()
     {
-
+        i++;
+        Debug.Log("test" + i);
+        
         if (isOpen == false)
         {
             _briefCaseAnim.SetTrigger(OpenBriefHash);
