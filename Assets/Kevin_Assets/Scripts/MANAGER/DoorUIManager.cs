@@ -19,7 +19,7 @@ public class DoorUIManager : MonoBehaviour
         int totalLevel = PlayerManager.TotalLevels();
         for(int i = 1; i < totalLevel; i++)
         {
-            Debug.Log(i + " what" + totalLevel);
+            // Debug.Log(i + " what" + totalLevel);
             TeleportLevelUI newUI = Instantiate(_teleportLevelPrefab, _contentTransform);
             newUI.SetData(PlayerManager.LevelDataNow(i), i);
 

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class UILangkahPrefab : MonoBehaviour
 {
+    const string UnknownKitName = "???";
 
     [Header("Reference")]
     [SerializeField] TMP_Text _langkahName;
@@ -14,9 +15,13 @@ public class UILangkahPrefab : MonoBehaviour
 
     UILangkahP3K UILangkahP3K;
     SOLangkahP3K scriptableData;
+    bool state = false;
+
+    public SOLangkahP3K Data { get { return scriptableData; } }
+    public bool State { get { return state; } }
     public void SetData(string langkahName, UILangkahP3K uILangkahP3K, SOLangkahP3K data)
     {
-        _langkahName.SetText(langkahName);
+        
         UILangkahP3K = uILangkahP3K;
         scriptableData = data;
 
@@ -27,23 +32,27 @@ public class UILangkahPrefab : MonoBehaviour
         
     }
 
-    public void SetState(Sprite sprite, bool state)
+    public void SetState(bool state)
     {
-        _imgLangkahState.sprite = sprite;
+        this.state = state;
+        
 
         if (state)
         {
-            _buttonLangkah.enabled = true;
+            _langkahName.SetText(scriptableData.ProcedureName);
+            _imgLangkahState.sprite = scriptableData.ProcedureIMG;
         }
         else
         {
-            _buttonLangkah.enabled = false;
+            _langkahName.SetText(UnknownKitName);
+            _imgLangkahState.sprite = null;
+            
         }
-
+        _buttonLangkah.enabled = state;
     }
 
-    public void SubscribeButton(SOLangkahP3K scriptableData)
-    {
+    // public void SubscribeButton(SOLangkahP3K scriptableData)
+    // {
 
-    }
+    // }
 }

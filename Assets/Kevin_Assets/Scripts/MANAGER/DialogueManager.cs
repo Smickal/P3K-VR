@@ -30,7 +30,7 @@ public class DialogueManager : MonoBehaviour
 
     private void Start() 
     {
-        PlayDialogueScene(DialogueListType.Home_Introduction1);
+        // PlayDialogueScene(DialogueListType.Home_Introduction1);
     }
     private void Update() 
     {

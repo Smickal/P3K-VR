@@ -38,6 +38,9 @@ namespace Oculus.Interaction.HandGrab
     public class DistanceHandGrabInteractable : PointerInteractable<DistanceHandGrabInteractor, DistanceHandGrabInteractable>,
         IHandGrabInteractable, IRigidbodyRef, ICollidersRef
     {
+        //tambah sendiri
+        [SerializeField]private bool isInSnapZone;
+
         [SerializeField]
         private Rigidbody _rigidbody;
         public Rigidbody Rigidbody => _rigidbody;
@@ -265,5 +268,11 @@ namespace Oculus.Interaction.HandGrab
             MovementProvider = provider;
         }
         #endregion
+
+        public bool IsInSnapZone(){return isInSnapZone;}
+        public void InSnapZone(bool change)
+        {
+            isInSnapZone = change;
+        }
     }
 }

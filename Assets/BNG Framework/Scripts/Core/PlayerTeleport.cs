@@ -160,6 +160,13 @@ namespace BNG {
         public delegate void OnAfterTeleportAction();
         public static event OnAfterTeleportAction OnAfterTeleport;
 
+        [Header("Tambahan")]
+        public static Action<Vector3,Quaternion> Teleport;
+        private void Awake() 
+        {
+            Teleport += TeleportPlayer;
+        }
+
         void Start() {
             setupVariables();
         }
@@ -584,6 +591,7 @@ namespace BNG {
 
                 // Apply Teleport before offset is applied
                 controller.transform.position = playerDestination;
+                // Debug.Log(controller.transform.position);
 
                 // Apply offset
                 controller.transform.localPosition -= new Vector3(0, yOffset, 0);

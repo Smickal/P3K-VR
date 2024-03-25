@@ -14,24 +14,24 @@ public class TeleportLevelUI : MonoBehaviour
 
     private string levelName;
 
-    public void SetData(LevelData levelData, int level)
+    public void SetData(LevelPlayerData levelPlayerData, int level)
     {
-        levelName = levelData.levelType.ToString();
+        levelName = levelPlayerData.levelType.ToString();
 
         _levelTitle.SetText("Level " + level);
         
         _levelButton.onClick.AddListener(TeleportToLevel);
 
-        if(levelData.levelSprite == null)
+        if(levelPlayerData.levelSprite == null)
         {
             _levelIMG.gameObject.SetActive(false);
         }
         else
         {
-            _levelIMG.sprite = levelData.levelSprite;
+            _levelIMG.sprite = levelPlayerData.levelSprite;
         }
 
-        if(!levelData.unlocked)
+        if(!levelPlayerData.unlocked)
         {
             _lockedLevel.SetActive(true);
         }
@@ -40,7 +40,7 @@ public class TeleportLevelUI : MonoBehaviour
             _lockedLevel.SetActive(false);
         }
 
-        for(int i=0;i<levelData.totalScore;i++)
+        for(int i=0;i<levelPlayerData.totalScore;i++)
         {
             _starsBright[i].SetActive(true);
         }

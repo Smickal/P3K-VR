@@ -4,11 +4,9 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public enum LevelP3KType{
-    None, Choking, Bleeding
-}
+
 [Serializable]
-public class LevelData
+public class LevelPlayerData
 {
     public LevelP3KType levelType;
     [Tooltip("0-1-2-3")]
@@ -38,7 +36,9 @@ public class SOPlayerFile : ScriptableObject
 
     [Tooltip("utk cek player pernah slsain tutorial ga")]
     public bool isTutorialFinish;
-    public List<LevelData> levelDataList;
+    public List<LevelPlayerData> levelPlayerDataList;
+    public LevelMode lastLevel;
+    public InGame_Mode lastInGameMode;
 
 
 }
