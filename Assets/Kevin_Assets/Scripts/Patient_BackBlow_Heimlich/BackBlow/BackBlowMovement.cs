@@ -5,6 +5,7 @@ using BNG;
 using System;
 using UnityEngine.Events;
 using TMPro;
+using Meta.Voice.TelemetryUtilities;
 
 public class BackBlowMovement : MonoBehaviour
 {
@@ -29,6 +30,8 @@ public class BackBlowMovement : MonoBehaviour
     Grabber currentGrabberForBackBlow;
 
     public static UnityEvent<Collider> OnBackBlow = new UnityEvent<Collider>();
+    public static UnityEvent<Collider> OnReleaseBackBlow = new UnityEvent<Collider>();
+
 
     float curTime;
     float prevDistance;
@@ -43,12 +46,16 @@ public class BackBlowMovement : MonoBehaviour
 
     bool isGrabbingChest;
     bool isReducing;
+    bool isHittingCollider;
+    Collider currentHitCollider;
+
 
     int backblowCount = 0;
 
     private void Start()
     {
         OnBackBlow.AddListener(CheckForBackBlowCollision);
+        OnReleaseBackBlow.AddListener(CheckForExitingCollider);
     }
 
     private void Update()
@@ -89,7 +96,20 @@ public class BackBlowMovement : MonoBehaviour
     }
 
     public void CheckForBackBlowCollision(Collider col)
-    { 
+    {
+        if (isHittingCollider) return;
+        if(col != _leftGrabber || col != _rightGrabber) return;
+        col.TryGetComponent<FullScoreBlow>(out FullScoreBlow fullScoreBlow);
+        bool isFullScores = false;
+
+
+        if (fullScoreBlow != null) isFullScores = true;
+
+
+        currentHitCollider = col;
+        isHittingCollider = true;
+
+
         //CheckForChestPull
         if(currentGrabberForPull == null)
         {
@@ -107,7 +127,21 @@ public class BackBlowMovement : MonoBehaviour
             velocity > _minSmackVelocity && velocity < _maxSmackVelocity
             && prevBlowDistance <= blowDistance)
         {
-            backblowCount++;
+            
+
+            //TODO: DROP FULL PROGGRESS HERE!
+            if(isFullScores)
+            {
+                backblowCount++;
+                Debug.Log("FullBackBlow");
+            }
+
+            //TODO: DROP REDUCED PROGGRESS HERE!
+            else
+            {
+                backblowCount++;
+                Debug.Log("ReducedBackBlow");
+            }
 
             if(isDebug)
             {
@@ -119,6 +153,18 @@ public class BackBlowMovement : MonoBehaviour
             StartCoroutine(BackBlowCoolDown());
         }
     }
+
+    public void CheckForExitingCollider(Collider collider)
+    {
+
+        //Check if the ones triggered is the same as the ones exiting
+        if (currentHitCollider == collider)
+        {
+            isHittingCollider = false;
+            currentHitCollider = null;
+        }
+    }
+
 
     private void StartCalc()
     {

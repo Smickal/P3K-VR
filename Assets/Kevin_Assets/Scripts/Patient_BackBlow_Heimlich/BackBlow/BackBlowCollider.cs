@@ -11,5 +11,10 @@ public class BackBlowCollider : MonoBehaviour
 
     }
 
+
+    private void OnTriggerExit(Collider other)
+    {
+        BackBlowMovement.OnReleaseBackBlow.Invoke(other);
+    }
 }
 

@@ -126,7 +126,7 @@ public class HeimlichMovement : MonoBehaviour
     }
 
 
-    public void CheckForTargetTrigger(Collider col)
+    public void CheckForTargetTrigger(Collider col, bool isFullScore)
     {
         //Must check for 2 hands + Target Trigger
         if (col == null) return;
@@ -141,7 +141,21 @@ public class HeimlichMovement : MonoBehaviour
         if (velocity > _minSmackVelocity && velocity < _maxSmackVelocity
             && prevHeimlichDistance > heimlichDistance && prevDistance > curDistance)
         {
-            heimlichCount++;
+
+            //NOTE: DROP FULL SCORE alias MAX PROGGRESS BAR HERE
+            if (isFullScore)
+            {
+                heimlichCount++;
+                Debug.Log("FULL PROGRESS");
+            }
+
+            //NOTE: DROP REDUCE SCORE PROGRESS HERE!
+            else
+            {
+                heimlichCount++;
+                Debug.Log("REDUCED PROGRESS");
+            }
+            
 
             if (_isDebug)
             {
