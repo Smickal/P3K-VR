@@ -30,8 +30,8 @@ public class PatientBackBlowHeimlich : MonoBehaviour
     const string titleChokingBackblow = "Backblow";
 
 
-    [HideInInspector] public UnityEvent<int> OnHeimlichCountUp;
-    [HideInInspector] public UnityEvent<int> OnBackBlowCountUp;
+    [HideInInspector] public UnityEvent<int, float> OnHeimlichCountUp;
+    [HideInInspector] public UnityEvent<int, float> OnBackBlowCountUp;
 
     public static Action UnActivateAllQuest;
 
@@ -82,28 +82,28 @@ public class PatientBackBlowHeimlich : MonoBehaviour
         _backBlowContainerOBJ?.SetActive(false);
     }
 
-    private void CheckBackBlowCount(int count)
+    private void CheckBackBlowCount(int count, float score)
     {
         if(count >= _backBlowMaxCount)
         {
             
             TurnOffGrabber();
             ActivateHeimlich();
-            Choking_QuestManager.AddProgressBar(5);
+            Choking_QuestManager.AddProgressBar(score);
             _backBlowDone = true;
             
         }
     }
 
 
-    private void CheckHeimlichCount(int count)
+    private void CheckHeimlichCount(int count, float score)
     {
         if(count >= _heimlichMaxCount)
         {
             
             TurnOffGrabber();
             ActivateBackBlowRig();
-            Choking_QuestManager.AddProgressBar(10);
+            Choking_QuestManager.AddProgressBar(score);
             _heimlichDone = true;
             
         }

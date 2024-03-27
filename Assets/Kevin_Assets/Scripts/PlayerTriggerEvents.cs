@@ -10,6 +10,7 @@ public class PlayerTriggerEvents : MonoBehaviour
     {
         if(other.gameObject.CompareTag("Player"))
         {
+            Debug.Log("Wat???");
             OnTriggerCollision.Invoke();
         }
     }

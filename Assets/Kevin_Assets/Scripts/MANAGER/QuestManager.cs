@@ -9,10 +9,12 @@ public class QuestManager : MonoBehaviour
 {
     [Header("Reference")]
     [SerializeField] protected QuestManagerUI questManagerUI;
+    
     protected LevelPlayerData levelPlayerDataNow; // ambil di awal utk punya data level
     protected LevelP3KType levelP3KTypeNow;
     [SerializeField]protected PlayerManager playerManager;
     [SerializeField]protected GameManager gameManager;
+    
     [SerializeField]private Bleeding_QuestManager bleeding_QuestManager;
     [SerializeField]private Choking_QuestManager choking_QuestManager;
 
@@ -33,17 +35,17 @@ public class QuestManager : MonoBehaviour
         levelP3KTypeNow = gameManager.LevelTypeNow();
         levelPlayerDataNow = playerManager.GetLevelData((int)levelP3KTypeNow);
     }
-    protected virtual void Start()
+    private void Start()
     {
         if(PlayerManager.LastInGameMode() == InGame_Mode.FirstAid)StartQuest();
     }
     protected virtual void Update() 
     {
-        if(Startq)
-        {
-            Startq = false;
-            StartQuest();
-        }
+        // if(Startq)
+        // {
+        //     Startq = false;
+        //     StartQuest();
+        // }
         if(isQuestStart)
         {
             if(timerInSecs > 0)
@@ -59,10 +61,11 @@ public class QuestManager : MonoBehaviour
             }
         }
     }
-    public virtual void CheckStartQuest()
+    public void CheckStartQuest()
     {
         if(!levelPlayerDataNow.hasBeatenLevelOnce)
         {
+            Debug.Log("Wattheee???"); 
             StartQuest();
         }
         else
@@ -70,11 +73,10 @@ public class QuestManager : MonoBehaviour
             //open ui
         }
     }
-    protected virtual void StartQuest()
+    public void StartQuest()
     {
         OnStartQuest.Invoke();
-        timerInSecs = timerInSecsMax;
-        questManagerUI.SetTimerSlider(timerInSecs);
+        
         if(PlayerManager.LastInGameMode() != InGame_Mode.FirstAid)
         {
             PlayerManager.ChangeInGame_Mode_Now(InGame_Mode.FirstAid);
@@ -94,11 +96,17 @@ public class QuestManager : MonoBehaviour
         if(levelP3KTypeNow == LevelP3KType.Choking) choking_QuestManager.ScoreCounter();
         else if (levelP3KTypeNow == LevelP3KType.Bleeding) bleeding_QuestManager.ScoreCounter();
         PlayerRestriction.ApplyAllRestriction();
+
+        //ntr perlu dinyalain fader sendiri di sini
+        EnvironmentLevelManager.SetEnvironment_FinishQuest();
+        PlayerManager.SetPlayerPosition_FinishP3k();
+
     }
     protected virtual void Quest(){}
     protected virtual void ScoreCounter()
     {
-        
+        PlayerManager.HasBeatenLvl((int)levelP3KTypeNow, score);
+        QuestEndingUI.SetUIData(score, levelP3KTypeNow);
     }
 
     public virtual void Restart()

@@ -9,6 +9,7 @@ using Meta.Voice.TelemetryUtilities;
 
 public class BackBlowMovement : MonoBehaviour
 {
+    [SerializeField] private float _reducedScore, _fullScore, _totalScore;
     [SerializeField] PatientBackBlowHeimlich _patientBackBlowHeimlich;
     [Space(5)]
     // Start is called before the first frame update
@@ -20,6 +21,10 @@ public class BackBlowMovement : MonoBehaviour
     [SerializeField] Grabbable _chestGrabable;
     [SerializeField] Grabber _leftGrabber;
     [SerializeField] Grabber _rightGrabber;
+    [SerializeField] GameObject _leftGrabberFull;
+    [SerializeField] GameObject _rightGrabberFull;
+    [SerializeField] Collider _leftGrabberColl;
+    [SerializeField] Collider _rightGrabberColl;
     [SerializeField] Transform _backColliderTrans;
     //
 
@@ -108,16 +113,32 @@ public class BackBlowMovement : MonoBehaviour
 
     public void CheckForBackBlowCollision(Collider col)
     {
+        // Debug.Log("Di siniaaaaaaaabbbbbbbbaaaaaaaaaaaaaaaaaabb ???");
         if (isHittingCollider) return;
-        if(col != _leftGrabber || col != _rightGrabber) return;
+        // Debug.Log("Di siniaaaaaaaa ???" + col + _rightGrabber);
+        if(!(col.gameObject == _leftGrabber.gameObject || col.gameObject == _rightGrabber.gameObject || col.gameObject == _leftGrabberFull || col.gameObject == _rightGrabberFull)) return;
+        // if(!(col.gameObject == _leftGrabberFull || col.gameObject == _rightGrabberFull)) return;
+        // Debug.Log("Di siniaaaaaaaabbbbbbbbbb ???");
         col.TryGetComponent<FullScoreBlow>(out FullScoreBlow fullScoreBlow);
         bool isFullScores = false;
+        // Debug.Log("Di sini ???");
 
 
         if (fullScoreBlow != null) isFullScores = true;
 
-
-        currentHitCollider = col;
+        if(col.gameObject == _leftGrabberFull)
+        {
+            currentHitCollider = _leftGrabberColl;
+        }
+        else if(col.gameObject == _rightGrabberFull)
+        {
+            currentHitCollider = _rightGrabberColl;
+        }
+        else
+        {
+            currentHitCollider = col;
+        }
+        
         isHittingCollider = true;
 
 
@@ -139,25 +160,28 @@ public class BackBlowMovement : MonoBehaviour
             && prevBlowDistance <= blowDistance)
         {
             
+            // Debug.Log("halo ???");
 
             //TODO: DROP FULL PROGGRESS HERE!
             if(isFullScores)
             {
                 backblowCount++;
-                Debug.Log("FullBackBlow");
+                Debug.Log("FullBackBlow_BB" + _fullScore);
+                _totalScore += _fullScore;
             }
 
             //TODO: DROP REDUCED PROGGRESS HERE!
             else
             {
                 backblowCount++;
-                Debug.Log("ReducedBackBlow");
+                Debug.Log("ReducedBackBlow_BB" + _reducedScore);
+                _totalScore += _reducedScore;
             }
 
             if(isDebug)
             {
                 _debugText.SetText($"BackBlowCount = {backblowCount}.");
-                _patientBackBlowHeimlich?.OnBackBlowCountUp.Invoke( backblowCount );
+                _patientBackBlowHeimlich?.OnBackBlowCountUp.Invoke( backblowCount, _totalScore);
             }
 
             StopCoroutine(BackBlowCoolDown());
@@ -220,5 +244,6 @@ public class BackBlowMovement : MonoBehaviour
     public void ResetCount()
     {
         backblowCount = 0;
+        _totalScore = 0;
     }
 }

@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     public static Func<LevelP3KType> CheckLevelTypeNow;
     public static Action<InGame_Mode> ChangeInGameModeNow;
     public static Action PauseGame;
+    public static Action<GameState> ChangeGameStateNow;
 
     private void Awake() 
     {
@@ -25,7 +26,7 @@ public class GameManager : MonoBehaviour
         ChangeInGameModeNow += ChangeInGameMode;
         CheckGameStateNow += GameStateNow;
         CheckLevelTypeNow += LevelTypeNow;
-
+        ChangeGameStateNow += ChangeGameState;
         
     }
     private void Start() 
@@ -58,6 +59,10 @@ public class GameManager : MonoBehaviour
     public LevelP3KType LevelTypeNow()
     {
         return levelType;
+    }
+    public void ChangeGameState(GameState changeState)
+    {
+        state = changeState;
     }
     public void Pause()
     {

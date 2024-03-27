@@ -12,6 +12,7 @@ public class Choking_QuestManager : QuestManager
     [Header("Data")]
     [SerializeField]private float progressTotal;
     private float progressNow;
+    [SerializeField]private float _minusProgress;
     [SerializeField]private float[] timerTarget;
     
     public static Action<float> AddProgressBar;
@@ -22,8 +23,27 @@ public class Choking_QuestManager : QuestManager
         AddProgressBar += AddProgress;
         // Questt += StartQuest;
     }
+    protected override void Update()
+    {
+        base.Update();
+        if(isQuestStart)
+        {
+            if(progressNow > 0 && progressNow < progressTotal)
+            {
+                progressNow -= (Time.deltaTime * _minusProgress);
+            }
+            else if(progressNow < 0)
+            {
+                progressNow = 0;
+            }
+        }
+    }
     protected override void Quest()
     {
+        OnStartQuest.Invoke();// krn ud ga berhubungan ama questmanager jd hrsnya aman..
+        timerInSecs = timerInSecsMax;
+        questManagerUI.SetTimerSlider(timerInSecs);
+
         questManagerUI.OpenHelper_Choking();
         chokingCourotine = ChokingStart();
         StartCoroutine(chokingCourotine);
@@ -45,7 +65,7 @@ public class Choking_QuestManager : QuestManager
         {
             score = ScoreName.Sad_Face;
         }
-        PlayerManager.HasBeatenLvl((int)levelP3KTypeNow, score);
+        base.ScoreCounter();
     }
 
     private IEnumerator ChokingStart()
@@ -68,7 +88,7 @@ public class Choking_QuestManager : QuestManager
             progressNow += progress;
             if(progressNow >= progressTotal)
             {
-                questManagerUI.ShowTimer();
+                // questManagerUI.ShowTimer();
                 QuestDone();
                 Debug.Log("Quest Selesai coii");
             }

@@ -11,6 +11,7 @@ public class QuestManagerUI : MonoBehaviour
     const string titleChoking = "Choking First Aid";
     const string titleChokingBackblow = "Backblow";
     const string titleChokingHeimlich = "Heimlich";
+    const string titleBleedingWithItem = "Bleeding With Item First Aid";
     [Header("Base UI")]
     [SerializeField] GameObject _baseUI;
     [SerializeField] TMP_Text _titleBase;
@@ -26,12 +27,9 @@ public class QuestManagerUI : MonoBehaviour
     [Tooltip("0 - Backblow, 1 - Heimlich")]
     [SerializeField] Sprite[] _chokingDescSprite;
     [Header("Bleeding")]
-    [SerializeField] GameObject _bleedingHelperContainer;
-
-    
-
-    
-    
+    [SerializeField] GameObject _bleedingHelperContainer_WithItem;
+    [SerializeField] GameObject _bleedingHelperContainer_WithoutItem;
+    [SerializeField] Slider _timerSlider_bleeding;
 
     public static Action<String> ChangeHelperDesc_Choking;
     
@@ -76,16 +74,50 @@ public class QuestManagerUI : MonoBehaviour
         }
     }
 
+    public void OpenHelper_Bleeding_All()
+    {
+        ActivateBaseUI();
+        CloseUI();
+        _titleBase.text = titleBleedingWithItem;
+        _bleedingHelperContainer_WithItem.SetActive(true);
+        ShowTimer();
+        _bleedingHelperContainer_WithoutItem.SetActive(true);
+
+    }
+    public void OpenHelper_Bleeding_WithItem()
+    {
+        ActivateBaseUI();
+        CloseUI();
+        _titleBase.text = titleBleedingWithItem;
+        ShowTimer();
+        _bleedingHelperContainer_WithItem.SetActive(true);
+    }
+    public void OpenHelper_Bleeding_WithoutItem()
+    {
+        _bleedingHelperContainer_WithoutItem.SetActive(true);
+    }
+    public void CloseHelper_Bleeding_WithItem()
+    {
+        DeactivateBaseUI();
+        _bleedingHelperContainer_WithItem.SetActive(false);
+    }
+    public void CloseHelper_Bleeding_WithoutItem()
+    {
+        _bleedingHelperContainer_WithoutItem.SetActive(false);
+    }
+
     public void ShowTimer() {_timerSlider.gameObject.SetActive(true);}
     public void HideTimer() {_timerSlider.gameObject.SetActive(false);}
     public void SetTimerSlider(float timerMax)
     {
         _timerSlider.value = 1;
+        if(GameManager.CheckLevelTypeNow() == LevelP3KType.Bleeding)_timerSlider_bleeding.value = 1;
         _maxTimer = timerMax;
     }
     public void ChangeTimerSlider(float curTime)
     {
         _timerSlider.value = curTime/_maxTimer;
+        if(GameManager.CheckLevelTypeNow() == LevelP3KType.Bleeding)_timerSlider_bleeding.value = curTime/_maxTimer;
     }
     public void ActiveQuestBtn_Robot(bool change)
     {

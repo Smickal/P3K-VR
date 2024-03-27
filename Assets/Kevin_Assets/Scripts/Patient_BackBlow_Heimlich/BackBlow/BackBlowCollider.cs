@@ -6,7 +6,7 @@ public class BackBlowCollider : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-
+        Debug.Log(other.gameObject);
         BackBlowMovement.OnBackBlow.Invoke(other);
 
     }

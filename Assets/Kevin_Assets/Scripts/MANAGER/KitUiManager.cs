@@ -17,6 +17,7 @@ public class KitUiManager : MonoBehaviour
     [SerializeField] GameObject _quizContainer;
     [SerializeField] GameObject _levelHelperContainer;
     [SerializeField] GameObject _outsideGlossaryContainer;
+    [SerializeField] GameObject _questEndingContainer;
 
     [Header("UI")]
     [SerializeField] GameObject[] _baseUIContainers;
@@ -79,6 +80,14 @@ public class KitUiManager : MonoBehaviour
     {
         CloseUI();
         _outsideGlossaryContainer.SetActive(true);
+        _vF.Deactivate();
+    }
+
+    public void OpenQuestEnding()
+    {
+        CloseUI();
+        _questEndingContainer.SetActive(true);
+        _vF.Deactivate();
     }
 
     public bool IsBaseUIOpen()

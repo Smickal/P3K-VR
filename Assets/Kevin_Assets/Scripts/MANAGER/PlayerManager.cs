@@ -51,12 +51,13 @@ public class PlayerManager : MonoBehaviour
     [SerializeField]private GameManager gameManager;
     [SerializeField]private Transform playerGameObject;
     [SerializeField]private PlayerTeleport playerTeleport;
+    [SerializeField]private EnvironmentLevelManager environmentLevelManager;
     [Header("DO NOT FORGET TO SET")]
     [SerializeField]private float playerTeleport_y = 1.65f;
     [SerializeField]private PlayerPositionSave[] playerPosition;
 
     [SerializeField]private PlayerLevelSave playerLevelSave;
-    public static Action HasFinishedTutorialMain, ResetPlayerSave, SetPlayerPosition_DoP3k;
+    public static Action HasFinishedTutorialMain, ResetPlayerSave, SetPlayerPosition_DoP3k, SetPlayerPosition_FinishP3k;
     public static Action<InGame_Mode> ChangeInGame_Mode_Now;
     public static Action<int> HasFinishedIntroLevel;
     public static Action<int, ScoreName> HasBeatenLvl;
@@ -82,15 +83,22 @@ public class PlayerManager : MonoBehaviour
         LevelDataNow += GetLevelData;
         TotalLevels += TotalLevel;
         SetPlayerPosition_DoP3k += SetPlayerPosition_InGame_DoP3k;
+        SetPlayerPosition_FinishP3k += SetPlayerPostion_InGame_AfterP3K;
         ChangeInGame_Mode_Now += ChangePlayerLastInGameMode;
         LastInGameMode += PlayerLastInGameMode;
 
         gameManager = GetComponent<GameManager>();
         
         Load();
+        
+        if(gameManager.LevelModeNow() == LevelMode.Level)
+        {
+            environmentLevelManager.SetEnvironmentAwake(realFile.levelPlayerDataList[(int)gameManager.LevelTypeNow()].hasFinishIntro);
+        }
+        if(!WantToExploreWorld)SetPlayerPositionAwake();
     }
     private void Start() {
-        if(!WantToExploreWorld)SetPlayerPositionAwake();
+        
     }
 
     private void Update() {
@@ -154,7 +162,7 @@ public class PlayerManager : MonoBehaviour
             playerLevelSave.levelDataMiniList[level].hasBeatenLevelOnce = true;
         }
 
-        if(level+1 <= realFile.levelPlayerDataList.Count)
+        if(level+1 < realFile.levelPlayerDataList.Count)
         {
             realFile.levelPlayerDataList[level+1].unlocked = true;
             playerLevelSave.levelDataMiniList[level+1].unlocked = true;
@@ -316,6 +324,29 @@ public class PlayerManager : MonoBehaviour
         // Debug.Break();
         gameManager.ChangeInGameMode(InGame_Mode.FirstAid);
         
+    }
+
+    private void SetPlayerPostion_InGame_AfterP3K()
+    {
+        PlayerPositionSave.PositionsInLevelMode.position positionNow = new PlayerPositionSave.PositionsInLevelMode.position();
+        if(gameManager.LevelTypeNow() == LevelP3KType.Choking)
+        {
+            positionNow = playerPosition[1].positionsInLevel[0].positions[3]; 
+        }
+        else if(gameManager.LevelTypeNow() == LevelP3KType.Bleeding)
+        {
+            positionNow = playerPosition[1].positionsInLevel[1].positions[3]; 
+        }
+        
+        Vector3 destination = new Vector3(positionNow.playerPosition.x, playerTeleport_y, positionNow.playerPosition.z);
+        Quaternion rotation = Quaternion.Euler(0,positionNow.playerRotation,0);
+        playerTeleport.TeleportPlayer(destination, rotation);
+        // Debug.Break();
+        gameManager.ChangeGameState(GameState.Cinematic);
+        PlayerRestriction.ApplyAllRestriction();
+
+        QuestEndingUI.ShowQuestEnding();
+
     }
 
 }
