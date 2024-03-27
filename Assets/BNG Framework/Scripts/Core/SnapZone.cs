@@ -451,7 +451,7 @@ namespace BNG {
                 // Debug.Log(totallewat+"thiss");
                 // Debug.Log("HeldItem" + HeldItem);
                 if (ge != null) {
-                    Debug.Log("Masuk sini?");
+                    // Debug.Log("Masuk sini?");
                     for (int x = 0; x < ge.Length; x++) {
                         ge[x].OnSnapZoneExit();
                     }

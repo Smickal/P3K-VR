@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using Unity.VisualScripting;
 
 public class TeleportLevelUI : MonoBehaviour
 {
     [SerializeField] TMP_Text _levelTitle;
     [SerializeField] Image _levelIMG;
     [SerializeField] GameObject _lockedLevel;
-    [SerializeField] GameObject[] _starsBright;
+    [SerializeField] Sprite[] _scoreEmoticon;
+    [SerializeField] Image _scoreIMG;
     [SerializeField] Button _levelButton;
 
     private string levelName;
@@ -39,11 +41,12 @@ public class TeleportLevelUI : MonoBehaviour
         {
             _lockedLevel.SetActive(false);
         }
-
-        for(int i=0;i<levelPlayerData.totalScore;i++)
+        if(levelPlayerData.score == ScoreName.None)
         {
-            _starsBright[i].SetActive(true);
+            _scoreIMG.sprite = null;
         }
+        else _scoreIMG.sprite = _scoreEmoticon[(int)levelPlayerData.score - 1];
+        
     }
 
     public void TeleportToLevel()

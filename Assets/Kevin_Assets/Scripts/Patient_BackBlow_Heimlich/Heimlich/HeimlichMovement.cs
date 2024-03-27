@@ -121,8 +121,18 @@ public class HeimlichMovement : MonoBehaviour
 
     private void CheckGrabber()
     {
-        if (curLeftGrabber && curRightGrabber) isGrabbing = true;
-        else isGrabbing = false;
+        if (curLeftGrabber && curRightGrabber)
+        {
+            isGrabbing = true;
+            if(!PlayerRestriction.IsRestrictMovement())PlayerRestriction.ApplyMovementRestriction();
+        }
+        
+        else 
+        {
+            isGrabbing = false;
+            
+        }
+        
     }
 
 
@@ -200,5 +210,10 @@ public class HeimlichMovement : MonoBehaviour
     public bool IsHandsTriggered()
     {
         return isLeftHandHit && isRightHandHit;
+    }
+
+    public void ResetCount()
+    {
+        heimlichCount = 0;
     }
 }

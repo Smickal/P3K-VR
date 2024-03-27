@@ -33,7 +33,7 @@ public class PlayerLevelSave
     [Serializable]
     public class LevelDataMini
     {
-        public int totalScore;
+        public ScoreName score;
         public bool unlocked;
         public bool hasFinishIntro;
         public bool hasBeatenLevelOnce;
@@ -50,6 +50,7 @@ public class PlayerManager : MonoBehaviour
     [Header("References")]
     [SerializeField]private GameManager gameManager;
     [SerializeField]private Transform playerGameObject;
+    [SerializeField]private PlayerTeleport playerTeleport;
     [Header("DO NOT FORGET TO SET")]
     [SerializeField]private float playerTeleport_y = 1.65f;
     [SerializeField]private PlayerPositionSave[] playerPosition;
@@ -58,10 +59,11 @@ public class PlayerManager : MonoBehaviour
     public static Action HasFinishedTutorialMain, ResetPlayerSave, SetPlayerPosition_DoP3k;
     public static Action<InGame_Mode> ChangeInGame_Mode_Now;
     public static Action<int> HasFinishedIntroLevel;
-    public static Action<int, int> HasBeatenLvl;
+    public static Action<int, ScoreName> HasBeatenLvl;
     public static Func<bool> IsTutorialMainFinish;
     public static Func<int> TotalLevels;
     public static Func<int, LevelPlayerData> LevelDataNow;
+    public static Func<InGame_Mode> LastInGameMode;
 
     [Header("Debug Only")]
     public bool checkSave;
@@ -81,10 +83,14 @@ public class PlayerManager : MonoBehaviour
         TotalLevels += TotalLevel;
         SetPlayerPosition_DoP3k += SetPlayerPosition_InGame_DoP3k;
         ChangeInGame_Mode_Now += ChangePlayerLastInGameMode;
+        LastInGameMode += PlayerLastInGameMode;
 
         gameManager = GetComponent<GameManager>();
+        
+        Load();
+    }
+    private void Start() {
         if(!WantToExploreWorld)SetPlayerPositionAwake();
-        if(gameManager.levelModeNow() == LevelMode.Home)Load();
     }
 
     private void Update() {
@@ -95,7 +101,7 @@ public class PlayerManager : MonoBehaviour
             playerLevelSave.isTutorialFinish = realFile.isTutorialFinish;
             for(int i=1;i<realFile.levelPlayerDataList.Count;i++)
             {
-                playerLevelSave.levelDataMiniList[i].totalScore = realFile.levelPlayerDataList[i].totalScore;
+                playerLevelSave.levelDataMiniList[i].score = realFile.levelPlayerDataList[i].score;
                 playerLevelSave.levelDataMiniList[i].unlocked = realFile.levelPlayerDataList[i].unlocked;
                 playerLevelSave.levelDataMiniList[i].hasFinishIntro = realFile.levelPlayerDataList[i].hasFinishIntro;
                 playerLevelSave.levelDataMiniList[i].hasBeatenLevelOnce = realFile.levelPlayerDataList[i].hasBeatenLevelOnce;
@@ -113,6 +119,7 @@ public class PlayerManager : MonoBehaviour
     }
     public bool IsFinish_TutorialMain(){ return realFile.isTutorialFinish; }
     public LevelPlayerData GetLevelData(int level){ return realFile.levelPlayerDataList[level]; }
+    public InGame_Mode PlayerLastInGameMode(){return realFile.lastInGameMode;}
     private void ChangePlayerLastInGameMode(InGame_Mode change)
     {
         realFile.lastInGameMode = change;
@@ -132,10 +139,14 @@ public class PlayerManager : MonoBehaviour
 
         Save();
     }
-    private void BeatenLevel(int level, int score)
+    private void BeatenLevel(int level, ScoreName score)
     {
-        realFile.levelPlayerDataList[level].totalScore = score;
-        playerLevelSave.levelDataMiniList[level].totalScore = score;
+        if(score > realFile.levelPlayerDataList[level].score)
+        {
+            realFile.levelPlayerDataList[level].score = score;
+            playerLevelSave.levelDataMiniList[level].score = score;
+        }
+        
 
         if(!realFile.levelPlayerDataList[level].hasBeatenLevelOnce)
         {
@@ -161,13 +172,14 @@ public class PlayerManager : MonoBehaviour
     {
         if (PlayerPrefs.HasKey(SaveStateKey))
         {
+            Debug.Log("Test");
             string loadString = PlayerPrefs.GetString(SaveStateKey);
             playerLevelSave = JsonConvert.DeserializeObject<PlayerLevelSave>(loadString);
 
             realFile.isTutorialFinish = playerLevelSave.isTutorialFinish;
             for(int i=1;i<realFile.levelPlayerDataList.Count;i++)
             {
-                realFile.levelPlayerDataList[i].totalScore = playerLevelSave.levelDataMiniList[i].totalScore;
+                realFile.levelPlayerDataList[i].score = playerLevelSave.levelDataMiniList[i].score;
                 realFile.levelPlayerDataList[i].unlocked = playerLevelSave.levelDataMiniList[i].unlocked;
                 realFile.levelPlayerDataList[i].hasFinishIntro = playerLevelSave.levelDataMiniList[i].hasFinishIntro;
                 realFile.levelPlayerDataList[i].hasBeatenLevelOnce = playerLevelSave.levelDataMiniList[i].hasBeatenLevelOnce;
@@ -175,6 +187,7 @@ public class PlayerManager : MonoBehaviour
         }
         else
         {
+            Debug.Log("Test");
             playerLevelSave = new PlayerLevelSave();
             playerLevelSave.levelDataMiniList = new PlayerLevelSave.LevelDataMini[realFile.levelPlayerDataList.Count];
             for(int i=1;i<realFile.levelPlayerDataList.Count;i++)
@@ -194,7 +207,7 @@ public class PlayerManager : MonoBehaviour
         realFile.isTutorialFinish = resetFile.isTutorialFinish;
         for(int i=1;i<realFile.levelPlayerDataList.Count;i++)
         {
-            realFile.levelPlayerDataList[i].totalScore = resetFile.levelPlayerDataList[i].totalScore;
+            realFile.levelPlayerDataList[i].score = resetFile.levelPlayerDataList[i].score;
             realFile.levelPlayerDataList[i].unlocked = resetFile.levelPlayerDataList[i].unlocked;
             realFile.levelPlayerDataList[i].hasFinishIntro = resetFile.levelPlayerDataList[i].hasFinishIntro;
             realFile.levelPlayerDataList[i].hasBeatenLevelOnce = resetFile.levelPlayerDataList[i].hasBeatenLevelOnce;
@@ -203,7 +216,7 @@ public class PlayerManager : MonoBehaviour
         playerLevelSave.isTutorialFinish = realFile.isTutorialFinish;
         for(int i=1;i<realFile.levelPlayerDataList.Count;i++)
         {
-            playerLevelSave.levelDataMiniList[i].totalScore = realFile.levelPlayerDataList[i].totalScore;
+            playerLevelSave.levelDataMiniList[i].score = realFile.levelPlayerDataList[i].score;
             playerLevelSave.levelDataMiniList[i].unlocked = realFile.levelPlayerDataList[i].unlocked;
             playerLevelSave.levelDataMiniList[i].hasFinishIntro = realFile.levelPlayerDataList[i].hasFinishIntro;
             playerLevelSave.levelDataMiniList[i].hasBeatenLevelOnce = realFile.levelPlayerDataList[i].hasBeatenLevelOnce;
@@ -215,7 +228,7 @@ public class PlayerManager : MonoBehaviour
     private void SetPlayerPositionAwake()
     {
         PlayerPositionSave.PositionsInLevelMode.position positionNow = new PlayerPositionSave.PositionsInLevelMode.position();
-        if(gameManager.levelModeNow() == LevelMode.Home)
+        if(gameManager.LevelModeNow() == LevelMode.Home)
         {
             if(realFile.lastLevel == LevelMode.Home)
             {
@@ -229,7 +242,7 @@ public class PlayerManager : MonoBehaviour
         }
         else
         {
-            if(gameManager.levelTypeNow() == LevelP3KType.Choking)
+            if(gameManager.LevelTypeNow() == LevelP3KType.Choking)
             {
                 if(realFile.lastLevel == LevelMode.Home)
                 {
@@ -250,7 +263,7 @@ public class PlayerManager : MonoBehaviour
                     }
                 }
             }
-            else if(gameManager.levelTypeNow() == LevelP3KType.Bleeding)
+            else if(gameManager.LevelTypeNow() == LevelP3KType.Bleeding)
             {
                 if(realFile.lastLevel == LevelMode.Home)
                 {
@@ -278,17 +291,17 @@ public class PlayerManager : MonoBehaviour
         // playerGameObject.rotation = Quaternion.Euler(0,positionNow.playerRotation,0);
         Vector3 destination = new Vector3(positionNow.playerPosition.x, playerTeleport_y, positionNow.playerPosition.z);
         Quaternion rotation = Quaternion.Euler(0,positionNow.playerRotation,0);
-        PlayerTeleport.Teleport(destination, rotation);
-        realFile.lastLevel = gameManager.levelModeNow();
+        playerTeleport.TeleportPlayerAwake(destination, rotation);
+        realFile.lastLevel = gameManager.LevelModeNow();
     }
     private void SetPlayerPosition_InGame_DoP3k()
     {
         PlayerPositionSave.PositionsInLevelMode.position positionNow = new PlayerPositionSave.PositionsInLevelMode.position();
-        if(gameManager.levelTypeNow() == LevelP3KType.Choking)
+        if(gameManager.LevelTypeNow() == LevelP3KType.Choking)
         {
             positionNow = playerPosition[1].positionsInLevel[0].positions[2]; 
         }
-        else if(gameManager.levelTypeNow() == LevelP3KType.Bleeding)
+        else if(gameManager.LevelTypeNow() == LevelP3KType.Bleeding)
         {
             positionNow = playerPosition[1].positionsInLevel[1].positions[2]; 
         }
@@ -296,10 +309,10 @@ public class PlayerManager : MonoBehaviour
         // playerGameObject.position += positionNow.playerPosition;
         // playerGameObject.rotation = Quaternion.Euler(0,positionNow.playerRotation,0);
         // Debug.Break();
-        Debug.Log(playerGameObject.position + "posisi");
+        // Debug.Log(playerGameObject.position + "posisi");
         Vector3 destination = new Vector3(positionNow.playerPosition.x, playerTeleport_y, positionNow.playerPosition.z);
         Quaternion rotation = Quaternion.Euler(0,positionNow.playerRotation,0);
-        PlayerTeleport.Teleport(destination, rotation);
+        playerTeleport.TeleportPlayer(destination, rotation);
         // Debug.Break();
         gameManager.ChangeInGameMode(InGame_Mode.FirstAid);
         

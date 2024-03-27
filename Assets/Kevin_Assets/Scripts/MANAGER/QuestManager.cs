@@ -1,24 +1,65 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class QuestManager : MonoBehaviour
 {
-    private LevelPlayerData levelPlayerDataNow; // ambil di awal utk punya data level
-    private LevelP3KType levelP3KTypeNow;
-    [SerializeField]private PlayerManager playerManager;
-    [SerializeField]private GameManager gameManager;
+    [Header("Reference")]
+    [SerializeField] protected QuestManagerUI questManagerUI;
+    protected LevelPlayerData levelPlayerDataNow; // ambil di awal utk punya data level
+    protected LevelP3KType levelP3KTypeNow;
+    [SerializeField]protected PlayerManager playerManager;
+    [SerializeField]protected GameManager gameManager;
+    [SerializeField]private Bleeding_QuestManager bleeding_QuestManager;
+    [SerializeField]private Choking_QuestManager choking_QuestManager;
 
     [Header("Level Data")]
-    [Tooltip("Urutan berdasarkan enum levelp3ktype")]
-    public float[] timerInSecs;
-    private IEnumerator chokingCourotine;
-    private void Awake() 
+    [SerializeField]protected float timerInSecsMax;
+    protected float timerInSecs;
+    protected ScoreName score;
+    [Header("Checker")]
+    [SerializeField]protected bool isQuestStart;
+    [SerializeField]protected bool isTimerUp;
+
+    public UnityEvent OnStartQuest, OnFinishQuest;
+    
+    [Header("Debug Only")]
+    public bool Startq;
+    protected virtual void Awake() 
     {
-        levelP3KTypeNow = gameManager.levelTypeNow();
+        levelP3KTypeNow = gameManager.LevelTypeNow();
         levelPlayerDataNow = playerManager.GetLevelData((int)levelP3KTypeNow);
     }
-    private void CheckStartQuest()
+    protected virtual void Start()
+    {
+        if(PlayerManager.LastInGameMode() == InGame_Mode.FirstAid)StartQuest();
+    }
+    protected virtual void Update() 
+    {
+        if(Startq)
+        {
+            Startq = false;
+            StartQuest();
+        }
+        if(isQuestStart)
+        {
+            if(timerInSecs > 0)
+            {
+                timerInSecs -= Time.deltaTime;
+                questManagerUI.ChangeTimerSlider(timerInSecs);
+            }
+            else
+            {
+                isTimerUp = true;
+                QuestDone();
+                
+            }
+        }
+    }
+    public virtual void CheckStartQuest()
     {
         if(!levelPlayerDataNow.hasBeatenLevelOnce)
         {
@@ -29,43 +70,54 @@ public class QuestManager : MonoBehaviour
             //open ui
         }
     }
-    public void StartQuest()
+    protected virtual void StartQuest()
     {
-        //fade in fade out - or reset scene
-        PlayerManager.ChangeInGame_Mode_Now(InGame_Mode.FirstAid);
-        if(levelP3KTypeNow == LevelP3KType.Choking)
+        OnStartQuest.Invoke();
+        timerInSecs = timerInSecsMax;
+        questManagerUI.SetTimerSlider(timerInSecs);
+        if(PlayerManager.LastInGameMode() != InGame_Mode.FirstAid)
         {
-            // chokingCourotine = ChokingTutorial();
-            StartCoroutine(chokingCourotine);
+            PlayerManager.ChangeInGame_Mode_Now(InGame_Mode.FirstAid);
+            PlayerManager.SetPlayerPosition_DoP3k();
         }
         
-        else if (levelP3KTypeNow == LevelP3KType.Bleeding)BleedingQuest();
+        if(levelP3KTypeNow == LevelP3KType.Choking) choking_QuestManager.Quest();
+        else if (levelP3KTypeNow == LevelP3KType.Bleeding) bleeding_QuestManager.Quest();
         
 
     }
-
-    // private IEnumerator ChokingTutorial()
-    // {
-    //     //buka ui bla bla
-    //     // yield return new WaitUntil(); - tunggu sampai bekblow 5x
-
-    //     //buka ui bla bla
-    //     // yield return new WaitUntil(); - tunggu sampai heimlich 5x
-    //     ChokingQuest();
-    // }
-    public void ChokingQuest()
+    public void QuestDone() 
+    {
+        OnFinishQuest.Invoke();
+        isQuestStart = false;
+        PlayerManager.ChangeInGame_Mode_Now(InGame_Mode.NormalWalk);
+        if(levelP3KTypeNow == LevelP3KType.Choking) choking_QuestManager.ScoreCounter();
+        else if (levelP3KTypeNow == LevelP3KType.Bleeding) bleeding_QuestManager.ScoreCounter();
+        PlayerRestriction.ApplyAllRestriction();
+    }
+    protected virtual void Quest(){}
+    protected virtual void ScoreCounter()
     {
         
     }
-    public void BleedingQuest()
+
+    public virtual void Restart()
     {
+        PlayerManager.ChangeInGame_Mode_Now(InGame_Mode.FirstAid);
+        if(levelP3KTypeNow == LevelP3KType.Choking) choking_QuestManager.ResetQuest();
+        else if (levelP3KTypeNow == LevelP3KType.Bleeding) bleeding_QuestManager.ResetQuest();
+    }
+    public virtual void QuitQuest()
+    {
+        PlayerManager.ChangeInGame_Mode_Now(InGame_Mode.NormalWalk);
+        if(levelP3KTypeNow == LevelP3KType.Choking) choking_QuestManager.ResetQuest();
+        else if (levelP3KTypeNow == LevelP3KType.Bleeding) bleeding_QuestManager.ResetQuest();
+    }
+    protected virtual void ResetQuest() 
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         
     }
 
-    //bikin code start quest yg jalanin quest pas player ada di certain areanya - kalo ud pernah dijalanin buka ui trus minta jawaban kalo yes berarti yauda
-
-    //masuk ke quest, kalo level 1, lakuin nyalain ui levelhelper, tutorial 2 kali, trus nyalain timer, trus br ganti gantian, timer slsain, dptin skor akhir, penilaian, abis liatin ksh liat glossary the end. - ui mungkin perlu dikasi jarak hm dn dia diem di tmpt doang
-
-    //lsg timer sambil ui helper nyala, trus ngikutin terus sampe slsai, penilaian, liat glossary the end
 
 }

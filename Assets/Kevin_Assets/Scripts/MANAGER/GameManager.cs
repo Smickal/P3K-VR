@@ -14,15 +14,22 @@ public class GameManager : MonoBehaviour
     private bool isPause;
     public UnityEvent OnPause, OnUnPause;
     public static Func<LevelMode> CheckLevelModeNow;
+    public static Func<GameState> CheckGameStateNow;
+    public static Func<LevelP3KType> CheckLevelTypeNow;
     public static Action<InGame_Mode> ChangeInGameModeNow;
     public static Action PauseGame;
 
     private void Awake() 
     {
-        CheckLevelModeNow += levelModeNow;
+        CheckLevelModeNow += LevelModeNow;
         ChangeInGameModeNow += ChangeInGameMode;
+        CheckGameStateNow += GameStateNow;
+        CheckLevelTypeNow += LevelTypeNow;
 
-
+        
+    }
+    private void Start() 
+    {
         OnPause.AddListener(
             ()=>
             {
@@ -44,16 +51,20 @@ public class GameManager : MonoBehaviour
     {
         return inGame_Mode;
     }
-    public LevelMode levelModeNow()
+    public LevelMode LevelModeNow()
     {
         return levelMode;
     }
-    public LevelP3KType levelTypeNow()
+    public LevelP3KType LevelTypeNow()
     {
         return levelType;
     }
     public void Pause()
     {
+        if(state == GameState.Cinematic)
+        {
+            return;
+        }
         isPause = !isPause;
         if(isPause)
         {

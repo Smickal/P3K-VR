@@ -37,10 +37,10 @@ namespace BNG {
 
                 // Don't want to repeatedly do grabs if this is a hold item
                 if(Time.time - lastGrabTime >= minTimeBetweenGrabs) {
-                    Debug.Log(grabber + "ga ada");
+                    // Debug.Log(grabber + "ga ada");
                     if(grabber != null)
                     {
-                        Debug.Log(grabber.gameObject);
+                        // Debug.Log(grabber.gameObject);
                         OnGrabEvent.Invoke(grabber);
                     }
                     

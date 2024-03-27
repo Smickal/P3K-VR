@@ -22,9 +22,11 @@ public class PlayerRestriction : MonoBehaviour
     [SerializeField]private SmoothLocomotion playerMovement_BNG;
     [SerializeField]private GameObject[] playerMovements_OVR;
     
+    private bool isRestrictAll, isRestrictGrabable, isRestrictMovement;
+    public static Func<bool> IsRestrictAll, IsRestrictMovement, IsRestrictGrabable;
 
 
-    public static Action LiftAllRestriction, ApplyAllRestriction;
+    public static Action LiftAllRestriction, ApplyAllRestriction, LiftGrabableRestriction, ApplyGrabableRestriction, LiftMovementRestriction, ApplyMovementRestriction;
     
     [Header("Debug")]
     public bool enableNow;
@@ -33,7 +35,17 @@ public class PlayerRestriction : MonoBehaviour
         InitiateGrabableReference();
         LiftAllRestriction += EnableAll;
         ApplyAllRestriction += DisableAll;
-        if(!playerManager.IsFinish_TutorialMain())DisableAll();
+        LiftGrabableRestriction += EnableAllGrabable;
+        ApplyGrabableRestriction += DisableAllGrabable;
+        LiftMovementRestriction += EnableAllMovement;
+        ApplyMovementRestriction += DisableAllMovement;
+
+        IsRestrictAll += RestrictAll;
+        IsRestrictMovement += RestrictMovement;
+        IsRestrictGrabable += RestrictGrabable;
+
+
+        if(!playerManager.IsFinish_TutorialMain())DisableAllGrabable();
     }
     private void Update() {
         if(enableNow)
@@ -41,8 +53,12 @@ public class PlayerRestriction : MonoBehaviour
             enableNow = false;
             EnableAll();
         }
+        Debug.Log(playerMovement_BNG.enabled);
     }
 
+    private bool RestrictAll(){return isRestrictAll;}
+    private bool RestrictMovement(){return isRestrictMovement;}
+    private bool RestrictGrabable(){return isRestrictGrabable;}
     private void InitiateGrabableReference()
     {
         HandGrabInteractable[] grabbable_OVR_array = GameObject.FindObjectsOfType<HandGrabInteractable>();
@@ -61,6 +77,7 @@ public class PlayerRestriction : MonoBehaviour
     }
     private void DisableAllGrabable()
     {
+        isRestrictGrabable = true;
         foreach(Grabbable grabbable in all_BNG_Grabable)
         {
             grabbable.enabled = false;
@@ -77,9 +94,11 @@ public class PlayerRestriction : MonoBehaviour
         {
             distanceHandGrabInteractable.enabled = false;
         }
+        
     }
     private void EnableAllGrabable()
     {
+        isRestrictGrabable = false;
         foreach(Grabbable grabbable in all_BNG_Grabable)
         {
             grabbable.enabled = true;
@@ -96,11 +115,15 @@ public class PlayerRestriction : MonoBehaviour
         {
             if(!distanceHandGrabInteractable.IsInSnapZone())distanceHandGrabInteractable.enabled = true;
         }
+        
     }
 
     private void DisableAllMovement()
     {
-        playerMovement_BNG.enabled = false;
+        isRestrictMovement = true;
+        Debug.Log("WHAT DO YOU MEAN THERE'S NO PLAYER MOVEMENT" + playerMovement_BNG + "???");
+        if(playerMovement_BNG)playerMovement_BNG.enabled = false;
+        Debug.Log("test");
         foreach(GameObject playermovement_OVR in playerMovements_OVR)
         {
             playermovement_OVR.SetActive(false);
@@ -108,7 +131,9 @@ public class PlayerRestriction : MonoBehaviour
     }
     private void EnableAllMovement()
     {
-        playerMovement_BNG.enabled = true;
+        isRestrictMovement = false;
+
+        if(playerMovement_BNG)playerMovement_BNG.enabled = true;
         foreach(GameObject playermovement_OVR in playerMovements_OVR)
         {
             playermovement_OVR.SetActive(true);
@@ -117,13 +142,16 @@ public class PlayerRestriction : MonoBehaviour
 
     private void DisableAll()
     {
+        isRestrictAll = true;
         DisableAllMovement();
         DisableAllGrabable();
     }
     private void EnableAll()
     {
+        isRestrictAll = false;
         EnableAllMovement();
         EnableAllGrabable();
     }
+    
 
 }

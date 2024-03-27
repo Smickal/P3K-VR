@@ -10,7 +10,7 @@ public class LevelPlayerData
 {
     public LevelP3KType levelType;
     [Tooltip("0-1-2-3")]
-    public int totalScore;
+    public ScoreName score;
     public bool unlocked;
     public bool hasFinishIntro;
     [Tooltip("Kalo ud pernah slsain, pas deketin quest br muncul ui do you want to do it again")]

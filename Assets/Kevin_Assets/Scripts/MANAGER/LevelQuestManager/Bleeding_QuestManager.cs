@@ -4,15 +4,26 @@ using UnityEngine;
 
 public class Bleeding_QuestManager : QuestManager
 {
-    // Start is called before the first frame update
-    void Start()
+    protected override void Quest()
     {
-        
+        Debug.Log("Bleed");
     }
-
-    // Update is called once per frame
-    void Update()
+    protected override void ScoreCounter()
     {
-        
+        // Debug.Log("Bleeding");
+        // if()
+        // {
+        //     score = ScoreName.Big_Happy_Face;
+            
+        // }
+        // else if()
+        // {
+        //     score = ScoreName.Small_Happy_Face;
+        // }
+        // else
+        // {
+        //     score = ScoreName.Sad_Face;
+        // }
+        // PlayerManager.HasBeatenLvl((int)levelP3KTypeNow, score);
     }
 }

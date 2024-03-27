@@ -161,10 +161,12 @@ namespace BNG {
         public static event OnAfterTeleportAction OnAfterTeleport;
 
         [Header("Tambahan")]
-        public static Action<Vector3,Quaternion> Teleport;
+        public static Action<Vector3,Quaternion> Teleport, TeleportAwake;
         private void Awake() 
         {
+            
             Teleport += TeleportPlayer;
+            TeleportAwake += TeleportPlayerAwake;
         }
 
         void Start() {
@@ -185,7 +187,7 @@ namespace BNG {
             playerRigid = GetComponent<Rigidbody>();
             controller = GetComponentInChildren<CharacterController>();
             cameraRig = playerController.CameraRig;
-            fader = cameraRig.GetComponentInChildren<ScreenFader>();
+            if(fader == null)fader = cameraRig.GetComponentInChildren<ScreenFader>();
 
             segments = new Vector3[SegmentCount];
 
@@ -536,7 +538,7 @@ namespace BNG {
             // Call any Before Teleport Events
             OnBeforeTeleportFade?.Invoke();
 
-            if (FadeScreenOnTeleport && fader) {
+            if (FadeScreenOnTeleport && fader != null) {
                 fader.FadeInSpeed = TeleportFadeSpeed;
                 fader.DoFadeIn();
             }
@@ -544,7 +546,7 @@ namespace BNG {
 
         public virtual void BeforeTeleport() {
 
-            if (FadeScreenOnTeleport && fader) {
+            if (FadeScreenOnTeleport && fader != null) {
                 fader.FadeInSpeed = TeleportFadeSpeed;
                 fader.DoFadeIn();
             }
@@ -555,7 +557,7 @@ namespace BNG {
 
         public virtual void AfterTeleport() {
             
-            if (FadeScreenOnTeleport && fader) {
+            if (FadeScreenOnTeleport && fader != null) {
                 fader.DoFadeOut();
             }
 
@@ -637,12 +639,84 @@ namespace BNG {
             }
         }
 
+        IEnumerator doTeleportAwake(Vector3 playerDestination, Quaternion playerRotation, bool rotatePlayer) {
+
+            if(!setVariables) {
+                setupVariables();
+            }
+
+            if(TeleportDelay > 0) {
+                yield return new WaitForSeconds(TeleportDelay);
+            }
+
+            // Call pre-Teleport event
+            // BeforeTeleport();
+
+            // How to Teleport a CharacterController object
+            if(controller) {
+                // Disable before teleport
+                controller.enabled = false;
+
+                // Calculate teleport offset as character may have been resized
+                float yOffset = 1 + cameraRig.localPosition.y - playerController.CharacterControllerYOffset;
+
+                // Apply Teleport before offset is applied
+                controller.transform.position = playerDestination;
+                // Debug.Log(controller.transform.position);
+
+                // Apply offset
+                controller.transform.localPosition -= new Vector3(0, yOffset, 0);
+
+                // Rotate player to TeleportMarker Rotation
+                if (rotatePlayer) {
+                    controller.transform.rotation = playerRotation;
+
+                    // Force our character to remain upright
+                    controller.transform.eulerAngles = new Vector3(0, controller.transform.eulerAngles.y, 0);
+                }
+            }
+            else {
+                // Otherwise just move the transform directly
+                transform.position = playerDestination;
+
+                if (rotatePlayer) {
+                    transform.rotation = playerRotation;
+
+                    // Force our character to remain upright
+                    transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
+                }
+            }
+
+            // Reset the player's velocity
+            if (playerRigid) {
+                playerRigid.velocity = Vector3.zero;
+            }
+
+            // Update last teleport time
+            if (playerController) {
+                playerController.LastTeleportTime = Time.time;
+            }
+            
+            // Call events, etc.
+            // AfterTeleport();            
+
+            yield return new WaitForEndOfFrame();
+
+            if(controller) {
+                // Re-Enable the character controller so we can move again
+                controller.enabled = true;
+            }
+        }
         public void TeleportPlayer(Vector3 destination, Quaternion rotation) {
             StartCoroutine(doTeleport(destination, rotation, true));
         }
 
         public void TeleportPlayerToTransform(Transform destination) {
             StartCoroutine(doTeleport(destination.position, destination.rotation, true));
+        }
+
+        public void TeleportPlayerAwake(Vector3 destination, Quaternion rotation) {
+            StartCoroutine(doTeleportAwake(destination, rotation, true));
         }
 
         Vector2 teleportAxis = Vector2.zero;

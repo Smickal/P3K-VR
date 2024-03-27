@@ -45,7 +45,6 @@ public class BackBlowMovement : MonoBehaviour
     bool isReducing;
 
     int backblowCount = 0;
-
     private void Start()
     {
         OnBackBlow.AddListener(CheckForBackBlowCollision);
@@ -56,9 +55,21 @@ public class BackBlowMovement : MonoBehaviour
         if(isGrabbingChest)
         {
             prevDistance = curDistance;
+            if(currentGrabberForPull == null)
+            {
+                StopCalc();
+                return;
+            }
+
             curDistance = Vector3.Distance(currentGrabberForBackBlow.transform.position, _backColliderTrans.position);
 
             prevBlowDistance = blowDistance;
+            if(currentGrabberForPull == null)
+            {
+                StopCalc();
+                return;
+            }
+            
             blowDistance = Vector3.Distance(currentGrabberForBackBlow.transform.position, currentGrabberForPull.transform.position);
 
             
@@ -123,6 +134,7 @@ public class BackBlowMovement : MonoBehaviour
     private void StartCalc()
     {
         isGrabbingChest = true;
+        
     }
 
     private void StopCalc()
@@ -132,7 +144,7 @@ public class BackBlowMovement : MonoBehaviour
         curDistance = 0f;
         prevBlowDistance = 0f;
         blowDistance = 0f;
-
+        
 
         isGrabbingChest = false;
     }
@@ -157,5 +169,10 @@ public class BackBlowMovement : MonoBehaviour
         StopCalc ();
         yield return new WaitForSeconds(_backBlowCooldown);
         StartCalc();
+    }
+
+    public void ResetCount()
+    {
+        backblowCount = 0;
     }
 }
