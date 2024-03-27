@@ -5,10 +5,9 @@ using UnityEngine;
 
 public class HeimlichCollider : MonoBehaviour
 {
+    [SerializeField] bool _isFullScore = true;
     [SerializeField] HeimlichMovement _heimlichMov;
 
-    bool isLeftHit;
-    bool isRightHit;
     private void OnTriggerEnter(Collider other)
     {
 
@@ -17,8 +16,12 @@ public class HeimlichCollider : MonoBehaviour
         //Check TargetCollider
         //Need to check 3 of them to be considered true
 
+        //TRIGGER CHECK FOR BOTH FINGERS
         _heimlichMov.CheckForGrababbleTrig(other);
-        _heimlichMov.CheckForTargetTrigger(other);
+
+        //TRIGGER CHECK FOR TARGET
+        //TRIGGER CHECK FOR SCORE
+        _heimlichMov.CheckForTargetTrigger(other, _isFullScore);
 
 
     }
