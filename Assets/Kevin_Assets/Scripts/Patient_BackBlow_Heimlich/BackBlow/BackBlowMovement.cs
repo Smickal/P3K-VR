@@ -160,7 +160,7 @@ public class BackBlowMovement : MonoBehaviour
             && prevBlowDistance <= blowDistance)
         {
             
-            // Debug.Log("halo ???");
+            Debug.Log("halo ???");
             if(!hitShoulderBlades)
             {
                 Debug.Log("ReducedBackBlow_Back");
