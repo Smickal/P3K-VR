@@ -69,7 +69,7 @@ public class PatientBackBlowHeimlich : MonoBehaviour
         _backBlowContainerOBJ.SetActive(false);
 
         _backBlowRig.weight = 0f;
-        _heimlichRig.weight = 0.75f;
+        _heimlichRig.weight = 0.5f;
         // _heimlichDone = false;
         // _backBlowDone = false;
         _heimlichMove.ResetCount();
