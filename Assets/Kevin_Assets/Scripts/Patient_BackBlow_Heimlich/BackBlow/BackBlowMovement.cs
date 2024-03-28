@@ -34,7 +34,7 @@ public class BackBlowMovement : MonoBehaviour
     Grabber currentGrabberForPull;
     Grabber currentGrabberForBackBlow;
 
-    public static UnityEvent<Collider> OnBackBlow = new UnityEvent<Collider>();
+    public static UnityEvent<Collider, bool> OnBackBlow = new UnityEvent<Collider, bool>();
     public static UnityEvent<Collider> OnReleaseBackBlow = new UnityEvent<Collider>();
 
 
@@ -111,17 +111,17 @@ public class BackBlowMovement : MonoBehaviour
         }
     }
 
-    public void CheckForBackBlowCollision(Collider col)
+    public void CheckForBackBlowCollision(Collider col, bool hitShoulderBlades)
     {
-        // Debug.Log("Di siniaaaaaaaabbbbbbbbaaaaaaaaaaaaaaaaaabb ???");
+        Debug.Log("Di siniaaaaaaaabbbbbbbbaaaaaaaaaaaaaaaaaabb ???");
         if (isHittingCollider) return;
-        // Debug.Log("Di siniaaaaaaaa ???" + col + _rightGrabber);
+        Debug.Log("Di siniaaaaaaaa ???" + col);
         if(!(col.gameObject == _leftGrabber.gameObject || col.gameObject == _rightGrabber.gameObject || col.gameObject == _leftGrabberFull || col.gameObject == _rightGrabberFull)) return;
         // if(!(col.gameObject == _leftGrabberFull || col.gameObject == _rightGrabberFull)) return;
-        // Debug.Log("Di siniaaaaaaaabbbbbbbbbb ???");
+        Debug.Log("Di siniaaaaaaaabbbbbbbbbb ???");
         col.TryGetComponent<FullScoreBlow>(out FullScoreBlow fullScoreBlow);
         bool isFullScores = false;
-        // Debug.Log("Di sini ???");
+        Debug.Log("Di sini ???");
 
 
         if (fullScoreBlow != null) isFullScores = true;
@@ -161,22 +161,32 @@ public class BackBlowMovement : MonoBehaviour
         {
             
             // Debug.Log("halo ???");
-
-            //TODO: DROP FULL PROGGRESS HERE!
-            if(isFullScores)
+            if(!hitShoulderBlades)
             {
-                backblowCount++;
-                Debug.Log("FullBackBlow_BB" + _fullScore);
-                _totalScore += _fullScore;
-            }
+                Debug.Log("ReducedBackBlow_Back");
+                //TODO: DROP FULL PROGGRESS HERE!
+                if(isFullScores)
+                {
+                    backblowCount++;
+                    Debug.Log("FullBackBlow_BB" + _fullScore);
+                    _totalScore += _fullScore;
+                }
 
-            //TODO: DROP REDUCED PROGGRESS HERE!
+                //TODO: DROP REDUCED PROGGRESS HERE!
+                else
+                {
+                    backblowCount++;
+                    Debug.Log("ReducedBackBlow_BB" + _reducedScore);
+                    _totalScore += _reducedScore;
+                }
+            }
             else
             {
                 backblowCount++;
-                Debug.Log("ReducedBackBlow_BB" + _reducedScore);
-                _totalScore += _reducedScore;
+                Debug.Log("ReducedBackBlow_Shoulder" + _reducedScore/2f);
+                _totalScore += (_reducedScore/2f);
             }
+            
 
             if(isDebug)
             {
