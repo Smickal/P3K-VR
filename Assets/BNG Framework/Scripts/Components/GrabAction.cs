@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Oculus.Interaction;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -36,7 +37,13 @@ namespace BNG {
 
                 // Don't want to repeatedly do grabs if this is a hold item
                 if(Time.time - lastGrabTime >= minTimeBetweenGrabs) {
-                    OnGrabEvent.Invoke(grabber);
+                    // Debug.Log(grabber + "ga ada");
+                    if(grabber != null)
+                    {
+                        // Debug.Log(grabber.gameObject);
+                        OnGrabEvent.Invoke(grabber);
+                    }
+                    
                     lastGrabTime = Time.time;
                 }
             }

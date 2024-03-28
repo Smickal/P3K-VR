@@ -1,18 +1,21 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace BNG {
     
     /// <summary>
     /// An object that can be picked up by a Grabber
     /// </summary>
+    
     public class Grabbable : MonoBehaviour {
-
         /// <summary>
         /// Is this object currently being held by a Grabber
         /// </summary>
+        // [SerializeField]private SnapInteractorHelper snapHelper;
         public bool BeingHeld = false;
 
         /// <summary>
@@ -128,6 +131,7 @@ namespace BNG {
         /// </summary>
         [Tooltip("Drop the item if object's center travels this far from the Grabber's Center (in meters). Set to 0 to disable distance break.")]
         public float BreakDistance = 0;
+        
 
         /// <summary>
         /// Enabling this will hide the Transform specified in the Grabber's HandGraphics property
@@ -271,6 +275,8 @@ namespace BNG {
         [Header("Velocity Grab Settings")]
         public float MoveVelocityForce = 3000f;
         public float MoveAngularVelocityForce = 90f;
+
+        
 
         /// <summary>
         /// Time in seconds (Time.time) when we last grabbed this item
@@ -418,6 +424,7 @@ namespace BNG {
                 return _grabTransformSecondary;
             }
         }
+        
 
         [Header("Grab Points")]
         /// <summary>
@@ -477,6 +484,7 @@ namespace BNG {
             }
         }
         protected bool didParentHands = false;
+        
 
         protected void Awake() {
             col = GetComponent<Collider>();
@@ -1801,7 +1809,7 @@ namespace BNG {
 
                     // We know the item is no longer being held. Can set this before calling any drop events
                     BeingHeld = false;
-
+                    // if(snapHelper)snapHelper.ReviveSnapInteractorAfterReleaseController();
                     LastDropTime = Time.time;
 
                     // Release item and apply physics force to it

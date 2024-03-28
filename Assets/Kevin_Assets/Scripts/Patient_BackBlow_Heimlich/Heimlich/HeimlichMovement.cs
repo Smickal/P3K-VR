@@ -7,6 +7,7 @@ using UnityEngine;
 
 public class HeimlichMovement : MonoBehaviour
 {
+    [SerializeField] private float _reducedScore, _fullScore, _totalScore;
     [SerializeField] PatientBackBlowHeimlich _patientBackblowHeim;
 
     [Header("Smack")]
@@ -121,8 +122,18 @@ public class HeimlichMovement : MonoBehaviour
 
     private void CheckGrabber()
     {
-        if (curLeftGrabber && curRightGrabber) isGrabbing = true;
-        else isGrabbing = false;
+        if (curLeftGrabber && curRightGrabber)
+        {
+            isGrabbing = true;
+            if(!PlayerRestriction.IsRestrictMovement())PlayerRestriction.ApplyMovementRestriction();
+        }
+        
+        else 
+        {
+            isGrabbing = false;
+            
+        }
+        
     }
 
 
@@ -146,21 +157,23 @@ public class HeimlichMovement : MonoBehaviour
             if (isFullScore)
             {
                 heimlichCount++;
-                Debug.Log("FULL PROGRESS");
+                Debug.Log("FULL PROGRESS_H");
+                _totalScore += _fullScore;
             }
 
             //NOTE: DROP REDUCE SCORE PROGRESS HERE!
             else
             {
                 heimlichCount++;
-                Debug.Log("REDUCED PROGRESS");
+                Debug.Log("REDUCED PROGRESS_H");
+                _totalScore += _reducedScore;
             }
             
 
             if (_isDebug)
             {
                 _debugText.SetText($"HEIMLICHCount = {heimlichCount}.");
-                _patientBackblowHeim?.OnHeimlichCountUp.Invoke(heimlichCount);
+                _patientBackblowHeim?.OnHeimlichCountUp.Invoke(heimlichCount, _totalScore);
             }
 
             //reset hand trigger
@@ -214,5 +227,11 @@ public class HeimlichMovement : MonoBehaviour
     public bool IsHandsTriggered()
     {
         return isLeftHandHit && isRightHandHit;
+    }
+
+    public void ResetCount()
+    {
+        heimlichCount = 0;
+        _totalScore = 0;
     }
 }

@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Newtonsoft.Json;
+using System;
 public class UILangkahP3K : BaseKitUI
 {
+    const string SaveStateKey = "LangkahSaveData_Key";
+
     [Header("DescriptionDetails")]
 
     [SerializeField] TMP_Text _tutorialNameText;
     [SerializeField] TMP_Text _descriptionText;
     [SerializeField] Image _tutorialIMG;
-
-
 
     [Header("Reference")]
     [SerializeField] GameObject _masterContainerOBJ;
@@ -33,8 +35,24 @@ public class UILangkahP3K : BaseKitUI
     [SerializeField] UILangkahPrefab _langkahPrefab;
     [SerializeField] UILangkahDescPrefab _langkahDescPrefab;
 
+    bool[] UnlockedLangkahSavedData;
+    List<UILangkahPrefab> ListOfDataInstance = new List<UILangkahPrefab>();
 
     List<UILangkahDescPrefab> listOfLangkahDescPrefab = new List<UILangkahDescPrefab>();
+
+    public static Action<SOLangkahP3K> UnlockLangkahSave;
+    public static Action ResetSaveData;
+
+    [Header("Debug")]
+    public bool Unlock;
+    public SOLangkahP3K saveExample;
+    private void Awake() 
+    {
+        UnlockLangkahSave += UnlockLangkah;
+        ResetSaveData += ResetSave;
+
+        Load();
+    }
 
     private void Start()
     {
@@ -43,11 +61,22 @@ public class UILangkahP3K : BaseKitUI
         {
             UILangkahPrefab newUI = Instantiate(_langkahPrefab, _choiceTransform);
             newUI.SetData(_soLangkahData[i].ProcedureName, this, _soLangkahData[i]);
-            newUI.SetState(_soLangkahData[i].ProcedureIMG, true);
+            newUI.SetState(UnlockedLangkahSavedData[i]);
 
+            ListOfDataInstance.Add(newUI);
         }
 
         _backButton.onClick.AddListener(StartData);
+    }
+
+    private void Update() 
+    {
+        if(Unlock)
+        {
+            Unlock = false;
+            UnlockLangkah(saveExample);
+        }
+        
     }
 
     public override void StartData()
@@ -99,14 +128,66 @@ public class UILangkahP3K : BaseKitUI
         //Check For Doubles
         if (listOfLangkahDescPrefab.Count > 0)
         {
-            foreach (UILangkahDescPrefab ui in listOfLangkahDescPrefab)
+            int listLength = listOfLangkahDescPrefab.Count;
+            for(int i=listLength - 1;i>=0 ;i--)
             {
-                UILangkahDescPrefab tempUI = ui;
-                listOfLangkahDescPrefab.Remove(ui);
+                UILangkahDescPrefab tempUI = listOfLangkahDescPrefab[i];
+                listOfLangkahDescPrefab.Remove(tempUI);
                 Destroy(tempUI);
             }
 
             listOfLangkahDescPrefab.Clear();
         }
+    }
+
+    private void UnlockLangkah(SOLangkahP3K scriptableData)
+    {
+        int i=0;
+        foreach(var kitInstance in ListOfDataInstance)
+        {
+            if(kitInstance.Data.ProcedureName == scriptableData.ProcedureName && kitInstance.State == false)
+            {
+                //Debug.Log(scriptableData.KitName + " Unlocked");
+
+                kitInstance.SetState(true);
+
+                UnlockedLangkahSavedData[i] = true;
+
+                Save();
+                break;
+            }
+            i++;
+        }
+
+    }
+
+    private void Save()
+    {
+        string Json = JsonConvert.SerializeObject(UnlockedLangkahSavedData);
+        PlayerPrefs.SetString(SaveStateKey, Json);
+        PlayerPrefs.Save();
+    }
+
+    private void Load()
+    {
+
+        if (PlayerPrefs.HasKey(SaveStateKey))
+        {
+            string loadString = PlayerPrefs.GetString(SaveStateKey);
+            UnlockedLangkahSavedData = JsonConvert.DeserializeObject<bool[]>(loadString);
+        }
+
+        else
+        {
+            UnlockedLangkahSavedData = new bool[_soLangkahData.Length];
+
+        }
+
+    }
+
+    private void ResetSave()
+    {
+        UnlockedLangkahSavedData = new bool[_soLangkahData.Length];
+        Save();
     }
 }

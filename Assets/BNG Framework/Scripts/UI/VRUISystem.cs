@@ -340,5 +340,9 @@ namespace BNG {
                 cameraCaster.transform.localEulerAngles = Vector3.zero;
             }
         }
+        public void ReAddCameratoCanvas()
+        {
+            AssignCameraToAllCanvases(cameraCaster);
+        }
     }
 }

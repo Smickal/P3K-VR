@@ -53,6 +53,10 @@ public class Robot : GrabbableEvents
 
     public void ReleaseRobot()
     {
+        if(GameManager.CheckGameStateNow() == GameState.Cinematic)
+        {
+            return;
+        }
         ActivateLookAt();
         grab.DropItem(thisGrabber, true, false);
         returnPos.MoveToSnapZone();

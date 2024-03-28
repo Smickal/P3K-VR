@@ -8,7 +8,7 @@ public class UIKotakP3KDescPrefab : MonoBehaviour
 {
     const string UnknownKitName = "???";
 
-
+    
     [SerializeField] Image _iconIMG;
     [SerializeField] TMP_Text _nameText;
     [SerializeField] Button _toolsBtn;

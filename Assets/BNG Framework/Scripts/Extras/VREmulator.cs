@@ -455,5 +455,6 @@ namespace BNG {
         void OnApplicationQuit() {
             isQuitting = true;
         }
+        
     }
 }

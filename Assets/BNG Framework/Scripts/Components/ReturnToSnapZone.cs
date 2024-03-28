@@ -24,9 +24,11 @@ namespace BNG {
         Grabbable grab;
         Rigidbody rigid;
         bool useGravityInitial;
+        [SerializeField]private IsBeingGrabHandTrack isBeingGrabHand;
 
         [Tooltip("Initiate snap if distance between the Grabbable and SnapZone is <= SnapDistance")]
         public float SnapDistance = 0.05f;
+        [SerializeField]private bool onlyReturnOnce = true;
 
         void Start() {
             grab = GetComponent<Grabbable>();
@@ -37,11 +39,11 @@ namespace BNG {
         void Update() {
 
             // Reset the counter if we're holding the item
-            if(grab.BeingHeld) {
+            if(grab.BeingHeld || (isBeingGrabHand && isBeingGrabHand.IsBeingGrab())) {
                 currentDelay = 0;
             }
 
-            bool validReturn = grab != null && ReturnTo != null && ReturnTo.HeldItem == null && !grab.BeingHeld;
+            bool validReturn = grab != null && ReturnTo != null && ReturnTo.HeldItem == null && (!grab.BeingHeld || (isBeingGrabHand && !isBeingGrabHand.IsBeingGrab()));
 
             // Increment how long we've been waiting
             if (validReturn) {
@@ -55,15 +57,17 @@ namespace BNG {
         }
 
         void moveToSnapZone() {
-            
             rigid.useGravity = false;
-            
+        
             transform.position = Vector3.MoveTowards(transform.position, ReturnTo.transform.position, Time.deltaTime * LerpSpeed);
 
             if (Vector3.Distance(transform.position, ReturnTo.transform.position) < SnapDistance) {
                 rigid.useGravity = useGravityInitial;
                 ReturnTo.GrabGrabbable(grab);
+                if(onlyReturnOnce)this.enabled = false;
             }
+                
+            
         }
     }
 }

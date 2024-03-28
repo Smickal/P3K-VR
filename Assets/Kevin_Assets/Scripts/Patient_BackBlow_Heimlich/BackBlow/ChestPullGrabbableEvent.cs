@@ -10,14 +10,14 @@ public class ChestPullGrabbableEvent : GrabbableEvents
     public override void OnGrab(Grabber grabber)
     {
         thisGrabber = grabber;
-
+        if(!PlayerRestriction.IsRestrictMovement())PlayerRestriction.ApplyMovementRestriction();
         _bacBlowMov.SetPullGrabber(grabber);
     }
 
     public override void OnRelease()
     {
         base.OnRelease();
-
+        if(PlayerRestriction.IsRestrictMovement())PlayerRestriction.LiftMovementRestriction();
         _bacBlowMov.SetPullGrabber(null);
     }
 }

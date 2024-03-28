@@ -36,6 +36,27 @@ namespace Oculus.Interaction
                                     where TInteractor : Interactor<TInteractor, TInteractable>
                                     where TInteractable : Interactable<TInteractor, TInteractable>
     {
+        public event EventHandler<OnSelectEventArgs> OnSelect;
+        public class OnSelectEventArgs : EventArgs
+        {
+            public SnapInteractable Interactable { get; private set; }
+            public SnapInteractor Interactor { get; private set; }
+            public OnSelectEventArgs(SnapInteractable interactable, SnapInteractor interactor)
+            {
+                Interactable = interactable;
+                Interactor = interactor;
+            }
+            
+        }
+        public event EventHandler<OnUnSelectEventArgs> OnUnSelect;
+        public class OnUnSelectEventArgs : EventArgs
+        {
+            public SnapInteractable Interactable { get; private set; }
+            public OnUnSelectEventArgs(SnapInteractable interactable)
+            {
+                Interactable = interactable;
+            }
+        }
         #region Oculus Library Variables and Constants
         private const ulong DefaultNativeId = 0x494e56414c494420;
         protected ulong _nativeId = DefaultNativeId;
@@ -772,6 +793,14 @@ namespace Oculus.Interaction
         {
             _data = data as UnityEngine.Object;
             Data = data;
+        }
+        public void OnSelectInvoke(SnapInteractable interactable, SnapInteractor interactor)
+        {
+            if(OnSelect != null)OnSelect.Invoke(this, new OnSelectEventArgs(interactable, interactor));
+        }
+        public void OnUnSelectInvoke(SnapInteractable interactable)
+        {
+            if(OnUnSelect != null)OnUnSelect.Invoke(this, new OnUnSelectEventArgs(interactable));
         }
 
         #endregion

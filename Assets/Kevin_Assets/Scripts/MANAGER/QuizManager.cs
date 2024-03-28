@@ -84,7 +84,7 @@ public class QuizManager : MonoBehaviour
         _buttonD.onClick.AddListener(() => { AnswerCheck(EAnswerType.D); });
 
 
-        _kitUiManager.ActivateBaseUI();
+        _kitUiManager.ActivateBaseUI("Quiz");
         _kitUiManager.OpenQuizUI();
 
         CreateQuestion();
