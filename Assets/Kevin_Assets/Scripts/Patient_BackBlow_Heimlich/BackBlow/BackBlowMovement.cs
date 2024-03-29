@@ -244,17 +244,21 @@ public class BackBlowMovement : MonoBehaviour
 
     public void SetPullGrabber(Grabber grabber)
     {
-        currentGrabberForPull = grabber;
-        if (currentGrabberForPull == null) 
+        if(!InteractToolsController.CheckIsHandTrackOn())
         {
-            StopCalc();
-            return;
+            currentGrabberForPull = grabber;
+            if (currentGrabberForPull == null) 
+            {
+                StopCalc();
+                return;
+            }
+
+            if (grabber == _leftGrabber) currentGrabberForBackBlow = _rightGrabber;
+            else if (grabber == _rightGrabber) currentGrabberForBackBlow = _leftGrabber;
+
+            StartCalc();
         }
-
-        if (grabber == _leftGrabber) currentGrabberForBackBlow = _rightGrabber;
-        else if (grabber == _rightGrabber) currentGrabberForBackBlow = _leftGrabber;
-
-        StartCalc();
+        
     }
     
     IEnumerator BackBlowCoolDown()
