@@ -116,29 +116,22 @@ public class BackBlowMovement : MonoBehaviour
         Debug.Log("Di siniaaaaaaaabbbbbbbbaaaaaaaaaaaaaaaaaabb ???");
         if (isHittingCollider) return;
         Debug.Log("Di siniaaaaaaaa ???" + col);
-        if(!(col.gameObject == _leftGrabber.gameObject || col.gameObject == _rightGrabber.gameObject || col.gameObject == _leftGrabberFull || col.gameObject == _rightGrabberFull)) return;
+        if(!(col.gameObject == _leftGrabber.gameObject || 
+            col.gameObject == _rightGrabber.gameObject || 
+            col.gameObject == _leftGrabberFull || 
+            col.gameObject == _rightGrabberFull)) return;
         // if(!(col.gameObject == _leftGrabberFull || col.gameObject == _rightGrabberFull)) return;
         Debug.Log("Di siniaaaaaaaabbbbbbbbbb ???");
-        col.TryGetComponent<FullScoreBlow>(out FullScoreBlow fullScoreBlow);
+        col.TryGetComponent(out FullScoreBlow fullScoreBlow);
         bool isFullScores = false;
         Debug.Log("Di sini ???");
 
 
         if (fullScoreBlow != null) isFullScores = true;
 
-        if(col.gameObject == _leftGrabberFull)
-        {
-            currentHitCollider = _leftGrabberColl;
-        }
-        else if(col.gameObject == _rightGrabberFull)
-        {
-            currentHitCollider = _rightGrabberColl;
-        }
-        else
-        {
-            currentHitCollider = col;
-        }
-        
+       
+        currentHitCollider = col;
+
         isHittingCollider = true;
 
 

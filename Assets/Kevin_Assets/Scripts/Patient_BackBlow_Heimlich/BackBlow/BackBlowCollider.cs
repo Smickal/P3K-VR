@@ -15,6 +15,7 @@ public class BackBlowCollider : MonoBehaviour
         Debug.Log(other.gameObject);
         bool hitShoulderBlades = false;
         ContactPoint[] contactPoints = new ContactPoint[5];
+
         for(int i=0;i<contactPoints.Length;i++)
         {
             ContactPoint currContact = contactPoints[i];
