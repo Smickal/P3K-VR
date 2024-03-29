@@ -52,6 +52,8 @@ public class HeimlichMovement : MonoBehaviour
 
     Vector3 startPos;
     Vector3 endPos;
+    private bool isAlreadyScoring;
+    [SerializeField]private HeimlichColliderFull _heimlichColliderFull;
 
     public bool IsGrabbing {  get { return isGrabbing; } }
 
@@ -136,12 +138,20 @@ public class HeimlichMovement : MonoBehaviour
         
     }
 
-
+    public int i = 0;
     public void CheckForTargetTrigger(Collider col, bool isFullScore)
     {
         //Must check for 2 hands + Target Trigger
         if (col == null) return;
         else if (!IsHandsTriggered()) return;
+        if(!(col.gameObject == _leftGrabber.gameObject || col.gameObject == _rightGrabber.gameObject)) return;
+        if(isAlreadyScoring)
+        {
+            Debug.Log("Masih ada");
+            i++;
+            return;
+        }
+        
 
         endPos = _targetTr.position;
 
@@ -154,20 +164,30 @@ public class HeimlichMovement : MonoBehaviour
         {
 
             //NOTE: DROP FULL SCORE alias MAX PROGGRESS BAR HERE
-            if (isFullScore)
-            {
-                heimlichCount++;
-                Debug.Log("FULL PROGRESS_H");
-                _totalScore += _fullScore;
-            }
+            // if (isFullScore)
+            // {
+            //     heimlichCount++;
+            //     Debug.Log("FULL PROGRESS_H");
+            //     _totalScore += _fullScore;
+            // }
 
-            //NOTE: DROP REDUCE SCORE PROGRESS HERE!
-            else
+            // //NOTE: DROP REDUCE SCORE PROGRESS HERE!
+            // else
+            // {
+            //     heimlichCount++;
+            //     Debug.Log("REDUCED PROGRESS_H");
+            //     _totalScore += _reducedScore;
+            // }
+            float score = 0;
+            heimlichCount++;
+            Debug.Log("REDUCED PROGRESS_H");
+            score = _reducedScore;
+            if(_heimlichColliderFull.HitFull)
             {
-                heimlichCount++;
-                Debug.Log("REDUCED PROGRESS_H");
-                _totalScore += _reducedScore;
+                Debug.Log("FULL PROGRESS_H");
+                score = _fullScore;
             }
+            _totalScore += score;
             
 
             if (_isDebug)
@@ -179,6 +199,7 @@ public class HeimlichMovement : MonoBehaviour
             //reset hand trigger
             isLeftHandHit = false;
             isRightHandHit = false;
+            isAlreadyScoring = false;
 
             //Reset
             velocity = 0f;
