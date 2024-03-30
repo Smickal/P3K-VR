@@ -41,6 +41,14 @@ public class BandageDraw : MonoBehaviour
         circleMeshesOBJ.Clear();
     }
 
+    public void DeleteCustomPosMesh()
+    {
+        if (customPositionMeshOBJ != null)
+        {
+            Destroy(customPositionMeshOBJ);
+        }
+    }
+
     public void CreateMeshesByIndex(int startIndex, int endIndex)
     {
         DeleteAllMeshes(_CircleMeshParent);
@@ -52,7 +60,7 @@ public class BandageDraw : MonoBehaviour
             tempObj.transform.localPosition = Vector3.zero;
             _CircleMeshParent.transform.localRotation = Quaternion.identity;
 
-            if (i == _circleMotion.CircleTransforms.Count)
+            if (i == _circleMotion.CircleTransforms.Count - 1)
             {
                 if (_isLooping)
                 {
@@ -76,10 +84,7 @@ public class BandageDraw : MonoBehaviour
 
     public void CreateCustomMeshByPositions(Transform startingTransform)
     {
-        if(customPositionMeshOBJ != null)
-        {
-            Destroy(customPositionMeshOBJ);
-        }
+        DeleteCustomPosMesh();
 
         GameObject tempObj = new GameObject($"CircleMesh_PositionBased");
         tempObj.transform.parent = _circleMeshCustomParent;
@@ -179,9 +184,10 @@ public class BandageDraw : MonoBehaviour
         vertices[0] = new Vector3(startTransform.localPosition.x, startTransform.localPosition.y, startTransform.localPosition.z + (-_quadWidth * 0.5f));
 
         //top left Vertice location
-        vertices[1] = new Vector3(_circleMotion.CustomLeftTransform.localPosition.x, _circleMotion.CustomLeftTransform.localPosition.y, _circleMotion.CustomRightTransform.localPosition.z);
+        vertices[1] = new Vector3(_circleMotion.CustomLeftTransform.localPosition.x, _circleMotion.CustomLeftTransform.localPosition.y, _circleMotion.CustomLeftTransform.localPosition.z);
         //bot right Vertice location
         vertices[2] = new Vector3(startTransform.localPosition.x, startTransform.localPosition.y, startTransform.localPosition.z + (_quadWidth * 0.5f));
+
 
         //Bot left Vertice location
         vertices[3] = new Vector3(_circleMotion.CustomRightTransform.localPosition.x, _circleMotion.CustomRightTransform.localPosition.y, _circleMotion.CustomRightTransform.localPosition.z);

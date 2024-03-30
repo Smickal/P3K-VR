@@ -13,9 +13,6 @@ public class BandageMovement : MonoBehaviour
     [SerializeField] CircleMotionTransform _circleTransform;
     [SerializeField] BandageDraw _bandageDraw;
 
-    [Header("Debug")]
-    [SerializeField] Transform _debugTransform;
-    [SerializeField] Bandage _debugBandage;
     int currentIdx;
     int targetIdx;
 
@@ -29,8 +26,6 @@ public class BandageMovement : MonoBehaviour
 
     private void Update()
     {
-        _circleTransform.MoveCustomTransform(_debugBandage.StartingMeshTransform, _debugBandage.LeftMaxTransform, _debugBandage.RightMaxTransform); ;
-        _bandageDraw.CreateCustomMeshByPositions(_circleTransform.CircleTransforms[currentIdx]);
 
         if (curBandageGrabbable == null) return;  
         if (!isMoving || curBandageGrabbable.BeingHeld == false) return;
@@ -54,12 +49,17 @@ public class BandageMovement : MonoBehaviour
                 _bandageDraw.CreateMeshesByIndex(0, _circleTransform.CircleTransforms.Count - 1);
                 Debug.Log("BANDAGE MOVEMENT DONE!");
                 isMoving = false;
+
+
+                _snapZone.gameObject.SetActive(false);                
             }
 
 
         }
 
         //Draw bandage from current transform idx to bandage
+        if(currentIdx < _circleTransform.CircleTransforms.Count - 1)
+        _circleTransform.MoveCustomTransform(currBandage.StartingMeshTransform, currBandage.LeftMaxTransform, currBandage.RightMaxTransform);
         _bandageDraw.CreateCustomMeshByPositions(_circleTransform.CircleTransforms[currentIdx]);
 
 
@@ -115,6 +115,12 @@ public class BandageMovement : MonoBehaviour
     {
         isMoving = false;
         _snapZone.HeldItem = curBandageGrabbable;
+    }
+
+    public void DeleteCustomPosMesh()
+    {
+        if (curBandageGrabbable == null) return;
+        _bandageDraw.DeleteCustomPosMesh();
     }
 }
 

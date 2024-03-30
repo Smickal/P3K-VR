@@ -21,7 +21,11 @@ public class BandageGrabbableEvent : GrabbableEvents
         base.OnRelease();
 
 
-        if(_bandage.BandageMovement != null)
+        if (_bandage.BandageMovement != null)
+        {
             _bandage.BandageMovement.DisableBandageMovement();
+            _bandage.BandageMovement.DeleteCustomPosMesh();
+        }
+
     }
 }
