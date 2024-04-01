@@ -88,7 +88,7 @@ public class Choking_QuestManager : QuestManager
             progressNow += progress;
             if(progressNow >= progressTotal)
             {
-                // questManagerUI.ShowTimer();
+                patientChoking.UnActivateAll();
                 QuestDone();
                 Debug.Log("Quest Selesai coii");
             }

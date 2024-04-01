@@ -178,6 +178,13 @@ namespace BNG {
             if(GetComponent<SphereCollider>() != null && FrictionMaterial != null) {
                 GetComponent<SphereCollider>().material = FrictionMaterial;
             }
+            // Teleport += TeleportPlayer;
+            // TeleportAwake += TeleportPlayerAwake;
+        }
+        private void TurnOffStatic_OnChangeScene()
+        {
+            Teleport -= TeleportPlayer;
+            TeleportAwake -= TeleportPlayerAwake;
         }
 
         bool setVariables = false;

@@ -18,6 +18,7 @@ public class BackBlowMovement : MonoBehaviour
     [SerializeField] float _backBlowCooldown = 0.25f;
 
     [Space(5)]
+    [Header("Controller GameObject")]
     [SerializeField] Grabbable _chestGrabable;
     [SerializeField] Grabber _leftGrabber;
     [SerializeField] Grabber _rightGrabber;
@@ -25,6 +26,12 @@ public class BackBlowMovement : MonoBehaviour
     [SerializeField] GameObject _rightGrabberFull;
     [SerializeField] Collider _leftGrabberColl;
     [SerializeField] Collider _rightGrabberColl;
+
+    [Header("HandTrack GameObject")]
+    [SerializeField] Collider _leftGrabberHandTrack;
+    [SerializeField] Collider _rightGrabberHandTrack;
+    [SerializeField] Collider _leftGrabberHandFull;
+    [SerializeField] Collider _rightGrabberHandTrackFull;
     [SerializeField] Transform _backColliderTrans;
     [SerializeField] private BackBlowFullCollider _bbFull;
     private bool enterNormalCollider;
@@ -194,12 +201,6 @@ public class BackBlowMovement : MonoBehaviour
                 // Debug.Log("ReducedBackBlow_Back");
                 //TODO: DROP FULL PROGGRESS HERE!
                 
-            // }
-            // else
-            // {
-                
-            // }
-            
 
             if(isDebug)
             {

@@ -81,6 +81,7 @@ public class QuestManager : MonoBehaviour
         {
             PlayerManager.ChangeInGame_Mode_Now(InGame_Mode.FirstAid);
             PlayerManager.SetPlayerPosition_DoP3k();
+            EnvironmentLevelManager.SetEnvironment_FirstAid();
         }
         
         if(levelP3KTypeNow == LevelP3KType.Choking) choking_QuestManager.Quest();

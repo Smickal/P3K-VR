@@ -60,6 +60,8 @@ namespace BNG {
         /// </summary>
         [HideInInspector]
         public float LastSnapTime;
+        [Tooltip("If false, ReturnToSnapZone will be on when snapping")]
+        public bool turnOffReturnTo = true;
 
         [Header("Filtering")]
         /// <summary>
@@ -257,6 +259,15 @@ namespace BNG {
                 heldItemWasKinematic = false;
             }
 
+            //tambahan biar Return too ga aneh aneh
+            ReturnToSnapZone returns = HeldItem.GetComponent<ReturnToSnapZone>();
+            if(turnOffReturnTo)
+            {
+                if(returns)
+                {
+                    if(returns.enabled)returns.enabled = false;
+                }
+            }
             // Set the parent of the object 
             grab.transform.parent = transform;
 
@@ -424,6 +435,17 @@ namespace BNG {
                 heldItemRigid.isKinematic = heldItemWasKinematic;
             }
 
+            //tambahan biar Return too ga aneh aneh
+            ReturnToSnapZone returns = HeldItem.GetComponent<ReturnToSnapZone>();
+            if(turnOffReturnTo)
+            {
+                if(returns)
+                {
+                    Debug.Log("RETUUUUUUUUUURRRRRRN");
+                    if(!returns.OnlyReturnOnce)returns.enabled = true;
+                }
+            }
+
             HeldItem.enabled = true;
             HeldItem.transform.parent = null;
             
@@ -489,6 +511,17 @@ namespace BNG {
                 heldItemRigid.isKinematic = heldItemWasKinematic;
             }
 
+            //tambahan biar Return too ga aneh aneh
+            ReturnToSnapZone returns = HeldItem.GetComponent<ReturnToSnapZone>();
+            if(turnOffReturnTo)
+            {
+                if(returns)
+                {
+                    Debug.Log("RETUUUUUUUUUURRRRRRN");
+                    if(!returns.OnlyReturnOnce)returns.enabled = true;
+                }
+            }
+            
             HeldItem.enabled = true;
             HeldItem.transform.parent = null;
 
@@ -533,6 +566,16 @@ namespace BNG {
             }
             else {
                 heldItemWasKinematic = false;
+            }
+
+            //tambahan biar Return too ga aneh aneh
+            ReturnToSnapZone returns = HeldItem.GetComponent<ReturnToSnapZone>();
+            if(turnOffReturnTo)
+            {
+                if(returns)
+                {
+                    if(returns.enabled)returns.enabled = false;
+                }
             }
 
             // Set the parent of the object 

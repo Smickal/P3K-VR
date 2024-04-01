@@ -5,11 +5,12 @@ using UnityEngine;
 
 public class EnvironmentLevelManager : MonoBehaviour
 {
-    [Tooltip("0- Pas Intro, 1 - biasa, 2- ending doang")]
+    [Tooltip("0- Pas Intro, 1 - biasa, 2 - first aid, 3- ending doang")]
     [SerializeField] private GameObject[] Environments;
-    public static Action SetEnvironment_FinishQuest;
+    public static Action SetEnvironment_FinishQuest, SetEnvironment_FirstAid;
     private void Awake() 
     {
+        SetEnvironment_FirstAid += SetEnvironmentFirstAid;
         SetEnvironment_FinishQuest += SetEnvironmentEndQuest;
     }
     public void SetEnvironmentAwake(bool hasFinishIntro_ThisLevel)
@@ -19,6 +20,11 @@ public class EnvironmentLevelManager : MonoBehaviour
         else Environments[1].SetActive(true);
     }
     public void SetEnvironmentEndQuest()
+    {
+        CloseAllGameObject();
+        Environments[3].SetActive(true);
+    }
+    public void SetEnvironmentFirstAid()
     {
         CloseAllGameObject();
         Environments[2].SetActive(true);

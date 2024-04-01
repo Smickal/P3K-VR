@@ -26,6 +26,7 @@ public class HeimlichMovement : MonoBehaviour
     [SerializeField] Transform _targetTr;
     [SerializeField] Transform _heimlichTargetColliderTr;
     [SerializeField] Transform _targetMaxMovTr;
+    [SerializeField] Vector3 _targetTRStartPos;
 
     [Header("Debug")]
     [SerializeField] bool _isDebug = true;
@@ -120,6 +121,10 @@ public class HeimlichMovement : MonoBehaviour
 
         if (grabber == _rightGrabber) curRightGrabber = null;
         else if(grabber == _leftGrabber) curLeftGrabber = null;
+
+        //harusnya ini balikin ke asal
+        //move Target According to left&right grabber
+        _targetTr.position = _targetTRStartPos;
     }
 
     private void CheckGrabber()

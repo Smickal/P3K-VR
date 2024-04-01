@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using BNG;
+using Oculus.Interaction.HandGrab;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 using UnityEngine.Events;
@@ -10,6 +11,7 @@ public class PatientBackBlowHeimlich : MonoBehaviour
 {
     [SerializeField] RigBuilder _rig;
     [SerializeField] Grabber[] grabbers;
+    [SerializeField] HandGrabInteractor[] grabbersHandTrack;
 
     [Header("Heimlich")]
     [SerializeField] HeimlichMovement _heimlichMove;
@@ -32,14 +34,6 @@ public class PatientBackBlowHeimlich : MonoBehaviour
 
     [HideInInspector] public UnityEvent<int, float> OnHeimlichCountUp;
     [HideInInspector] public UnityEvent<int, float> OnBackBlowCountUp;
-
-    public static Action UnActivateAllQuest;
-
-    private void Awake() 
-    {
-        UnActivateAllQuest += UnActivateAll;
-    }
-
 
     private void Start()
     {
@@ -78,6 +72,7 @@ public class PatientBackBlowHeimlich : MonoBehaviour
     }
     public void UnActivateAll()
     {
+        // TurnOffGrabber();
         _heimlichContainerOBJ?.SetActive(false);
         _backBlowContainerOBJ?.SetActive(false);
     }
@@ -111,8 +106,16 @@ public class PatientBackBlowHeimlich : MonoBehaviour
 
     private void TurnOffGrabber()
     {
-        grabbers[0].TryRelease();
-        grabbers[1].TryRelease();
+        if(!InteractToolsController.CheckIsHandTrackOn())
+        {
+            grabbers[0].TryRelease();
+            grabbers[1].TryRelease();
+        }
+        else
+        {
+            grabbersHandTrack[0].ForceRelease();
+            grabbersHandTrack[1].ForceRelease();
+        }
         
     }
 }
