@@ -6,26 +6,6 @@ using System;
 using System.Linq;
 using BNG;
 
-// [Serializable]
-// public class PlayerPositionSave
-// {
-//     public LevelMode levelMode;
-//     [Serializable]
-//     public class PositionsInLevelMode
-//     {
-//         public LevelP3KType levelP3KType;
-//         [Serializable]
-//         public class position{
-//             public string namaPosisi;
-//             public Vector3 playerPosition;
-//             public float playerRotation;
-
-//         }
-//         public position[] positions;
-//     }
-//     public PositionsInLevelMode[] positionsInLevel;
-// }
-
 [Serializable]
 public class PlayerLevelSave
 {
@@ -54,7 +34,6 @@ public class PlayerManager : MonoBehaviour
     [SerializeField]private EnvironmentLevelManager environmentLevelManager;
     [Header("DO NOT FORGET TO SET")]
     [SerializeField]private float playerTeleport_y = 1.65f;
-    [SerializeField]private PlayerPositionSave[] playerPosition;
     [SerializeField]private SOPlayerPosition playerPositionSO;
 
     [SerializeField]private PlayerLevelSave playerLevelSave;

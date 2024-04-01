@@ -78,6 +78,7 @@ namespace Oculus.Interaction
         public event Action<IInteractorView> WhenInteractorViewRemoved = delegate { };
         public event Action<IInteractorView> WhenSelectingInteractorViewAdded = delegate { };
         public event Action<IInteractorView> WhenSelectingInteractorViewRemoved = delegate { };
+        public event Action<IInteractorView> BeforeSelectingInteractorViewRemoved = delegate { };
 
         public int MaxInteractors
         {
@@ -177,6 +178,7 @@ namespace Oculus.Interaction
                     interactable.WhenInteractorViewRemoved += HandleInteractorViewRemoved;
                     interactable.WhenSelectingInteractorViewAdded += HandleSelectingInteractorViewAdded;
                     interactable.WhenSelectingInteractorViewRemoved += HandleSelectingInteractorViewRemoved;
+                    interactable.WhenSelectingInteractorViewRemoved += HandleSelectingInteractorViewRemoved;
                 }
             }
         }
@@ -191,6 +193,7 @@ namespace Oculus.Interaction
                     interactable.WhenInteractorViewAdded -= HandleInteractorViewAdded;
                     interactable.WhenInteractorViewRemoved -= HandleInteractorViewRemoved;
                     interactable.WhenSelectingInteractorViewAdded -= HandleSelectingInteractorViewAdded;
+                    interactable.WhenSelectingInteractorViewRemoved -= HandleSelectingInteractorViewRemoved;
                     interactable.WhenSelectingInteractorViewRemoved -= HandleSelectingInteractorViewRemoved;
                 }
             }
@@ -219,6 +222,10 @@ namespace Oculus.Interaction
         private void HandleSelectingInteractorViewRemoved(IInteractorView obj)
         {
             WhenSelectingInteractorViewRemoved.Invoke(obj);
+        }
+        private void HandleBeforeSelectingInteractorViewRemoved(IInteractorView obj)
+        {
+            BeforeSelectingInteractorViewRemoved.Invoke(obj);
         }
 
         #region Inject

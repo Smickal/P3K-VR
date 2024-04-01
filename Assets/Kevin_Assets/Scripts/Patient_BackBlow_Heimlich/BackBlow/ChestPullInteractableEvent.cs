@@ -1,13 +1,40 @@
 using System.Collections;
 using System.Collections.Generic;
 using Oculus.Interaction;
+using Oculus.Interaction.HandGrab;
 using UnityEngine;
 
-public class ChestPullInteractableEvent : InteractableUnityEventWrapper
+public class ChestPullInteractableEvent : MonoBehaviour
 {
-    private void Awake() 
+    [SerializeField]private HandGrabInteractable handGrab;
+    [SerializeField]private HandGrabInteractor leftGrabberHT;
+    [SerializeField]private HandGrabInteractor rightGrabberHT;
+    [SerializeField]private GameObject leftGrabber, rightGrabber;
+
+    [SerializeField]private GameObject currGrabber;
+    [SerializeField] BackBlowMovement _bacBlowMov;
+
+    public void OnGrabHT()
     {
-        // WhenUnselect.AddListener();
+        if(!PlayerRestriction.IsRestrictMovement())PlayerRestriction.ApplyMovementRestriction();
+        if(handGrab.HasSelectingInteractor(leftGrabberHT))currGrabber = leftGrabber;
+        else if (handGrab.HasSelectingInteractor(rightGrabberHT))currGrabber = rightGrabber;
+        Debug.Log(handGrab.HasSelectingInteractor(leftGrabberHT) + "apakah iya");
+        // else return;
+        // Debug.Log(currGrabber+"grabbernya sekarang");
+        _bacBlowMov.SetPullGrabber(currGrabber);
+
+        // Debug.Log(handGrab.HasSelectingInteractor(leftGrabberHT) + " and " + handGrab.HasSelectingInteractor(rightGrabberHT));
+        // handGrab.Interactors
     }
-    // public void 
+
+    public void OnReleaseHT()
+    {
+        // base.OnRelease();
+        if(PlayerRestriction.IsRestrictMovement())PlayerRestriction.LiftMovementRestriction();
+        currGrabber = null;
+        _bacBlowMov.SetPullGrabber(currGrabber);
+        
+
+    }
 }

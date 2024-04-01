@@ -20,6 +20,7 @@
 
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Oculus.Interaction
 {
@@ -58,6 +59,7 @@ namespace Oculus.Interaction
         event Action<IInteractorView> WhenInteractorViewRemoved;
         event Action<IInteractorView> WhenSelectingInteractorViewAdded;
         event Action<IInteractorView> WhenSelectingInteractorViewRemoved;
+        event Action<IInteractorView> BeforeSelectingInteractorViewRemoved;
     }
 
     /// <summary>

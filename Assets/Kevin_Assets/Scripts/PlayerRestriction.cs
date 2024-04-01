@@ -53,7 +53,7 @@ public class PlayerRestriction : MonoBehaviour
             enableNow = false;
             EnableAll();
         }
-        Debug.Log(playerMovement_BNG.enabled);
+        // Debug.Log(playerMovement_BNG.enabled);
     }
 
     private bool RestrictAll(){return isRestrictAll;}

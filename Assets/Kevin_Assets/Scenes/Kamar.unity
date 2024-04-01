@@ -2261,8 +2261,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 464ca9a17f60fe345bbbaadbae73a83a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitShoulderBlades: 0
-  colliderSize: {x: 0, y: 0, z: 0}
 --- !u!65 &69271919
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12595,6 +12593,9 @@ MonoBehaviour:
   _whenSelectingInteractorViewRemoved:
     m_PersistentCalls:
       m_Calls: []
+  _beforeSelectingInteractorViewRemoved:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &271905332
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13517,8 +13518,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 464ca9a17f60fe345bbbaadbae73a83a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitShoulderBlades: 1
-  colliderSize: {x: 0, y: 0, z: 0}
 --- !u!65 &289953561
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15723,8 +15722,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 464ca9a17f60fe345bbbaadbae73a83a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitShoulderBlades: 0
-  colliderSize: {x: 0, y: 0, z: 0}
 --- !u!65 &346744197
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17316,11 +17313,11 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2143258139025002739, guid: e7fbb376593cff24f9db4ecf8d465aaf,
         type: 3}
       insertIndex: 0
-      addedObject: {fileID: 1858101872}
+      addedObject: {fileID: 1751005596}
     - targetCorrespondingSourceObject: {fileID: 2143258139025002739, guid: e7fbb376593cff24f9db4ecf8d465aaf,
         type: 3}
       insertIndex: 1
-      addedObject: {fileID: 1751005596}
+      addedObject: {fileID: 1858101872}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e7fbb376593cff24f9db4ecf8d465aaf, type: 3}
 --- !u!4 &384744954 stripped
@@ -17700,8 +17697,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 464ca9a17f60fe345bbbaadbae73a83a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitShoulderBlades: 0
-  colliderSize: {x: 0, y: 0, z: 0}
 --- !u!65 &388955818
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -18926,16 +18921,13 @@ MonoBehaviour:
   _maxSmackVelocity: 10
   _minSmackVelocity: 0
   _backBlowCooldown: 0.25
-  _chestGrabable: {fileID: 1190845263}
-  _leftGrabber: {fileID: 1245581545}
-  _rightGrabber: {fileID: 2088954975}
+  _leftGrabber: {fileID: 0}
+  _rightGrabber: {fileID: 0}
   _leftGrabberFull: {fileID: 0}
   _rightGrabberFull: {fileID: 0}
-  _leftGrabberColl: {fileID: 0}
-  _rightGrabberColl: {fileID: 0}
   _leftGrabberHandTrack: {fileID: 0}
   _rightGrabberHandTrack: {fileID: 0}
-  _leftGrabberHandFull: {fileID: 0}
+  _leftGrabberHandTrackFull: {fileID: 0}
   _rightGrabberHandTrackFull: {fileID: 0}
   _backColliderTrans: {fileID: 1313790503}
   _bbFull: {fileID: 0}
@@ -25608,16 +25600,13 @@ MonoBehaviour:
   _maxSmackVelocity: 10
   _minSmackVelocity: 0
   _backBlowCooldown: 0.25
-  _chestGrabable: {fileID: 1207181899}
-  _leftGrabber: {fileID: 1245581545}
-  _rightGrabber: {fileID: 2088954975}
+  _leftGrabber: {fileID: 0}
+  _rightGrabber: {fileID: 0}
   _leftGrabberFull: {fileID: 0}
   _rightGrabberFull: {fileID: 0}
-  _leftGrabberColl: {fileID: 0}
-  _rightGrabberColl: {fileID: 0}
   _leftGrabberHandTrack: {fileID: 0}
   _rightGrabberHandTrack: {fileID: 0}
-  _leftGrabberHandFull: {fileID: 0}
+  _leftGrabberHandTrackFull: {fileID: 0}
   _rightGrabberHandTrackFull: {fileID: 0}
   _backColliderTrans: {fileID: 346744195}
   _bbFull: {fileID: 0}
@@ -28537,16 +28526,13 @@ MonoBehaviour:
   _maxSmackVelocity: 10
   _minSmackVelocity: 0
   _backBlowCooldown: 0.25
-  _chestGrabable: {fileID: 1362715804}
-  _leftGrabber: {fileID: 1245581545}
-  _rightGrabber: {fileID: 2088954975}
+  _leftGrabber: {fileID: 0}
+  _rightGrabber: {fileID: 0}
   _leftGrabberFull: {fileID: 0}
   _rightGrabberFull: {fileID: 0}
-  _leftGrabberColl: {fileID: 0}
-  _rightGrabberColl: {fileID: 0}
   _leftGrabberHandTrack: {fileID: 0}
   _rightGrabberHandTrack: {fileID: 0}
-  _leftGrabberHandFull: {fileID: 0}
+  _leftGrabberHandTrackFull: {fileID: 0}
   _rightGrabberHandTrackFull: {fileID: 0}
   _backColliderTrans: {fileID: 69271917}
   _bbFull: {fileID: 0}
@@ -29799,16 +29785,13 @@ MonoBehaviour:
   _maxSmackVelocity: 10
   _minSmackVelocity: 0
   _backBlowCooldown: 0.25
-  _chestGrabable: {fileID: 546239708}
-  _leftGrabber: {fileID: 1245581545}
-  _rightGrabber: {fileID: 2088954975}
+  _leftGrabber: {fileID: 0}
+  _rightGrabber: {fileID: 0}
   _leftGrabberFull: {fileID: 0}
   _rightGrabberFull: {fileID: 0}
-  _leftGrabberColl: {fileID: 0}
-  _rightGrabberColl: {fileID: 0}
   _leftGrabberHandTrack: {fileID: 0}
   _rightGrabberHandTrack: {fileID: 0}
-  _leftGrabberHandFull: {fileID: 0}
+  _leftGrabberHandTrackFull: {fileID: 0}
   _rightGrabberHandTrackFull: {fileID: 0}
   _backColliderTrans: {fileID: 1375104423}
   _bbFull: {fileID: 0}
@@ -33973,8 +33956,9 @@ GameObject:
   m_Component:
   - component: {fileID: 730081025}
   - component: {fileID: 730081026}
+  - component: {fileID: 730081027}
   m_Layer: 0
-  m_Name: Hand Collider
+  m_Name: Hand Collider_Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34016,6 +34000,33 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.045
   m_Center: {x: 0.075, y: -0.02, z: -0.005}
+--- !u!54 &730081027
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 730081024}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &731084845
 GameObject:
   m_ObjectHideFlags: 0
@@ -35370,8 +35381,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 464ca9a17f60fe345bbbaadbae73a83a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitShoulderBlades: 0
-  colliderSize: {x: 0, y: 0, z: 0}
 --- !u!65 &757028351
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -48124,11 +48133,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitFull: 0
-  backBlowMovement: {fileID: 0}
-  _leftGrabber: {fileID: 1245581545}
-  _rightGrabber: {fileID: 2088954975}
-  _leftGrabberFull: {fileID: 1849732918}
-  _rightGrabberFull: {fileID: 1542816289}
+  _leftGrabber: {fileID: 1245581549}
+  _rightGrabber: {fileID: 2088954979}
+  _leftGrabberFull: {fileID: 1849732925}
+  _rightGrabberFull: {fileID: 1542816296}
+  _leftGrabberHT: {fileID: 1751005597}
+  _rightGrabberHT: {fileID: 730081026}
+  _leftGrabberHTFull: {fileID: 1858101873}
+  _rightGrabberHTFull: {fileID: 1564048675}
 --- !u!1 &997199197
 GameObject:
   m_ObjectHideFlags: 0
@@ -51298,7 +51310,7 @@ MonoBehaviour:
   state: 0
   inGame_Mode: 0
   levelMode: 1
-  levelType: 2
+  levelType: 1
   OnPause:
     m_PersistentCalls:
       m_Calls:
@@ -51375,47 +51387,6 @@ MonoBehaviour:
   playerTeleport: {fileID: 1328612553}
   environmentLevelManager: {fileID: 1035744554}
   playerTeleport_y: 1.65
-  playerPosition:
-  - levelMode: 0
-    positionsInLevel:
-    - levelP3KType: 0
-      positions:
-      - namaPosisi: 0
-        playerPosition: {x: -4, y: 0, z: -8.5}
-        playerRotation: 180
-      - namaPosisi: 0
-        playerPosition: {x: -6, y: 0, z: -5}
-        playerRotation: 90
-  - levelMode: 1
-    positionsInLevel:
-    - levelP3KType: 1
-      positions:
-      - namaPosisi: 0
-        playerPosition: {x: 0, y: 0, z: 0}
-        playerRotation: 0
-      - namaPosisi: 0
-        playerPosition: {x: -7.7, y: 0, z: -8}
-        playerRotation: 180
-      - namaPosisi: 0
-        playerPosition: {x: -7.7, y: 0, z: -8}
-        playerRotation: 180
-      - namaPosisi: 0
-        playerPosition: {x: -5.91, y: 0, z: -7.77}
-        playerRotation: 180
-    - levelP3KType: 2
-      positions:
-      - namaPosisi: 0
-        playerPosition: {x: 0, y: 0, z: 0}
-        playerRotation: 0
-      - namaPosisi: 0
-        playerPosition: {x: 0, y: 0, z: 0}
-        playerRotation: 0
-      - namaPosisi: 0
-        playerPosition: {x: -7.7, y: 0, z: -8}
-        playerRotation: 180
-      - namaPosisi: 0
-        playerPosition: {x: -5.91, y: 0, z: -7.77}
-        playerRotation: 180
   playerPositionSO: {fileID: 11400000, guid: ef92a44278ef29d4d9df9c62a7d8c3ba, type: 2}
   playerLevelSave:
     isTutorialFinish: 0
@@ -58981,6 +58952,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 160792443551787102, guid: 4ac7df741a9c0a2418ec19477729ee3d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 593873502900240332, guid: 4ac7df741a9c0a2418ec19477729ee3d,
         type: 3}
       propertyPath: m_Size.x
@@ -59239,6 +59215,11 @@ PrefabInstance:
     - target: {fileID: 6130294578286966575, guid: 4ac7df741a9c0a2418ec19477729ee3d,
         type: 3}
       propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7920472492889837366, guid: 4ac7df741a9c0a2418ec19477729ee3d,
+        type: 3}
+      propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8200471172645470430, guid: 4ac7df741a9c0a2418ec19477729ee3d,
@@ -60486,16 +60467,13 @@ MonoBehaviour:
   _maxSmackVelocity: 10
   _minSmackVelocity: 0
   _backBlowCooldown: 0.25
-  _chestGrabable: {fileID: 132938035}
-  _leftGrabber: {fileID: 1245581545}
-  _rightGrabber: {fileID: 2088954975}
+  _leftGrabber: {fileID: 0}
+  _rightGrabber: {fileID: 0}
   _leftGrabberFull: {fileID: 0}
   _rightGrabberFull: {fileID: 0}
-  _leftGrabberColl: {fileID: 0}
-  _rightGrabberColl: {fileID: 0}
   _leftGrabberHandTrack: {fileID: 0}
   _rightGrabberHandTrack: {fileID: 0}
-  _leftGrabberHandFull: {fileID: 0}
+  _leftGrabberHandTrackFull: {fileID: 0}
   _rightGrabberHandTrackFull: {fileID: 0}
   _backColliderTrans: {fileID: 388955816}
   _bbFull: {fileID: 0}
@@ -66996,6 +66974,9 @@ MonoBehaviour:
   _whenSelectingInteractorViewRemoved:
     m_PersistentCalls:
       m_Calls: []
+  _beforeSelectingInteractorViewRemoved:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1312731534
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67169,8 +67150,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 464ca9a17f60fe345bbbaadbae73a83a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitShoulderBlades: 0
-  colliderSize: {x: 0, y: 0, z: 0}
 --- !u!65 &1313790505
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -70569,8 +70548,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 464ca9a17f60fe345bbbaadbae73a83a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitShoulderBlades: 0
-  colliderSize: {x: 0, y: 0, z: 0}
 --- !u!65 &1375104425
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -78368,62 +78345,62 @@ PrefabInstance:
     - target: {fileID: 1310064221194515821, guid: afb1615dd3b243a449003594175d971a,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1310064221194515821, guid: afb1615dd3b243a449003594175d971a,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1310064221194515821, guid: afb1615dd3b243a449003594175d971a,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 210
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1310064221194515821, guid: afb1615dd3b243a449003594175d971a,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 120
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1310064221194515821, guid: afb1615dd3b243a449003594175d971a,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 341
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1310064221194515821, guid: afb1615dd3b243a449003594175d971a,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -75
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1609893006899754556, guid: afb1615dd3b243a449003594175d971a,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1609893006899754556, guid: afb1615dd3b243a449003594175d971a,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1609893006899754556, guid: afb1615dd3b243a449003594175d971a,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 210
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1609893006899754556, guid: afb1615dd3b243a449003594175d971a,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 120
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1609893006899754556, guid: afb1615dd3b243a449003594175d971a,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1001
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1609893006899754556, guid: afb1615dd3b243a449003594175d971a,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -75
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1727678748421004495, guid: afb1615dd3b243a449003594175d971a,
         type: 3}
@@ -78498,32 +78475,32 @@ PrefabInstance:
     - target: {fileID: 5175671480852354581, guid: afb1615dd3b243a449003594175d971a,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5175671480852354581, guid: afb1615dd3b243a449003594175d971a,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5175671480852354581, guid: afb1615dd3b243a449003594175d971a,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 210
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5175671480852354581, guid: afb1615dd3b243a449003594175d971a,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 120
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5175671480852354581, guid: afb1615dd3b243a449003594175d971a,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 121
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5175671480852354581, guid: afb1615dd3b243a449003594175d971a,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -75
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5882312518634390960, guid: afb1615dd3b243a449003594175d971a,
         type: 3}
@@ -78618,92 +78595,92 @@ PrefabInstance:
     - target: {fileID: 6707123348667685460, guid: afb1615dd3b243a449003594175d971a,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6707123348667685460, guid: afb1615dd3b243a449003594175d971a,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6707123348667685460, guid: afb1615dd3b243a449003594175d971a,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 210
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6707123348667685460, guid: afb1615dd3b243a449003594175d971a,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 120
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6707123348667685460, guid: afb1615dd3b243a449003594175d971a,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1221
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6707123348667685460, guid: afb1615dd3b243a449003594175d971a,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -75
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7059851702232048117, guid: afb1615dd3b243a449003594175d971a,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7059851702232048117, guid: afb1615dd3b243a449003594175d971a,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7059851702232048117, guid: afb1615dd3b243a449003594175d971a,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 210
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7059851702232048117, guid: afb1615dd3b243a449003594175d971a,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 120
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7059851702232048117, guid: afb1615dd3b243a449003594175d971a,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 781
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7059851702232048117, guid: afb1615dd3b243a449003594175d971a,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -75
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7115964070628639582, guid: afb1615dd3b243a449003594175d971a,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7115964070628639582, guid: afb1615dd3b243a449003594175d971a,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7115964070628639582, guid: afb1615dd3b243a449003594175d971a,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 210
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7115964070628639582, guid: afb1615dd3b243a449003594175d971a,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 120
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7115964070628639582, guid: afb1615dd3b243a449003594175d971a,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 561
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7115964070628639582, guid: afb1615dd3b243a449003594175d971a,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -75
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7557103694410060634, guid: afb1615dd3b243a449003594175d971a,
         type: 3}
@@ -79964,6 +79941,12 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &1542816296 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 593873502900240332, guid: 4ac7df741a9c0a2418ec19477729ee3d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1194111218}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1543079581
 GameObject:
   m_ObjectHideFlags: 0
@@ -80687,8 +80670,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1564048674}
   - component: {fileID: 1564048675}
+  - component: {fileID: 1564048676}
   m_Layer: 0
-  m_Name: Hand Heel
+  m_Name: Hand Heel_Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -80730,6 +80714,33 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.03, y: 0.02, z: 0.075}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &1564048676
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1564048673}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1568128100
 GameObject:
   m_ObjectHideFlags: 0
@@ -81943,8 +81954,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 464ca9a17f60fe345bbbaadbae73a83a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitShoulderBlades: 0
-  colliderSize: {x: 0, y: 0, z: 0}
 --- !u!65 &1586011444
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -83767,6 +83776,7 @@ GameObject:
   - component: {fileID: 1614492596}
   - component: {fileID: 1614492598}
   - component: {fileID: 1614492597}
+  - component: {fileID: 1614492599}
   m_Layer: 0
   m_Name: HandInteractable
   m_TagString: Untagged
@@ -83846,10 +83856,37 @@ MonoBehaviour:
       m_Calls: []
   _whenSelectingInteractorViewAdded:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1614492599}
+        m_TargetAssemblyTypeName: ChestPullInteractableEvent, Assembly-CSharp
+        m_MethodName: OnGrabHT
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _whenSelectingInteractorViewRemoved:
     m_PersistentCalls:
       m_Calls: []
+  _beforeSelectingInteractorViewRemoved:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1614492599}
+        m_TargetAssemblyTypeName: ChestPullInteractableEvent, Assembly-CSharp
+        m_MethodName: OnReleaseHT
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1614492598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -83891,6 +83928,25 @@ MonoBehaviour:
   _movementProvider: {fileID: 0}
   _handAligment: 1
   _handGrabPoses: []
+--- !u!114 &1614492599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1614492595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9060e9d40cc27664097a141d69083698, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  handGrab: {fileID: 1614492598}
+  leftGrabberHT: {fileID: 169444103}
+  rightGrabberHT: {fileID: 787151350}
+  leftGrabber: {fileID: 1751005595}
+  rightGrabber: {fileID: 730081024}
+  currGrabber: {fileID: 0}
+  _bacBlowMov: {fileID: 1980075947}
 --- !u!1 &1614531608
 GameObject:
   m_ObjectHideFlags: 0
@@ -84797,6 +84853,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _whenSelectingInteractorViewRemoved:
+    m_PersistentCalls:
+      m_Calls: []
+  _beforeSelectingInteractorViewRemoved:
     m_PersistentCalls:
       m_Calls: []
 --- !u!114 &1645350153
@@ -89453,8 +89512,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1751005596}
   - component: {fileID: 1751005597}
+  - component: {fileID: 1751005598}
   m_Layer: 0
-  m_Name: Hand Collider
+  m_Name: Hand Collider_Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -89496,6 +89556,33 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.045
   m_Center: {x: -0.075, y: 0.02, z: 0.005}
+--- !u!54 &1751005598
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1751005595}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1752126710
 GameObject:
   m_ObjectHideFlags: 0
@@ -92732,6 +92819,9 @@ MonoBehaviour:
   _whenSelectingInteractorViewRemoved:
     m_PersistentCalls:
       m_Calls: []
+  _beforeSelectingInteractorViewRemoved:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &1831879693
 Transform:
   m_ObjectHideFlags: 0
@@ -93961,6 +94051,12 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &1849732925 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 4433843000557276687, guid: 4ac7df741a9c0a2418ec19477729ee3d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1194111218}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1849785539
 GameObject:
   m_ObjectHideFlags: 0
@@ -94307,6 +94403,9 @@ MonoBehaviour:
   _whenSelectingInteractorViewRemoved:
     m_PersistentCalls:
       m_Calls: []
+  _beforeSelectingInteractorViewRemoved:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1852003851
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94606,8 +94705,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1858101872}
   - component: {fileID: 1858101873}
+  - component: {fileID: 1858101874}
   m_Layer: 0
-  m_Name: Hand Heel
+  m_Name: Hand Heel_Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -94649,6 +94749,33 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.03, y: 0.02, z: 0.075}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &1858101874
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1858101871}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1859935751
 GameObject:
   m_ObjectHideFlags: 0
@@ -100638,6 +100765,9 @@ MonoBehaviour:
   grabbers:
   - {fileID: 1245581545}
   - {fileID: 2088954975}
+  grabbersHandTrack:
+  - {fileID: 169444103}
+  - {fileID: 787151350}
   _heimlichMove: {fileID: 1980075945}
   _heimlichContainerOBJ: {fileID: 1387020165}
   _heimlichRig: {fileID: 1387020166}
@@ -100671,17 +100801,14 @@ MonoBehaviour:
   _maxSmackVelocity: 10
   _minSmackVelocity: 0
   _backBlowCooldown: 0.25
-  _chestGrabable: {fileID: 639181976}
-  _leftGrabber: {fileID: 1245581545}
-  _rightGrabber: {fileID: 2088954975}
-  _leftGrabberFull: {fileID: 1849732918}
-  _rightGrabberFull: {fileID: 1542816289}
-  _leftGrabberColl: {fileID: 1245581549}
-  _rightGrabberColl: {fileID: 2088954979}
-  _leftGrabberHandTrack: {fileID: 0}
-  _rightGrabberHandTrack: {fileID: 0}
-  _leftGrabberHandFull: {fileID: 0}
-  _rightGrabberHandTrackFull: {fileID: 0}
+  _leftGrabber: {fileID: 1245581549}
+  _rightGrabber: {fileID: 2088954979}
+  _leftGrabberFull: {fileID: 1849732925}
+  _rightGrabberFull: {fileID: 1542816296}
+  _leftGrabberHandTrack: {fileID: 1751005597}
+  _rightGrabberHandTrack: {fileID: 730081026}
+  _leftGrabberHandTrackFull: {fileID: 1858101873}
+  _rightGrabberHandTrackFull: {fileID: 1564048675}
   _backColliderTrans: {fileID: 991016238}
   _bbFull: {fileID: 991016241}
   isDebug: 1
@@ -104321,16 +104448,13 @@ MonoBehaviour:
   _maxSmackVelocity: 10
   _minSmackVelocity: 0
   _backBlowCooldown: 0.25
-  _chestGrabable: {fileID: 148621550}
-  _leftGrabber: {fileID: 1245581545}
-  _rightGrabber: {fileID: 2088954975}
+  _leftGrabber: {fileID: 0}
+  _rightGrabber: {fileID: 0}
   _leftGrabberFull: {fileID: 0}
   _rightGrabberFull: {fileID: 0}
-  _leftGrabberColl: {fileID: 0}
-  _rightGrabberColl: {fileID: 0}
   _leftGrabberHandTrack: {fileID: 0}
   _rightGrabberHandTrack: {fileID: 0}
-  _leftGrabberHandFull: {fileID: 0}
+  _leftGrabberHandTrackFull: {fileID: 0}
   _rightGrabberHandTrackFull: {fileID: 0}
   _backColliderTrans: {fileID: 1586011442}
   _bbFull: {fileID: 0}
@@ -108602,8 +108726,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 464ca9a17f60fe345bbbaadbae73a83a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitShoulderBlades: 1
-  colliderSize: {x: 0, y: 0, z: 0}
 --- !u!65 &2144186526
 BoxCollider:
   m_ObjectHideFlags: 0
