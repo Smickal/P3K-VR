@@ -9,7 +9,7 @@ public class QuestManager : MonoBehaviour
 {
     [Header("Reference")]
     [SerializeField] protected QuestManagerUI questManagerUI;
-    
+    [SerializeField] private QuestYesNoUI questYesNoUI;
     protected LevelPlayerData levelPlayerDataNow; // ambil di awal utk punya data level
     protected LevelP3KType levelP3KTypeNow;
     [SerializeField]protected PlayerManager playerManager;
@@ -17,6 +17,8 @@ public class QuestManager : MonoBehaviour
     
     [SerializeField]private Bleeding_QuestManager bleeding_QuestManager;
     [SerializeField]private Choking_QuestManager choking_QuestManager;
+    [SerializeField]private SceneMoveManager sceneMoveManager;
+    
 
     [Header("Level Data")]
     [SerializeField]protected float timerInSecsMax;
@@ -41,12 +43,12 @@ public class QuestManager : MonoBehaviour
     }
     protected virtual void Update() 
     {
-        // if(Startq)
-        // {
-        //     Startq = false;
-        //     StartQuest();
-        // }
-        if(isQuestStart)
+        if(Startq)
+        {
+            Startq = false;
+            Restart();
+        }
+        if(isQuestStart && gameManager.GameStateNow() == GameState.InGame)
         {
             if(timerInSecs > 0)
             {
@@ -63,15 +65,25 @@ public class QuestManager : MonoBehaviour
     }
     public void CheckStartQuest()
     {
-        if(!levelPlayerDataNow.hasBeatenLevelOnce)
+        if(!(PlayerManager.LastInGameMode() == InGame_Mode.FirstAid))
         {
-            Debug.Log("Wattheee???"); 
-            StartQuest();
+            if(!levelPlayerDataNow.hasBeatenLevelOnce)
+            {
+                StartQuest();
+            }
+            else
+            {
+                questYesNoUI.ActivateUI();
+                PlayerRestriction.ApplyAllRestriction();
+            }
         }
-        else
-        {
-            //open ui
-        }
+        
+    }
+    public void YesNoStartQuest(bool choice)
+    {
+        PlayerRestriction.LiftAllRestriction();
+        if(choice)StartQuest();
+        questYesNoUI.CloseUI();
     }
     public void StartQuest()
     {
@@ -124,7 +136,8 @@ public class QuestManager : MonoBehaviour
     }
     protected virtual void ResetQuest() 
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Debug.Log(sceneMoveManager.gameObject);
+        sceneMoveManager.RestartScene();
         
     }
 

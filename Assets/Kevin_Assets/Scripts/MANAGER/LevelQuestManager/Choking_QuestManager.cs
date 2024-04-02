@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Choking_QuestManager : QuestManager
+public class Choking_QuestManager : QuestManager, ITurnOffStatic
 {
     private IEnumerator chokingCourotine;
     [Header("Reference")]
@@ -23,10 +23,14 @@ public class Choking_QuestManager : QuestManager
         AddProgressBar += AddProgress;
         // Questt += StartQuest;
     }
+    public void TurnOffStatic()
+    {
+        AddProgressBar -= AddProgress;
+    }
     protected override void Update()
     {
         base.Update();
-        if(isQuestStart)
+        if(isQuestStart && gameManager.GameStateNow() == GameState.InGame)
         {
             if(progressNow > 0 && progressNow < progressTotal)
             {

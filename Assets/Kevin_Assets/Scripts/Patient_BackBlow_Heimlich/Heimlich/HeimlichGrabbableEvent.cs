@@ -13,7 +13,7 @@ public class HeimlichGrabbableEvent : GrabbableEvents
     {
         base.OnGrab(grabber);
         
-        _heimlichMovement.SetGrabber(grabber);
+        _heimlichMovement.SetGrabber(grabber.gameObject);
         this.grabber = grabber;
     }
 
@@ -21,7 +21,7 @@ public class HeimlichGrabbableEvent : GrabbableEvents
     {
         base.OnRelease();
         if(PlayerRestriction.IsRestrictMovement())PlayerRestriction.LiftMovementRestriction();
-        _heimlichMovement.ReleaseGrabber(grabber);
+        _heimlichMovement.ReleaseGrabber(grabber.gameObject);
     }
     
 }

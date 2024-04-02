@@ -1,18 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class SceneMoveManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField]private List<ITurnOffStatic> turnOffStaticsList;
+    private void Awake() 
     {
-        
+        ITurnOffStatic[] turnOffStaticsArray = GameObject.FindObjectsOfType<MonoBehaviour>().OfType<ITurnOffStatic>().ToArray();
+        turnOffStaticsList = new List<ITurnOffStatic>(turnOffStaticsArray);
+    }
+    
+    public void RestartScene()
+    {
+        Debug.Log("What??");
+        TurnOffAllStatics();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void TurnOffAllStatics()
     {
-        
+        if(turnOffStaticsList == null)return;
+        foreach(ITurnOffStatic turnOffStatic in turnOffStaticsList)
+        {
+            turnOffStatic.TurnOffStatic();
+        }
     }
 }

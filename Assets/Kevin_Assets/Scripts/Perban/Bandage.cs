@@ -89,19 +89,19 @@ public class Bandage : MonoBehaviour
 
 
 }
-[CustomEditor(typeof(Bandage))]
-public class BandageEditor : Editor
-{
-    public override void OnInspectorGUI()
-    {
-        var bandage = (Bandage)target;
+// [CustomEditor(typeof(Bandage))]
+// public class BandageEditor : Editor
+// {
+//     public override void OnInspectorGUI()
+//     {
+//         var bandage = (Bandage)target;
         
-        EditorGUI.BeginChangeCheck();
-        base.OnInspectorGUI();
+//         EditorGUI.BeginChangeCheck();
+//         base.OnInspectorGUI();
 
-        if (GUILayout.Button("Render Lines"))
-        {
-           bandage.CreateAllMeshes();
-        }
-    }
-}
+//         if (GUILayout.Button("Render Lines"))
+//         {
+//            bandage.CreateAllMeshes();
+//         }
+//     }
+// }

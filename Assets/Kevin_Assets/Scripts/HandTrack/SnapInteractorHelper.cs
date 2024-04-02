@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Oculus.Interaction.HandGrab;
 
-public class SnapInteractorHelper : MonoBehaviour
+public class SnapInteractorHelper : MonoBehaviour, ITurnOffStatic
 {
     [SerializeField]private Oculus.Interaction.SnapInteractor snapInteractor;
     [SerializeField]private BNG.SnapZone snapZone;
@@ -16,8 +16,14 @@ public class SnapInteractorHelper : MonoBehaviour
         distanceHandGrabInteractable = transform.parent.GetComponentInChildren<DistanceHandGrabInteractable>();
     }
 
+    public void TurnOffStatic()
+    {
+        if(snapInteractor)snapInteractor.OnSelect -= snapInteractor_OnSelect;
+        if(snapInteractor)snapInteractor.OnUnSelect -= snapInteractor_OnUnSelect;
+    }
     private void snapInteractor_OnUnSelect(object sender, Oculus.Interaction.SnapInteractor.OnUnSelectEventArgs e)
     {
+        if(InteractToolsController.CheckIsHandTrackOn == null) return;
         if(InteractToolsController.CheckIsHandTrackOn())LeaveSnapZone(e.Interactable);
 
         if(distanceHandGrabInteractable)
@@ -30,6 +36,7 @@ public class SnapInteractorHelper : MonoBehaviour
 
     private void snapInteractor_OnSelect(object sender, Oculus.Interaction.SnapInteractor.OnSelectEventArgs e)
     {
+        if(InteractToolsController.CheckIsHandTrackOn == null) return;
         if(InteractToolsController.CheckIsHandTrackOn())SetSnapZone(e.Interactable, e.Interactor);
         if(distanceHandGrabInteractable)
         {

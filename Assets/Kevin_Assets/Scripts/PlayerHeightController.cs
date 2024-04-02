@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class PlayerHeightController : MonoBehaviour
+public class PlayerHeightController : MonoBehaviour, ITurnOffStatic
 {
     [SerializeField]private GameObject[] _heightConnectOBJ;
     [SerializeField]private float minHeigth, maxHeight, addHeight = 0.05f;
@@ -14,6 +14,11 @@ public class PlayerHeightController : MonoBehaviour
     {
         AddPlayerHeight += PlayerHeightControl;
         ResetPlayerHeight += ResetHeight;
+    }
+    public void TurnOffStatic()
+    {
+        AddPlayerHeight -= PlayerHeightControl;
+        ResetPlayerHeight -= ResetHeight;
     }
 
     private void PlayerHeightControl(bool addPlayerHeight)

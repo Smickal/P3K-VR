@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using DialogueSystem;
 using UnityEngine;
 
-public class DialogueManager : MonoBehaviour
+public class DialogueManager : MonoBehaviour, ITurnOffStatic
 {
     [SerializeField]private SODialogueList SODialogueList;
     [SerializeField]private DialogueHolder dialogueHolder; // dialogueholder nerima scene dialogue, trus berdasarkan itu dikirim textnya beserta data berdasarkan namanya ke dialogue line
@@ -76,4 +76,10 @@ public class DialogueManager : MonoBehaviour
         dialogueHolder.HideDialogue();
     }
     
+    public void TurnOffStatic()
+    {
+        DoSomethingAfterFinish -= DoSomethingAfterDialogueFinish;
+        HideFinishedDialogue_AfterFinishingTask -= HideFinishedDialogueNow;
+        PlaySceneDialogue -= PlayDialogueScene;
+    }
 }

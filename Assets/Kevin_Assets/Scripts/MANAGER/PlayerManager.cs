@@ -20,7 +20,7 @@ public class PlayerLevelSave
     }
     public LevelDataMini[] levelDataMiniList;
 }
-public class PlayerManager : MonoBehaviour
+public class PlayerManager : MonoBehaviour, ITurnOffStatic
 {
     const string SaveStateKey = "playerSaveData_Key";
     [Header("SaveFile")]
@@ -73,12 +73,23 @@ public class PlayerManager : MonoBehaviour
         
         if(gameManager.LevelModeNow() == LevelMode.Level)
         {
-            environmentLevelManager.SetEnvironmentAwake(realFile.levelPlayerDataList[(int)gameManager.LevelTypeNow()].hasFinishIntro);
+            environmentLevelManager.SetEnvironmentAwake(realFile.levelPlayerDataList[(int)gameManager.LevelTypeNow()].hasFinishIntro, realFile.lastInGameMode == InGame_Mode.FirstAid);
         }
         if(!WantToExploreWorld)SetPlayerPositionAwake();
     }
-    private void Start() {
-        
+    public void TurnOffStatic()
+    {
+        HasFinishedTutorialMain -= HasFinished_TutorialMain;
+        ResetPlayerSave -= ResetSavePlayer;
+        HasFinishedIntroLevel -= HasFinished_IntroLevel;
+        HasBeatenLvl -= BeatenLevel;
+        IsTutorialMainFinish -= IsFinish_TutorialMain;
+        LevelDataNow -= GetLevelData;
+        TotalLevels -= TotalLevel;
+        SetPlayerPosition_DoP3k -= SetPlayerPosition_InGame_DoP3k;
+        SetPlayerPosition_FinishP3k -= SetPlayerPostion_InGame_AfterP3K;
+        ChangeInGame_Mode_Now -= ChangePlayerLastInGameMode;
+        LastInGameMode -= PlayerLastInGameMode;
     }
 
     private void Update() {

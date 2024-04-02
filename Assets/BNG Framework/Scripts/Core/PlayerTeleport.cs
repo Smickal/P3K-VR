@@ -21,7 +21,7 @@ namespace BNG {
     /// <summary>
     /// A basic Teleport script that uses a parabolic arc to determine teleport location
     /// </summary>
-    public class PlayerTeleport : MonoBehaviour {
+    public class PlayerTeleport : MonoBehaviour, ITurnOffStatic {
 
         [Header("Colors")]
 
@@ -181,10 +181,11 @@ namespace BNG {
             // Teleport += TeleportPlayer;
             // TeleportAwake += TeleportPlayerAwake;
         }
-        private void TurnOffStatic_OnChangeScene()
+        public void TurnOffStatic()
         {
             Teleport -= TeleportPlayer;
             TeleportAwake -= TeleportPlayerAwake;
+            // Debug.Log("Uhh");
         }
 
         bool setVariables = false;

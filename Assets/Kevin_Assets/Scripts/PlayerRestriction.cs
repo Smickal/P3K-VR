@@ -2,12 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using BNG;
-using UnityEditor.EditorTools;
 using UnityEngine;
 using Oculus.Interaction.HandGrab;
 
 
-public class PlayerRestriction : MonoBehaviour
+public class PlayerRestriction : MonoBehaviour, ITurnOffStatic
 {
     [Header("Reference")]
     [SerializeField]private PlayerManager playerManager;
@@ -46,6 +45,20 @@ public class PlayerRestriction : MonoBehaviour
 
 
         if(!playerManager.IsFinish_TutorialMain())DisableAllGrabable();
+    }
+    public void TurnOffStatic()
+    {
+        LiftAllRestriction -= EnableAll;
+        ApplyAllRestriction -= DisableAll;
+        LiftGrabableRestriction -= EnableAllGrabable;
+        ApplyGrabableRestriction -= DisableAllGrabable;
+        LiftMovementRestriction -= EnableAllMovement;
+        ApplyMovementRestriction -= DisableAllMovement;
+
+        IsRestrictAll -= RestrictAll;
+        IsRestrictMovement -= RestrictMovement;
+        IsRestrictGrabable -= RestrictGrabable;
+        // Debug.Log("Uhh");
     }
     private void Update() {
         if(enableNow)
@@ -124,6 +137,7 @@ public class PlayerRestriction : MonoBehaviour
         Debug.Log("WHAT DO YOU MEAN THERE'S NO PLAYER MOVEMENT" + playerMovement_BNG + "???");
         if(playerMovement_BNG)playerMovement_BNG.enabled = false;
         Debug.Log("test");
+        Debug.Log(playerMovements_OVR + " Kok bisa i;ang???");
         foreach(GameObject playermovement_OVR in playerMovements_OVR)
         {
             playermovement_OVR.SetActive(false);

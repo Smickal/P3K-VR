@@ -42,9 +42,11 @@ public class PatientBackBlowHeimlich : MonoBehaviour
 
         ActivateBackBlowRig();
     }
-
+    int i =0;
     public void ActivateBackBlowRig()
     {
+        Debug.Log("ini i " + i + " cek");
+        i++;
         _heimlichContainerOBJ.SetActive(false);
         _backBlowContainerOBJ.SetActive(true);
 

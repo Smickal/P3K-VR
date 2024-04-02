@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Newtonsoft.Json;
 
-public class UIKotakP3K : BaseKitUI
+public class UIKotakP3K : BaseKitUI, ITurnOffStatic
 {
     const string SaveStateKey = "toolsSaveData_Key";
 
@@ -162,5 +162,13 @@ public class UIKotakP3K : BaseKitUI
     {
         UnlockedKitSavedData = new bool[_scriptableDatas.Length];
         Save();
+    }
+
+    public void TurnOffStatic()
+    {
+        CheckUnlock -= UnlockAKit;
+        OpenDescriptioninRoom -= OpenDesc_OutsideGlossary;
+        CloseDescriptioninRoom -= CloseDesc_OutsideGlossary;
+        ResetSaveData -= ResetSave;
     }
 }

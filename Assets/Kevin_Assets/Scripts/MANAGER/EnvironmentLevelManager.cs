@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnvironmentLevelManager : MonoBehaviour
+public class EnvironmentLevelManager : MonoBehaviour, ITurnOffStatic
 {
     [Tooltip("0- Pas Intro, 1 - biasa, 2 - first aid, 3- ending doang")]
     [SerializeField] private GameObject[] Environments;
@@ -13,11 +13,20 @@ public class EnvironmentLevelManager : MonoBehaviour
         SetEnvironment_FirstAid += SetEnvironmentFirstAid;
         SetEnvironment_FinishQuest += SetEnvironmentEndQuest;
     }
-    public void SetEnvironmentAwake(bool hasFinishIntro_ThisLevel)
+    
+    public void SetEnvironmentAwake(bool hasFinishIntro_ThisLevel, bool isPlayerLastModeFirstAid)
     {
         CloseAllGameObject();
-        if(!hasFinishIntro_ThisLevel)Environments[0].SetActive(true);
-        else Environments[1].SetActive(true);
+        if(isPlayerLastModeFirstAid)
+        {
+            Environments[2].SetActive(true);
+        }
+        else
+        {
+            if(!hasFinishIntro_ThisLevel) Environments[0].SetActive(true);
+            else Environments[1].SetActive(true);
+        }
+        
     }
     public void SetEnvironmentEndQuest()
     {
@@ -26,6 +35,7 @@ public class EnvironmentLevelManager : MonoBehaviour
     }
     public void SetEnvironmentFirstAid()
     {
+        Debug.Log("SetEnvironmentFirstAid");
         CloseAllGameObject();
         Environments[2].SetActive(true);
     }
@@ -35,5 +45,10 @@ public class EnvironmentLevelManager : MonoBehaviour
         {
             obj.gameObject.SetActive(false);
         }
+    }
+    public void TurnOffStatic()
+    {
+        SetEnvironment_FirstAid -= SetEnvironmentFirstAid;
+        SetEnvironment_FinishQuest -= SetEnvironmentEndQuest;
     }
 }

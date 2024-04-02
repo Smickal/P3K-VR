@@ -14,9 +14,12 @@ public class HeimlichMovement : MonoBehaviour
     [SerializeField] float _minSmackVelocity;
     [SerializeField] float _maxSmackVelocity;
 
-    [Header("Grabber")]
-    [SerializeField] Grabber _leftGrabber;
-    [SerializeField] Grabber _rightGrabber;
+    [Header("Grabber - Controller")]
+    [SerializeField] GameObject _leftGrabber;
+    [SerializeField] GameObject _rightGrabber;
+    [Header("Grabber - HT")]
+    [SerializeField] GameObject _leftGrabberHT;
+    [SerializeField] GameObject _rightGrabberHT;
 
     [Header("Grabbable")]
     [SerializeField] Grabbable _leftGrabbable;
@@ -32,8 +35,8 @@ public class HeimlichMovement : MonoBehaviour
     [SerializeField] bool _isDebug = true;
     [SerializeField] TMP_Text _debugText;
 
-    Grabber curLeftGrabber;
-    Grabber curRightGrabber;
+    GameObject curLeftGrabber;
+    GameObject curRightGrabber;
 
     private bool isGrabbing;
 
@@ -107,20 +110,38 @@ public class HeimlichMovement : MonoBehaviour
     }
 
 
-    public void SetGrabber(Grabber grabber)
+    public void SetGrabber(GameObject grabber)
     {
         if(grabber == null) return;
 
-        if (grabber == _leftGrabber) curLeftGrabber = grabber;
-        else if (grabber == _rightGrabber) curRightGrabber = grabber;
+        if(!InteractToolsController.CheckIsHandTrackOn())
+        {
+            if (grabber == _leftGrabber) curLeftGrabber = grabber;
+            else if (grabber == _rightGrabber) curRightGrabber = grabber;
+        }
+        else
+        {
+            if (grabber == _leftGrabberHT) curLeftGrabber = grabber;
+            else if (grabber == _rightGrabberHT) curRightGrabber = grabber;
+        }
+        
     }
 
-    public void ReleaseGrabber(Grabber grabber)
+    public void ReleaseGrabber(GameObject grabber)
     {
         if(grabber == null) return;
 
-        if (grabber == _rightGrabber) curRightGrabber = null;
-        else if(grabber == _leftGrabber) curLeftGrabber = null;
+        if(!InteractToolsController.CheckIsHandTrackOn())
+        {
+            if (grabber == _rightGrabber) curRightGrabber = null;
+            else if(grabber == _leftGrabber) curLeftGrabber = null;
+        }
+        else
+        {
+            if (grabber == _leftGrabberHT) curLeftGrabber = null;
+            else if (grabber == _rightGrabberHT) curRightGrabber = null;
+        }
+        
 
         //harusnya ini balikin ke asal
         //move Target According to left&right grabber
@@ -149,7 +170,9 @@ public class HeimlichMovement : MonoBehaviour
         //Must check for 2 hands + Target Trigger
         if (col == null) return;
         else if (!IsHandsTriggered()) return;
-        if(!(col.gameObject == _leftGrabber.gameObject || col.gameObject == _rightGrabber.gameObject)) return;
+        Debug.Log(col.gameObject + " Collider yang masuk sini");
+        if(!(col.gameObject == _leftGrabbable.gameObject || col.gameObject == _rightGrabbable.gameObject)) return;
+        Debug.Log(col.gameObject + " Collider yang masuk sini2");
         if(isAlreadyScoring)
         {
             Debug.Log("Masih ada");
