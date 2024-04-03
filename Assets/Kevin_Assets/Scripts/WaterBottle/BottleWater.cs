@@ -5,32 +5,90 @@ using UnityEngine;
 
 public class BottleWater : MonoBehaviour
 {
-    [SerializeField] float _waterSpillThreshold = 1f;
+    [Range(0,1)][SerializeField] float _waterSpillRotationThreshold = 1f;
 
 
     [Header("Reference")]
     [SerializeField] SnapZone _bottleCapSnapZone;
     [SerializeField] Transform _dropWaterTransform;
+    [SerializeField] ParticleSystem _waterLeakParticlePrefab;
+    [SerializeField] ParticleSystem _waterSplashParticlePrefab;
 
 
-    bool isBottleOpened = false;
+    [Header("FILL THIS IF THIS ITEM IS A CLEANER")]
+    [SerializeField] DirtyCleaner _cleaner;
+
+    [Header("DONT TOUCH! DEBUG PURPOSE")]
+    [SerializeField] bool isBottleOpened = false;
+
+    ParticleSystem curSpawnedWLeak;
+    ParticleSystem curSpawnedWSplash;
+
+
+    private void Start()
+    {
+        //Instantiate WaterLeak And Splash GO
+        curSpawnedWLeak = Instantiate(_waterLeakParticlePrefab);
+        curSpawnedWLeak.transform.SetParent(_dropWaterTransform);
+        curSpawnedWLeak.transform.localPosition = Vector3.zero;
+        curSpawnedWLeak.GetComponent<WaterPourCollision>().RegisterWaterBottle(this, _cleaner);
+
+        curSpawnedWSplash = Instantiate(_waterSplashParticlePrefab);
+
+
+        isBottleOpened = false;
+    }
 
     public void OpenedCapBottle()
     {
         isBottleOpened = true;
     }
 
+    public void ClosedCapBottle()
+    {
+        isBottleOpened = false;
+    }
 
     private void Update()
     {
+        RaycastHit hitInfo;
+        Physics.Raycast(_dropWaterTransform.position, Vector3.down, out hitInfo);
+
         //Check if is bottled cap is opened
         if (!isBottleOpened) return;
 
         //Check if the bottle is upside down
-        if (transform.up.y > -_waterSpillThreshold) return;
+        if (transform.up.y > -_waterSpillRotationThreshold)
+        {
+            if(curSpawnedWLeak.isPlaying || curSpawnedWSplash.isPlaying)
+            {
+                curSpawnedWLeak.Stop();
+                curSpawnedWSplash.Stop();
+            }
 
+           
+            return;
+        }
         
+        
+        if(!curSpawnedWLeak.isPlaying)
+        {
+            curSpawnedWLeak.Play();
+        }
 
+        //Update Splash Position
+        Vector3 hitPos = hitInfo.point;
+        curSpawnedWSplash.transform.position = hitPos;
+
+    }
+
+
+    public void PlaySplashOnCollision()
+    {
+        if(!_waterSplashParticlePrefab.isEmitting || !_waterSplashParticlePrefab.isPlaying)
+        {
+            curSpawnedWSplash.Play();
+        }
     }
 
 

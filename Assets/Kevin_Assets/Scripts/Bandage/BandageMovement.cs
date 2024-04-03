@@ -2,6 +2,7 @@ using BNG;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class BandageMovement : MonoBehaviour
 {
@@ -20,9 +21,11 @@ public class BandageMovement : MonoBehaviour
     Grabbable curBandageGrabbable;
 
 
-
-
     bool isMoving = false;
+    bool isDoneMovement = false;
+
+    public UnityAction OnMovementDone;
+    public bool IsDoneMovement {  get { return isDoneMovement; } }
 
     private void Update()
     {
@@ -49,7 +52,10 @@ public class BandageMovement : MonoBehaviour
                 _bandageDraw.CreateMeshesByIndex(0, _circleTransform.CircleTransforms.Count - 1);
                 Debug.Log("BANDAGE MOVEMENT DONE!");
                 isMoving = false;
+                isDoneMovement = true;
 
+                //Fire a Event that the movement is done!
+                OnMovementDone?.Invoke();
 
                 _snapZone.gameObject.SetActive(false);                
             }
