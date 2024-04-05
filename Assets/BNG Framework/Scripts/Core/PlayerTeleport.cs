@@ -21,7 +21,7 @@ namespace BNG {
     /// <summary>
     /// A basic Teleport script that uses a parabolic arc to determine teleport location
     /// </summary>
-    public class PlayerTeleport : MonoBehaviour {
+    public class PlayerTeleport : MonoBehaviour, ITurnOffStatic {
 
         [Header("Colors")]
 
@@ -178,6 +178,14 @@ namespace BNG {
             if(GetComponent<SphereCollider>() != null && FrictionMaterial != null) {
                 GetComponent<SphereCollider>().material = FrictionMaterial;
             }
+            // Teleport += TeleportPlayer;
+            // TeleportAwake += TeleportPlayerAwake;
+        }
+        public void TurnOffStatic()
+        {
+            Teleport -= TeleportPlayer;
+            TeleportAwake -= TeleportPlayerAwake;
+            // Debug.Log("Uhh");
         }
 
         bool setVariables = false;

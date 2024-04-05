@@ -50,6 +50,8 @@ namespace Oculus.Interaction
         private UnityEvent _whenSelectingInteractorViewAdded;
         [SerializeField]
         private UnityEvent _whenSelectingInteractorViewRemoved;
+        [SerializeField]
+        private UnityEvent _beforeSelectingInteractorViewRemoved;
 
         #region Properties
 
@@ -61,6 +63,7 @@ namespace Oculus.Interaction
         public UnityEvent WhenInteractorViewRemoved => _whenInteractorViewRemoved;
         public UnityEvent WhenSelectingInteractorViewAdded => _whenSelectingInteractorViewAdded;
         public UnityEvent WhenSelectingInteractorViewRemoved => _whenSelectingInteractorViewRemoved;
+        public UnityEvent BeforeSelectingInteractorViewRemoved => _beforeSelectingInteractorViewRemoved;
 
         #endregion
 
@@ -87,6 +90,7 @@ namespace Oculus.Interaction
                 InteractableView.WhenInteractorViewRemoved += HandleInteractorViewRemoved;
                 InteractableView.WhenSelectingInteractorViewAdded += HandleSelectingInteractorViewAdded;
                 InteractableView.WhenSelectingInteractorViewRemoved += HandleSelectingInteractorViewRemoved;
+                InteractableView.BeforeSelectingInteractorViewRemoved += HandleBeforeSelectingInteractorViewRemoved;
             }
         }
 
@@ -153,6 +157,12 @@ namespace Oculus.Interaction
         {
             WhenSelectingInteractorViewRemoved.Invoke();
         }
+        private void HandleBeforeSelectingInteractorViewRemoved(IInteractorView interactorView)
+        {
+            Debug.Log("OIIIII BANG");
+            BeforeSelectingInteractorViewRemoved.Invoke();
+        }
+
 
         #region Inject
 

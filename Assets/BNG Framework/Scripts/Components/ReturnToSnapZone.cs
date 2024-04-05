@@ -29,6 +29,7 @@ namespace BNG {
         [Tooltip("Initiate snap if distance between the Grabbable and SnapZone is <= SnapDistance")]
         public float SnapDistance = 0.05f;
         [SerializeField]private bool onlyReturnOnce = true;
+        public bool OnlyReturnOnce { get { return onlyReturnOnce; } }
 
         void Start() {
             grab = GetComponent<Grabbable>();

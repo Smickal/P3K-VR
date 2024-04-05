@@ -5,7 +5,7 @@ using System;
 using UnityEngine.Events;
 
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviour, ITurnOffStatic
 {
     [SerializeField]private GameState state;
     [SerializeField]private InGame_Mode inGame_Mode;
@@ -86,5 +86,13 @@ public class GameManager : MonoBehaviour
     public void ChangeInGameMode(InGame_Mode change)
     {
         inGame_Mode = change;
+    }
+    public void TurnOffStatic()
+    {
+        CheckLevelModeNow -= LevelModeNow;
+        ChangeInGameModeNow -= ChangeInGameMode;
+        CheckGameStateNow -= GameStateNow;
+        CheckLevelTypeNow -= LevelTypeNow;
+        ChangeGameStateNow -= ChangeGameState;
     }
 }

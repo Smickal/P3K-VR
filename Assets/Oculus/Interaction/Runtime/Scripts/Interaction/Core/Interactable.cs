@@ -97,6 +97,7 @@ namespace Oculus.Interaction
         public event Action<IInteractorView> WhenInteractorViewRemoved = delegate { };
         public event Action<IInteractorView> WhenSelectingInteractorViewAdded = delegate { };
         public event Action<IInteractorView> WhenSelectingInteractorViewRemoved = delegate { };
+        public event Action<IInteractorView> BeforeSelectingInteractorViewRemoved = delegate { };
 
         private MultiAction<TInteractor> _whenInteractorAdded = new MultiAction<TInteractor>();
         private MultiAction<TInteractor> _whenInteractorRemoved = new MultiAction<TInteractor>();
@@ -148,6 +149,10 @@ namespace Oculus.Interaction
             WhenSelectingInteractorViewRemoved(interactor);
             _whenSelectingInteractorRemoved.Invoke(interactor);
         }
+        protected virtual void GetInteractorBeforeRemoved(TInteractor interactor)
+        {
+            BeforeSelectingInteractorViewRemoved(interactor);
+        }
 
         public IEnumerableHashSet<TInteractor> Interactors => _interactors;
 
@@ -180,6 +185,7 @@ namespace Oculus.Interaction
 
         public void RemoveSelectingInteractor(TInteractor interactor)
         {
+            GetInteractorBeforeRemoved(interactor);
             if (!_selectingInteractors.Remove(interactor))
             {
                 return;

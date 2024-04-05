@@ -6,7 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class QuestManagerUI : MonoBehaviour
+public class QuestManagerUI : MonoBehaviour, ITurnOffStatic
 {
     const string titleChoking = "Choking First Aid";
     const string titleChokingBackblow = "Backblow";
@@ -38,6 +38,10 @@ public class QuestManagerUI : MonoBehaviour
         ActiveQuestBtn_Robot(false);
         ChangeHelperDesc_Choking += ChangeHelper_ChokingDesc;
     }
+    public void TurnOffStatic()
+    {
+        ChangeHelperDesc_Choking -= ChangeHelper_ChokingDesc;
+    }
 
     public void ActivateBaseUI()
     {
@@ -64,6 +68,7 @@ public class QuestManagerUI : MonoBehaviour
     public void ChangeHelper_ChokingDesc(string choke_P3KType)
     {
         _titleBase.text = titleChoking + "-" + choke_P3KType;
+        Debug.Log("ini maksudnya " + _chokingDescIMG.gameObject + "ilang???");
         if(choke_P3KType == titleChokingBackblow)
         {
             _chokingDescIMG.sprite = _chokingDescSprite[0];

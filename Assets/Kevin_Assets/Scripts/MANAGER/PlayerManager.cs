@@ -7,26 +7,6 @@ using System.Linq;
 using BNG;
 
 [Serializable]
-public class PlayerPositionSave
-{
-    public LevelMode levelMode;
-    [Serializable]
-    public class PositionsInLevelMode
-    {
-        public LevelP3KType levelP3KType;
-        [Serializable]
-        public class position{
-            public string namaPosisi;
-            public Vector3 playerPosition;
-            public float playerRotation;
-
-        }
-        public position[] positions;
-    }
-    public PositionsInLevelMode[] positionsInLevel;
-}
-
-[Serializable]
 public class PlayerLevelSave
 {
     public bool isTutorialFinish;
@@ -40,7 +20,7 @@ public class PlayerLevelSave
     }
     public LevelDataMini[] levelDataMiniList;
 }
-public class PlayerManager : MonoBehaviour
+public class PlayerManager : MonoBehaviour, ITurnOffStatic
 {
     const string SaveStateKey = "playerSaveData_Key";
     [Header("SaveFile")]
@@ -54,7 +34,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField]private EnvironmentLevelManager environmentLevelManager;
     [Header("DO NOT FORGET TO SET")]
     [SerializeField]private float playerTeleport_y = 1.65f;
-    [SerializeField]private PlayerPositionSave[] playerPosition;
+    [SerializeField]private SOPlayerPosition playerPositionSO;
 
     [SerializeField]private PlayerLevelSave playerLevelSave;
     public static Action HasFinishedTutorialMain, ResetPlayerSave, SetPlayerPosition_DoP3k, SetPlayerPosition_FinishP3k;
@@ -93,12 +73,23 @@ public class PlayerManager : MonoBehaviour
         
         if(gameManager.LevelModeNow() == LevelMode.Level)
         {
-            environmentLevelManager.SetEnvironmentAwake(realFile.levelPlayerDataList[(int)gameManager.LevelTypeNow()].hasFinishIntro);
+            environmentLevelManager.SetEnvironmentAwake(realFile.levelPlayerDataList[(int)gameManager.LevelTypeNow()].hasFinishIntro, realFile.lastInGameMode == InGame_Mode.FirstAid);
         }
         if(!WantToExploreWorld)SetPlayerPositionAwake();
     }
-    private void Start() {
-        
+    public void TurnOffStatic()
+    {
+        HasFinishedTutorialMain -= HasFinished_TutorialMain;
+        ResetPlayerSave -= ResetSavePlayer;
+        HasFinishedIntroLevel -= HasFinished_IntroLevel;
+        HasBeatenLvl -= BeatenLevel;
+        IsTutorialMainFinish -= IsFinish_TutorialMain;
+        LevelDataNow -= GetLevelData;
+        TotalLevels -= TotalLevel;
+        SetPlayerPosition_DoP3k -= SetPlayerPosition_InGame_DoP3k;
+        SetPlayerPosition_FinishP3k -= SetPlayerPostion_InGame_AfterP3K;
+        ChangeInGame_Mode_Now -= ChangePlayerLastInGameMode;
+        LastInGameMode -= PlayerLastInGameMode;
     }
 
     private void Update() {
@@ -236,16 +227,9 @@ public class PlayerManager : MonoBehaviour
     private void SetPlayerPositionAwake()
     {
         PlayerPositionSave.PositionsInLevelMode.position positionNow = new PlayerPositionSave.PositionsInLevelMode.position();
+        positionNow = playerPositionSO.PlayerPositionSearch(gameManager.LevelModeNow(), gameManager.LevelTypeNow(), realFile.lastLevel, realFile.lastInGameMode, NamaPosisi.None);
         if(gameManager.LevelModeNow() == LevelMode.Home)
         {
-            if(realFile.lastLevel == LevelMode.Home)
-            {
-                positionNow = playerPosition[0].positionsInLevel[0].positions[0];                
-            }
-            else
-            {
-                positionNow = playerPosition[0].positionsInLevel[0].positions[1];  
-            }
             realFile.lastInGameMode = InGame_Mode.NormalWalk;
         }
         else
@@ -254,19 +238,16 @@ public class PlayerManager : MonoBehaviour
             {
                 if(realFile.lastLevel == LevelMode.Home)
                 {
-                    positionNow = playerPosition[1].positionsInLevel[0].positions[0];  
                     realFile.lastInGameMode = InGame_Mode.NormalWalk;
                 }
                 else
                 {
                     if(realFile.lastInGameMode == InGame_Mode.NormalWalk)
                     {
-                        positionNow = playerPosition[1].positionsInLevel[0].positions[1]; 
                         gameManager.ChangeInGameMode(InGame_Mode.NormalWalk);
                     }
                     else
                     {
-                        positionNow = playerPosition[1].positionsInLevel[0].positions[2]; 
                         gameManager.ChangeInGameMode(InGame_Mode.FirstAid);
                     }
                 }
@@ -275,19 +256,16 @@ public class PlayerManager : MonoBehaviour
             {
                 if(realFile.lastLevel == LevelMode.Home)
                 {
-                    positionNow = playerPosition[1].positionsInLevel[1].positions[0];  
                     realFile.lastInGameMode = InGame_Mode.NormalWalk;
                 }
                 else
                 {
                     if(realFile.lastInGameMode == InGame_Mode.NormalWalk)
                     {
-                        positionNow = playerPosition[1].positionsInLevel[1].positions[1]; 
                         gameManager.ChangeInGameMode(InGame_Mode.NormalWalk);
                     }
                     else
                     {
-                        positionNow = playerPosition[1].positionsInLevel[1].positions[2]; 
                         gameManager.ChangeInGameMode(InGame_Mode.FirstAid);
                     }
                 }
@@ -295,33 +273,22 @@ public class PlayerManager : MonoBehaviour
             
         }
 
-        // playerGameObject.position = positionNow.playerPosition;
-        // playerGameObject.rotation = Quaternion.Euler(0,positionNow.playerRotation,0);
         Vector3 destination = new Vector3(positionNow.playerPosition.x, playerTeleport_y, positionNow.playerPosition.z);
         Quaternion rotation = Quaternion.Euler(0,positionNow.playerRotation,0);
+
         playerTeleport.TeleportPlayerAwake(destination, rotation);
         realFile.lastLevel = gameManager.LevelModeNow();
     }
     private void SetPlayerPosition_InGame_DoP3k()
     {
         PlayerPositionSave.PositionsInLevelMode.position positionNow = new PlayerPositionSave.PositionsInLevelMode.position();
-        if(gameManager.LevelTypeNow() == LevelP3KType.Choking)
-        {
-            positionNow = playerPosition[1].positionsInLevel[0].positions[2]; 
-        }
-        else if(gameManager.LevelTypeNow() == LevelP3KType.Bleeding)
-        {
-            positionNow = playerPosition[1].positionsInLevel[1].positions[2]; 
-        }
+        positionNow = playerPositionSO.PlayerPositionSearch(gameManager.LevelModeNow(), gameManager.LevelTypeNow(), realFile.lastLevel, realFile.lastInGameMode, NamaPosisi.None);
         
-        // playerGameObject.position += positionNow.playerPosition;
-        // playerGameObject.rotation = Quaternion.Euler(0,positionNow.playerRotation,0);
-        // Debug.Break();
-        // Debug.Log(playerGameObject.position + "posisi");
         Vector3 destination = new Vector3(positionNow.playerPosition.x, playerTeleport_y, positionNow.playerPosition.z);
         Quaternion rotation = Quaternion.Euler(0,positionNow.playerRotation,0);
         playerTeleport.TeleportPlayer(destination, rotation);
         // Debug.Break();
+
         gameManager.ChangeInGameMode(InGame_Mode.FirstAid);
         
     }
@@ -329,19 +296,23 @@ public class PlayerManager : MonoBehaviour
     private void SetPlayerPostion_InGame_AfterP3K()
     {
         PlayerPositionSave.PositionsInLevelMode.position positionNow = new PlayerPositionSave.PositionsInLevelMode.position();
-        if(gameManager.LevelTypeNow() == LevelP3KType.Choking)
-        {
-            positionNow = playerPosition[1].positionsInLevel[0].positions[3]; 
-        }
-        else if(gameManager.LevelTypeNow() == LevelP3KType.Bleeding)
-        {
-            positionNow = playerPosition[1].positionsInLevel[1].positions[3]; 
-        }
+        positionNow = playerPositionSO.PlayerPositionSearch(gameManager.LevelModeNow(), gameManager.LevelTypeNow(), realFile.lastLevel, realFile.lastInGameMode, NamaPosisi.LevelFinish);
+
+        // if(gameManager.LevelTypeNow() == LevelP3KType.Choking)
+        // {
+        //     positionNow = playerPosition[1].positionsInLevel[0].positions[3]; 
+        // }
+        // else if(gameManager.LevelTypeNow() == LevelP3KType.Bleeding)
+        // {
+        //     positionNow = playerPosition[1].positionsInLevel[1].positions[3]; 
+        // }
         
         Vector3 destination = new Vector3(positionNow.playerPosition.x, playerTeleport_y, positionNow.playerPosition.z);
         Quaternion rotation = Quaternion.Euler(0,positionNow.playerRotation,0);
         playerTeleport.TeleportPlayer(destination, rotation);
         // Debug.Break();
+
+
         gameManager.ChangeGameState(GameState.Cinematic);
         PlayerRestriction.ApplyAllRestriction();
 

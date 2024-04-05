@@ -6,7 +6,7 @@ using UnityEngine.Playables;
 using UnityEngine.Timeline;
 using System;
 
-public class TimelineManager : MonoBehaviour
+public class TimelineManager : MonoBehaviour, ITurnOffStatic
 {
     [SerializeField] private PlayableDirector director;
     [SerializeField] private SOTimelineList tImelineList;
@@ -22,6 +22,12 @@ public class TimelineManager : MonoBehaviour
     {
         director.stopped += OnTimelineStopped;
     }
+    public void TurnOffStatic()
+    {
+        StartTimeline -= PlayTimeline;
+        director.stopped -= OnTimelineStopped;
+    }
+    
     private void OnTimelineStopped(PlayableDirector director)
     {
         if(timelineTypeNow == TimelineType.Home_Cutscene1)

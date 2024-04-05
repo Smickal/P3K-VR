@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 
-public class QuestEndingUI : MonoBehaviour
+public class QuestEndingUI : MonoBehaviour, ITurnOffStatic
 {
     [Header("Reference")]
     [SerializeField] private KitUiManager _kitUIMgr;
@@ -37,6 +37,11 @@ public class QuestEndingUI : MonoBehaviour
     {
         SetUIData += SetData;
         ShowQuestEnding += ActivateQuestEnding;
+    }
+    public void TurnOffStatic()
+    {
+        SetUIData -= SetData;
+        ShowQuestEnding -= ActivateQuestEnding;
     }
     private void Start() 
     {

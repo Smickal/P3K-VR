@@ -5,7 +5,7 @@ using BNG;
 using Oculus.Interaction;
 using UnityEngine;
 
-public class InteractToolsController : MonoBehaviour
+public class InteractToolsController : MonoBehaviour, ITurnOffStatic
 {
     [SerializeField]private HandActiveState leftHand, rightHand;
     [SerializeField]private GameObject leftControllerGameObject, rightControllerGameObject;
@@ -63,5 +63,9 @@ public class InteractToolsController : MonoBehaviour
     private bool IsHandTrackOn()
     {
         return isHandTrackOn;
+    }
+    public void TurnOffStatic()
+    {
+        CheckIsHandTrackOn -= IsHandTrackOn;
     }
 }

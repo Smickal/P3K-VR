@@ -5,7 +5,6 @@ using BNG;
 using System;
 using UnityEngine.Events;
 using TMPro;
-using Meta.Voice.TelemetryUtilities;
 
 public class BackBlowMovement : MonoBehaviour
 {
@@ -18,13 +17,19 @@ public class BackBlowMovement : MonoBehaviour
     [SerializeField] float _backBlowCooldown = 0.25f;
 
     [Space(5)]
-    [SerializeField] Grabbable _chestGrabable;
-    [SerializeField] Grabber _leftGrabber;
-    [SerializeField] Grabber _rightGrabber;
-    [SerializeField] GameObject _leftGrabberFull;
-    [SerializeField] GameObject _rightGrabberFull;
-    [SerializeField] Collider _leftGrabberColl;
-    [SerializeField] Collider _rightGrabberColl;
+    [Header("Controller GameObject")]
+    [SerializeField] Collider _leftGrabber;
+    [SerializeField] Collider _rightGrabber;
+    [SerializeField] Collider _leftGrabberFull;
+    [SerializeField] Collider _rightGrabberFull;
+
+    [Header("HandTrack GameObject")]
+    [SerializeField] Collider _leftGrabberHandTrack;
+    [SerializeField] Collider _rightGrabberHandTrack;
+    [SerializeField] Collider _leftGrabberHandTrackFull;
+    [SerializeField] Collider _rightGrabberHandTrackFull;
+
+
     [SerializeField] Transform _backColliderTrans;
     [SerializeField] private BackBlowFullCollider _bbFull;
     private bool enterNormalCollider;
@@ -34,10 +39,10 @@ public class BackBlowMovement : MonoBehaviour
     [Header("debug")]
     [SerializeField] bool isDebug;
     [SerializeField] TMP_Text _debugText;
-    Grabber currentGrabberForPull;
-    Grabber currentGrabberForBackBlow;
+    GameObject currentGrabberForPull;
+    GameObject currentGrabberForBackBlow;
 
-    public static UnityEvent<Collider, bool> OnBackBlow = new UnityEvent<Collider, bool>();
+    public static UnityEvent<Collider> OnBackBlow = new UnityEvent<Collider>();
     public static UnityEvent<Collider> OnReleaseBackBlow = new UnityEvent<Collider>();
 
 
@@ -114,38 +119,65 @@ public class BackBlowMovement : MonoBehaviour
         }
     }
 
-    public void CheckForBackBlowCollision(Collider col, bool hitShoulderBlades)
+    public void CheckForBackBlowCollision(Collider col)
     {
-        // Debug.Log("Di siniaaaaaaaabbbbbbbbaaaaaaaaaaaaaaaaaabb ???");
+        
         if (isHittingCollider) return;
-        // Debug.Log("Di siniaaaaaaaa ???" + col);
-        if(!(col.gameObject == _leftGrabber.gameObject || col.gameObject == _rightGrabber.gameObject || col.gameObject == _leftGrabberFull || col.gameObject == _rightGrabberFull)) return;
-
-        enterNormalCollider = true;
-        // if(!(col.gameObject == _leftGrabberFull || col.gameObject == _rightGrabberFull)) return;
-        // Debug.Log("Di siniaaaaaaaabbbbbbbbbb ???");
-        col.TryGetComponent<FullScoreBlow>(out FullScoreBlow fullScoreBlow);
+        Debug.Log("Di siniaaaaaaaabbbbbbbbaaaaaaaaaaaaaaaaaabb ???");
         bool isFullScores = false;
-        // Debug.Log("Di sini ???");
 
+        Debug.Log(col.gameObject == _rightGrabberFull);
+        Debug.Log(" " + col);
 
-        if (fullScoreBlow != null) isFullScores = true;
-
-        if(col.gameObject == _leftGrabberFull)
+        // if(!(col.gameObject == _leftGrabberFull || col.gameObject == _rightGrabberFull || col == _leftGrabber || col == _rightGrabber)) return;
+        if(!InteractToolsController.CheckIsHandTrackOn())
         {
-            currentHitCollider = _leftGrabberColl;
-        }
-        else if(col.gameObject == _rightGrabberFull)
-        {
-            currentHitCollider = _rightGrabberColl;
+            if(col == _leftGrabberFull || col == _rightGrabberFull || col == _leftGrabber || col == _rightGrabber)
+            {
+                isHittingCollider = true;
+                if(col == _leftGrabberFull)
+                {
+                    currentHitCollider = _leftGrabber;
+                    isFullScores = true;
+                }
+                else if(col == _rightGrabberFull)
+                {
+                    currentHitCollider = _rightGrabber;
+                    isFullScores = true;
+                }
+                else
+                {
+                    currentHitCollider = col;
+                }
+            }
+            else return;
         }
         else
         {
-            currentHitCollider = col;
+            bool yes = col == _rightGrabberHandTrack;
+            Debug.Log(col.gameObject.transform.parent.name + " Bener dongg" + _rightGrabberHandTrack.gameObject + this.gameObject);
+            if(col == _leftGrabberHandTrackFull || col == _rightGrabberHandTrackFull || col == _leftGrabberHandTrack || col == _rightGrabberHandTrack)
+            {
+                isHittingCollider = true;
+                if(col == _leftGrabberHandTrackFull)
+                {
+                    currentHitCollider = _leftGrabberHandTrack;
+                    isFullScores = true;
+                }
+                else if(col == _rightGrabberHandTrackFull)
+                {
+                    currentHitCollider = _rightGrabberHandTrack;
+                    isFullScores = true;
+                }
+                else
+                {
+                    currentHitCollider = col;
+                }
+            }
+            else return;
         }
         
-        isHittingCollider = true;
-
+        Debug.Log("Di siniKAHHH ???"); 
 
         //CheckForChestPull
         if(currentGrabberForPull == null)
@@ -153,21 +185,19 @@ public class BackBlowMovement : MonoBehaviour
             StopCalc();
             return;
         }
-
+        Debug.Log("Di siniKAHHHAAAAAAAA ???"); 
         endPos = currentGrabberForBackBlow.transform.position;
 
         float distance = Vector3.Distance(endPos, startPos);
         velocity = distance / curTime;
 
-
+        Debug.Log(velocity + " dan " + distance + " dan " + curTime); 
         if(currentGrabberForBackBlow && currentGrabberForPull && 
             velocity > _minSmackVelocity && velocity < _maxSmackVelocity
             && prevBlowDistance <= blowDistance)
         {
             
-            // Debug.Log("halo ???");
-            // if(!hitShoulderBlades)
-            // {
+            // Debug.Log(col +"yang masuk"); 
             float scoreTemp = 0;
             backblowCount++;
             Debug.Log("ReducedBackBlow_Shoulder" + _reducedScore/2f);
@@ -194,12 +224,6 @@ public class BackBlowMovement : MonoBehaviour
                 // Debug.Log("ReducedBackBlow_Back");
                 //TODO: DROP FULL PROGGRESS HERE!
                 
-            // }
-            // else
-            // {
-                
-            // }
-            
 
             if(isDebug)
             {
@@ -242,22 +266,27 @@ public class BackBlowMovement : MonoBehaviour
         isGrabbingChest = false;
     }
 
-    public void SetPullGrabber(Grabber grabber)
+    public void SetPullGrabber(GameObject grabber)
     {
+        
+        currentGrabberForPull = grabber;
+        if (currentGrabberForPull == null) 
+        {
+            StopCalc();
+            return;
+        }
         if(!InteractToolsController.CheckIsHandTrackOn())
         {
-            currentGrabberForPull = grabber;
-            if (currentGrabberForPull == null) 
-            {
-                StopCalc();
-                return;
-            }
-
-            if (grabber == _leftGrabber) currentGrabberForBackBlow = _rightGrabber;
-            else if (grabber == _rightGrabber) currentGrabberForBackBlow = _leftGrabber;
-
-            StartCalc();
+            if (grabber == _leftGrabber.gameObject) currentGrabberForBackBlow = _rightGrabber.gameObject;
+            else if (grabber == _rightGrabber.gameObject) currentGrabberForBackBlow = _leftGrabber.gameObject;
         }
+        else
+        {
+            if (grabber == _leftGrabberHandTrack.gameObject) currentGrabberForBackBlow = _rightGrabberHandTrack.gameObject;
+            else if (grabber == _rightGrabberHandTrack.gameObject) currentGrabberForBackBlow = _leftGrabberHandTrack.gameObject;
+        }
+        StartCalc();
+        
         
     }
     

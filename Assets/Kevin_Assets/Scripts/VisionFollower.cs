@@ -24,6 +24,7 @@ public class VisionFollower : MonoBehaviour
             //Move
             transform.position += (targetPos - transform.position) * _moveSpeed;      
             
+            // transform.LookAt(_cameraTransform);
         }
 
         //UI Tethered to Robot

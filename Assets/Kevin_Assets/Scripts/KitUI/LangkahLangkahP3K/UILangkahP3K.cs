@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Newtonsoft.Json;
 using System;
-public class UILangkahP3K : BaseKitUI
+public class UILangkahP3K : BaseKitUI, ITurnOffStatic
 {
     const string SaveStateKey = "LangkahSaveData_Key";
 
@@ -189,5 +189,11 @@ public class UILangkahP3K : BaseKitUI
     {
         UnlockedLangkahSavedData = new bool[_soLangkahData.Length];
         Save();
+    }
+
+    public void TurnOffStatic()
+    {
+        UnlockLangkahSave -= UnlockLangkah;
+        ResetSaveData -= ResetSave;
     }
 }
