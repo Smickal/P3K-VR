@@ -15,7 +15,7 @@ public class WaterPourCollision : MonoBehaviour
 
     private void OnParticleCollision(GameObject other)
     {
-       bottleWater.PlaySplashOnCollision();
+        bottleWater.PlaySplashOnCollision();
 
 
         //Checks if the ITEM IS NOT A CLEANER OR

@@ -202,8 +202,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.029252533, y: 0.016150333, z: 0.026997004}
-  m_Center: {x: 0, y: 0.008319166, z: 0}
+  m_Size: {x: 0.04027929, y: 0.026421335, z: 0.043359585}
+  m_Center: {x: 0, y: 0.013454666, z: 0}
 --- !u!54 &7794538373001829003
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -653,6 +653,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63c626373856845459990113e5360845, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _typeOfService: 0
   _typeOfCleaner: 1
 --- !u!1 &7972145539171005133
 GameObject:
@@ -929,6 +930,7 @@ MonoBehaviour:
   DuplicateItemOnGrab: 0
   MaxDropTime: 0.1
   LastSnapTime: 0
+  turnOffReturnTo: 1
   OnlyAllowNames:
   - BottleCap
   ExcludeTransformNames: []

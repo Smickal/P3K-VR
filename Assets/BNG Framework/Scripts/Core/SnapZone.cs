@@ -441,7 +441,7 @@ namespace BNG {
             {
                 if(returns)
                 {
-                    Debug.Log("RETUUUUUUUUUURRRRRRN");
+                    //Debug.Log("RETUUUUUUUUUURRRRRRN");
                     if(!returns.OnlyReturnOnce)returns.enabled = true;
                 }
             }
