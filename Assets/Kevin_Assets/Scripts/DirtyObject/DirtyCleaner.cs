@@ -5,15 +5,21 @@ using UnityEngine.Events;
 
 public class DirtyCleaner : MonoBehaviour
 {
+    [SerializeField] ETypeOfCleaner _typeOfService;
     [SerializeField] ETypeOfCleaning _typeOfCleaner;
 
     DirtyObject currentDirtyObj;
     GameObject currDirtyGameOBJ;
     public UnityAction OnCleaning;
 
-    public ETypeOfCleaning GetTypeOfCleaner()
+    public ETypeOfCleaning GetTypeOfCleaning()
     {
         return _typeOfCleaner;
+    }
+
+    public ETypeOfCleaner GetTypeOfService()
+    {
+        return _typeOfService;
     }
 
     public void TryRegisterADirtyObject(GameObject obj)
