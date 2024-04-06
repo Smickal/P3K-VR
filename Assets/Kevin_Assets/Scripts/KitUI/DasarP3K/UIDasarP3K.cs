@@ -10,6 +10,8 @@ public class UIDasarP3K : BaseKitUI
     [Header("Reference")]
     [SerializeField] GameObject _containerGO;
     [SerializeField] TMP_Text _dasarP3kText;
+    [SerializeField] GameObject[] _containerDasar;
+    [SerializeField] GameObject _containerFirstAidAim, _containerRole, _containerEmergencyAP;
 
     private void Start()
     {
@@ -26,5 +28,5 @@ public class UIDasarP3K : BaseKitUI
     {
         _containerGO.SetActive(false);
     }
-
+    
 }
