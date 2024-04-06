@@ -27,6 +27,7 @@ public class BandageMovement : MonoBehaviour
     public UnityAction OnMovementDone;
     public bool IsDoneMovement {  get { return isDoneMovement; } }
 
+
     private void Update()
     {
 
