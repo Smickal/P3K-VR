@@ -6,13 +6,14 @@ using UnityEngine.UI;
 
 public class UILangkahPrefab : MonoBehaviour
 {
-    const string UnknownKitName = "???";
+    const string UnknownKitName = "? ? ?";
 
     [Header("Reference")]
     [SerializeField] TMP_Text _langkahName;
     [SerializeField] Image _imgLangkahState;
     [SerializeField] Button _buttonLangkah;
-
+    [SerializeField] GameObject _lockedImage;
+    [SerializeField] Color _textColorLocked, _textColorUnlocked;
     UILangkahP3K UILangkahP3K;
     SOLangkahP3K scriptableData;
     bool state = false;
@@ -40,14 +41,17 @@ public class UILangkahPrefab : MonoBehaviour
         if (state)
         {
             _langkahName.SetText(scriptableData.ProcedureName);
+            _langkahName.color = _textColorUnlocked;
             _imgLangkahState.sprite = scriptableData.ProcedureIMG;
         }
         else
         {
             _langkahName.SetText(UnknownKitName);
+            _langkahName.color = _textColorUnlocked;
             _imgLangkahState.sprite = null;
             
         }
+        _lockedImage.SetActive(!state);
         _buttonLangkah.enabled = state;
     }
 

@@ -3,7 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using DialogueSystem;
 using UnityEngine;
+using UnityEngine.Events;
 
+[Serializable]
+public class DialogueFinishActions
+{
+    public DialogueListType dialogueListType;
+    public UnityEvent OnDialogueFinish;
+}
 public class DialogueManager : MonoBehaviour, ITurnOffStatic
 {
     [SerializeField]private SODialogueList SODialogueList;
@@ -12,9 +19,8 @@ public class DialogueManager : MonoBehaviour, ITurnOffStatic
     public static Action DoSomethingAfterFinish, HideFinishedDialogue_AfterFinishingTask;
     public static Action<DialogueListType> PlaySceneDialogue;
     
-    //di sini main berdasarkan yg diminta org sesuai dgn type listnya dan yg nyambungin skrg yg lg nyala dialogue yg mana, dn kalo dialogue itu perlu yg dimatiin lsg ga ato prlu apa dl br dimatiin dialoguenya, dn dia nyambungin buat matiinnya lwt sini
-
-    // kayaknya utk skrg main amannya player gabisa interact apa apa dulu kalo dialog main ??
+    [Header("Action To Do When DialogueFinish")]
+    [SerializeField]private DialogueFinishActions[] dialogueFinishActions;
 
     [Header("DEBUG ONLY")]
     // public bool isPlayScene1;
@@ -30,7 +36,7 @@ public class DialogueManager : MonoBehaviour, ITurnOffStatic
 
     private void Start() 
     {
-        // PlayDialogueScene(DialogueListType.Home_Introduction1);
+        PlayDialogueScene(DialogueListType.Home_Introduction1);
     }
     private void Update() 
     {
@@ -48,23 +54,50 @@ public class DialogueManager : MonoBehaviour, ITurnOffStatic
     private void PlayDialogueScene(DialogueListType inputDialogueSceneType)
     {
         dialogueSceneTypeNow = inputDialogueSceneType;
-        if(dialogueSceneTypeNow == DialogueListType.Home_Introduction1)
+        SODialogue chosenDialogue = SODialogueList.SearchDialogue(dialogueSceneTypeNow);
+
+        // OnFinishDialogue.RemoveAllListeners();
+        
+        if(chosenDialogue)
         {
-            dialogueHolder.ShowDialogue(SODialogueList.Home_Introduction1_dialogue);
+            dialogueHolder.ShowDialogue(chosenDialogue);
         }
-        else if (dialogueSceneTypeNow == DialogueListType.Home_Introduction2)
+        // if(dialogueSceneTypeNow == DialogueListType.Home_Introduction1)
+        // {
+        //     dialogueHolder.ShowDialogue(SODialogueList.Home_Introduction1_dialogue);
+        // }
+        // else if (dialogueSceneTypeNow == DialogueListType.Home_Introduction2)
+        // {
+        //     dialogueHolder.ShowDialogue(SODialogueList.Home_Introduction2_dialogue);
+        // }
+    }
+    
+    public void PlayDialogueSceneOnEvent(GetDialogueListType inputDialogueSceneType)
+    {
+        dialogueSceneTypeNow = inputDialogueSceneType.dialogueListType;
+        SODialogue chosenDialogue = SODialogueList.SearchDialogue(dialogueSceneTypeNow);
+
+        // OnFinishDialogue.RemoveAllListeners();
+        
+        if(chosenDialogue)
         {
-            dialogueHolder.ShowDialogue(SODialogueList.Home_Introduction2_dialogue);
+            dialogueHolder.ShowDialogue(chosenDialogue);
         }
     }
 
     private void DoSomethingAfterDialogueFinish()
     {
-        if(dialogueSceneTypeNow == DialogueListType.Home_Introduction1)
+        //kalo ga mo lwt code bs lewat inspector, kalo mo lwt code gausa tambahin di inspector, well sbnrnya tinggal ilangin return kalo mo 2-2nya
+        foreach(DialogueFinishActions action in dialogueFinishActions)
         {
-            TimelineManager.StartTimeline(TimelineType.Home_Cutscene1);
+            if(action.dialogueListType == dialogueSceneTypeNow)
+            {
+                action.OnDialogueFinish.Invoke();
+                return;
+            }
         }
-        else if (dialogueSceneTypeNow == DialogueListType.Home_Introduction2)
+
+        if (dialogueSceneTypeNow == DialogueListType.Home_Introduction2)
         {
             Debug.Log("Click That Bool Yo to HideTheDialogue");
         }
@@ -82,4 +115,5 @@ public class DialogueManager : MonoBehaviour, ITurnOffStatic
         HideFinishedDialogue_AfterFinishingTask -= HideFinishedDialogueNow;
         PlaySceneDialogue -= PlayDialogueScene;
     }
+    
 }

@@ -9,7 +9,7 @@ public class TeleportLevelUI : MonoBehaviour
 {
     [SerializeField] TMP_Text _levelTitle;
     [SerializeField] Image _levelIMG;
-    [SerializeField] GameObject _lockedLevel;
+    [SerializeField] GameObject _lockedLevel, _casualtyContainer;
     [SerializeField] Sprite[] _scoreEmoticon;
     [SerializeField] Image _scoreIMG;
     [SerializeField] Button _levelButton;
@@ -36,6 +36,9 @@ public class TeleportLevelUI : MonoBehaviour
         if(!levelPlayerData.unlocked)
         {
             _lockedLevel.SetActive(true);
+            _levelTitle.SetText("? ? ?");
+            _levelIMG.gameObject.SetActive(false);
+            _casualtyContainer.SetActive(false);
         }
         else
         {
@@ -45,7 +48,7 @@ public class TeleportLevelUI : MonoBehaviour
         {
             _scoreIMG.sprite = null;
         }
-        else _scoreIMG.sprite = _scoreEmoticon[(int)levelPlayerData.score - 1];
+        else _scoreIMG.sprite = _scoreEmoticon[(int)levelPlayerData.score];
         
     }
 

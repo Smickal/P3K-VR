@@ -38,11 +38,16 @@ public class QuizManager : MonoBehaviour
 
     [Space(5)]
     [SerializeField] Slider _timerSlider;
+    [SerializeField] Image _sliderFill;
+    [SerializeField] Color[] _sliderColor;
+    [SerializeField] float[] _sliderColorLimit;
 
     [Space(5)]
     [Header("Results")]
     [SerializeField] TMP_Text _resultAnswer;
     [SerializeField] TMP_Text _answerText;
+    [TextArea(5,7)][SerializeField] string _answerRightText, _answerWrongText, _answerNotInTimeText;
+    [SerializeField] Color _answerRightColor, _answerWrongColor;
     [SerializeField] Button _resultBtn;
 
     [Space(5)]
@@ -63,9 +68,36 @@ public class QuizManager : MonoBehaviour
     bool isTimerActivated;
     private void Start()
     {
-        if(!_isActivated) { return; }
+        // if(!_isActivated) { return; }
 
 
+        // foreach(var question in _scriptableData)
+        // {
+        //     questionQ.Enqueue(question);
+        // }
+
+        // _resultBtn.onClick.AddListener(() =>
+        // {
+        //     OpenExplanationPage();
+        // });
+
+        // curTime = _maxTimeSlider;
+
+        // _buttonA.onClick.AddListener(() => { AnswerCheck(EAnswerType.A); });
+        // _buttonB.onClick.AddListener(() => { AnswerCheck(EAnswerType.B); });
+        // _buttonC.onClick.AddListener(() => { AnswerCheck(EAnswerType.C); });
+        // _buttonD.onClick.AddListener(() => { AnswerCheck(EAnswerType.D); });
+
+
+        // _kitUiManager.ActivateBaseUI("Quiz");
+        // _kitUiManager.OpenQuizUI();
+
+        // CreateQuestion();
+
+        // if(PlayerManager.ChangeInGame_Mode_Now)
+    }
+    public void StartQuiz()
+    {
         foreach(var question in _scriptableData)
         {
             questionQ.Enqueue(question);
@@ -92,12 +124,12 @@ public class QuizManager : MonoBehaviour
 
     private void Update()
     {
-        if (isTimerActivated)
+        if (isTimerActivated && GameManager.CheckGameStateNow() == GameState.InGame)
         {
             curTime -= Time.deltaTime;
 
             _timerSlider.value = curTime / _maxTimeSlider;
-
+            Update_TimerVisual();
             if(curTime < 0)
             {
                 //Activate
@@ -105,17 +137,25 @@ public class QuizManager : MonoBehaviour
             }    
         }
     }
+    private void Update_TimerVisual()
+    {
+        if(_timerSlider.value >= _sliderColorLimit[0])_sliderFill.color = _sliderColor[0]; 
+        else if(_timerSlider.value >= _sliderColorLimit[1])_sliderFill.color = _sliderColor[1];
+        else _sliderFill.color = _sliderColor[2];
+    }
 
     public void CreateQuestion()
     {
         if (questionQ.Count == 0)
         {
             //NO MORE QUESTION
+            PlayerManager.HasFinishedTutorialMain();
             _kitUiManager.DeactivateBaseUI();
             return;
         }
-
+        
         curQuestion = questionQ.Dequeue();
+        PlayDialogueNeeded(curQuestion.dialogueListTypeQuestionStart);
 
         //Create Question UI
         _questionContainer.SetActive(true);
@@ -149,13 +189,16 @@ public class QuizManager : MonoBehaviour
         if (answerType == curQuestion.AnswerType)
         {
             //Right Answer!!!
-            _answerText.SetText("RIGHT ANSWER!!!");
-
+            _answerText.SetText(_answerRightText);
+            _answerText.color = _answerRightColor;
+            PlayDialogueNeeded(DialogueListType.Home_QuizRight);
         }
         else
         {
             //Wrong Answer!!
-            _answerText.SetText("Wrong Answer!! /n The correct answer is:");
+            _answerText.SetText(_answerWrongText);
+            _answerText.color = _answerWrongColor;
+            PlayDialogueNeeded(DialogueListType.Home_QuizWrong);
 
         }
         _resultAnswer.SetText(curQuestion.GetAnswer());
@@ -168,14 +211,16 @@ public class QuizManager : MonoBehaviour
 
         _questionContainer.SetActive(false);
         _resultContainer.SetActive(true);
-        _answerText.SetText("You didn't answer in time!");
-        _resultAnswer.SetText(string.Empty);
+        _answerText.SetText(_answerNotInTimeText);
+        PlayDialogueNeeded(DialogueListType.Home_QuizLate);
+        _resultAnswer.SetText(curQuestion.GetAnswer());
 
     }
 
     private void OpenExplanationPage()
     {
         _nextExButton.onClick.RemoveAllListeners();
+        //close nextbutton here if you want
 
         _resultContainer.SetActive(false);
         _explainContainer.SetActive(true);
@@ -183,6 +228,7 @@ public class QuizManager : MonoBehaviour
         _currentExplanationImages = curQuestion.ExplanationSprites;
 
         _exImage.sprite = _currentExplanationImages[curExplainImageIdx];
+        PlayDialogueNeeded(curQuestion.dialogueListTypeExplanations[curExplainImageIdx]);
         curExplainImageIdx++;
 
 
@@ -202,5 +248,13 @@ public class QuizManager : MonoBehaviour
                 OpenExplanationPage();
             });
         }
+
+    }
+
+    private void PlayDialogueNeeded(DialogueListType dialogueListType)
+    {
+        Debug.Log("Masuk sinikan?");
+        DialogueManager.HideFinishedDialogue_AfterFinishingTask();
+        DialogueManager.PlaySceneDialogue(dialogueListType);
     }
 }

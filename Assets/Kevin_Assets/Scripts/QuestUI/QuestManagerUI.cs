@@ -11,7 +11,7 @@ public class QuestManagerUI : MonoBehaviour, ITurnOffStatic
     const string titleChoking = "Choking First Aid";
     const string titleChokingBackblow = "Backblow";
     const string titleChokingHeimlich = "Heimlich";
-    const string titleBleedingWithItem = "Bleeding With Item First Aid";
+    const string titleBleedingWithItem = "Bleeding With Embedded Item First Aid";
     [Header("Base UI")]
     [SerializeField] GameObject _baseUI;
     [SerializeField] TMP_Text _titleBase;

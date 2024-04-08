@@ -12,6 +12,8 @@ public class UIKotakP3KDescPrefab : MonoBehaviour
     [SerializeField] Image _iconIMG;
     [SerializeField] TMP_Text _nameText;
     [SerializeField] Button _toolsBtn;
+    [SerializeField] GameObject _lockedImage;
+    [SerializeField] Color _textColorLocked, _textColorUnlocked;
 
     SOKotakP3K scriptableData;
  
@@ -38,15 +40,17 @@ public class UIKotakP3KDescPrefab : MonoBehaviour
         if (state)
         {
             _nameText.SetText(scriptableData.KitName.ToString());
+            _nameText.color = _textColorUnlocked;
             _iconIMG.sprite = scriptableData.KitIMG;
         }
 
         else
         {
             _nameText.SetText(UnknownKitName);
+            _nameText.color = _textColorLocked;
             _iconIMG.sprite = null;
         }
-
+        _lockedImage.SetActive(!state);
         _toolsBtn.enabled = this.state;
     }
 }

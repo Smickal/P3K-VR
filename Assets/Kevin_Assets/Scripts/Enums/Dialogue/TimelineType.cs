@@ -1,4 +1,5 @@
+
 public enum TimelineType
 {
-    Home_Cutscene1
+    None, Home_Cutscene1
 }
