@@ -227,7 +227,7 @@ public class BackBlowMovement : MonoBehaviour
 
             if(isDebug)
             {
-                _debugText.SetText($"BackBlowCount = {backblowCount}.");
+                _debugText.SetText($"Counter Backblow : {backblowCount}.");
                 _patientBackBlowHeimlich?.OnBackBlowCountUp.Invoke( backblowCount, _totalScore);
             }
 

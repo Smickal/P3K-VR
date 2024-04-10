@@ -5,6 +5,7 @@ using UnityEngine;
 public class DoorUIManager : MonoBehaviour
 {
     [Header("Reference")]
+    [SerializeField] SceneMoveManager sceneMoveManager;
     [SerializeField] Transform _contentTransform;
     [SerializeField] GameObject _containerDoorOBJ;
     [Header("Prefabs")]
@@ -21,7 +22,7 @@ public class DoorUIManager : MonoBehaviour
         {
             // Debug.Log(i + " what" + totalLevel);
             TeleportLevelUI newUI = Instantiate(_teleportLevelPrefab, _contentTransform);
-            newUI.SetData(PlayerManager.LevelDataNow(i), i);
+            newUI.SetData(PlayerManager.LevelDataNow(i), i, sceneMoveManager);
 
             ListOfDataInstance.Add(newUI);
         }

@@ -21,11 +21,14 @@ public class SOLangkahP3K : ScriptableObject
 
     [Header("Langkah-Langkah Option")]
     public string ProcedureName;
+    public string ProcedureShortName;
+    public Sprite ProcedureIcon;
     public Sprite ProcedureIMG;
     [TextArea(3, 7)] public string ProcedureDescription;
 
     [Space(5)]
     [Header("StepsOfProcedure")]
+    public Transform _prefabProcedure;
     public List<Procedure> Procedures = new List<Procedure>();
     [Tooltip("0-ga ada, 1-3 ada dr sad ke big happy")]
     [TextArea(3, 7)] public string[] _scoreNoteDesc; 

@@ -36,7 +36,7 @@ public class DialogueManager : MonoBehaviour, ITurnOffStatic
 
     private void Start() 
     {
-        PlayDialogueScene(DialogueListType.Home_Introduction1);
+        // PlayDialogueScene(DialogueListType.Home_Introduction1);
     }
     private void Update() 
     {

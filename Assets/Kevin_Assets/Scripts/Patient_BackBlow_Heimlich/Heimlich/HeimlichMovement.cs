@@ -220,7 +220,7 @@ public class HeimlichMovement : MonoBehaviour
 
             if (_isDebug)
             {
-                _debugText.SetText($"HEIMLICHCount = {heimlichCount}.");
+                _debugText.SetText($"Counter Heimlich : {heimlichCount}");
                 _patientBackblowHeim?.OnHeimlichCountUp.Invoke(heimlichCount, _totalScore);
             }
 

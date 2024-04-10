@@ -40,9 +40,9 @@ public class UILangkahPrefab : MonoBehaviour
 
         if (state)
         {
-            _langkahName.SetText(scriptableData.ProcedureName);
+            _langkahName.SetText(scriptableData.ProcedureShortName);
             _langkahName.color = _textColorUnlocked;
-            _imgLangkahState.sprite = scriptableData.ProcedureIMG;
+            _imgLangkahState.sprite = scriptableData.ProcedureIcon;
         }
         else
         {
