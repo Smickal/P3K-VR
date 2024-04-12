@@ -43,12 +43,20 @@ public class UILangkahPrefab : MonoBehaviour
             _langkahName.SetText(scriptableData.ProcedureShortName);
             _langkahName.color = _textColorUnlocked;
             _imgLangkahState.sprite = scriptableData.ProcedureIcon;
+
+            Color iconColor = _imgLangkahState.color;
+            iconColor.a = 1f;
+            _imgLangkahState.color = iconColor;
         }
         else
         {
             _langkahName.SetText(UnknownKitName);
             _langkahName.color = _textColorUnlocked;
-            _imgLangkahState.sprite = null;
+            _imgLangkahState.sprite = scriptableData.ProcedureIcon;
+
+            Color iconColor = _imgLangkahState.color;
+            iconColor.a = 0.5f;
+            _imgLangkahState.color = iconColor;
             
         }
         _lockedImage.SetActive(!state);

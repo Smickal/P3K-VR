@@ -42,13 +42,21 @@ public class UIKotakP3KDescPrefab : MonoBehaviour
             _nameText.SetText(scriptableData.KitName.ToString());
             _nameText.color = _textColorUnlocked;
             _iconIMG.sprite = scriptableData.KitIMG;
+
+            Color iconColor = _iconIMG.color;
+            iconColor.a = 1f;
+            _iconIMG.color = iconColor;
         }
 
         else
         {
             _nameText.SetText(UnknownKitName);
             _nameText.color = _textColorLocked;
-            _iconIMG.sprite = null;
+            _iconIMG.sprite = scriptableData.KitIMG;
+
+            Color iconColor = _iconIMG.color;
+            iconColor.a = 0.5f;
+            _iconIMG.color = iconColor;
         }
         _lockedImage.SetActive(!state);
         _toolsBtn.enabled = this.state;

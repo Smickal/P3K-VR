@@ -50,6 +50,9 @@ namespace BNG {
         float xAxis;
         float previousXInput;
 
+        [Tooltip("Tambahan utk rotasi robot")]
+        [SerializeField]private GameObject _robotContainer;
+
         #region Events
         public delegate void OnBeforeRotateAction();
         public static event OnBeforeRotateAction OnBeforeRotate;
@@ -139,6 +142,8 @@ namespace BNG {
                 // Apply rotation
                 transform.rotation = Quaternion.Euler(new Vector3(transform.eulerAngles.x, transform.eulerAngles.y + rotationAmount, transform.eulerAngles.z));
 
+                if(_robotContainer)_robotContainer.transform.rotation = transform.rotation;
+
                 recentSnapTurnTime = Time.time;
 
                 // Call any After Rotation Events
@@ -166,6 +171,7 @@ namespace BNG {
 
             // Apply rotation
             transform.rotation = Quaternion.Euler(new Vector3(transform.eulerAngles.x, transform.eulerAngles.y + rotationAmount, transform.eulerAngles.z));
+            if(_robotContainer)_robotContainer.transform.rotation = Quaternion.Euler(new Vector3(transform.eulerAngles.x, transform.eulerAngles.y + rotationAmount, transform.eulerAngles.z));
         }
     }
 }

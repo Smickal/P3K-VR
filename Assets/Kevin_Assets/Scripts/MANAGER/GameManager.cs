@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour, ITurnOffStatic
         CheckGameStateNow += GameStateNow;
         CheckLevelTypeNow += LevelTypeNow;
         ChangeGameStateNow += ChangeGameState;
+        PauseGame += Pause;
         
     }
     private void Start() 
@@ -94,5 +95,6 @@ public class GameManager : MonoBehaviour, ITurnOffStatic
         CheckGameStateNow -= GameStateNow;
         CheckLevelTypeNow -= LevelTypeNow;
         ChangeGameStateNow -= ChangeGameState;
+        PauseGame -= Pause;
     }
 }

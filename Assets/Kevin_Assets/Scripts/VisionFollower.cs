@@ -35,7 +35,9 @@ public class VisionFollower : MonoBehaviour
         }
 
         //Look at
-        transform.LookAt(_cameraTransform.position);
+        // transform.LookAt(_cameraTransform.position);
+        Vector3 lookDir = _cameraTransform.position - transform.position;
+        transform.rotation = Quaternion.LookRotation(-lookDir, Vector3.up);
 
     }
 

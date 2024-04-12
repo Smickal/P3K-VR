@@ -16,8 +16,10 @@ public class Briefcase : MonoBehaviour
     [SerializeField] InteractableUnityEventWrapper _briefCaseBtn_HandTrack;
     //[SerializeField] BoxCollider _boxCollider;
 
-    bool isOpen = false;
-    int i= 0;
+    [SerializeField] Collider[] _inventoryColliders;
+
+    bool isOpen = false, isInventEnabled;
+    public bool IsOpen { get { return isOpen; } }
 
     private void Start()
     {
@@ -26,10 +28,20 @@ public class Briefcase : MonoBehaviour
 
     }
 
+    private void Update() 
+    {
+        if(isOpen)
+        {
+            if(!PlayerRestriction.IsRestrictGrabable())EnableInventory();
+            else DisableInventory();
+        }
+        else if(!isOpen)
+        {
+            DisableInventory();
+        }
+    }
     public void TriggerOpenCloseAnim()
     {
-        i++;
-        Debug.Log("test" + i);
         
         if (isOpen == false)
         {
@@ -40,6 +52,23 @@ public class Briefcase : MonoBehaviour
         {
             _briefCaseAnim.SetTrigger(CloseBriefHash);
             isOpen = false;
+        }
+    }
+
+    public void DisableInventory()
+    {
+        if(isInventEnabled)isInventEnabled = false;
+        foreach(Collider _inventoryCollider in _inventoryColliders)
+        {
+            _inventoryCollider.enabled = false;
+        }
+    }
+    public void EnableInventory()
+    {
+        if(!isInventEnabled)isInventEnabled = true;
+        foreach(Collider _inventoryCollider in _inventoryColliders)
+        {
+            _inventoryCollider.enabled = true;
         }
     }
 
