@@ -45,7 +45,7 @@ public class Choking_QuestManager : QuestManager, ITurnOffStatic
     protected override void Quest()
     {
         OnStartQuest.Invoke();// krn ud ga berhubungan ama questmanager jd hrsnya aman..
-        timerInSecs = timerInSecsMax;
+        timerInSecs = 0;
         questManagerUI.SetTimerSlider(timerInSecs);
 
         questManagerUI.OpenHelper_Choking();
@@ -56,18 +56,15 @@ public class Choking_QuestManager : QuestManager, ITurnOffStatic
 
     protected override void ScoreCounter()
     {
-        if(timerInSecs <= timerTarget[0])
-        {
-            score = ScoreName.Big_Happy_Face;
-            
-        }
-        else if(timerInSecs <= timerTarget[1])
+        score = ScoreName.Sad_Face;
+        
+        if(timerInSecs <= timerTarget[1])
         {
             score = ScoreName.Small_Happy_Face;
         }
-        else
+        if(timerInSecs <= timerTarget[0])
         {
-            score = ScoreName.Sad_Face;
+            score = ScoreName.Big_Happy_Face;
         }
         base.ScoreCounter();
     }

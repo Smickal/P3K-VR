@@ -80,6 +80,7 @@ public class QuestEndingUI : MonoBehaviour, ITurnOffStatic
                           scriptableData.Procedures[i].StepsSprite);
             listOfLangkahDescPrefab.Add(newUI);
         }
+        Transform _langkahDescPrefabTransform = Instantiate(scriptableData._prefabProcedure, _stepTransform);
         endButton.transform.SetAsLastSibling();
     }
     public void ActivateQuestEnding()

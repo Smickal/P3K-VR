@@ -154,8 +154,8 @@ public class BackBlowMovement : MonoBehaviour
         }
         else
         {
-            bool yes = col == _rightGrabberHandTrack;
-            Debug.Log(col.gameObject.transform.parent.name + " Bener dongg" + _rightGrabberHandTrack.gameObject + this.gameObject);
+            // bool yes = col == _rightGrabberHandTrack;
+            // Debug.Log(col.gameObject.transform.parent.name + " Bener dongg" + _rightGrabberHandTrack.gameObject + this.gameObject);
             if(col == _leftGrabberHandTrackFull || col == _rightGrabberHandTrackFull || col == _leftGrabberHandTrack || col == _rightGrabberHandTrack)
             {
                 isHittingCollider = true;

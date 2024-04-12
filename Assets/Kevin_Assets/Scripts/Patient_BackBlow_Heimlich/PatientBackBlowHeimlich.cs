@@ -47,8 +47,8 @@ public class PatientBackBlowHeimlich : MonoBehaviour
     {
         Debug.Log("ini i " + i + " cek");
         i++;
-        _heimlichContainerOBJ.SetActive(false);
-        _backBlowContainerOBJ.SetActive(true);
+        // _heimlichContainerOBJ.SetActive(false);
+        // _backBlowContainerOBJ.SetActive(true);
 
         _heimlichRig.weight = 0f;
         _backBlowRig.weight = 0.75f;
@@ -61,8 +61,8 @@ public class PatientBackBlowHeimlich : MonoBehaviour
 
     public void ActivateHeimlich()
     {
-        _heimlichContainerOBJ?.SetActive(true);
-        _backBlowContainerOBJ.SetActive(false);
+        // _heimlichContainerOBJ?.SetActive(true);
+        // _backBlowContainerOBJ.SetActive(false);
 
         _backBlowRig.weight = 0f;
         _heimlichRig.weight = 0.5f;
@@ -78,15 +78,26 @@ public class PatientBackBlowHeimlich : MonoBehaviour
         _heimlichContainerOBJ?.SetActive(false);
         _backBlowContainerOBJ?.SetActive(false);
     }
+    public void ActivateContainerBackblowOnly()
+    {
+        _heimlichContainerOBJ.SetActive(false);
+        _backBlowContainerOBJ.SetActive(true);
+    }
+    public void ActivateContainerHeimlichOnly()
+    {
+        _heimlichContainerOBJ?.SetActive(true);
+        _backBlowContainerOBJ.SetActive(false);
+    }
 
     private void CheckBackBlowCount(int count, float score)
     {
         if(count >= _backBlowMaxCount)
         {
-            
+            ActivateContainerHeimlichOnly();
             TurnOffGrabber();
-            ActivateHeimlich();
+            
             Choking_QuestManager.AddProgressBar(score);
+            ActivateHeimlich();
             _backBlowDone = true;
             
         }
@@ -97,10 +108,11 @@ public class PatientBackBlowHeimlich : MonoBehaviour
     {
         if(count >= _heimlichMaxCount)
         {
-            
+            ActivateContainerBackblowOnly();
             TurnOffGrabber();
-            ActivateBackBlowRig();
+            
             Choking_QuestManager.AddProgressBar(score);
+            ActivateBackBlowRig();
             _heimlichDone = true;
             
         }

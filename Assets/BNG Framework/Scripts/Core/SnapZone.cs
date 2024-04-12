@@ -269,6 +269,7 @@ namespace BNG {
                 }
             }
             // Set the parent of the object 
+            Debug.Log("ini yg bikin masalah ya? pas mati");
             grab.transform.parent = transform;
 
             // Set scale factor            
@@ -445,7 +446,7 @@ namespace BNG {
                     if(!returns.OnlyReturnOnce)returns.enabled = true;
                 }
             }
-
+            Debug.Log("atau ini");
             HeldItem.enabled = true;
             HeldItem.transform.parent = null;
             
@@ -521,7 +522,7 @@ namespace BNG {
                     if(!returns.OnlyReturnOnce)returns.enabled = true;
                 }
             }
-            
+            Debug.Log("atau ini");
             HeldItem.enabled = true;
             HeldItem.transform.parent = null;
 
@@ -579,6 +580,7 @@ namespace BNG {
             }
 
             // Set the parent of the object 
+            Debug.Log("ini yg bikin masalah ya? pas mati ato dr");
             grab.transform.parent = transform;
 
             // Set scale factor            

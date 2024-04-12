@@ -50,9 +50,9 @@ public class QuestManager : MonoBehaviour
         }
         if(isQuestStart && gameManager.GameStateNow() == GameState.InGame)
         {
-            if(timerInSecs > 0)
+            if(timerInSecs < timerInSecsMax)
             {
-                timerInSecs -= Time.deltaTime;
+                timerInSecs += Time.deltaTime;
                 questManagerUI.ChangeTimerSlider(timerInSecs);
             }
             else

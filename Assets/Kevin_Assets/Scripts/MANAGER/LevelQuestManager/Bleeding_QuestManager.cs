@@ -13,7 +13,7 @@ public class Bleeding_QuestManager : QuestManager
     protected override void Quest()
     {
         OnStartQuest.Invoke();// krn ud ga berhubungan ama questmanager jd hrsnya aman..
-        timerInSecs = timerInSecsMax;
+        timerInSecs = 0;
         questManagerUI.SetTimerSlider(timerInSecs);
         
         isQuestStart = true;
