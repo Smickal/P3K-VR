@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.UI;
 
 namespace BNG {
@@ -40,6 +41,8 @@ namespace BNG {
         // Store so we can compare against future entries
         public string LastDebugMsg;
         int lastDebugMsgCount;
+
+        [SerializeField]private AudioMixerGroup SFXAudioMixer;
 
 
         void Awake() {
@@ -123,7 +126,7 @@ namespace BNG {
 
             AudioSource source = go.AddComponent<AudioSource>();
             source.clip = clip;
-
+            if(SFXAudioMixer)source.outputAudioMixerGroup = SFXAudioMixer;
             // Currently only Oculus Integration supports spatial audio
 #if OCULUS_INTEGRATION
             source.spatialize = true;

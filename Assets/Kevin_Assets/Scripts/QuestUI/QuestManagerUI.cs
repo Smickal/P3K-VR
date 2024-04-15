@@ -14,6 +14,8 @@ public class QuestManagerUI : MonoBehaviour, ITurnOffStatic
     const string titleBleedingWithItem = "Bleeding With Embedded Item First Aid";
     const string _counterStartBackBlow = "Counter Backblow : 0";
     const string _counterStartHeimlich = "Counter Heimlich : 0";
+    [Header("Reference")]
+    [SerializeField]GameManager gameManager;
     [TextArea(5,7)][SerializeField]private string _followBackBlow;
     [TextArea(5,7)][SerializeField]private string _followHeimlich;
     [Header("Base UI")]
@@ -125,13 +127,13 @@ public class QuestManagerUI : MonoBehaviour, ITurnOffStatic
     public void SetTimerSlider(float timerMax)
     {
         _timerSlider.value = 1;
-        if(GameManager.CheckLevelTypeNow() == LevelP3KType.Bleeding)_timerSlider_bleeding.value = 1;
+        if(gameManager.LevelTypeNow() == LevelP3KType.Bleeding)_timerSlider_bleeding.value = 1;
         _maxTimer = timerMax;
     }
     public void ChangeTimerSlider(float curTime)
     {
         _timerSlider.value = curTime/_maxTimer;
-        if(GameManager.CheckLevelTypeNow() == LevelP3KType.Bleeding)_timerSlider_bleeding.value = curTime/_maxTimer;
+        if(gameManager.LevelTypeNow() == LevelP3KType.Bleeding)_timerSlider_bleeding.value = curTime/_maxTimer;
     }
     public void ActiveQuestBtn_Robot(bool change)
     {

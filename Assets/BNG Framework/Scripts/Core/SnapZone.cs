@@ -269,7 +269,7 @@ namespace BNG {
                 }
             }
             // Set the parent of the object 
-            Debug.Log("ini yg bikin masalah ya? pas mati");
+            // Debug.Log("ini yg bikin masalah ya? pas mati");
             grab.transform.parent = transform;
 
             // Set scale factor            

@@ -94,6 +94,7 @@ public class QuestManager : MonoBehaviour
             PlayerManager.ChangeInGame_Mode_Now(InGame_Mode.FirstAid);
             PlayerManager.SetPlayerPosition_DoP3k();
             EnvironmentLevelManager.SetEnvironment_FirstAid();
+            BGMManager.ChangeBGMAudio(BGM_Type.tense);
         }
         
         if(levelP3KTypeNow == LevelP3KType.Choking) choking_QuestManager.Quest();
@@ -131,6 +132,7 @@ public class QuestManager : MonoBehaviour
     public virtual void QuitQuest()
     {
         PlayerManager.ChangeInGame_Mode_Now(InGame_Mode.NormalWalk);
+        BGMManager.ChangeBGMAudio(BGM_Type.main);
         if(levelP3KTypeNow == LevelP3KType.Choking) choking_QuestManager.ResetQuest();
         else if (levelP3KTypeNow == LevelP3KType.Bleeding) bleeding_QuestManager.ResetQuest();
     }

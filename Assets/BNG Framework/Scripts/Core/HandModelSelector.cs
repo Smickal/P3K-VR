@@ -39,6 +39,8 @@ namespace BNG {
         /// </summary>
         [Tooltip("Used for IK Hands / Body option")]
         public CharacterIK IKBody;
+        [Tooltip("If True, toggleInput wont do anything")]        
+        public bool turnOffToggleInput;
 
         /// <summary>
         /// This is the start point of a line for UI purposes. We may want to move this around if we change models or controllers.        
@@ -67,7 +69,7 @@ namespace BNG {
 
         void Update() {
             // Cycle through hand models with Right Thumbstick
-            if (ToggleHandsInput.GetDown()) {
+            if (ToggleHandsInput.GetDown() && !turnOffToggleInput) {
                 ChangeHandsModel(_selectedHandGFX + 1, LoadHandSelectionFromPrefs);
             }
         }

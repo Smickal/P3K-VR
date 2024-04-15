@@ -55,6 +55,6 @@ public class TeleportLevelUI : MonoBehaviour
     {
         Debug.Log("Teleport to" + levelName);
         
-        // if(sceneMoveManager)sceneMoveManager.GoToScene(levelName);
+        if(sceneMoveManager)sceneMoveManager.GoToScene(levelName);
     }
 }

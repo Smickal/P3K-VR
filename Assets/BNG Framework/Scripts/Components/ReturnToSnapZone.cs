@@ -28,7 +28,8 @@ namespace BNG {
 
         [Tooltip("Initiate snap if distance between the Grabbable and SnapZone is <= SnapDistance")]
         public float SnapDistance = 0.05f;
-        private bool returnFirstTime = true;
+        [Tooltip("Kalau mager taro di starting item snapzone - true; tp suara ada")]
+        [SerializeField]private bool returnFirstTime = false;
         [SerializeField]private bool onlyReturnOnce = true;
         public bool OnlyReturnOnce { get { return onlyReturnOnce; } }
 

@@ -123,11 +123,11 @@ public class BackBlowMovement : MonoBehaviour
     {
         
         if (isHittingCollider) return;
-        Debug.Log("Di siniaaaaaaaabbbbbbbbaaaaaaaaaaaaaaaaaabb ???");
+        // Debug.Log("Di siniaaaaaaaabbbbbbbbaaaaaaaaaaaaaaaaaabb ???");
         bool isFullScores = false;
 
-        Debug.Log(col.gameObject == _rightGrabberFull);
-        Debug.Log(" " + col);
+        // Debug.Log(col.gameObject == _rightGrabberFull);
+        // Debug.Log(" " + col);
 
         // if(!(col.gameObject == _leftGrabberFull || col.gameObject == _rightGrabberFull || col == _leftGrabber || col == _rightGrabber)) return;
         if(!InteractToolsController.CheckIsHandTrackOn())
