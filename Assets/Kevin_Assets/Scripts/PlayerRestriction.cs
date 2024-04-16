@@ -12,7 +12,8 @@ public class PlayerRestriction : MonoBehaviour, ITurnOffStatic
     [SerializeField]private PlayerManager playerManager;
     [Tooltip("Kalo ada button yg ikut grabable, buttonnya jg masukkin ya")]
     [SerializeField]private List<Rigidbody> all_Grabable_Rigidbody;
-    // private Dictionary<Rigidbody, bool> initialRigidbodyStateds = new Dictionary<Rigidbody, bool>(); ini gbs krn pas awake ada yg blm ke snap
+    [SerializeField]private List<Grabber> playerHandController; //to prevent controller hand tetep pegang
+    [SerializeField]private List<HandGrabInteractor> playerHandTrack;
     private List<Grabbable> all_BNG_Grabable;
     [SerializeField]private Dictionary<Grabbable, bool> initial_BNG_GrabbableStates = new Dictionary<Grabbable, bool>();
     private List<HandGrabInteractable> all_OVR_Grabable;
@@ -108,6 +109,10 @@ public class PlayerRestriction : MonoBehaviour, ITurnOffStatic
         {
             rigidbody.constraints = RigidbodyConstraints.FreezeAll;
         }
+        foreach(Grabber hand in playerHandController)
+        {
+            hand.TryRelease();
+        }
         foreach(HandGrabInteractable handGrabInteractable in all_OVR_Grabable)
         {
             handGrabInteractable.enabled = false;
@@ -115,6 +120,10 @@ public class PlayerRestriction : MonoBehaviour, ITurnOffStatic
         foreach(DistanceHandGrabInteractable distanceHandGrabInteractable in all_OVR_DistanceGrabable)
         {
             distanceHandGrabInteractable.enabled = false;
+        }
+        foreach(HandGrabInteractor hand in playerHandTrack)
+        {
+            hand.ForceRelease();
         }
         
     }
