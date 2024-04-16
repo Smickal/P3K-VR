@@ -21,6 +21,7 @@ public class QuestEndingUI : MonoBehaviour, ITurnOffStatic
     [SerializeField] private TMP_Text _scoreDescText;
     [SerializeField] private Sprite[] _scoreSprite;
     [SerializeField] private TMP_Text _scoreNameText;
+    [SerializeField] private GameObject endButton;
     [Header("Glossary")]
     [SerializeField]private TMP_Text _procedureNameText;
     [SerializeField]private Image _procedureIMG;
@@ -79,7 +80,8 @@ public class QuestEndingUI : MonoBehaviour, ITurnOffStatic
                           scriptableData.Procedures[i].StepsSprite);
             listOfLangkahDescPrefab.Add(newUI);
         }
-
+        Transform _langkahDescPrefabTransform = Instantiate(scriptableData._prefabProcedure, _stepTransform);
+        endButton.transform.SetAsLastSibling();
     }
     public void ActivateQuestEnding()
     {

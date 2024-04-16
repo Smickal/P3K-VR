@@ -12,7 +12,8 @@ public class PlayerRestriction : MonoBehaviour, ITurnOffStatic
     [SerializeField]private PlayerManager playerManager;
     [Tooltip("Kalo ada button yg ikut grabable, buttonnya jg masukkin ya")]
     [SerializeField]private List<Rigidbody> all_Grabable_Rigidbody;
-    // private Dictionary<Rigidbody, bool> initialRigidbodyStateds = new Dictionary<Rigidbody, bool>(); ini gbs krn pas awake ada yg blm ke snap
+    [SerializeField]private List<Grabber> playerHandController; //to prevent controller hand tetep pegang
+    [SerializeField]private List<HandGrabInteractor> playerHandTrack;
     private List<Grabbable> all_BNG_Grabable;
     [SerializeField]private Dictionary<Grabbable, bool> initial_BNG_GrabbableStates = new Dictionary<Grabbable, bool>();
     private List<HandGrabInteractable> all_OVR_Grabable;
@@ -20,12 +21,14 @@ public class PlayerRestriction : MonoBehaviour, ITurnOffStatic
 
     [SerializeField]private SmoothLocomotion playerMovement_BNG;
     [SerializeField]private GameObject[] playerMovements_OVR;
+    [SerializeField]private PlayerRotation playerRotation_BNG;
+    [SerializeField]private GameObject[] playerRotations_OVR;
     
-    private bool isRestrictAll, isRestrictGrabable, isRestrictMovement;
-    public static Func<bool> IsRestrictAll, IsRestrictMovement, IsRestrictGrabable;
+    private bool isRestrictAll, isRestrictGrabable, isRestrictRotation, isRestrictMovement;
+    public static Func<bool> IsRestrictAll, IsRestrictMovement, IsRestrictRotation, IsRestrictGrabable;
 
 
-    public static Action LiftAllRestriction, ApplyAllRestriction, LiftGrabableRestriction, ApplyGrabableRestriction, LiftMovementRestriction, ApplyMovementRestriction;
+    public static Action LiftAllRestriction, ApplyAllRestriction, LiftGrabableRestriction, ApplyGrabableRestriction, LiftMovementRestriction, ApplyMovementRestriction, LiftRotationRestriction, ApplyRotationRestriction;
     
     [Header("Debug")]
     public bool enableNow;
@@ -38,10 +41,13 @@ public class PlayerRestriction : MonoBehaviour, ITurnOffStatic
         ApplyGrabableRestriction += DisableAllGrabable;
         LiftMovementRestriction += EnableAllMovement;
         ApplyMovementRestriction += DisableAllMovement;
+        LiftRotationRestriction += EnableAllRotation;
+        ApplyRotationRestriction += DisableAllRotation;
 
         IsRestrictAll += RestrictAll;
         IsRestrictMovement += RestrictMovement;
         IsRestrictGrabable += RestrictGrabable;
+        IsRestrictRotation += RestrictRotation;
 
 
         if(!playerManager.IsFinish_TutorialMain())DisableAllGrabable();
@@ -54,11 +60,14 @@ public class PlayerRestriction : MonoBehaviour, ITurnOffStatic
         ApplyGrabableRestriction -= DisableAllGrabable;
         LiftMovementRestriction -= EnableAllMovement;
         ApplyMovementRestriction -= DisableAllMovement;
+        LiftRotationRestriction -= EnableAllRotation;
+        ApplyRotationRestriction -= DisableAllRotation;
 
         IsRestrictAll -= RestrictAll;
         IsRestrictMovement -= RestrictMovement;
         IsRestrictGrabable -= RestrictGrabable;
-        // Debug.Log("Uhh");
+        IsRestrictRotation -= RestrictRotation;
+        
     }
     private void Update() {
         if(enableNow)
@@ -72,6 +81,7 @@ public class PlayerRestriction : MonoBehaviour, ITurnOffStatic
     private bool RestrictAll(){return isRestrictAll;}
     private bool RestrictMovement(){return isRestrictMovement;}
     private bool RestrictGrabable(){return isRestrictGrabable;}
+    private bool RestrictRotation(){return isRestrictRotation;}
     private void InitiateGrabableReference()
     {
         HandGrabInteractable[] grabbable_OVR_array = GameObject.FindObjectsOfType<HandGrabInteractable>();
@@ -99,6 +109,10 @@ public class PlayerRestriction : MonoBehaviour, ITurnOffStatic
         {
             rigidbody.constraints = RigidbodyConstraints.FreezeAll;
         }
+        foreach(Grabber hand in playerHandController)
+        {
+            hand.TryRelease();
+        }
         foreach(HandGrabInteractable handGrabInteractable in all_OVR_Grabable)
         {
             handGrabInteractable.enabled = false;
@@ -106,6 +120,10 @@ public class PlayerRestriction : MonoBehaviour, ITurnOffStatic
         foreach(DistanceHandGrabInteractable distanceHandGrabInteractable in all_OVR_DistanceGrabable)
         {
             distanceHandGrabInteractable.enabled = false;
+        }
+        foreach(HandGrabInteractor hand in playerHandTrack)
+        {
+            hand.ForceRelease();
         }
         
     }
@@ -134,10 +152,10 @@ public class PlayerRestriction : MonoBehaviour, ITurnOffStatic
     private void DisableAllMovement()
     {
         isRestrictMovement = true;
-        Debug.Log("WHAT DO YOU MEAN THERE'S NO PLAYER MOVEMENT" + playerMovement_BNG + "???");
+        // Debug.Log("WHAT DO YOU MEAN THERE'S NO PLAYER MOVEMENT" + playerMovement_BNG + "???");
         if(playerMovement_BNG)playerMovement_BNG.enabled = false;
-        Debug.Log("test");
-        Debug.Log(playerMovements_OVR + " Kok bisa i;ang???");
+        // Debug.Log("test");
+        // Debug.Log(playerMovements_OVR + " Kok bisa i;ang???");
         foreach(GameObject playermovement_OVR in playerMovements_OVR)
         {
             playermovement_OVR.SetActive(false);
@@ -151,6 +169,27 @@ public class PlayerRestriction : MonoBehaviour, ITurnOffStatic
         foreach(GameObject playermovement_OVR in playerMovements_OVR)
         {
             playermovement_OVR.SetActive(true);
+        }
+    }
+
+    private void DisableAllRotation()
+    {
+        isRestrictRotation = true;
+
+        if(playerRotation_BNG)playerRotation_BNG.enabled = false;
+        foreach(GameObject playerRotation_OVR in playerRotations_OVR)
+        {
+            playerRotation_OVR.SetActive(false);
+        }
+    }
+    private void EnableAllRotation()
+    {
+        isRestrictRotation = false;
+
+        if(playerRotation_BNG)playerRotation_BNG.enabled = true;
+        foreach(GameObject playerRotation_OVR in playerRotations_OVR)
+        {
+            playerRotation_OVR.SetActive(true);
         }
     }
 

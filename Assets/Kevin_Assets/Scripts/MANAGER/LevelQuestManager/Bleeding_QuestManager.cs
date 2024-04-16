@@ -5,15 +5,17 @@ using UnityEngine;
 
 public class Bleeding_QuestManager : QuestManager
 {
-    IEnumerator bleedingWithItemCourotine, bleedingWithoutItemCourotine;
+    IEnumerator bleedingCoroutine;
     public bool DebugChooseWithItemFirst, DebugChooseWithoutItemFirst;
     public bool isBWIDone, isBWDone;
-    public bool hasDissatisfaction = true;
+    public bool hasDissatisfaction = true, isTrashEverywhere = false;
+    [Header ("All Bleeding GameObject and Manager - Without Item")]
+    [SerializeField]private Patient_Bleeding patient_Bleeding;
     
     protected override void Quest()
     {
         OnStartQuest.Invoke();// krn ud ga berhubungan ama questmanager jd hrsnya aman..
-        timerInSecs = timerInSecsMax;
+        timerInSecs = 0;
         questManagerUI.SetTimerSlider(timerInSecs);
         
         isQuestStart = true;
@@ -22,34 +24,10 @@ public class Bleeding_QuestManager : QuestManager
         
         
         questManagerUI.OpenHelper_Bleeding_WithoutItem();
-        bleedingWithoutItemCourotine = BleedingWithoutItem();
-        StartCoroutine(bleedingWithoutItemCourotine);
-    }
-    protected override void Update()
-    {
-        base.Update();
-        // if(DebugChooseWithItemFirst)
-        // {
-        //     //aslinya dijalanin dgn dia ngelakuin langkah prtm yg mana dulu.
-        //     DebugChooseWithItemFirst = false;
-        //     questManagerUI.CloseHelper_Bleeding_WithoutItem();
-            
-        //     //matiin collider si yg ga ada item 
+        
 
-        //     bleedingWithItemCourotine = BleedingWithItem();
-        //     StartCoroutine(bleedingWithItemCourotine);
-        // }
-        // if(DebugChooseWithoutItemFirst)
-        // {
-            
-        //     //aslinya dijalanin dgn dia ngelakuin langkah prtm yg mana dulu.
-        //     DebugChooseWithoutItemFirst = false;
-        //     questManagerUI.CloseHelper_Bleeding_WithItem();
-            
-        //     //matiin collider si yg ga ada item 
-
-            
-        // }
+        bleedingCoroutine = Bleeding();
+        StartCoroutine(bleedingCoroutine);
     }
     protected override void ScoreCounter()
     {
@@ -57,62 +35,33 @@ public class Bleeding_QuestManager : QuestManager
         if(isTimerUp)
         {
             score = ScoreName.Sad_Face;
-            if(isBWDone && isBWIDone)
+            if(bleedingCoroutine != null)StopCoroutine(bleedingCoroutine);
+            patient_Bleeding.StopCoroutines();
+            
+            if(patient_Bleeding.IsDoneFirstAid)
             {
                 score = ScoreName.Small_Happy_Face;
-                if(!hasDissatisfaction) score = ScoreName.Big_Happy_Face;
+                if(!hasDissatisfaction && !isTrashEverywhere) score = ScoreName.Big_Happy_Face;
             }
         }
         base.ScoreCounter();
     }
 
-    private IEnumerator BleedingWithItem()
+    private IEnumerator Bleeding()
     {
-        yield return new WaitUntil(()=> isBWIDone);
-        bleedingWithItemCourotine = null;
-        if(!isBWDone)
+        yield return new WaitUntil(()=> patient_Bleeding.IsDoneFirstAid);
+        bleedingCoroutine = null;
+        if(isQuestStart)
         {
-            
-            //nyalakan collider part 2
-            questManagerUI.CloseHelper_Bleeding_WithItem();
-            questManagerUI.OpenHelper_Bleeding_WithoutItem();
-            bleedingWithoutItemCourotine = BleedingWithoutItem();
-            StartCoroutine(bleedingWithoutItemCourotine);
+            isTimerUp = true;
+            QuestDone();
         }
-        else
-        {
-            if(!hasDissatisfaction)
-            {
-                isTimerUp = true;
-                QuestDone();
-            }
-        }
-    }  
-    private IEnumerator BleedingWithoutItem()
-    {
-        yield return new WaitUntil(()=> isBWDone);
-        if(!isBWIDone)
-        {
-            questManagerUI.OpenHelper_Bleeding_WithItem();
-            
-            //nyalakan collider part 2
-            questManagerUI.CloseHelper_Bleeding_WithoutItem();
-            bleedingWithItemCourotine = BleedingWithItem();
-            StartCoroutine(bleedingWithItemCourotine);
-        }
-        else
-        {
-            if(!hasDissatisfaction)
-            {
-                isTimerUp = true;
-                QuestDone();
-            }
-        }
+        
     }
     protected override void ResetQuest()
     {
-        if(bleedingWithoutItemCourotine != null)StopCoroutine(bleedingWithoutItemCourotine);
-        if(bleedingWithItemCourotine != null)StopCoroutine(bleedingWithItemCourotine);
+        if(bleedingCoroutine != null)StopCoroutine(bleedingCoroutine);
+        patient_Bleeding.StopCoroutines();
         base.ResetQuest();
     }
 }

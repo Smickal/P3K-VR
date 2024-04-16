@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class Robot : GrabbableEvents
 {
+    [SerializeField]Transform followTransformPos;
+
     ReturnRobotToStartingPos returnPos;
     Camera mainCam;
 
@@ -27,7 +29,17 @@ public class Robot : GrabbableEvents
         {
             transform.LookAt(mainCam.transform);
         }
-
+        if(followTransformPos)
+        {
+            if(transform.parent)
+            {
+                transform.parent.position = followTransformPos.position;
+            }
+            else
+            {
+                transform.position = followTransformPos.position;
+            }
+        }
     }
 
     public void DeactivateLookAt() 
@@ -60,5 +72,9 @@ public class Robot : GrabbableEvents
         ActivateLookAt();
         grab.DropItem(thisGrabber, true, false);
         returnPos.MoveToSnapZone();
+    }
+    public void RotateRobot()
+    {
+
     }
 }

@@ -15,6 +15,7 @@ public class LevelPlayerData
     public bool hasFinishIntro;
     [Tooltip("Kalo ud pernah slsain, pas deketin quest br muncul ui do you want to do it again")]
     public bool hasBeatenLevelOnce;
+    public string levelName;
     public Sprite levelSprite;
 
 }

@@ -4,24 +4,26 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using Unity.VisualScripting;
+using UnityEngine.SceneManagement;
 
 public class TeleportLevelUI : MonoBehaviour
 {
     [SerializeField] TMP_Text _levelTitle;
     [SerializeField] Image _levelIMG;
-    [SerializeField] GameObject _lockedLevel;
+    [SerializeField] GameObject _lockedLevel, _casualtyContainer;
     [SerializeField] Sprite[] _scoreEmoticon;
     [SerializeField] Image _scoreIMG;
     [SerializeField] Button _levelButton;
+    [SerializeField] SceneMoveManager sceneMoveManager;
 
     private string levelName;
 
-    public void SetData(LevelPlayerData levelPlayerData, int level)
+    public void SetData(LevelPlayerData levelPlayerData, int level, SceneMoveManager sceneMoveManagers)
     {
-        levelName = levelPlayerData.levelType.ToString();
+        sceneMoveManager = sceneMoveManagers;
 
-        _levelTitle.SetText("Level " + level);
-        
+        _levelTitle.SetText(levelPlayerData.levelName);
+        levelName = levelPlayerData.levelName;
         _levelButton.onClick.AddListener(TeleportToLevel);
 
         if(levelPlayerData.levelSprite == null)
@@ -36,21 +38,23 @@ public class TeleportLevelUI : MonoBehaviour
         if(!levelPlayerData.unlocked)
         {
             _lockedLevel.SetActive(true);
+            _levelTitle.SetText("? ? ?");
+            _levelIMG.gameObject.SetActive(false);
+            _casualtyContainer.SetActive(false);
         }
         else
         {
             _lockedLevel.SetActive(false);
         }
-        if(levelPlayerData.score == ScoreName.None)
-        {
-            _scoreIMG.sprite = null;
-        }
-        else _scoreIMG.sprite = _scoreEmoticon[(int)levelPlayerData.score - 1];
+
+        _scoreIMG.sprite = _scoreEmoticon[(int)levelPlayerData.score];
         
     }
 
     public void TeleportToLevel()
     {
         Debug.Log("Teleport to" + levelName);
+        
+        if(sceneMoveManager)sceneMoveManager.GoToScene(levelName);
     }
 }

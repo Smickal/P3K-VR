@@ -130,7 +130,7 @@ public class UIKotakP3K : BaseKitUI, ITurnOffStatic
     {
         if(scriptableData != null && scriptableOBJ_OutsideGlossary_Now == scriptableData)
         {
-            _kitUiManager.DeactivateBaseUI();
+            if(GameManager.CheckGameStateNow() != GameState.Pause) _kitUiManager.DeactivateBaseUI();
             scriptableOBJ_OutsideGlossary_Now = null;
         }
     }

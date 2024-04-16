@@ -8,18 +8,6 @@ public class UISaveJournal : BaseKitUI
 
     [Header("Reference")]
     [SerializeField] GameObject _masterContainer;
-    [SerializeField] Button _saveButton;
-
-
-    private void Start()
-    {
-        _saveButton.onClick.AddListener(Save);
-    }
-
-    private void Save()
-    {
-        Debug.Log("Save");
-    }
 
     public override void ResetData()
     {

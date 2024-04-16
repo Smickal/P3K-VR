@@ -20,6 +20,8 @@ public class UILangkahP3K : BaseKitUI, ITurnOffStatic
     [SerializeField] GameObject _containerChoiceOBJ;
     [SerializeField] Transform _choiceTransform;
     [SerializeField] Transform _stepTransform;
+    [SerializeField] RectTransform _contentDescSlider;
+    private SOLangkahP3K lastSO;
 
     [Space(2)]
     [SerializeField] GameObject _containerDescOBJ;
@@ -34,6 +36,8 @@ public class UILangkahP3K : BaseKitUI, ITurnOffStatic
     [Header("Prefab")]
     [SerializeField] UILangkahPrefab _langkahPrefab;
     [SerializeField] UILangkahDescPrefab _langkahDescPrefab;
+    [SerializeField] Transform _langkahDescPrefabTransform;
+    
 
     bool[] UnlockedLangkahSavedData;
     List<UILangkahPrefab> ListOfDataInstance = new List<UILangkahPrefab>();
@@ -98,7 +102,8 @@ public class UILangkahP3K : BaseKitUI, ITurnOffStatic
     }
 
     public void ActivateDescription(SOLangkahP3K scriptableData)
-    {
+    {   
+        
         _containerChoiceOBJ.SetActive(false);
         _containerDescOBJ.SetActive(true);
 
@@ -110,15 +115,22 @@ public class UILangkahP3K : BaseKitUI, ITurnOffStatic
         ResetProcedureDescription();
         
         //Create Step Procedure
-        for(int i = 0; i < scriptableData.Procedures.Count; i++)
+        // for(int i = 0; i < scriptableData.Procedures.Count; i++)
+        // {
+        //     UILangkahDescPrefab newUI = Instantiate(_langkahDescPrefab, _stepTransform);
+        //     newUI.SetData((i+1).ToString(),
+        //                   scriptableData.Procedures[i].StepsDescription, 
+        //                   scriptableData.Procedures[i].StepsSprite);
+        //     listOfLangkahDescPrefab.Add(newUI);
+        // }
+        if(lastSO != null)
         {
-            UILangkahDescPrefab newUI = Instantiate(_langkahDescPrefab, _stepTransform);
-            newUI.SetData((i+1).ToString(),
-                          scriptableData.Procedures[i].StepsDescription, 
-                          scriptableData.Procedures[i].StepsSprite);
-            listOfLangkahDescPrefab.Add(newUI);
+            if(lastSO != scriptableData)_contentDescSlider.localPosition = new Vector3(_contentDescSlider.position.x, 0, 0);
+            
         }
-
+        lastSO = scriptableData;
+        _langkahDescPrefabTransform = Instantiate(scriptableData._prefabProcedure, _stepTransform);
+        
 
     }
 
@@ -126,18 +138,25 @@ public class UILangkahP3K : BaseKitUI, ITurnOffStatic
     private void ResetProcedureDescription()
     {
         //Check For Doubles
-        if (listOfLangkahDescPrefab.Count > 0)
-        {
-            int listLength = listOfLangkahDescPrefab.Count;
-            for(int i=listLength - 1;i>=0 ;i--)
-            {
-                UILangkahDescPrefab tempUI = listOfLangkahDescPrefab[i];
-                listOfLangkahDescPrefab.Remove(tempUI);
-                Destroy(tempUI);
-            }
+        // if (listOfLangkahDescPrefab.Count > 0)
+        // {
+        //     int listLength = listOfLangkahDescPrefab.Count;
+        //     for(int i=listLength - 1;i>=0 ;i--)
+        //     {
+        //         UILangkahDescPrefab tempUI = listOfLangkahDescPrefab[i];
+        //         listOfLangkahDescPrefab.Remove(tempUI);
+        //         Destroy(tempUI);
+        //     }
 
-            listOfLangkahDescPrefab.Clear();
+        //     listOfLangkahDescPrefab.Clear();
+        // }
+
+        if(_langkahDescPrefabTransform != null)
+        {
+            Destroy(_langkahDescPrefabTransform.gameObject);
+            _langkahDescPrefabTransform = null;
         }
+        
     }
 
     private void UnlockLangkah(SOLangkahP3K scriptableData)

@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour, ITurnOffStatic
     public static Func<LevelMode> CheckLevelModeNow;
     public static Func<GameState> CheckGameStateNow;
     public static Func<LevelP3KType> CheckLevelTypeNow;
+    public static Func<InGame_Mode> CheckInGameModeNow;
     public static Action<InGame_Mode> ChangeInGameModeNow;
     public static Action PauseGame;
     public static Action<GameState> ChangeGameStateNow;
@@ -24,9 +25,12 @@ public class GameManager : MonoBehaviour, ITurnOffStatic
     {
         CheckLevelModeNow += LevelModeNow;
         ChangeInGameModeNow += ChangeInGameMode;
+        CheckInGameModeNow += InGame_ModeNow;
+
         CheckGameStateNow += GameStateNow;
         CheckLevelTypeNow += LevelTypeNow;
         ChangeGameStateNow += ChangeGameState;
+        PauseGame += Pause;
         
     }
     private void Start() 
@@ -73,8 +77,8 @@ public class GameManager : MonoBehaviour, ITurnOffStatic
         isPause = !isPause;
         if(isPause)
         {
-            OnPause.Invoke();
             state = GameState.Pause;
+            OnPause.Invoke();
         }
         else
         {
@@ -94,5 +98,7 @@ public class GameManager : MonoBehaviour, ITurnOffStatic
         CheckGameStateNow -= GameStateNow;
         CheckLevelTypeNow -= LevelTypeNow;
         ChangeGameStateNow -= ChangeGameState;
+        PauseGame -= Pause;
+        CheckInGameModeNow -= InGame_ModeNow;
     }
 }

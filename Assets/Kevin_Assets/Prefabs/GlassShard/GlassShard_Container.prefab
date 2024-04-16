@@ -175,6 +175,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4858454016221149926}
+  - component: {fileID: 5457082310263247524}
   m_Layer: 0
   m_Name: GlassShard_Container
   m_TagString: Untagged
@@ -190,7 +191,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 667753283289819265}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -21.09, y: -0.1062, z: -7.538}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -200,6 +201,25 @@ Transform:
   - {fileID: 2790939303032310143}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5457082310263247524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 667753283289819265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8913a71b1804a324eb2d60736ad31faa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bandageSnapZones:
+  - {fileID: 384052244529509016}
+  _bandageMovement: {fileID: 7682625411915934853}
+  circleMovement: {fileID: 120716048207173986}
+  OnBandageMovementDone:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &781766180284969167
 GameObject:
   m_ObjectHideFlags: 0
@@ -4934,6 +4954,12 @@ PrefabInstance:
       addedObject: {fileID: 5567484062296291374}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 081369acd1504784e89952756676838d, type: 3}
+--- !u!1 &120716048207173986 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3881497670994748495, guid: 081369acd1504784e89952756676838d,
+    type: 3}
+  m_PrefabInstance: {fileID: 3778809302412049709}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2790939303032310143 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1354017269811573842, guid: 081369acd1504784e89952756676838d,
@@ -4946,3 +4972,15 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 3778809302412049709}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7682625411915934853 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6840734813672264104, guid: 081369acd1504784e89952756676838d,
+    type: 3}
+  m_PrefabInstance: {fileID: 3778809302412049709}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8688f98fcd840e04abdcdf9a59b9c990, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

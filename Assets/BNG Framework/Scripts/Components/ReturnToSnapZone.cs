@@ -28,8 +28,13 @@ namespace BNG {
 
         [Tooltip("Initiate snap if distance between the Grabbable and SnapZone is <= SnapDistance")]
         public float SnapDistance = 0.05f;
+        [Tooltip("Kalau mager taro di starting item snapzone - true; tp suara ada")]
+        [SerializeField]private bool returnFirstTime = false;
         [SerializeField]private bool onlyReturnOnce = true;
         public bool OnlyReturnOnce { get { return onlyReturnOnce; } }
+
+        [Header("isi ini kalo mo balik berdasarkan briefcase buka ato tutup")]
+        [SerializeField]private Briefcase briefCase;
 
         void Start() {
             grab = GetComponent<Grabbable>();
@@ -48,12 +53,31 @@ namespace BNG {
 
             // Increment how long we've been waiting
             if (validReturn) {
-                currentDelay += Time.deltaTime;
+                if(returnFirstTime) currentDelay = ReturnDelay;
+                else currentDelay += Time.deltaTime;
             }
 
             // Start moving towards the SnapZone
             if(validReturn && currentDelay >= ReturnDelay) {
-                moveToSnapZone();
+                if(returnFirstTime)
+                {
+                    moveToSnapZone();
+                    returnFirstTime = false;
+                }
+                else
+                {
+                    
+                    //kalo butu dia balik pas briefcase kebuka aja
+                    if(briefCase)
+                    {
+                        if(briefCase.IsOpen)moveToSnapZone();
+                    }
+                    else
+                    {
+                        moveToSnapZone();
+                    }
+                }
+                
             }
         }
 

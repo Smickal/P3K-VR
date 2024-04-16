@@ -170,12 +170,12 @@ public class HeimlichMovement : MonoBehaviour
         //Must check for 2 hands + Target Trigger
         if (col == null) return;
         else if (!IsHandsTriggered()) return;
-        Debug.Log(col.gameObject + " Collider yang masuk sini");
+        // Debug.Log(col.gameObject + " Collider yang masuk sini");
         if(!(col.gameObject == _leftGrabbable.gameObject || col.gameObject == _rightGrabbable.gameObject)) return;
-        Debug.Log(col.gameObject + " Collider yang masuk sini2");
+        // Debug.Log(col.gameObject + " Collider yang masuk sini2");
         if(isAlreadyScoring)
         {
-            Debug.Log("Masih ada");
+            // Debug.Log("Masih ada");
             i++;
             return;
         }
@@ -220,7 +220,7 @@ public class HeimlichMovement : MonoBehaviour
 
             if (_isDebug)
             {
-                _debugText.SetText($"HEIMLICHCount = {heimlichCount}.");
+                _debugText.SetText($"Counter Heimlich : {heimlichCount}");
                 _patientBackblowHeim?.OnHeimlichCountUp.Invoke(heimlichCount, _totalScore);
             }
 

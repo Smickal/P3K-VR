@@ -11,7 +11,13 @@ public class QuestManagerUI : MonoBehaviour, ITurnOffStatic
     const string titleChoking = "Choking First Aid";
     const string titleChokingBackblow = "Backblow";
     const string titleChokingHeimlich = "Heimlich";
-    const string titleBleedingWithItem = "Bleeding With Item First Aid";
+    const string titleBleedingWithItem = "Bleeding With Embedded Item First Aid";
+    const string _counterStartBackBlow = "Counter Backblow : 0";
+    const string _counterStartHeimlich = "Counter Heimlich : 0";
+    [Header("Reference")]
+    [SerializeField]GameManager gameManager;
+    [TextArea(5,7)][SerializeField]private string _followBackBlow;
+    [TextArea(5,7)][SerializeField]private string _followHeimlich;
     [Header("Base UI")]
     [SerializeField] GameObject _baseUI;
     [SerializeField] TMP_Text _titleBase;
@@ -24,6 +30,7 @@ public class QuestManagerUI : MonoBehaviour, ITurnOffStatic
     
     [SerializeField] GameObject _chokingHelperContainer;
     [SerializeField] Image _chokingDescIMG;
+    [SerializeField] TMP_Text _counterText, _followProcedureText;
     [Tooltip("0 - Backblow, 1 - Heimlich")]
     [SerializeField] Sprite[] _chokingDescSprite;
     [Header("Bleeding")]
@@ -72,10 +79,14 @@ public class QuestManagerUI : MonoBehaviour, ITurnOffStatic
         if(choke_P3KType == titleChokingBackblow)
         {
             _chokingDescIMG.sprite = _chokingDescSprite[0];
+            _counterText.text = _counterStartBackBlow;
+            _followProcedureText.text = _followBackBlow;
         }
         else if(choke_P3KType == titleChokingHeimlich)
         {
             _chokingDescIMG.sprite = _chokingDescSprite[1];
+            _counterText.text = _counterStartHeimlich;
+            _followProcedureText.text = _followHeimlich;
         }
     }
 
@@ -116,13 +127,13 @@ public class QuestManagerUI : MonoBehaviour, ITurnOffStatic
     public void SetTimerSlider(float timerMax)
     {
         _timerSlider.value = 1;
-        if(GameManager.CheckLevelTypeNow() == LevelP3KType.Bleeding)_timerSlider_bleeding.value = 1;
+        if(gameManager.LevelTypeNow() == LevelP3KType.Bleeding)_timerSlider_bleeding.value = 1;
         _maxTimer = timerMax;
     }
     public void ChangeTimerSlider(float curTime)
     {
         _timerSlider.value = curTime/_maxTimer;
-        if(GameManager.CheckLevelTypeNow() == LevelP3KType.Bleeding)_timerSlider_bleeding.value = curTime/_maxTimer;
+        if(gameManager.LevelTypeNow() == LevelP3KType.Bleeding)_timerSlider_bleeding.value = curTime/_maxTimer;
     }
     public void ActiveQuestBtn_Robot(bool change)
     {

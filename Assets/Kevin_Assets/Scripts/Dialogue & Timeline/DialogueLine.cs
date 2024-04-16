@@ -17,7 +17,7 @@ namespace DialogueSystem
         private TMP_Text _textContainer;
         // [SerializeField]private Color _textColor;
         [Tooltip ("Kalo off berarti dia ambil dr yg ada di desc text")]
-        [SerializeField]private bool isInputText_FromOutside = true;
+        // [SerializeField]private bool isInputText_FromOutside = true;
 
         [Header("Time Delay ")]
         [SerializeField]private float delayTypeText;

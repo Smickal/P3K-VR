@@ -7,7 +7,7 @@ namespace DialogueSystem{
     public class DialogueBase : MonoBehaviour
     {
         public bool finished {get; protected set;}
-        private bool isRichText = false, isRichTextDone = false;
+        private bool isRichText = false;
         string saveRichText;
         public IEnumerator typeText(string inputText, TMP_Text textHolder, float delayTypeText, float delayBetweenLines, Color textColor){
             textHolder.color = textColor;

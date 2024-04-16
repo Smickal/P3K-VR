@@ -39,6 +39,9 @@ public class SOQuizQuestions : ScriptableObject
 
     [Header("Explanation")]
     public Sprite[] ExplanationSprites;
+    [Header("Dialogue")]
+    public DialogueListType dialogueListTypeQuestionStart;
+    public DialogueListType[] dialogueListTypeExplanations;
 
     public string GetAnswer()
     {

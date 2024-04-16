@@ -123,11 +123,11 @@ public class BackBlowMovement : MonoBehaviour
     {
         
         if (isHittingCollider) return;
-        Debug.Log("Di siniaaaaaaaabbbbbbbbaaaaaaaaaaaaaaaaaabb ???");
+        // Debug.Log("Di siniaaaaaaaabbbbbbbbaaaaaaaaaaaaaaaaaabb ???");
         bool isFullScores = false;
 
-        Debug.Log(col.gameObject == _rightGrabberFull);
-        Debug.Log(" " + col);
+        // Debug.Log(col.gameObject == _rightGrabberFull);
+        // Debug.Log(" " + col);
 
         // if(!(col.gameObject == _leftGrabberFull || col.gameObject == _rightGrabberFull || col == _leftGrabber || col == _rightGrabber)) return;
         if(!InteractToolsController.CheckIsHandTrackOn())
@@ -154,8 +154,8 @@ public class BackBlowMovement : MonoBehaviour
         }
         else
         {
-            bool yes = col == _rightGrabberHandTrack;
-            Debug.Log(col.gameObject.transform.parent.name + " Bener dongg" + _rightGrabberHandTrack.gameObject + this.gameObject);
+            // bool yes = col == _rightGrabberHandTrack;
+            // Debug.Log(col.gameObject.transform.parent.name + " Bener dongg" + _rightGrabberHandTrack.gameObject + this.gameObject);
             if(col == _leftGrabberHandTrackFull || col == _rightGrabberHandTrackFull || col == _leftGrabberHandTrack || col == _rightGrabberHandTrack)
             {
                 isHittingCollider = true;
@@ -227,7 +227,7 @@ public class BackBlowMovement : MonoBehaviour
 
             if(isDebug)
             {
-                _debugText.SetText($"BackBlowCount = {backblowCount}.");
+                _debugText.SetText($"Counter Backblow : {backblowCount}.");
                 _patientBackBlowHeimlich?.OnBackBlowCountUp.Invoke( backblowCount, _totalScore);
             }
 
