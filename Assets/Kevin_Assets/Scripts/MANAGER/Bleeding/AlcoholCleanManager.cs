@@ -9,8 +9,11 @@ public class AlcoholCleanManager : MonoBehaviour
     public static AlcoholCleanManager Instance;
 
     [SerializeField] float _timeToCleanGrabber = 3f;
-
     [Header("Reference")]
+    [SerializeField]private GameManager gameManager;
+    [SerializeField]private BleedingWithoutEmbeddedItem bleedingWithoutEmbeddedItem;
+
+    [Header("Reference - Hand")]
     [SerializeField] Grabber _leftGrabber;
     [SerializeField] Grabber _rightGrabber;
 
@@ -44,7 +47,7 @@ public class AlcoholCleanManager : MonoBehaviour
 
     private void Update()
     {
-        if (!IsHolding) return;
+        if (!IsHolding || gameManager.GameStateNow() != GameState.InGame || gameManager.LevelTypeNow() != LevelP3KType.Bleeding || gameManager.InGame_ModeNow() != InGame_Mode.FirstAid || bleedingWithoutEmbeddedItem.StateNow() != BleedingWithoutEmbeddedItem_State.WearGloves) return;
 
         currTime += Time.deltaTime;
 
