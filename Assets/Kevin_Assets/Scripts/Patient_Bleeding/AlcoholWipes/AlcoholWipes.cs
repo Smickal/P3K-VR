@@ -7,12 +7,19 @@ public class AlcoholWipes : GrabbableEvents
 {
     Grabber curGrabber;
 
+    AlcoholCleanManager alcoholManager;
+
+    private void Start()
+    {
+        alcoholManager = AlcoholCleanManager.Instance;
+    }
+
     public override void OnGrab(Grabber grabber)
     {
         base.OnGrab(grabber);
 
         curGrabber = grabber;
-        if(AlcoholCleanManager.Instance)AlcoholCleanManager.Instance.RegisterGrabber(grabber);
+        alcoholManager?.RegisterGrabber(grabber);
     }
 
     public override void OnGrip(float gripValue)
@@ -20,7 +27,7 @@ public class AlcoholWipes : GrabbableEvents
         base.OnGrip(gripValue);
 
         if (!curGrabber) return;
-        if(AlcoholCleanManager.Instance)AlcoholCleanManager.Instance.IsHolding = true;
+        alcoholManager.IsHolding = true;
 
     }
 
@@ -29,8 +36,8 @@ public class AlcoholWipes : GrabbableEvents
         base.OnRelease();
         curGrabber = null;
 
-        if(AlcoholCleanManager.Instance)AlcoholCleanManager.Instance.IsHolding = false;
-        if(AlcoholCleanManager.Instance)AlcoholCleanManager.Instance.SaveCurrentTimeProgress();
+        alcoholManager.IsHolding = false;
+        alcoholManager.SaveCurrentTimeProgress();
     }
 
 
