@@ -8,7 +8,7 @@ public class LegTargetConstraint : MonoBehaviour
     [SerializeField] Color32 _lineColor = Color.green;
 
     [SerializeField] Transform[] _targetConstraints;
-    [SerializeField] 
+    [SerializeField] Transform _middlePoint;
     //IDX LISTING
     // 0 -> Down-Left
     // 1 -> Up-Left
@@ -67,6 +67,13 @@ public class LegTargetConstraint : MonoBehaviour
     //{
     //    Vector2 point = new Vector2(constraintPoint.y, constraintPoint.z);
 
+    //    //Get edge Line
+
+
+
+
 
     //}
+
+    //private int
 }
