@@ -5,13 +5,14 @@ using UnityEngine;
 
 public enum BleedingWithoutEmbeddedItem_State
 {
-    CleanHands, WearGloves, StopBleed, CleanBlood, DryWater, BandageTime, PuttingLegOnTopSomethingTime, Done
+    CleanHands, WearGloves, StopBleed, CleanBlood, DryWater, BandageTime, PuttingLegOnTopSomethingTime, Done, None
 }
 public class BleedingWithoutEmbeddedItem : MonoBehaviour, ITurnOffStatic
 {
     
     [SerializeField]private Patient_Bleeding patient_Bleeding;
     [SerializeField]private BleedingWithoutEmbeddedItem_State state;    
+    public BleedingWithoutEmbeddedItem_State BleedingWithoutEmbeddedItem_State{get{return state;}}
     IEnumerator FirstAidCoroutine;
     private bool isDoneFirstAid;
     public bool IsDoneFirstAid{get{return isDoneFirstAid;}}

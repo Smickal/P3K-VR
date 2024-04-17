@@ -40,8 +40,8 @@ public class SOQuizQuestions : ScriptableObject
     [Header("Explanation")]
     public Sprite[] ExplanationSprites;
     [Header("Dialogue")]
-    public DialogueListType dialogueListTypeQuestionStart;
-    public DialogueListType[] dialogueListTypeExplanations;
+    public DialogueListType_Home_Quiz dialogueListTypeQuestionStart;
+    public DialogueListType_Home_QuizExplanation[] dialogueListTypeExplanations;
 
     public string GetAnswer()
     {

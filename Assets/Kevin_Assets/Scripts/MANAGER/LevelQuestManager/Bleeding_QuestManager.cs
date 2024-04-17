@@ -22,7 +22,7 @@ public class Bleeding_QuestManager : QuestManager
         
         // questManagerUI.OpenHelper_Bleeding_All();
         
-        DialogueManager.PlaySceneDialogue(DialogueListType.Home_QuizExplanation_3_14);
+        // DialogueManager.PlaySceneDialogue(DialogueListType.Home_QuizExplanation_3_14);
         
         questManagerUI.OpenHelper_Bleeding_WithoutItem();
         
