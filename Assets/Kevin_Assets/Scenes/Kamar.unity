@@ -3039,7 +3039,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 4400
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &100000990
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9623,6 +9623,24 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1023003437958843727, guid: 35fe4694400b8164badb6e68725159e9,
     type: 3}
   m_PrefabInstance: {fileID: 395734238}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &399406500 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 70573162729642599, guid: d2c9bb6e24cd39c4d866b90236483d1b,
+    type: 3}
+  m_PrefabInstance: {fileID: 835225983}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55b646e2949ffb74c9ca8c512b4411df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!135 &399406501 stripped
+SphereCollider:
+  m_CorrespondingSourceObject: {fileID: 9187965156176624803, guid: d2c9bb6e24cd39c4d866b90236483d1b,
+    type: 3}
+  m_PrefabInstance: {fileID: 835225983}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &400280588
 PrefabInstance:
@@ -23609,8 +23627,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2caa1282db1012e4588b52a5d62e37c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ignoredColliders: []
-  snapZones: []
+  bleeding_QuestManager: {fileID: 0}
+  _ignoredColliders:
+  - {fileID: 1426119391}
+  - {fileID: 424710665}
+  - {fileID: 399406501}
+  - {fileID: 1154200025}
+  - {fileID: 1245581549}
+  - {fileID: 1849732925}
+  - {fileID: 2088954979}
+  - {fileID: 1542816296}
+  - {fileID: 1751005597}
+  - {fileID: 1858101873}
+  - {fileID: 730081026}
+  - {fileID: 1564048675}
+  snapZones:
+  - {fileID: 1426119392}
+  - {fileID: 424710661}
+  - {fileID: 399406500}
 --- !u!114 &954665340 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5881120594878296981, guid: 75ab4b45124a2bb4082739ddc1d78c6f,
@@ -26925,7 +26959,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
-  inGame_Mode: 0
+  inGame_Mode: 1
   levelMode: 1
   levelType: 2
   OnPause:
@@ -30756,6 +30790,12 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1289123097}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1154200025 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 8311282888935689827, guid: d2c9bb6e24cd39c4d866b90236483d1b,
+    type: 3}
+  m_PrefabInstance: {fileID: 835225983}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1156448469
 GameObject:
   m_ObjectHideFlags: 0
@@ -38970,6 +39010,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 925ef87c5bafc37469a2f7ec825dee4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!135 &1426119391 stripped
+SphereCollider:
+  m_CorrespondingSourceObject: {fileID: 3669757226481841990, guid: d2c9bb6e24cd39c4d866b90236483d1b,
+    type: 3}
+  m_PrefabInstance: {fileID: 835225983}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1426119392 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 384052244529509016, guid: d2c9bb6e24cd39c4d866b90236483d1b,
+    type: 3}
+  m_PrefabInstance: {fileID: 835225983}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55b646e2949ffb74c9ca8c512b4411df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1433726339
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -43439,6 +43497,11 @@ PrefabInstance:
         type: 3}
       propertyPath: CircleTransforms.Array.data[104]
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8559445978696117438, guid: d2c9bb6e24cd39c4d866b90236483d1b,
+        type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
