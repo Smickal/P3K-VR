@@ -2,16 +2,19 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using BNG;
 using UnityEngine;
 
 public class PlayerHeightController : MonoBehaviour, ITurnOffStatic
 {
-    [SerializeField]private GameObject[] _heightConnectOBJ;
-    [SerializeField]private float minHeigth, maxHeight, addHeight = 0.05f;
+    [SerializeField]private BNGPlayerController _heightConnectOBJ;
+    [SerializeField]private float minHeigth, maxHeight, addHeight = 0.001f;
+    private float startHeight;
     public static Action<bool> AddPlayerHeight;
     public static Action ResetPlayerHeight;
     private void Awake() 
     {
+        startHeight = _heightConnectOBJ.CharacterControllerYOffset;
         AddPlayerHeight += PlayerHeightControl;
         ResetPlayerHeight += ResetHeight;
     }
@@ -25,27 +28,18 @@ public class PlayerHeightController : MonoBehaviour, ITurnOffStatic
     {
         if(addPlayerHeight)
         {
-            for(int i=0;i < _heightConnectOBJ.Length;i++)
-            {
-                float newScale = Mathf.Clamp(_heightConnectOBJ[i].transform.localScale.x + addHeight, minHeigth, maxHeight);
-                _heightConnectOBJ[i].transform.localScale = new Vector3(newScale,newScale,newScale);
-            }
+            if(_heightConnectOBJ.CharacterControllerYOffset + addHeight > maxHeight)return;
+            _heightConnectOBJ.ChangeCharacterControllerY(addHeight);
         }
         else
         {
-            for(int i=0;i < _heightConnectOBJ.Length;i++)
-            {
-                float newScale = Mathf.Clamp(_heightConnectOBJ[i].transform.localScale.x - addHeight, minHeigth, maxHeight);
-                _heightConnectOBJ[i].transform.localScale = new Vector3(newScale,newScale,newScale);
-            }
+            if(_heightConnectOBJ.CharacterControllerYOffset - addHeight < minHeigth)return;
+            _heightConnectOBJ.ChangeCharacterControllerY(-addHeight);
         }
     }
 
     private void ResetHeight()
     {
-        for(int i=0;i < _heightConnectOBJ.Length;i++)
-        {
-            _heightConnectOBJ[i].transform.localScale = new Vector3(1f, 1f, 1f);
-        }
+        _heightConnectOBJ.ResetCharacterController(startHeight);
     }
 }

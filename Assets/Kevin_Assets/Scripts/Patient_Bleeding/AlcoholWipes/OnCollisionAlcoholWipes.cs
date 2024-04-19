@@ -15,9 +15,10 @@ public class OnCollisionAlcoholWipes : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         Grabber grabber = collision.gameObject.GetComponent<Grabber>();
-
+        
 
         if (grabber == null) return;
+        Debug.Log("Yang kena sini adalah " + grabber.gameObject);
         cleanManager.RegisterCurrentNeedToCleanGrabber(grabber);
     }
 
@@ -27,6 +28,7 @@ public class OnCollisionAlcoholWipes : MonoBehaviour
 
 
         if (grabber == null) return;
+        Debug.Log("Yang kena sini adalah " + grabber.gameObject);
         cleanManager.RegisterCurrentNeedToCleanGrabber(grabber);
     }
 }

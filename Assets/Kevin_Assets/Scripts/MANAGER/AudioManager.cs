@@ -22,6 +22,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField]GameObject theTrueBGM;
     [Header("Mixer")]
     [SerializeField]private AudioMixer audioMixer;
+    [SerializeField]private AudioMixerGroup SFXAudioMixer;
     const string Mixer_Master = "Master";
     const string Mixer_BGM = "BGM";
     const string Mixer_SFX = "SFX";
@@ -32,6 +33,7 @@ public class AudioManager : MonoBehaviour
         IChangeVolume[] _SFXIChangeArray = GameObject.FindObjectsOfType<MonoBehaviour>().OfType<IChangeVolume>().ToArray();
         _SFXIChange = new List<IChangeVolume>(_SFXIChangeArray);
 
+        
         theTrueBGM = null;
         BGM = GameObject.FindGameObjectsWithTag(BGM_Tag);
         if(BGM.Length == 1)
@@ -51,6 +53,15 @@ public class AudioManager : MonoBehaviour
                     break;
                 }
             }
+        }
+
+        AudioSource bgmSource = theTrueBGM.GetComponent<AudioSource>();
+        AudioSource[] audioSources = GameObject.FindObjectsOfType<AudioSource>();
+        List<AudioSource> audioSourcesList = new List<AudioSource>(audioSources);
+        audioSourcesList.Remove(bgmSource);
+        foreach(AudioSource audioSource in audioSourcesList)
+        {
+            audioSource.outputAudioMixerGroup = SFXAudioMixer;
         }
 
         _BGMIChange = theTrueBGM.GetComponent<BGMManager>();

@@ -9,7 +9,7 @@ public class CheckingTakeCorrectItem : MonoBehaviour
     [SerializeField]private Patient_Bleeding patient_Bleeding;
     [SerializeField]private BleedingWithoutEmbeddedItem bleedingWithoutEmbeddedItem;
     [Header("Correct State For Item - item ini buat pas kapan; Kalo ga ada yg kedua jdiin none")]
-    [SerializeField]private BleedingWithoutEmbeddedItem_State _correctbleedingWithoutEmbeddedItem_State, _correctbleedingWithoutEmbeddedItem_State2 = BleedingWithoutEmbeddedItem_State.None;
+    [SerializeField]private List<BleedingWithoutEmbeddedItem_State> _correctbleedingWithoutEmbeddedItem_State_List;
 
     private void Awake() 
     {
@@ -23,7 +23,7 @@ public class CheckingTakeCorrectItem : MonoBehaviour
 
         if(patient_Bleeding.BleedingQuest_State == BleedingQuest_State.WithItem)
         {
-            if(_correctbleedingWithoutEmbeddedItem_State != BleedingWithoutEmbeddedItem_State.BandageTime)
+            if(CorrectState(BleedingWithoutEmbeddedItem_State.BandageTime))
             {
                 dialogueManager.PlayDialogueScene(DialogueListTypeParent.Bleeding_WrongItem, DialogueListType_Bleeding_WrongItem.Bleeding_WrongItem_WithItem_Bandage);
                 return;
@@ -33,7 +33,7 @@ public class CheckingTakeCorrectItem : MonoBehaviour
         else if(patient_Bleeding.BleedingQuest_State == BleedingQuest_State.WithoutItem)
         {
             // CleanHands, WearGloves, StopBleed, CleanBlood, DryWater, BandageTime, PuttingLegOnTopSomethingTime
-            if(_correctbleedingWithoutEmbeddedItem_State == bleedingWithoutEmbeddedItem.BleedingWithoutEmbeddedItem_State || _correctbleedingWithoutEmbeddedItem_State2 == bleedingWithoutEmbeddedItem.BleedingWithoutEmbeddedItem_State)
+            if(CorrectState(BleedingWithoutEmbeddedItem_State.None))
             {
                 DialogueManager.HideFinishedDialogue_AfterFinishingTask();
                 return;
@@ -75,5 +75,22 @@ public class CheckingTakeCorrectItem : MonoBehaviour
                 return;
             }
         }
+    }
+    public bool CorrectState(BleedingWithoutEmbeddedItem_State ReqState)
+    {
+        
+        foreach(BleedingWithoutEmbeddedItem_State _correctbleedingWithoutEmbeddedItem_State in _correctbleedingWithoutEmbeddedItem_State_List)
+        {
+            if(ReqState == BleedingWithoutEmbeddedItem_State.None)
+            {
+                if(_correctbleedingWithoutEmbeddedItem_State == bleedingWithoutEmbeddedItem.BleedingWithoutEmbeddedItem_State)return true;
+            }
+            else
+            {
+                if(_correctbleedingWithoutEmbeddedItem_State == ReqState)return true;
+            }
+            
+        }
+        return false;
     }
 }
