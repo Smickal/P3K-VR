@@ -12,6 +12,8 @@ public class LegTargetConstraint : MonoBehaviour
 
     [SerializeField] Transform _edgeTransform;
     [SerializeField] Transform _outsideTrans;
+
+    [SerializeField] bool isHorizontal = false;
     //IDX LISTING
     // 0 -> Down-Left
     // 1 -> Up-Left
@@ -23,11 +25,17 @@ public class LegTargetConstraint : MonoBehaviour
     {
         //Debug.Log("is it inside ? = " + IsTargetWithinConstraint(_outsideTrans.localPosition));
 
+        if(isHorizontal)
+        {
+            Vector2 pos = GetLocalHorizontalEdge(_outsideTrans.localPosition);    
+            _edgeTransform.localPosition = new Vector3(pos.x, _edgeTransform.localPosition.y, pos.y);
 
-
-        Vector2 pos = GetEdgePosition(_outsideTrans.localPosition);
-        _edgeTransform.localPosition = new Vector3(0f, pos.x, pos.y);
-        
+        }
+        else
+        {
+            Vector2 pos = GetLocalVerticalEdge(_outsideTrans.localPosition);    
+            _edgeTransform.localPosition = new Vector3(0f, pos.x, pos.y);
+        }
     }
 
 
@@ -164,7 +172,7 @@ public class LegTargetConstraint : MonoBehaviour
         //countY = 2 --> middle
         //countY = 4 --> Top
 
-        Debug.Log($"CountX = {countX}, CountY = {countY}");
+        //Debug.Log($"CountX = {countX}, CountY = {countY}");
 
 
         if (countX == 0)
@@ -199,7 +207,7 @@ public class LegTargetConstraint : MonoBehaviour
 
     }
 
-    public Vector2 GetEdgePosition(Vector3 point)
+    public Vector2 GetLocalVerticalEdge(Vector3 point)
     {
         Vector2 curPos = new Vector2(point.y, point.z);
 
@@ -230,6 +238,37 @@ public class LegTargetConstraint : MonoBehaviour
         return curPos;
     }
 
+    public Vector2 GetLocalHorizontalEdge(Vector3 point)
+    {
+        Vector2 curPos = new Vector2(point.x, point.z);
+        //Debug.Log(curPos + ",  " + _targetConstraints[1].localPosition);
+
+        //leftSide
+        if (curPos.x <= _targetConstraints[1].localPosition.x)
+        {
+            curPos = new Vector2(_targetConstraints[1].localPosition.x, curPos.y);    
+        }
+
+        //RightSide
+        else if (curPos.x >= _targetConstraints[0].localPosition.x)
+        {
+            curPos = new Vector2(_targetConstraints[0].localPosition.x, curPos.y);
+        }
+
+        //bot
+        if (curPos.y <= _targetConstraints[1].localPosition.z)
+        {
+            curPos = new Vector2(curPos.x, _targetConstraints[1].localPosition.z);
+        }
+
+        //top
+        else if (curPos.y >= _targetConstraints[3].localPosition.z)
+        {
+            curPos = new Vector2(curPos.x, _targetConstraints[3].localPosition.z);
+        }
+
+            return curPos;
+    }
 
 
     private void OnDrawGizmos()
