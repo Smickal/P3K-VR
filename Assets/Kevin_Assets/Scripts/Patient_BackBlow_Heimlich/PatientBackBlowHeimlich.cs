@@ -18,6 +18,7 @@ public class PatientBackBlowHeimlich : MonoBehaviour
     [SerializeField] GameObject _heimlichContainerOBJ;
     [SerializeField] Rig _heimlichRig;
     [SerializeField] int _heimlichMaxCount = 5;
+    [SerializeField] float _heimlichWeight = 0.4f;
     private bool _heimlichDone;
     public bool HeimlichDone { get { return _heimlichDone; } }
     const string titleChokingHeimlich = "Heimlich";
@@ -27,6 +28,7 @@ public class PatientBackBlowHeimlich : MonoBehaviour
     [SerializeField] GameObject _backBlowContainerOBJ;
     [SerializeField] Rig _backBlowRig;
     [SerializeField] int _backBlowMaxCount = 5;
+    [SerializeField] float _backblowWeight = 0.5f;
     private bool _backBlowDone;
     public bool BackBlowDone { get { return _backBlowDone; } }
     const string titleChokingBackblow = "Backblow";
@@ -51,7 +53,7 @@ public class PatientBackBlowHeimlich : MonoBehaviour
         // _backBlowContainerOBJ.SetActive(true);
 
         _heimlichRig.weight = 0f;
-        _backBlowRig.weight = 0.75f;
+        _backBlowRig.weight = _backblowWeight;
         // _heimlichDone = false;
         // _backBlowDone = false;
         _heimlichMove.ResetCount();
@@ -65,7 +67,7 @@ public class PatientBackBlowHeimlich : MonoBehaviour
         // _backBlowContainerOBJ.SetActive(false);
 
         _backBlowRig.weight = 0f;
-        _heimlichRig.weight = 0.5f;
+        _heimlichRig.weight = _heimlichWeight;
         // _heimlichDone = false;
         // _backBlowDone = false;
         _heimlichMove.ResetCount();
