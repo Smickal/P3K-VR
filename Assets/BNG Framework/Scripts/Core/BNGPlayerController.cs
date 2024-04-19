@@ -435,6 +435,16 @@ namespace BNG {
             }
         }
 
+        public void ChangeCharacterControllerY(float change)
+        {
+            CharacterControllerYOffset += change;
+        }
+        public void ResetCharacterController(float reset)
+        {
+            CharacterControllerYOffset = reset;
+        }
+        
+
 //#if UNITY_EDITOR
 //        public static void DrawWireCapsule(Vector3 _pos, Vector3 _pos2, float _radius, float _height, Color _color = default) {
 //            if (_color != default) {

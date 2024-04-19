@@ -48,6 +48,8 @@ public class PlayerManager : MonoBehaviour, ITurnOffStatic
 
     [Header("Debug Only")]
     public bool checkSave;
+    public bool SetAwakePos;
+    public bool SetOtherPos;
     [Tooltip("Nyalakan ini kalo gamau di set posisi di awal")]
     public bool WantToExploreWorld;
 
@@ -113,6 +115,17 @@ public class PlayerManager : MonoBehaviour, ITurnOffStatic
             MasukQuest = false;
             SetPlayerPosition_InGame_DoP3k();
             // Debug.Log(playerGameObject.position + "satu");
+        }
+
+        if(SetAwakePos)
+        {
+            SetAwakePos = false;
+            SetPlayerPositionAwake();
+        }
+        if(SetOtherPos)
+        {
+            SetOtherPos = false;
+            SetPlayerPostion_InGame_AfterP3K();
         }
         // Debug.Log(playerGameObject.position + "dua");
     }
