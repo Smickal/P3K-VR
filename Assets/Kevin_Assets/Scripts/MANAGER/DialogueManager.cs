@@ -64,7 +64,7 @@ public class DialogueManager : MonoBehaviour, ITurnOffStatic
     [SerializeField]private DialogueFinishActions[] dialogueFinishActions;
 
     [Header("DEBUG ONLY")]
-    // public bool isPlayScene1;
+    public bool isPlayScene1AtStart;
     public bool isPlayScene2;
     public bool isFinishTaskScene2;
 
@@ -77,7 +77,7 @@ public class DialogueManager : MonoBehaviour, ITurnOffStatic
 
     private void Start() 
     {
-        PlayDialogueScene(DialogueListTypeParent.Home_Intro, DialogueListType_Home_Intro.Home_Introduction1);
+        if(isPlayScene1AtStart)PlayDialogueScene(DialogueListTypeParent.Home_Intro, DialogueListType_Home_Intro.Home_Introduction1);
     }
     private void Update() 
     {

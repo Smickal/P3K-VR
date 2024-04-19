@@ -46,7 +46,7 @@ public class Choking_QuestManager : QuestManager, ITurnOffStatic
     {
         OnStartQuest.Invoke();// krn ud ga berhubungan ama questmanager jd hrsnya aman..
         timerInSecs = 0;
-        questManagerUI.SetTimerSlider(timerInSecs);
+        questManagerUI.SetTimerSlider(timerInSecsMax);
 
         questManagerUI.OpenHelper_Choking();
         chokingCourotine = ChokingStart();

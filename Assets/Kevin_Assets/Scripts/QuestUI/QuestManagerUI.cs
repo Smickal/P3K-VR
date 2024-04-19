@@ -126,13 +126,14 @@ public class QuestManagerUI : MonoBehaviour, ITurnOffStatic
     public void HideTimer() {_timerSlider.gameObject.SetActive(false);}
     public void SetTimerSlider(float timerMax)
     {
-        _timerSlider.value = 1;
-        if(gameManager.LevelTypeNow() == LevelP3KType.Bleeding)_timerSlider_bleeding.value = 1;
+        _timerSlider.value = 0;
+        if(gameManager.LevelTypeNow() == LevelP3KType.Bleeding)_timerSlider_bleeding.value = 0;
         _maxTimer = timerMax;
     }
     public void ChangeTimerSlider(float curTime)
     {
         _timerSlider.value = curTime/_maxTimer;
+        Debug.Log(curTime + " " + _maxTimer);
         if(gameManager.LevelTypeNow() == LevelP3KType.Bleeding)_timerSlider_bleeding.value = curTime/_maxTimer;
     }
     public void ActiveQuestBtn_Robot(bool change)
