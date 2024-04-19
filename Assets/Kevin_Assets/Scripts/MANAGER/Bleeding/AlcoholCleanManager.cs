@@ -26,6 +26,7 @@ public class AlcoholCleanManager : MonoBehaviour
 
     float currTime;
     Grabber currentGrabber;
+    Grabber currentNeedToCleanGrabber;
 
     private void Awake()
     {
@@ -45,10 +46,11 @@ public class AlcoholCleanManager : MonoBehaviour
     private void Update()
     {
         if (!IsHolding) return;
+        if (currentGrabber == null || currentNeedToCleanGrabber == null) return;
 
         currTime += Time.deltaTime;
 
-        if (currentGrabber == _leftGrabber && currTime + currLeftTime > _timeToCleanGrabber)
+        if (currentNeedToCleanGrabber == _leftGrabber && currTime + currLeftTime > _timeToCleanGrabber)
         {
             isLeftCleaned = true;
             currTime = 0;
@@ -57,7 +59,7 @@ public class AlcoholCleanManager : MonoBehaviour
             CheckHandsAllClean();
         }
 
-        else if (currentGrabber == _rightGrabber && currTime + currRightTime > _timeToCleanGrabber)
+        else if (currentNeedToCleanGrabber == _rightGrabber && currTime + currRightTime > _timeToCleanGrabber)
         {
             isRightCleaned = true;
             currTime = 0;
@@ -73,20 +75,27 @@ public class AlcoholCleanManager : MonoBehaviour
         currentGrabber = grabber;
     }
 
+    public void RegisterCurrentNeedToCleanGrabber(Grabber grabber)
+    {
+        if (IsHolding == false || grabber == currentGrabber) return; 
+        
+        currentNeedToCleanGrabber = grabber;
+    }
 
     public void SaveCurrentTimeProgress()
     {
 
-        if (currentGrabber == _leftGrabber)
+        if (currentNeedToCleanGrabber== _leftGrabber)
         {
             currLeftTime += currTime;
         }
 
-        else if (currentGrabber == _rightGrabber)
+        else if (currentNeedToCleanGrabber == _rightGrabber)
         {
             currRightTime += currTime;
         }
 
+        currentNeedToCleanGrabber = null;
         currentGrabber = null;
         currTime = 0f;
     }
