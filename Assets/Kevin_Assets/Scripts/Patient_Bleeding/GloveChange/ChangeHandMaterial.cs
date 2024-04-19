@@ -36,15 +36,15 @@ public class ChangeHandMaterial : MonoBehaviour
         {
             if(handsMaterial == HandsMaterial.Normal)
             {
-                // materialHands[i].shader = normalMaterial.shader;
+                materialHands[i].shader = normalMaterial.shader;
                 // materialHands[i].CopyPropertiesFromMaterial(normalMaterial);
-                materialHands[i].parent = normalMaterial;
+                // materialHands[i].parent = normalMaterial;
             }
             else if(handsMaterial == HandsMaterial.Gloves)
             {
-                // materialHands[i].shader = glovesMaterial.shader;
+                materialHands[i].shader = glovesMaterial.shader;
                 // materialHands[i].CopyPropertiesFromMaterial(glovesMaterial);
-                materialHands[i].parent = glovesMaterial;
+                // materialHands[i].parent = glovesMaterial;
             }
         }
         

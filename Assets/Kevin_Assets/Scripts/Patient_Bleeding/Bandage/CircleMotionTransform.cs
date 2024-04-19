@@ -16,6 +16,8 @@ public class CircleMotionTransform : MonoBehaviour
     [SerializeField] Transform _customBandageMidTransform;
     [SerializeField] Transform _customBandageLeftTransform;
     [SerializeField] Transform _customBandageRightTransform;
+    [Tooltip("False kalau gamau di reset hasil karya nya")]
+    [SerializeField] bool wantToRecreateCircleBeforeStart = true;
 
     public List<Transform> CircleTransforms = new List<Transform>();
     public Transform CustomMidTransform { get { return _customBandageMidTransform; } }

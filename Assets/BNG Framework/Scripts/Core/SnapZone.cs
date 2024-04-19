@@ -199,6 +199,7 @@ namespace BNG {
                         for (int x = 0; x < OnlyAllowNames.Count; x++) {
                             string name = OnlyAllowNames[x];
                             if (transformName.Contains(name)) {
+                                // Debug.Log("Check " + gameObject + " " + transformName + " name " + name);
                                 matchFound = true;
                             }
                         }

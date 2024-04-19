@@ -16,12 +16,13 @@ public class Bleeding_QuestManager : QuestManager
     {
         OnStartQuest.Invoke();// krn ud ga berhubungan ama questmanager jd hrsnya aman..
         timerInSecs = 0;
-        questManagerUI.SetTimerSlider(timerInSecs);
+        questManagerUI.SetTimerSlider(timerInSecsMax);
         
         isQuestStart = true;
         
         // questManagerUI.OpenHelper_Bleeding_All();
         
+        // DialogueManager.PlaySceneDialogue(DialogueListType.Home_QuizExplanation_3_14);
         
         questManagerUI.OpenHelper_Bleeding_WithoutItem();
         

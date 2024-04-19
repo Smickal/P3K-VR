@@ -14,6 +14,7 @@ public class QuizManager : MonoBehaviour
     [SerializeField] float _maxTimeSlider = 10f;
 
     [Header("Reference")]
+    [SerializeField] private DialogueManager dialogueManager;
     [SerializeField] KitUiManager _kitUiManager;
 
     [SerializeField] GameObject _questionContainer;
@@ -66,6 +67,10 @@ public class QuizManager : MonoBehaviour
 
     float curTime;
     bool isTimerActivated;
+    private void Awake() 
+    {
+        if(dialogueManager == null)dialogueManager = GameObject.FindObjectOfType<DialogueManager>();
+    }
     private void Start()
     {
         // if(!_isActivated) { return; }
@@ -155,7 +160,7 @@ public class QuizManager : MonoBehaviour
         }
         
         curQuestion = questionQ.Dequeue();
-        PlayDialogueNeeded(curQuestion.dialogueListTypeQuestionStart);
+        PlayDialogueNeeded(DialogueListTypeParent.Home_Quiz, curQuestion.dialogueListTypeQuestionStart);
 
         //Create Question UI
         _questionContainer.SetActive(true);
@@ -191,14 +196,14 @@ public class QuizManager : MonoBehaviour
             //Right Answer!!!
             _answerText.SetText(_answerRightText);
             _answerText.color = _answerRightColor;
-            PlayDialogueNeeded(DialogueListType.Home_QuizRight);
+            PlayDialogueNeeded(DialogueListTypeParent.Home_Quiz,DialogueListType_Home_Quiz.Home_QuizRight);
         }
         else
         {
             //Wrong Answer!!
             _answerText.SetText(_answerWrongText);
             _answerText.color = _answerWrongColor;
-            PlayDialogueNeeded(DialogueListType.Home_QuizWrong);
+            PlayDialogueNeeded(DialogueListTypeParent.Home_Quiz,DialogueListType_Home_Quiz.Home_QuizWrong);
 
         }
         _resultAnswer.SetText(curQuestion.GetAnswer());
@@ -212,7 +217,7 @@ public class QuizManager : MonoBehaviour
         _questionContainer.SetActive(false);
         _resultContainer.SetActive(true);
         _answerText.SetText(_answerNotInTimeText);
-        PlayDialogueNeeded(DialogueListType.Home_QuizLate);
+        PlayDialogueNeeded(DialogueListTypeParent.Home_Quiz, DialogueListType_Home_Quiz.Home_QuizLate);
         _resultAnswer.SetText(curQuestion.GetAnswer());
 
     }
@@ -228,7 +233,7 @@ public class QuizManager : MonoBehaviour
         _currentExplanationImages = curQuestion.ExplanationSprites;
 
         _exImage.sprite = _currentExplanationImages[curExplainImageIdx];
-        PlayDialogueNeeded(curQuestion.dialogueListTypeExplanations[curExplainImageIdx]);
+        PlayDialogueNeeded(DialogueListTypeParent.Home_QuizExplanation,curQuestion.dialogueListTypeExplanations[curExplainImageIdx]);
         curExplainImageIdx++;
 
 
@@ -251,10 +256,11 @@ public class QuizManager : MonoBehaviour
 
     }
 
-    private void PlayDialogueNeeded(DialogueListType dialogueListType)
+    private void PlayDialogueNeeded<T>(DialogueListTypeParent parent, T enumValue)where T : struct, System.Enum
     {
-        Debug.Log("Masuk sinikan?");
+        // Debug.Log("Masuk sinikan?");
         DialogueManager.HideFinishedDialogue_AfterFinishingTask();
-        DialogueManager.PlaySceneDialogue(dialogueListType);
+        dialogueManager.PlayDialogueScene(parent, enumValue);
+        // DialogueManager.PlaySceneDialogue(dialogueListType);
     }
 }

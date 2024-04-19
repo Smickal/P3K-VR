@@ -11,7 +11,7 @@ public class GloveGrabbableEvent : GrabbableEvents
     {
         base.OnGrab(grabber);
 
-        _manager.ChangeToGlove();
+        if(_manager)_manager.ChangeToGlove();
         grab.Release(Vector3.zero, Vector3.zero);
     }
 }

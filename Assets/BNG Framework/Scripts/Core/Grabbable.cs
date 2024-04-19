@@ -55,6 +55,11 @@ namespace BNG {
         protected bool usedGravity;
         protected CollisionDetectionMode initialCollisionMode;
         protected RigidbodyInterpolation initialInterpolationMode;
+        [Header("This is for wasKinematic dan Parent biar ga aneh pas diduplikat :D")]
+        [Tooltip("if true, wasKinematic wont keep it starting kinematic")]
+        [SerializeField]public bool wasKinematicKeepFalse;
+        [Tooltip("if true, originalParent wont keep it starting parent")]
+        [SerializeField]public bool originalParentKeepNull;
 
         /// <summary>
         /// Is the object being pulled towards the Grabber
@@ -503,7 +508,10 @@ namespace BNG {
             if (rigid) {
                 initialCollisionMode = rigid.collisionDetectionMode;
                 initialInterpolationMode = rigid.interpolation;
-                wasKinematic = rigid.isKinematic;
+
+                // wasKinematic = rigid.isKinematic;
+                if(!wasKinematicKeepFalse)wasKinematic = rigid.isKinematic;
+                else wasKinematic = false;
                 usedGravity = rigid.useGravity;
 
                 // Allow our rigidbody to rotate quickly
@@ -511,7 +519,10 @@ namespace BNG {
             }
 
             // Store initial parent so we can reset later if needed
-            UpdateOriginalParent(transform.parent);
+            // UpdateOriginalParent(transform.parent);
+            if(!originalParentKeepNull)UpdateOriginalParent(transform.parent);
+            else UpdateOriginalParent(null);
+            
 
             validGrabbers = new List<Grabber>();
 
