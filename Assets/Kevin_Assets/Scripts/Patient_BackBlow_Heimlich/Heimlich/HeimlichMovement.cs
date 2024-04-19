@@ -17,6 +17,7 @@ public class HeimlichMovement : MonoBehaviour
     [Header("Grabber - Controller")]
     [SerializeField] GameObject _leftGrabber;
     [SerializeField] GameObject _rightGrabber;
+
     [Header("Grabber - HT")]
     [SerializeField] GameObject _leftGrabberHT;
     [SerializeField] GameObject _rightGrabberHT;
@@ -30,6 +31,9 @@ public class HeimlichMovement : MonoBehaviour
     [SerializeField] Transform _heimlichTargetColliderTr;
     [SerializeField] Transform _targetMaxMovTr;
     [SerializeField] Vector3 _targetTRStartPos;
+
+    [Header("ConstraintMovement")]
+    [SerializeField] LegTargetConstraint _targetConstraint;
 
     [Header("Debug")]
     [SerializeField] bool _isDebug = true;
@@ -73,7 +77,6 @@ public class HeimlichMovement : MonoBehaviour
 
             //move Target According to left&right grabber
             _targetTr.position = new Vector3(_targetTr.position.x, midYAxis, midZAxis);
-
 
             //Calculate TargetMovement velocity
             prevDistance = curDistance;
