@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Runtime.Remoting.Metadata;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.Rendering;
 
 public class LegMoveManager : MonoBehaviour
 {
@@ -17,6 +19,11 @@ public class LegMoveManager : MonoBehaviour
     [SerializeField] Transform _endFeetPosition;
     [SerializeField] Transform _targetTransform;
 
+    [Space(4)]
+    [Header("OnMovementDone-UnityEvent")]
+    [Space(2)]
+    public UnityEvent OnMovementDone = new UnityEvent();
+
     bool isGrabbingFoot = false;
     bool isDonePuttingBrick = false;
 
@@ -24,6 +31,7 @@ public class LegMoveManager : MonoBehaviour
 
     Vector3 startingPos;
     Rigidbody legGrabbableRB;
+    Grabber currentGrabber;
 
     private void Awake()
     {
@@ -43,8 +51,8 @@ public class LegMoveManager : MonoBehaviour
         if (!isGrabbingFoot) return;
         if (legGrabbableRB.velocity.magnitude >= _maxDisplacementVelocity)
         {
-            
-
+            currentGrabber.TryRelease();
+            OnReleaseFoot();
             return;
         }
 
@@ -69,7 +77,10 @@ public class LegMoveManager : MonoBehaviour
     public void OnReleaseFoot()
     {
         if(!isDonePuttingBrick)
+        {
             _brickSnapZone.gameObject.SetActive(false);
+            currentGrabber = null;
+        }
 
         isGrabbingFoot = false;
     }
@@ -77,6 +88,9 @@ public class LegMoveManager : MonoBehaviour
     public void OnSnapBrick()
     {
         _brickSnapZone.gameObject.SetActive(true);
+        //StopMoveLeg
+        //DisableLegSnapZone
+        //DisableBrickSnapZone
 
         isGrabbingFoot = false;
         _brickSnapZone.CanRemoveItem = false;
@@ -86,11 +100,13 @@ public class LegMoveManager : MonoBehaviour
 
         isDonePuttingBrick = true;
 
+        OnMovementDone.Invoke();
 
-        //StopMoveLeg
-        //DisableLegSnapZone
-        //DisableBrickSnapZone
+    }
 
+    public void RegisterGrab(Grabber grabber)
+    {
+       currentGrabber = grabber;
     }
 
 }
