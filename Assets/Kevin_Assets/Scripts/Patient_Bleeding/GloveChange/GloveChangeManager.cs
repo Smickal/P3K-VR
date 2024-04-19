@@ -16,7 +16,9 @@ public class GloveChangeManager : MonoBehaviour
 
     public void ChangeToGlove()
     {
-        if(GameManager.CheckLevelTypeNow() != LevelP3KType.Bleeding || GameManager.CheckInGameModeNow() != InGame_Mode.FirstAid || BleedingWithoutEmbeddedItem.StateFirstAidNow() != BleedingWithoutEmbeddedItem_State.WearGloves)return;
+        if(GameManager.CheckLevelTypeNow() != LevelP3KType.Bleeding || 
+            GameManager.CheckInGameModeNow() != InGame_Mode.FirstAid || 
+            BleedingWithoutEmbeddedItem.StateFirstAidNow() != BleedingWithoutEmbeddedItem_State.WearGloves)return;
         _handModelSelector.ChangeHandsModel(_gloveHandIdx, false);
 
         isDoneChanging = true;

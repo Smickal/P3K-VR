@@ -8,7 +8,7 @@ public class BandageWithItemManager : MonoBehaviour
 {
     [SerializeField] SnapZone[] _bandageSnapZones;
     [SerializeField] BandageMovement _bandageMovement;
-    [SerializeField]private GameObject circleMovement;
+    [SerializeField] private GameObject circleMovement;
 
 
 
