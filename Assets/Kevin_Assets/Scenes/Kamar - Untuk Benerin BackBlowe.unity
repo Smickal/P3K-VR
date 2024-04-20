@@ -4969,12 +4969,6 @@ MonoBehaviour:
     - {x: 0.09111304, y: -0.00407137, z: -0.02812923, w: 0.9954349}
     - {x: -0.037616655, y: 0.042937722, z: 0.013286051, w: 0.99828094}
     - {x: 0.0006447434, y: -0.049170665, z: 0.024018828, w: 0.99850136}
---- !u!1 &195837620 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6946666874318475649, guid: 4ac7df741a9c0a2418ec19477729ee3d,
-    type: 3}
-  m_PrefabInstance: {fileID: 1194111218}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &198505800
 GameObject:
   m_ObjectHideFlags: 0
@@ -10120,6 +10114,7 @@ MonoBehaviour:
   CanDropItem: 1
   CanSwapItem: 1
   CanRemoveItem: 1
+  UseOffset: 1
   ScaleItem: 1
   DisableColliders: 1
   DuplicateItemOnGrab: 0
@@ -14373,6 +14368,7 @@ MonoBehaviour:
   CanDropItem: 1
   CanSwapItem: 1
   CanRemoveItem: 1
+  UseOffset: 1
   ScaleItem: 1
   DisableColliders: 1
   DuplicateItemOnGrab: 1
@@ -23905,8 +23901,7 @@ MonoBehaviour:
   dialogueManager: {fileID: 0}
   patient_Bleeding: {fileID: 0}
   bleedingWithoutEmbeddedItem: {fileID: 0}
-  _correctbleedingWithoutEmbeddedItem_State: 2
-  _correctbleedingWithoutEmbeddedItem_State2: 4
+  _correctbleedingWithoutEmbeddedItem_State_List: 
 --- !u!114 &966895722
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26998,6 +26993,8 @@ MonoBehaviour:
     isTutorialFinish: 0
     levelDataMiniList: []
   checkSave: 0
+  SetAwakePos: 0
+  SetOtherPos: 0
   WantToExploreWorld: 0
   MasukQuest: 0
 --- !u!114 &1066109242
@@ -27099,8 +27096,8 @@ MonoBehaviour:
   DebugChooseWithoutItemFirst: 0
   isBWIDone: 0
   isBWDone: 0
-  hasDissatisfaction: 1
   isTrashEverywhere: 0
+  totalDissatisfactionMax: 0
   patient_Bleeding: {fileID: 1706366130}
 --- !u!114 &1066109245
 MonoBehaviour:
@@ -30519,8 +30516,7 @@ MonoBehaviour:
   dialogueManager: {fileID: 0}
   patient_Bleeding: {fileID: 0}
   bleedingWithoutEmbeddedItem: {fileID: 0}
-  _correctbleedingWithoutEmbeddedItem_State: 2
-  _correctbleedingWithoutEmbeddedItem_State2: 4
+  _correctbleedingWithoutEmbeddedItem_State_List: 
 --- !u!114 &1142108633
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31374,26 +31370,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 593873502900240332, guid: 4ac7df741a9c0a2418ec19477729ee3d,
-        type: 3}
-      propertyPath: m_Size.x
-      value: 0.034387697
-      objectReference: {fileID: 0}
-    - target: {fileID: 593873502900240332, guid: 4ac7df741a9c0a2418ec19477729ee3d,
-        type: 3}
-      propertyPath: m_Size.z
-      value: 0.04042391
-      objectReference: {fileID: 0}
-    - target: {fileID: 593873502900240332, guid: 4ac7df741a9c0a2418ec19477729ee3d,
-        type: 3}
-      propertyPath: m_Center.x
-      value: -0.0121938195
-      objectReference: {fileID: 0}
-    - target: {fileID: 593873502900240332, guid: 4ac7df741a9c0a2418ec19477729ee3d,
-        type: 3}
-      propertyPath: m_Center.z
-      value: 0.005211955
-      objectReference: {fileID: 0}
     - target: {fileID: 2093207351254462809, guid: 4ac7df741a9c0a2418ec19477729ee3d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -31628,26 +31604,6 @@ PrefabInstance:
         type: 3}
       propertyPath: TeleportFadeSpeed
       value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 4433843000557276687, guid: 4ac7df741a9c0a2418ec19477729ee3d,
-        type: 3}
-      propertyPath: m_Size.x
-      value: 0.034725696
-      objectReference: {fileID: 0}
-    - target: {fileID: 4433843000557276687, guid: 4ac7df741a9c0a2418ec19477729ee3d,
-        type: 3}
-      propertyPath: m_Size.z
-      value: 0.042704165
-      objectReference: {fileID: 0}
-    - target: {fileID: 4433843000557276687, guid: 4ac7df741a9c0a2418ec19477729ee3d,
-        type: 3}
-      propertyPath: m_Center.x
-      value: -0.003969416
-      objectReference: {fileID: 0}
-    - target: {fileID: 4433843000557276687, guid: 4ac7df741a9c0a2418ec19477729ee3d,
-        type: 3}
-      propertyPath: m_Center.z
-      value: 0.006352082
       objectReference: {fileID: 0}
     - target: {fileID: 4786920997832897282, guid: 4ac7df741a9c0a2418ec19477729ee3d,
         type: 3}
@@ -46759,6 +46715,7 @@ MonoBehaviour:
   CanDropItem: 1
   CanSwapItem: 1
   CanRemoveItem: 1
+  UseOffset: 1
   ScaleItem: 1
   DisableColliders: 1
   DuplicateItemOnGrab: 1
@@ -47472,6 +47429,7 @@ MonoBehaviour:
   BGM: []
   theTrueBGM: {fileID: 0}
   audioMixer: {fileID: 24100000, guid: bed32c7cabe57e94aa2c2b1e971474f7, type: 2}
+  SFXAudioMixer: {fileID: 0}
 --- !u!135 &1736203975 stripped
 SphereCollider:
   m_CorrespondingSourceObject: {fileID: 1221480787203356845, guid: 75ab4b45124a2bb4082739ddc1d78c6f,
@@ -51612,10 +51570,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be1d097403b424b46b1c90b1c01eb010, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _heightConnectOBJ:
-  - {fileID: 1194111226}
-  - {fileID: 195837620}
-  - {fileID: 2029529169}
+  _heightConnectOBJ: {fileID: 0}
   minHeigth: 0.9
   maxHeight: 1.1
   addHeight: 0.1
@@ -54743,12 +54698,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2022934051}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &2029529169 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6074074610480678380, guid: 4ac7df741a9c0a2418ec19477729ee3d,
-    type: 3}
-  m_PrefabInstance: {fileID: 1194111218}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2032407261
 GameObject:
   m_ObjectHideFlags: 0

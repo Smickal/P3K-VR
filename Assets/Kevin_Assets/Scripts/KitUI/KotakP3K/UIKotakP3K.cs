@@ -14,11 +14,13 @@ public class UIKotakP3K : BaseKitUI, ITurnOffStatic
     [SerializeField] TMP_Text _toolsNameText;
     [SerializeField] Image _descIconIMG;
     [SerializeField] TMP_Text _descText;
+    [SerializeField] TMP_Text _descHowToUseText;
 
     [Header("DescriptionDetails_Outside Glossary")]
     [SerializeField] TMP_Text _toolsName_OutsideGlossary_Text;
     [SerializeField] Image _descIcon_OutsideGlossary_IMG;
     [SerializeField] TMP_Text _desc_OutsideGlossary_Text;
+    [SerializeField] TMP_Text _desc_OutsideGlossary_HowToUseText;
 
 
     [Header("Reference")]
@@ -88,10 +90,12 @@ public class UIKotakP3K : BaseKitUI, ITurnOffStatic
         _choiceContainerOBJ.SetActive(false);
         _descContainerOBJ.SetActive(true);
 
-        _toolsNameText.SetText(scriptableData.KitName.ToString());
+        string toolsName = scriptableData.KitName.ToString();
+        toolsName = toolsName.Replace('_',' ');
+        _toolsNameText.SetText(toolsName);
         _descIconIMG.sprite = scriptableData.KitIMG;
         _descText.SetText(scriptableData.KitDescText);
-
+        _descHowToUseText.SetText(scriptableData.HowToUse_Text);
     }
 
     private void UnlockAKit(SOKotakP3K scriptableData)
@@ -122,9 +126,12 @@ public class UIKotakP3K : BaseKitUI, ITurnOffStatic
         
         
         scriptableOBJ_OutsideGlossary_Now = scriptableData;
-        _toolsName_OutsideGlossary_Text.SetText(scriptableData.KitName.ToString());
+        string toolsName = scriptableData.KitName.ToString();
+        toolsName = toolsName.Replace('_',' ');
+        _toolsName_OutsideGlossary_Text.SetText(toolsName);
         _descIcon_OutsideGlossary_IMG.sprite = scriptableData.KitIMG;
         _desc_OutsideGlossary_Text.SetText(scriptableData.KitDescText);
+        _desc_OutsideGlossary_HowToUseText.SetText(scriptableData.HowToUse_Text);
     }
     private void CloseDesc_OutsideGlossary(SOKotakP3K scriptableData)
     {

@@ -102,4 +102,8 @@ public class KitUiManager : MonoBehaviour
             obj.gameObject.SetActive(false);
         }
     }
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
 }

@@ -119,6 +119,7 @@ Transform:
   m_Children:
   - {fileID: 1528220727612044339}
   - {fileID: 7084055783050227309}
+  - {fileID: 7362599884712579116}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &5154532161817432548
@@ -335,6 +336,9 @@ GameObject:
   - component: {fileID: 295923429426240620}
   - component: {fileID: 298514153958197458}
   - component: {fileID: 5042169555861884752}
+  - component: {fileID: 5790226528466634094}
+  - component: {fileID: 4133577654793034599}
+  - component: {fileID: 9052218069453041143}
   m_Layer: 0
   m_Name: AlcoholWipes (2)
   m_TagString: Untagged
@@ -351,12 +355,12 @@ Transform:
   m_GameObject: {fileID: 4997816314732772931}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.010000005, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8743180140154405174}
-  m_Father: {fileID: 7084055783050227309}
+  m_Father: {fileID: 3426373786786476792}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &295923429426240620
 BoxCollider:
@@ -477,6 +481,45 @@ MonoBehaviour:
   UseCustomInspector: 1
   lastFlickTime: 0
   FlickForce: 1
+--- !u!114 &5790226528466634094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4997816314732772931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d6decd6d291cd5489cec534b3671f2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4133577654793034599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4997816314732772931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47779588661235140b97e2b22963cde3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &9052218069453041143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4997816314732772931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efea265e26a1dcc4d988d2ac4879c67c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnDestroyTrash:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &5063500505339574979
 GameObject:
   m_ObjectHideFlags: 0
@@ -974,13 +1017,14 @@ GameObject:
   - component: {fileID: 5929661562205057708}
   - component: {fileID: 691895980952803189}
   - component: {fileID: 1721292213896806948}
+  - component: {fileID: 3129852782059313552}
   m_Layer: 2
   m_Name: SnapPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7084055783050227309
 Transform:
   m_ObjectHideFlags: 0
@@ -995,7 +1039,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7187598086413398545}
-  - {fileID: 7362599884712579116}
   m_Father: {fileID: 3426373786786476792}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!135 &1102030190875949912
@@ -1036,6 +1079,7 @@ MonoBehaviour:
   CanDropItem: 1
   CanSwapItem: 0
   CanRemoveItem: 1
+  UseOffset: 1
   ScaleItem: 0.1
   DisableColliders: 1
   DuplicateItemOnGrab: 1
@@ -1048,10 +1092,34 @@ MonoBehaviour:
   SoundOnUnsnap: {fileID: 0}
   OnSnapEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3129852782059313552}
+        m_TargetAssemblyTypeName: SnapZoneSmallTrash, Assembly-CSharp
+        m_MethodName: RemoveTrashSnapIn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnDetachEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3129852782059313552}
+        m_TargetAssemblyTypeName: SnapZoneSmallTrash, Assembly-CSharp
+        m_MethodName: AddTrashSnapOut
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   ClosestGrabbable: {fileID: 0}
 --- !u!114 &5929661562205057708
 MonoBehaviour:
@@ -1171,3 +1239,16 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &3129852782059313552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7780016047761228851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13ea861ea200498418b38c62409a7939, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  snapZone: {fileID: 3765606533820546578}

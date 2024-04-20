@@ -60,7 +60,9 @@ namespace DialogueSystem
             if(dialogueInput.dialogueTalkerType == DialogueTalkerType.character) // cek list enum dialoguetype dr dialoguetalker
             {
                 _nametextContainer.color = Talker._textColor;
-                _nametextContainer.text = Talker.charaName.ToString() + " :";
+                string _talkerName = Talker.charaName.ToString();
+                _talkerName = _talkerName.Replace('_',' ');
+                _nametextContainer.text = _talkerName + " :";
                 _nametextContainer.gameObject.SetActive(true);
             }
             else

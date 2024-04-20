@@ -8,7 +8,9 @@ public class Bleeding_QuestManager : QuestManager
     IEnumerator bleedingCoroutine;
     public bool DebugChooseWithItemFirst, DebugChooseWithoutItemFirst;
     public bool isBWIDone, isBWDone;
-    public bool hasDissatisfaction = true, isTrashEverywhere = false;
+    [SerializeField] bool isTrashEverywhere = true;
+    private int totalDissatisfaction;
+    [SerializeField] int totalDissatisfactionMax;
     [Header ("All Bleeding GameObject and Manager - Without Item")]
     [SerializeField]private Patient_Bleeding patient_Bleeding;
     
@@ -32,6 +34,10 @@ public class Bleeding_QuestManager : QuestManager
     }
     protected override void ScoreCounter()
     {
+        if(TrashCountManager.Instance)
+        {
+            isTrashEverywhere = TrashCountManager.Instance.IsThereAnySmallTrash();
+        }
         questManagerUI.CloseHelper_Bleeding_WithItem();
         if(isTimerUp)
         {
@@ -42,7 +48,7 @@ public class Bleeding_QuestManager : QuestManager
             if(patient_Bleeding.IsDoneFirstAid)
             {
                 score = ScoreName.Small_Happy_Face;
-                if(!hasDissatisfaction && !isTrashEverywhere) score = ScoreName.Big_Happy_Face;
+                if(!isTrashEverywhere && totalDissatisfaction <= totalDissatisfactionMax) score = ScoreName.Big_Happy_Face;
             }
         }
         base.ScoreCounter();
@@ -50,8 +56,11 @@ public class Bleeding_QuestManager : QuestManager
 
     private IEnumerator Bleeding()
     {
-        yield return new WaitUntil(()=> patient_Bleeding.IsDoneFirstAid);
+        yield return new WaitUntil(()=> patient_Bleeding.IsDoneFirstAid && isQuestStart && !TrashCountManager.Instance.IsThereAnySmallTrash());
+
+
         bleedingCoroutine = null;
+        
         if(isQuestStart)
         {
             isTimerUp = true;
@@ -64,5 +73,9 @@ public class Bleeding_QuestManager : QuestManager
         if(bleedingCoroutine != null)StopCoroutine(bleedingCoroutine);
         patient_Bleeding.StopCoroutines();
         base.ResetQuest();
+    }
+    public void PatientDissatisfy()
+    {
+        totalDissatisfaction++;
     }
 }
