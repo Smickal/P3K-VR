@@ -6,7 +6,7 @@ using BNG;
 public class BackBlowFullCollider : MonoBehaviour
 {
     [SerializeField]bool hitFull;
-    public bool HitFull { get { return hitFull; } }
+    public bool HitFull { get { return hitFull; }set { hitFull = value; } }
     // [SerializeField] BackBlowMovement backBlowMovement;
     [SerializeField] Collider _leftGrabber;
     [SerializeField] Collider _rightGrabber;
@@ -34,7 +34,7 @@ public class BackBlowFullCollider : MonoBehaviour
         if(!InteractToolsController.CheckIsHandTrackOn()) if(!(other == _leftGrabber || other == _rightGrabber || other == _leftGrabberFull || other == _rightGrabberFull)) return;
         else if(InteractToolsController.CheckIsHandTrackOn()) if(!(other == _leftGrabberHT || other == _rightGrabberHT || other == _leftGrabberHTFull || other == _rightGrabberHTFull)) return;
         // if(other != firstColliderWhoTrigger)return;
-        hitFull = false;
+        // hitFull = false;
         firstColliderWhoTrigger = null;
     }
 }

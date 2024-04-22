@@ -7,7 +7,10 @@ public class MoveLegTarget : MonoBehaviour
     [SerializeField] Transform _target;
 
 
-    // Update is called once per frame
+    private void Start() 
+    {
+        transform.position = _target.position;
+    }
     void Update()
     {
         transform.position = _target.position;

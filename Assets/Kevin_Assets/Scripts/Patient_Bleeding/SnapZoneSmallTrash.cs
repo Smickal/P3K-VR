@@ -19,6 +19,7 @@ public class SnapZoneSmallTrash : MonoBehaviour
     }
     public void RemoveTrashSnapIn()
     {
+        if(snapZone.HeldItem == null)return;
         smallTrashItem = snapZone.HeldItem.GetComponent<SmallTrashItem>();
         if(smallTrashItem == null)return;
         Debug.Log("Bukan Sampah" + smallTrashItem.name);
