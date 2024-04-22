@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AlcoholWipes : GrabbableEvents
+public class AlcoholWipes : GrabbableEvents, ISmallTrash
 {
     Grabber curGrabber;
 
@@ -40,6 +40,9 @@ public class AlcoholWipes : GrabbableEvents
         alcoholManager.SaveCurrentTimeProgress();
     }
 
-
+    public void DestroyTrash()
+    {
+        Destroy(this.gameObject);
+    }
 
 }

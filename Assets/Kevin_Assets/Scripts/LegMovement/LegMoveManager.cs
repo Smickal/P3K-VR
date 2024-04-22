@@ -18,6 +18,8 @@ public class LegMoveManager : MonoBehaviour
     [SerializeField] Transform _legGrabbable;
     [SerializeField] Transform _endFeetPosition;
     [SerializeField] Transform _targetTransform;
+    private bool isMovementDone;
+    public bool IsMovementDone{get{return isMovementDone;}}
 
     [Space(4)]
     [Header("OnMovementDone-UnityEvent")]
@@ -32,6 +34,8 @@ public class LegMoveManager : MonoBehaviour
     Vector3 startingPos;
     Rigidbody legGrabbableRB;
     Grabber currentGrabber;
+    [Header("Debug Only")]
+    public bool setEndPos;
 
     private void Awake()
     {
@@ -46,13 +50,20 @@ public class LegMoveManager : MonoBehaviour
 
     private void Update()
     {
+        if(setEndPos)
+        {
+            setEndPos = false;
+            _legSnapZone.transform.position = _endFeetPosition.position;
+
+        }
         //Debug.Log(legGrabbableRB.velocity.magnitude);
 
         if (!isGrabbingFoot) return;
         if (legGrabbableRB.velocity.magnitude >= _maxDisplacementVelocity)
         {
-            currentGrabber.TryRelease();
-            OnReleaseFoot();
+            Debug.Log("Kecepetan WOi");
+            // currentGrabber.TryRelease();
+            // OnReleaseFoot();
             return;
         }
 
@@ -88,6 +99,8 @@ public class LegMoveManager : MonoBehaviour
     public void OnSnapBrick()
     {
         _brickSnapZone.gameObject.SetActive(true);
+        // currentGrabber.TryRelease();
+        // OnReleaseFoot();
         //StopMoveLeg
         //DisableLegSnapZone
         //DisableBrickSnapZone
@@ -98,8 +111,9 @@ public class LegMoveManager : MonoBehaviour
         _legSnapZone.transform.position = _endFeetPosition.position;
         _legSnapZone.CanRemoveItem = false;
 
+        
         isDonePuttingBrick = true;
-
+        isMovementDone = true;
         OnMovementDone.Invoke();
 
     }

@@ -35,7 +35,8 @@ namespace BNG {
         /// </summary>
         [Tooltip("If false the snap zone cannot have it's content replaced.")]
         public bool CanRemoveItem = true;
-
+        [Tooltip("If false the snap zone wont use the offset that's already in the item")]
+        public bool UseOffset = true;
         /// <summary>
         /// Multiply Item Scale times this when in snap zone.
         /// </summary>
@@ -102,6 +103,7 @@ namespace BNG {
         [HideInInspector]
         public Grabbable ClosestGrabbable;
 
+        
         SnapZoneOffset offset;
 
         void Start() {
@@ -285,6 +287,11 @@ namespace BNG {
             // Is there an offset to apply?
             SnapZoneOffset off = grab.GetComponent<SnapZoneOffset>();
             if (off) {
+                if(!UseOffset)
+                {
+                    off.LocalPositionOffset = Vector3.zero;
+                    off.LocalRotationOffset = Vector3.zero;
+                }
                 offset = off;
             }
             else {

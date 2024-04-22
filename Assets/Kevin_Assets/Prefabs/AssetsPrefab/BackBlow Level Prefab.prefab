@@ -10328,7 +10328,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6006305256170323179}
+  - {fileID: 4384558854911881200}
   - {fileID: 3588683521045005115}
   - {fileID: 9195145785126631048}
   - {fileID: 7299583945681159872}
@@ -28369,7 +28369,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3071075232153079408}
   m_Layer: 0
-  m_Name: Cylinder
+  m_Name: PlayerTriggerCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37316,80 +37316,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55b646e2949ffb74c9ca8c512b4411df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1001 &1210835494691680156
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 486990342518628574}
-    m_Modifications:
-    - target: {fileID: 4870483264216748919, guid: ea682afe9c00dd545953d2b86ee928f4,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -10.475
-      objectReference: {fileID: 0}
-    - target: {fileID: 4870483264216748919, guid: ea682afe9c00dd545953d2b86ee928f4,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4870483264216748919, guid: ea682afe9c00dd545953d2b86ee928f4,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -8.495
-      objectReference: {fileID: 0}
-    - target: {fileID: 4870483264216748919, guid: ea682afe9c00dd545953d2b86ee928f4,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: -0.0306234
-      objectReference: {fileID: 0}
-    - target: {fileID: 4870483264216748919, guid: ea682afe9c00dd545953d2b86ee928f4,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4870483264216748919, guid: ea682afe9c00dd545953d2b86ee928f4,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.999531
-      objectReference: {fileID: 0}
-    - target: {fileID: 4870483264216748919, guid: ea682afe9c00dd545953d2b86ee928f4,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4870483264216748919, guid: ea682afe9c00dd545953d2b86ee928f4,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4870483264216748919, guid: ea682afe9c00dd545953d2b86ee928f4,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -183.51
-      objectReference: {fileID: 0}
-    - target: {fileID: 4870483264216748919, guid: ea682afe9c00dd545953d2b86ee928f4,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7582346280188142017, guid: ea682afe9c00dd545953d2b86ee928f4,
-        type: 3}
-      propertyPath: m_Name
-      value: Pasien_Heimlich_BackBlow (1)
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: ea682afe9c00dd545953d2b86ee928f4, type: 3}
---- !u!4 &6006305256170323179 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4870483264216748919, guid: ea682afe9c00dd545953d2b86ee928f4,
-    type: 3}
-  m_PrefabInstance: {fileID: 1210835494691680156}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1542780385368184955
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -39193,4 +39119,78 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 292154147353046212, guid: 62f4987b7e086ff43ab61a31ee443048,
     type: 3}
   m_PrefabInstance: {fileID: 9113797510459661251}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &9173405508383489159
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 486990342518628574}
+    m_Modifications:
+    - target: {fileID: 4870483264216748919, guid: ea682afe9c00dd545953d2b86ee928f4,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -10.475
+      objectReference: {fileID: 0}
+    - target: {fileID: 4870483264216748919, guid: ea682afe9c00dd545953d2b86ee928f4,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4870483264216748919, guid: ea682afe9c00dd545953d2b86ee928f4,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -8.495
+      objectReference: {fileID: 0}
+    - target: {fileID: 4870483264216748919, guid: ea682afe9c00dd545953d2b86ee928f4,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.0306234
+      objectReference: {fileID: 0}
+    - target: {fileID: 4870483264216748919, guid: ea682afe9c00dd545953d2b86ee928f4,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4870483264216748919, guid: ea682afe9c00dd545953d2b86ee928f4,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.999531
+      objectReference: {fileID: 0}
+    - target: {fileID: 4870483264216748919, guid: ea682afe9c00dd545953d2b86ee928f4,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4870483264216748919, guid: ea682afe9c00dd545953d2b86ee928f4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4870483264216748919, guid: ea682afe9c00dd545953d2b86ee928f4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -183.51
+      objectReference: {fileID: 0}
+    - target: {fileID: 4870483264216748919, guid: ea682afe9c00dd545953d2b86ee928f4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7582346280188142017, guid: ea682afe9c00dd545953d2b86ee928f4,
+        type: 3}
+      propertyPath: m_Name
+      value: Pasien_Heimlich_BackBlow 2
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ea682afe9c00dd545953d2b86ee928f4, type: 3}
+--- !u!4 &4384558854911881200 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4870483264216748919, guid: ea682afe9c00dd545953d2b86ee928f4,
+    type: 3}
+  m_PrefabInstance: {fileID: 9173405508383489159}
   m_PrefabAsset: {fileID: 0}

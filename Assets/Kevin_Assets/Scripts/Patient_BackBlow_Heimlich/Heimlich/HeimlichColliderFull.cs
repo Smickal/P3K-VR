@@ -7,12 +7,12 @@ public class HeimlichColliderFull : MonoBehaviour
 {
     [SerializeField]bool hitFull;
     public bool HitFull { get { return hitFull; } }
-    [SerializeField] Grabber _leftGrabber;
-    [SerializeField] Grabber _rightGrabber;
+    [SerializeField] Grabbable _leftGrabbable;
+    [SerializeField] Grabbable _rightGrabbable;
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log(other.gameObject);
-        if(!(other.gameObject == _leftGrabber.gameObject || other.gameObject == _rightGrabber.gameObject)) return;
+        if(!(other.gameObject == _leftGrabbable.gameObject || other.gameObject == _rightGrabbable.gameObject)) return;
         hitFull = true;
 
     }
@@ -20,7 +20,7 @@ public class HeimlichColliderFull : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if(!(other.gameObject == _leftGrabber.gameObject || other.gameObject == _rightGrabber.gameObject)) return;
+        if(!(other.gameObject == _leftGrabbable.gameObject || other.gameObject == _rightGrabbable.gameObject)) return;
         hitFull = false;
     }
 }

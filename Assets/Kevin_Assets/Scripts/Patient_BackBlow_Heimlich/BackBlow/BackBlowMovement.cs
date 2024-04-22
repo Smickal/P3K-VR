@@ -204,6 +204,7 @@ public class BackBlowMovement : MonoBehaviour
             scoreTemp = (_reducedScore/2f);
             if(_bbFull.HitFull)
             {
+                _bbFull.HitFull = false;
                 if(isFullScores)
                 {
                     // backblowCount++;
@@ -242,6 +243,7 @@ public class BackBlowMovement : MonoBehaviour
         //Check if the ones triggered is the same as the ones exiting
         if (currentHitCollider == collider)
         {
+            _bbFull.HitFull = false;
             isHittingCollider = false;
             currentHitCollider = null;
         }

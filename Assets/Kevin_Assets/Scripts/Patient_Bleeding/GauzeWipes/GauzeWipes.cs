@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GauzeWipes : MonoBehaviour
+public class GauzeWipes : MonoBehaviour, ISmallTrash
 {
     [Header("Cleaner")]
     [SerializeField] DirtyCleaner _cleaner;
@@ -17,5 +17,9 @@ public class GauzeWipes : MonoBehaviour
         }
     }
 
-
+    public void DestroyTrash()
+    {
+        _cleaner.DestroyObject();
+        Destroy(this.gameObject);
+    }
 }

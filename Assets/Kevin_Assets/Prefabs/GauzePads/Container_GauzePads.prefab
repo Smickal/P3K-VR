@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 5905908859062996525}
   - component: {fileID: 2430345123065817530}
   - component: {fileID: 3198004737389527770}
+  - component: {fileID: 3568313460864198349}
   m_Layer: 13
   m_Name: GauzeWipes_Peel
   m_TagString: Untagged
@@ -201,6 +202,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LocalPositionOffset: {x: 0, y: 0, z: 0}
   LocalRotationOffset: {x: 0, y: 90, z: -90}
+--- !u!114 &3568313460864198349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1667609438331585815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efea265e26a1dcc4d988d2ac4879c67c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnDestroyTrash:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1857717049349929067
 GameObject:
   m_ObjectHideFlags: 0
@@ -281,6 +297,7 @@ GameObject:
   - component: {fileID: 3359686767860172594}
   - component: {fileID: 3074653020084759077}
   - component: {fileID: 5855920100362366183}
+  - component: {fileID: 7000103013430639711}
   m_Layer: 12
   m_Name: GauseWipes_Case
   m_TagString: Untagged
@@ -458,6 +475,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LocalPositionOffset: {x: 0, y: -0.046875, z: 0}
   LocalRotationOffset: {x: 0, y: 90, z: -90}
+--- !u!114 &7000103013430639711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2854724477945513071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efea265e26a1dcc4d988d2ac4879c67c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnDestroyTrash:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &2952739931797677424
 GameObject:
   m_ObjectHideFlags: 0
@@ -667,6 +699,7 @@ GameObject:
   - component: {fileID: 3051063916169150132}
   - component: {fileID: 5829992271993991051}
   - component: {fileID: 4164554384604611126}
+  - component: {fileID: 864470851067981004}
   m_Layer: 12
   m_Name: SnapPoint_Gauze
   m_TagString: Untagged
@@ -727,6 +760,7 @@ MonoBehaviour:
   CanDropItem: 1
   CanSwapItem: 1
   CanRemoveItem: 1
+  UseOffset: 1
   ScaleItem: 1
   DisableColliders: 1
   DuplicateItemOnGrab: 0
@@ -740,13 +774,37 @@ MonoBehaviour:
   SoundOnUnsnap: {fileID: 0}
   OnSnapEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 864470851067981004}
+        m_TargetAssemblyTypeName: SnapZoneSmallTrash, Assembly-CSharp
+        m_MethodName: RemoveTrashSnapIn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnDetachEvent:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 3074653020084759077}
         m_TargetAssemblyTypeName: GauzeWipesCase, Assembly-CSharp
-        m_MethodName: OpenedGauzeWipes
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 864470851067981004}
+        m_TargetAssemblyTypeName: SnapZoneSmallTrash, Assembly-CSharp
+        m_MethodName: AddTrashSnapOut
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -875,6 +933,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &864470851067981004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4789937526193327317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13ea861ea200498418b38c62409a7939, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  snapZone: {fileID: 1843344992579147843}
 --- !u!1 &5039804550156809106
 GameObject:
   m_ObjectHideFlags: 0
@@ -890,6 +961,7 @@ GameObject:
   - component: {fileID: 8135655368259516421}
   - component: {fileID: 8580440250599969412}
   - component: {fileID: 5703956657441552974}
+  - component: {fileID: 1486511083001049760}
   m_Layer: 12
   m_Name: SnapPoint_Peel
   m_TagString: Untagged
@@ -950,6 +1022,7 @@ MonoBehaviour:
   CanDropItem: 1
   CanSwapItem: 1
   CanRemoveItem: 1
+  UseOffset: 1
   ScaleItem: 1
   DisableColliders: 1
   DuplicateItemOnGrab: 0
@@ -963,13 +1036,37 @@ MonoBehaviour:
   SoundOnUnsnap: {fileID: 0}
   OnSnapEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 864470851067981004}
+        m_TargetAssemblyTypeName: SnapZoneSmallTrash, Assembly-CSharp
+        m_MethodName: RemoveTrashSnapIn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnDetachEvent:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 3074653020084759077}
         m_TargetAssemblyTypeName: GauzeWipesCase, Assembly-CSharp
-        m_MethodName: OpenedPeelCase
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 864470851067981004}
+        m_TargetAssemblyTypeName: SnapZoneSmallTrash, Assembly-CSharp
+        m_MethodName: AddTrashSnapOut
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1119,6 +1216,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.022701517, y: 0.012684822, z: 0.10138424}
   m_Center: {x: -0.0005787533, y: 0.004246268, z: 0.0006840749}
+--- !u!114 &1486511083001049760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5039804550156809106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13ea861ea200498418b38c62409a7939, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  snapZone: {fileID: 1843344992579147843}
 --- !u!1 &5194518878653348070
 GameObject:
   m_ObjectHideFlags: 0
@@ -1301,6 +1411,7 @@ GameObject:
   - component: {fileID: 1992774286607784546}
   - component: {fileID: 5440923973342171671}
   - component: {fileID: 7924321416617379456}
+  - component: {fileID: 2899764365699031508}
   m_Layer: 13
   m_Name: GauzeWipes_Clean
   m_TagString: Untagged
@@ -1497,3 +1608,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabbable: {fileID: 8880590639028959297}
+--- !u!114 &2899764365699031508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5734437288353022748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efea265e26a1dcc4d988d2ac4879c67c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnDestroyTrash:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5440923973342171671}
+        m_TargetAssemblyTypeName: DirtyCleaner, Assembly-CSharp
+        m_MethodName: DestroyObject
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

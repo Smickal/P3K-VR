@@ -24,4 +24,6 @@ public class SOKotakP3K : ScriptableObject
 
     [TextArea(7, 7)] public string KitDescText;
 
+    [TextArea(7, 7)] public string HowToUse_Text;
+
 }

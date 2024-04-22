@@ -246,9 +246,10 @@ public class HeimlichMovement : MonoBehaviour
     public void CheckForGrababbleTrig(Collider col)
     {
         Grabbable grabber = col.GetComponent<Grabbable>();
+        
         if (grabber == null) return;
         
-
+        Debug.Log("Collider HT Kah ? " + grabber.gameObject);
         if(grabber == _rightGrabbable)
         {
             isRightHandHit = true;

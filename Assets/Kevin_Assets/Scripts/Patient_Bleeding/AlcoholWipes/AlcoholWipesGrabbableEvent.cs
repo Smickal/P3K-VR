@@ -7,6 +7,11 @@ public class AlcoholWipesGrabbableEvent : GrabbableEvents
 {
     [SerializeField]GameObject Lid, WipeOut, SnapPoint;
     [SerializeField]Collider Lid_Collider;
+
+    private void Start() 
+    {
+        SnapPoint.SetActive(false);
+    }
     public override void OnGrab(Grabber grabber)
     {
         base.OnGrab(grabber);
@@ -17,9 +22,6 @@ public class AlcoholWipesGrabbableEvent : GrabbableEvents
         Lid.SetActive(false);
         // grabber.TryRelease();
         
-        
-        
-
         
     }
 }

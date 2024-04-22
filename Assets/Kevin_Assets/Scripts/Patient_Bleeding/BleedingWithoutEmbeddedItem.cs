@@ -32,6 +32,8 @@ public class BleedingWithoutEmbeddedItem : MonoBehaviour, ITurnOffStatic
     [Header("BandageTime")]
     [SerializeField]BandageWithItemManager bandageTime;
     [Header("PuttingLegOnTopSomethingTime")]
+    [SerializeField]GameObject Leg;
+    [SerializeField]LegMoveManager leftLeg, rightLeg;
     //put collider dr snapzone yg hrs di grab
     public bool isPuttingLegDone;
 
@@ -47,6 +49,7 @@ public class BleedingWithoutEmbeddedItem : MonoBehaviour, ITurnOffStatic
         _bleedingColl.enabled = false;
         _cleanColl.enabled = false;
         _dryColl.enabled = false;
+        Leg.SetActive(false);
         bandageTime.DeactivateBandageWithItem();
     }
 
@@ -55,6 +58,7 @@ public class BleedingWithoutEmbeddedItem : MonoBehaviour, ITurnOffStatic
     public void ActivateFirstAid()
     {
         state = BleedingWithoutEmbeddedItem_State.CleanHands;
+        Leg.SetActive(false);
         _bleedingColl.enabled = false;
         _cleanColl.enabled = false;
         _dryColl.enabled = false;
@@ -99,9 +103,10 @@ public class BleedingWithoutEmbeddedItem : MonoBehaviour, ITurnOffStatic
         yield return new WaitUntil(()=> bandageTime.IsDoneBandageMovement);
         state = BleedingWithoutEmbeddedItem_State.PuttingLegOnTopSomethingTime;
         bandageTime.DeactivateBandageWithItem();
+        Leg.SetActive(true);
         //nyalakan collider leg
 
-        yield return new WaitUntil(()=> isPuttingLegDone);
+        yield return new WaitUntil(()=> leftLeg.IsMovementDone && rightLeg.IsMovementDone);
         state = BleedingWithoutEmbeddedItem_State.Done;
         //matikan collider leg
         IsDone();
@@ -120,5 +125,9 @@ public class BleedingWithoutEmbeddedItem : MonoBehaviour, ITurnOffStatic
     public void TurnOffStatic()
     {
         StateFirstAidNow -= StateNow;
+    }
+    public bool IsLegDone()
+    {
+        return false;
     }
 }
