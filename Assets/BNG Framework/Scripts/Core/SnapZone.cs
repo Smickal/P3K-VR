@@ -92,6 +92,8 @@ namespace BNG {
         /// Optional Unity Event to be called when something has been detached from this SnapZone. Passes in the Grabbable is being detattached.
         /// </summary>
         public GrabbableEvent OnDetachEvent;
+        public GrabbableEvent OnSnapHTEvent;
+        public GrabbableEvent OnDetachHTEvent;
 
         GrabbablesInTrigger gZone;
 
@@ -542,7 +544,12 @@ namespace BNG {
                     }
                 }
 
-
+                if (OnDetachHTEvent != null) {
+                    // Debug.Log(HeldItem.gameObject.name);
+                    // Debug.Log(totallewat+"this");
+                    OnDetachHTEvent.Invoke(HeldItem);
+                    
+                }
                 // Fire Off Grabbable Events
                 // GrabbableEvents[] ge = HeldItem.GetComponents<GrabbableEvents>();
                 // if (ge != null) {
@@ -623,7 +630,9 @@ namespace BNG {
 
             // Disable the grabbable. This is picked up through a Grab Action
             disableGrabbable(grab);
-
+            if (OnSnapHTEvent != null) {
+                OnSnapHTEvent.Invoke(grab);
+            }
 
             // Fire Off Events on Grabbable
             // GrabbableEvents[] ge = grab.GetComponents<GrabbableEvents>();

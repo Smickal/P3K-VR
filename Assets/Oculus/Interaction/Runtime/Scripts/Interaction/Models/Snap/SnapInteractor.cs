@@ -89,6 +89,8 @@ namespace Oculus.Interaction
 
         private float _idleStarted = -1f;
         private IMovement _movement = null;
+        public bool isAtStart= true, isFirsTime=true;
+        public SnapInteractable snapInteractableTemp;
         
 
         #region Editor events
@@ -130,6 +132,19 @@ namespace Oculus.Interaction
             }
 
             this.EndStart(ref _started);
+            isAtStart = false;
+            if(snapInteractableTemp != null)SetCandidate(snapInteractableTemp);
+        }
+        protected override void Update() 
+        {
+            
+            base.Update();
+            // if(snapInteractableTemp != null && isFirsTime)
+            // {
+            //     isFirsTime = false;
+            //     SetCandidate(snapInteractableTemp);
+            // }
+            
         }
 
         protected override void OnEnable()
@@ -418,12 +433,17 @@ namespace Oculus.Interaction
             base.OnEnable();
             if (_started)
             {
+                Debug.Log(this.gameObject + " muncul pas start - connect - snapinteractor");
                 _pointableElement.WhenPointerEventRaised += HandlePointerEventRaised;
                 if (snapInteractableSet != null)
                 {
                     SetComputeCandidateOverride(() => snapInteractableSet, true);
                     SetComputeShouldSelectOverride(()=>true, true);
                 }
+            }
+            else
+            {
+                if(isAtStart)snapInteractableTemp = snapInteractableSet;
             }
             
         }

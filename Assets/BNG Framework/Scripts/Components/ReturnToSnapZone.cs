@@ -88,6 +88,7 @@ namespace BNG {
 
             if (Vector3.Distance(transform.position, ReturnTo.transform.position) < SnapDistance) {
                 rigid.useGravity = useGravityInitial;
+                Debug.Log("is this your fault");
                 ReturnTo.GrabGrabbable(grab);
                 if(onlyReturnOnce)this.enabled = false;
             }

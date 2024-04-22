@@ -36,8 +36,15 @@ public class SnapInteractorHelper : MonoBehaviour, ITurnOffStatic
 
     private void snapInteractor_OnSelect(object sender, Oculus.Interaction.SnapInteractor.OnSelectEventArgs e)
     {
+        Debug.Log("misiiiiiiiiiiiiid" + snapInteractor + e.Interactable.name);
         if(InteractToolsController.CheckIsHandTrackOn == null) return;
-        if(InteractToolsController.CheckIsHandTrackOn())SetSnapZone(e.Interactable, e.Interactor);
+        
+        if(InteractToolsController.CheckIsHandTrackOn())
+        {
+            Debug.Log("harusnya ga lwt sini");
+            SetSnapZone(e.Interactable, e.Interactor);
+        }
+        
         if(distanceHandGrabInteractable)
         {
             distanceHandGrabInteractable.enabled = false;
