@@ -18,6 +18,7 @@ public class QuestManagerUI : MonoBehaviour, ITurnOffStatic
     [SerializeField]GameManager gameManager;
     [TextArea(5,7)][SerializeField]private string _followBackBlow;
     [TextArea(5,7)][SerializeField]private string _followHeimlich;
+    [SerializeField]GraphicRaycaster graphicRaycaster;
     [Header("Base UI")]
     [SerializeField] GameObject _baseUI;
     [SerializeField] TMP_Text _titleBase;
@@ -63,6 +64,7 @@ public class QuestManagerUI : MonoBehaviour, ITurnOffStatic
     public void OpenHelper_Choking()
     {
         ActivateBaseUI();
+        graphicRaycaster.enabled = false;
         CloseUI();
         _chokingHelperContainer.SetActive(true);
 
@@ -70,6 +72,7 @@ public class QuestManagerUI : MonoBehaviour, ITurnOffStatic
     public void CloseHelper_Choking()
     {
         DeactivateBaseUI();
+        graphicRaycaster.enabled = true;
         _chokingHelperContainer.SetActive(false);
     }
     public void ChangeHelper_ChokingDesc(string choke_P3KType)
@@ -93,6 +96,7 @@ public class QuestManagerUI : MonoBehaviour, ITurnOffStatic
     public void OpenHelper_Bleeding_All()
     {
         ActivateBaseUI();
+        graphicRaycaster.enabled = true;
         CloseUI();
         _titleBase.text = titleBleedingWithItem;
         _bleedingHelperContainer_WithItem.SetActive(true);

@@ -27,7 +27,7 @@ public class GauzeWipesCase : MonoBehaviour
 
     public void OpenedGauzeWipes()
     {
-        //_gauzeSnapZone.gameObject.SetActive(false);
+        _gauzeSnapZone.gameObject.SetActive(false);
     }
 
     IEnumerator StartCoroutineDelay()

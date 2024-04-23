@@ -119,9 +119,15 @@ namespace Oculus.Interaction
         #endregion
 
         #region Unity Lifecycle
+        protected override void Awake()
+        {
+            base.Awake();
+            isAtStart = true;
+        }
 
         protected override void Start()
         {
+            
             this.BeginStart(ref _started, () => base.Start());
             this.AssertField(_pointableElement, nameof(_pointableElement));
             this.AssertField(Rigidbody, nameof(Rigidbody));

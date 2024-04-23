@@ -49,6 +49,8 @@ namespace BNG {
 
         [Tooltip("If true the item inside the SnapZone will be duplicated, instead of removed, from the SnapZone.")]
         public bool DuplicateItemOnGrab = false;
+        public bool ChangeNameWhenDuplicate = false;
+        public string nameChange;
 
         /// <summary>
         /// Only snap if Grabbable was dropped maximum of X seconds ago
@@ -289,12 +291,15 @@ namespace BNG {
             // Is there an offset to apply?
             SnapZoneOffset off = grab.GetComponent<SnapZoneOffset>();
             if (off) {
+                // Debug.Log("ada");
                 if(!UseOffset)
                 {
                     off.LocalPositionOffset = Vector3.zero;
                     off.LocalRotationOffset = Vector3.zero;
                 }
+                
                 offset = off;
+                // Debug.Log("ada" + offset);
             }
             else {
                 offset = grab.gameObject.AddComponent<SnapZoneOffset>();
@@ -306,6 +311,7 @@ namespace BNG {
             if (offset) {
                 HeldItem.transform.localPosition = offset.LocalPositionOffset;
                 HeldItem.transform.localEulerAngles = offset.LocalRotationOffset;
+                // Debug.Log(HeldItem.transform.position + " " + gameObject);
             }
             else {
                 HeldItem.transform.localPosition = Vector3.zero;
@@ -344,6 +350,9 @@ namespace BNG {
                 disabledColliders = grab.GetComponentsInChildren<Collider>(false).ToList();
                 for (int x = 0; x < disabledColliders.Count; x++) {
                     if(disabledColliders[x].name != "SnapInteractor") disabledColliders[x].enabled = false;
+                    else{
+                        if(CanRemoveItem == false) disabledColliders[x].enabled = false;
+                    }
                 }
             }
 
@@ -377,6 +386,7 @@ namespace BNG {
 
                         // Instantiate the object before it is grabbed
                         GameObject go = Instantiate(g.gameObject, transform.position, Quaternion.identity) as GameObject;
+                        if(ChangeNameWhenDuplicate)go.name = nameChange;
                         Grabbable grab = go.GetComponent<Grabbable>();
 
                         // Ok to attach it to snap zone now
@@ -456,7 +466,7 @@ namespace BNG {
                     if(!returns.OnlyReturnOnce)returns.enabled = true;
                 }
             }
-            Debug.Log("atau ini");
+            Debug.Log("atau ini + yg non HT");
             HeldItem.enabled = true;
             HeldItem.transform.parent = null;
             
@@ -495,12 +505,12 @@ namespace BNG {
         }
         
         public virtual void ReleaseAll_ForSnapHandTrackOnly() {
-
+            
             // No need to keep checking
             if (HeldItem == null) {
                 return;
             }
-
+            var g = HeldItem;
             // Still need to keep track of item if we can't fully drop it
             if (!CanDropItem && HeldItem != null) {
                 trackedItem = HeldItem;
@@ -532,7 +542,7 @@ namespace BNG {
                     if(!returns.OnlyReturnOnce)returns.enabled = true;
                 }
             }
-            Debug.Log("atau ini");
+            Debug.Log("atau ini + yg for HT Only");
             HeldItem.enabled = true;
             HeldItem.transform.parent = null;
 
@@ -558,8 +568,17 @@ namespace BNG {
                 //     }
                 // }
             }
-
+            
             HeldItem = null;
+            if(DuplicateItemOnGrab)
+            {
+                GameObject go = Instantiate(g.gameObject, transform.position, Quaternion.identity) as GameObject;
+                if(ChangeNameWhenDuplicate)go.name = nameChange;
+                Grabbable grab = go.GetComponent<Grabbable>();
+
+                // Ok to attach it to snap zone now
+                this.GrabGrabbable(grab);
+            }
         }
         public virtual void GrabGrabbable_ForSnapHandTrackOnly(Grabbable grab) {
 
@@ -651,5 +670,39 @@ namespace BNG {
 
             LastSnapTime = Time.time;
         }
+        public void CanRemoveChange(bool change)
+        {
+            if (HeldItem == null) return;
+            if(!change)
+            {
+                for(int i=0;i< HeldItem.transform.childCount;i++)
+                {
+                    if(HeldItem.transform.GetChild(i).name == "SnapInteractor")
+                    {
+                        Collider coll = HeldItem.transform.GetChild(i).GetComponent<Collider>();
+                        if(coll != null) coll.enabled = false;
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                for(int i=0;i< HeldItem.transform.childCount;i++)
+                {
+                    if(HeldItem.transform.GetChild(i).name == "SnapInteractor")
+                    {
+                        Collider coll = HeldItem.transform.GetChild(i).GetComponent<Collider>();
+                        if(coll != null) coll.enabled = true;
+                        break;
+                    }
+                }
+            }
+        }
+        public void ChangeHeldItemName(string name)
+        {
+            if (HeldItem == null) return;
+            HeldItem.name = name;
+        }
     }
+    
 }

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -29,10 +30,29 @@ namespace BNG {
         Image fadeImage;
         IEnumerator fadeRoutine;
         string faderName = "ScreenFader";
-
+        public bool debugIn, debugOut, debugInWithLevel;
+        public float levelFade;
+        public UnityEvent OnFadeDone;
 
         void Awake() {
             initialize();
+        }
+        private void Update() {
+            if (debugIn)
+            {
+                debugIn = false;
+                DoFadeIn();
+            }
+            if (debugOut)
+            {
+                debugOut = false;
+                DoFadeOut();
+            }
+            if (debugInWithLevel)
+            {
+                debugInWithLevel = false;
+                SetFadeLevel(levelFade);
+            }
         }
 
         protected virtual void initialize() {
@@ -46,6 +66,7 @@ namespace BNG {
                     return;
                 }
                 fadeObject = new GameObject();
+                fadeObject.layer = LayerMask.NameToLayer("UI Dialogue");
                 fadeObject.transform.parent = Camera.main.transform;
                 fadeObject.transform.localPosition = new Vector3(0, 0, 0.03f);
                 fadeObject.transform.localEulerAngles = Vector3.zero;
@@ -171,6 +192,7 @@ namespace BNG {
 
             // Ensure alpha is always applied
             updateImageAlpha(alphaTo);
+            OnFadeDone?.Invoke();
         }
 
         protected virtual void updateImageAlpha(float alphaValue) {
@@ -191,6 +213,11 @@ namespace BNG {
             if (alphaValue == 0 && canvasGroup.gameObject.activeSelf) {
                 canvasGroup.gameObject.SetActive(false);
             }
+        }
+
+        public void ResetEvent()
+        {
+            OnFadeDone.RemoveAllListeners();
         }
     }
 }

@@ -295,8 +295,8 @@ GameObject:
   - component: {fileID: 7285989234813945131}
   - component: {fileID: 464369946943855717}
   - component: {fileID: 3359686767860172594}
-  - component: {fileID: 3074653020084759077}
   - component: {fileID: 5855920100362366183}
+  - component: {fileID: 3074653020084759077}
   - component: {fileID: 7000103013430639711}
   m_Layer: 12
   m_Name: GauseWipes_Case
@@ -446,6 +446,20 @@ MonoBehaviour:
   UseCustomInspector: 1
   lastFlickTime: 0
   FlickForce: 1
+--- !u!114 &5855920100362366183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2854724477945513071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 804203cdc71657347bc071dfeba41047, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LocalPositionOffset: {x: 0, y: -0.046875, z: 0}
+  LocalRotationOffset: {x: 0, y: 90, z: -90}
 --- !u!114 &3074653020084759077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -461,20 +475,6 @@ MonoBehaviour:
   _delayTime: 0.51
   _peelSnapZone: {fileID: 1100117314848703895}
   _gauzeSnapZone: {fileID: 1843344992579147843}
---- !u!114 &5855920100362366183
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2854724477945513071}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 804203cdc71657347bc071dfeba41047, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  LocalPositionOffset: {x: 0, y: -0.046875, z: 0}
-  LocalRotationOffset: {x: 0, y: 90, z: -90}
 --- !u!114 &7000103013430639711
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -814,6 +814,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  OnSnapHTEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDetachHTEvent:
+    m_PersistentCalls:
+      m_Calls: []
   ClosestGrabbable: {fileID: 0}
 --- !u!114 &3051063916169150132
 MonoBehaviour:
@@ -1054,7 +1060,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3074653020084759077}
         m_TargetAssemblyTypeName: GauzeWipesCase, Assembly-CSharp
-        m_MethodName: 
+        m_MethodName: OpenedPeelCase
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1076,6 +1082,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  OnSnapHTEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDetachHTEvent:
+    m_PersistentCalls:
+      m_Calls: []
   ClosestGrabbable: {fileID: 0}
 --- !u!114 &4127506202709547180
 MonoBehaviour:

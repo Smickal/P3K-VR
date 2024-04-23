@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GauzeWipes : MonoBehaviour, ISmallTrash
+public class GauzeWipes : MonoBehaviour
 {
     [Header("Cleaner")]
     [SerializeField] DirtyCleaner _cleaner;

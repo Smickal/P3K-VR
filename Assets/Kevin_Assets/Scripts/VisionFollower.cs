@@ -12,7 +12,6 @@ public class VisionFollower : MonoBehaviour
     [SerializeField] Vector3 _followOffet;
     public bool isActivate = false;
 
-
     private void Update()
     {
 
@@ -49,5 +48,10 @@ public class VisionFollower : MonoBehaviour
     public void Deactivate()
     {
         isActivate = false;
+    }
+    public void RestartPos()
+    {
+        Vector3 targetPos = _robotTransform.position + (_robotTransform.forward * _distanceFromRobot);
+        transform.position = targetPos;
     }
 }
