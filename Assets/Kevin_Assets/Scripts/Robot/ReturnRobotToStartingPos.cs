@@ -10,9 +10,10 @@ public class ReturnRobotToStartingPos : MonoBehaviour
     [SerializeField] float _snapDistance = 0.05f;
 
     [SerializeField] Grabber _leftGrabber;
-    [SerializeField] Grabber _rightGrabber; 
+    [SerializeField] Grabber _rightGrabber;
 
     
+    RobotAnimationController _controller;
     Rigidbody rigid;
     Grabbable grabbable;
     Robot robot;
@@ -23,12 +24,12 @@ public class ReturnRobotToStartingPos : MonoBehaviour
         rigid = GetComponent<Rigidbody>();
         grabbable = GetComponent<Grabbable>();
         robot = GetComponent<Robot>();
+        _controller = GetComponent<RobotAnimationController>();
     }
 
     private void Update()
     {
         if (robot.IsFollowingPlayer) return;
-
         if(isMovingToSnapZone)
         {
             Vector3 moveDir = _startingPos.position - transform.position;
@@ -42,6 +43,8 @@ public class ReturnRobotToStartingPos : MonoBehaviour
 
             if (Vector3.Distance(transform.position, _startingPos.transform.position) <= _snapDistance)
             {
+                _controller.TriggerIdleAnim();
+
                 isMovingToSnapZone = false;
                 rigid.velocity = Vector3.zero;
                 rigid.angularVelocity = Vector3.zero;

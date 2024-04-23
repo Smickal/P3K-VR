@@ -7,11 +7,14 @@ using UnityEngine;
 
 public class Robot : GrabbableEvents
 {
-    [SerializeField] float _distanceToPlayer = 3.0f;
+    [SerializeField] float _minDistanceToPlayer = 2.0f;
+    [SerializeField] float _maxDistanceToPlayer = 3.0f;
     [SerializeField] float _followVelocity = 500f;
-    [SerializeField] float _fov = 60f;
-    [SerializeField] Transform _playerTransform;
+    [SerializeField] float _yOffset = 1f;
+    [SerializeField] float _xOffset = 1.25f;
 
+
+    RobotAnimationController _controller;
     ReturnRobotToStartingPos returnPos;
     Camera mainCam;
     Rigidbody myRb;
@@ -19,7 +22,6 @@ public class Robot : GrabbableEvents
     [Header("Debug")]
     [SerializeField] bool isActivated = false;
     [SerializeField] bool isFollowingPlayer = false;
-    [SerializeField] bool isCentered = false;
 
     public bool IsFollowingPlayer {  get { return isFollowingPlayer; } }
     public void ActivateLookAt()
@@ -37,6 +39,7 @@ public class Robot : GrabbableEvents
 
     private void Start()
     {
+        _controller = GetComponent<RobotAnimationController>();
         myRb = GetComponent<Rigidbody>();
         returnPos = GetComponent<ReturnRobotToStartingPos>();
         mainCam = Camera.main;
@@ -53,47 +56,53 @@ public class Robot : GrabbableEvents
         }
 
         //Checks if the player Stops grabbing in the middle of animation.
-        else if (grab.RemoteGrabbing)
+        if (grab.RemoteGrabbing)
         {
-           DeactivateLookAt();
-           returnPos.StopMoveToSnapZone();
+            DeactivateLookAt();
+            returnPos.StopMoveToSnapZone();
         }
 
 
-        Vector3 rayDir = transform.position - mainCam.transform.position;
-        RaycastHit hit;
-
-        //if(Physics.Raycast())
         //Tries to stay in front of the camera
-        if (isFollowingPlayer && !isCentered)
+        if (!isFollowingPlayer || grab.RemoteGrabbing || grab.BeingHeld) return;
+        ActivateLookAt();
+
+        myRb.velocity = Vector3.zero;
+        myRb.angularVelocity = Vector3.zero;
+
+
+        Vector3 targetPos = mainCam.transform.position +
+                (mainCam.transform.forward * _minDistanceToPlayer) +
+                (mainCam.transform.right * _xOffset) +
+                    (mainCam.transform.up * _yOffset);
+
+
+        if(Vector3.Distance(mainCam.transform.position, transform.position) > _minDistanceToPlayer &&
+            Vector3.Distance(mainCam.transform.position, transform.position) < _maxDistanceToPlayer)
         {
-            Vector3 targetPos = mainCam.transform.position + (mainCam.transform.forward * _distanceToPlayer);
-            if (Vector3.Angle(rayDir, mainCam.transform.forward) > _fov)
-            {
-                transform.position += (targetPos - transform.position) * 0.025f;
-            }
-
-            if (Vector3.Distance(mainCam.transform.position, transform.position) > _distanceToPlayer)
-            {
-                transform.position += (targetPos - transform.position) * 0.025f;
-            }
-
-            else if(Vector3.Distance(mainCam.transform.position, transform.position) < _distanceToPlayer)
-            {
-                transform.position += (targetPos - transform.position) * 0.025f;
-            }
-
+            _controller.TriggerIdleAnim();
         }
 
+        else if (Vector3.Distance(mainCam.transform.position, transform.position) > _maxDistanceToPlayer)
+        {
+            transform.position += (targetPos - transform.position) * 0.025f;
+            _controller.TriggerForwardAnim();
+        }
+
+        else if (Vector3.Distance(mainCam.transform.position, transform.position) < _minDistanceToPlayer)
+        {
+            transform.position += (targetPos - transform.position) * 0.025f;
+            _controller.TriggerBackwardAnim();
+
+        }
 
 
     }
 
-    
-
 
     public override void OnGrab(Grabber grabber)
     {
+        _controller.TriggerFrozeAnim();
 
         thisGrabber = grabber;
         DeactivateLookAt();
@@ -103,6 +112,8 @@ public class Robot : GrabbableEvents
 
     public override void OnRelease()
     {
+        _controller.TriggerBackwardAnim();
+
         ActivateLookAt();
         returnPos.MoveToSnapZone();
     }
@@ -118,4 +129,15 @@ public class Robot : GrabbableEvents
         grab.DropItem(thisGrabber, true, false);
         returnPos.MoveToSnapZone();
     }
+
+    public void ActivateFollowPlayer()
+    {
+        isFollowingPlayer = true;
+    }
+
+    public void DeactivateFollowPlayer()
+    {
+        isFollowingPlayer = false;
+    }
+
 }
