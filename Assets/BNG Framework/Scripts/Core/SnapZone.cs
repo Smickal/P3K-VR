@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
@@ -49,8 +50,12 @@ namespace BNG {
 
         [Tooltip("If true the item inside the SnapZone will be duplicated, instead of removed, from the SnapZone.")]
         public bool DuplicateItemOnGrab = false;
+        public bool ChangeNameWhenDropToSnapZone = false;
         public bool ChangeNameWhenDuplicate = false;
         public string nameChange;
+        public bool isThereSnapZoneinChild = false;
+        Dictionary<string, Tuple<List<Collider>>> snapZoneDictionary;
+        
 
         /// <summary>
         /// Only snap if Grabbable was dropped maximum of X seconds ago
@@ -101,6 +106,7 @@ namespace BNG {
 
         Rigidbody heldItemRigid;
         bool heldItemWasKinematic;
+        public bool wasKinematicKeepFalse;
         Grabbable trackedItem; // If we can't drop the item, track it separately
 
         // Closest Grabbable in our trigger
@@ -260,6 +266,7 @@ namespace BNG {
             // Mark as kinematic so it doesn't fall down
             if (heldItemRigid) {
                 heldItemWasKinematic = heldItemRigid.isKinematic;
+                if(wasKinematicKeepFalse)heldItemWasKinematic = false;
                 heldItemRigid.isKinematic = true;
             }
             else {
@@ -376,7 +383,25 @@ namespace BNG {
 
                     var g = HeldItem;
                     if (DuplicateItemOnGrab) {
+                        
+                        // if(isThereSnapZoneinChild)
+                        // {
+                        //     if(snapZoneDictionary == null)
+                        //     {
+                        //         snapZoneDictionary = new Dictionary<string, Tuple<List<Collider>>>();
+                        //         SnapZone[] snapzones = HeldItem.GetComponentsInChildren<SnapZone>(true).ToArray();
+                        //         for(int i=0;i<snapzones.Length;i++)
+                        //         {
+                        //             if(snapzones[i].HeldItem == null)continue;
+                        //             string nameSnap = snapzones[i].name;
+                        //             List<Collider> coll = new List<Collider>(snapzones[i].disabledColliders);
+                        //             Debug.Log("Dictionary " + i + " " + nameSnap + " " + coll.Count);
+                        //             snapZoneDictionary.Add(nameSnap, new Tuple<List<Collider>>(coll));
+                        //         }
+                        //     }
 
+                        // }
+                        
                         ReleaseAll();
 
                         // Position next to grabber if somewhat far away
@@ -387,6 +412,27 @@ namespace BNG {
                         // Instantiate the object before it is grabbed
                         GameObject go = Instantiate(g.gameObject, transform.position, Quaternion.identity) as GameObject;
                         if(ChangeNameWhenDuplicate)go.name = nameChange;
+
+                        if(isThereSnapZoneinChild)
+                        {
+                            SnapZone[] snapzones2 = go.transform.GetComponentsInChildren<SnapZone>(true).ToArray();
+                            for(int i=0;i<snapzones2.Length;i++)
+                            {
+                                if(snapzones2[i].HeldItem == null)continue;
+                                // if(snapZoneDictionary.ContainsKey(snapzones2[i].name))
+                                // {
+                                //     Debug.Log("Dictionary adaa " + i + " " + snapzones2[i].name);
+                                //     Tuple<List<Collider>> data = snapZoneDictionary[snapzones2[i].name];
+                                //     snapzones2[i].disabledColliders = new List<Collider>(data.Item1);
+                                // }
+                                snapzones2[i].disableGrabbable(snapzones2[i].HeldItem.GetComponent<Grabbable>());
+                                snapzones2[i].heldItemRigid = snapzones2[i].HeldItem.GetComponent<Rigidbody>();
+                            }
+
+                        }
+
+
+
                         Grabbable grab = go.GetComponent<Grabbable>();
 
                         // Ok to attach it to snap zone now
@@ -507,10 +553,27 @@ namespace BNG {
         public virtual void ReleaseAll_ForSnapHandTrackOnly() {
             
             // No need to keep checking
+
             if (HeldItem == null) {
                 return;
             }
             var g = HeldItem;
+            // if(DuplicateItemOnGrab && isThereSnapZoneinChild)
+            // {
+            //     if(snapZoneDictionary == null)
+            //     {
+            //         snapZoneDictionary = new Dictionary<string, Tuple<List<Collider>>>();
+            //         SnapZone[] snapzones = HeldItem.GetComponentsInChildren<SnapZone>(true).ToArray();
+            //         for(int i=0;i<snapzones.Length;i++)
+            //         {
+            //             if(snapzones[i].HeldItem == null)continue;
+            //             string nameSnap = snapzones[i].name;
+            //             List<Collider> coll = new List<Collider>(snapzones[i].disabledColliders);
+            //             snapZoneDictionary.Add(nameSnap, new Tuple<List<Collider>>(coll));
+            //         }
+            //     }
+
+            // }
             // Still need to keep track of item if we can't fully drop it
             if (!CanDropItem && HeldItem != null) {
                 trackedItem = HeldItem;
@@ -525,11 +588,16 @@ namespace BNG {
                     }
                 }
             }
+
             disabledColliders = null;
 
             // Reset Kinematic status
             if (heldItemRigid) {
                 heldItemRigid.isKinematic = heldItemWasKinematic;
+            }
+            else
+            {
+                heldItemWasKinematic = false;
             }
 
             //tambahan biar Return too ga aneh aneh
@@ -538,11 +606,11 @@ namespace BNG {
             {
                 if(returns)
                 {
-                    Debug.Log("RETUUUUUUUUUURRRRRRN");
+
                     if(!returns.OnlyReturnOnce)returns.enabled = true;
                 }
             }
-            Debug.Log("atau ini + yg for HT Only");
+
             HeldItem.enabled = true;
             HeldItem.transform.parent = null;
 
@@ -575,7 +643,23 @@ namespace BNG {
                 GameObject go = Instantiate(g.gameObject, transform.position, Quaternion.identity) as GameObject;
                 if(ChangeNameWhenDuplicate)go.name = nameChange;
                 Grabbable grab = go.GetComponent<Grabbable>();
+                if(isThereSnapZoneinChild)
+                {
+                    SnapZone[] snapzones2 = go.transform.GetComponentsInChildren<SnapZone>(true).ToArray();
+                    for(int i=0;i<snapzones2.Length;i++)
+                    {
+                        if(snapzones2[i].HeldItem == null)continue;
+                        // if(snapZoneDictionary.ContainsKey(snapzones2[i].name))
+                        // {
+                        //     Debug.Log("Dictionary adaa " + i + " " + snapzones2[i].name);
+                        //     Tuple<List<Collider>> data = snapZoneDictionary[snapzones2[i].name];
+                        //     snapzones2[i].disabledColliders = new List<Collider>(data.Item1);
+                        // }
+                        snapzones2[i].disableGrabbable(snapzones2[i].HeldItem.GetComponent<Grabbable>());
+                        snapzones2[i].heldItemRigid = snapzones2[i].HeldItem.GetComponent<Rigidbody>();
+                    }
 
+                }
                 // Ok to attach it to snap zone now
                 this.GrabGrabbable(grab);
             }
@@ -597,6 +681,7 @@ namespace BNG {
             // Mark as kinematic so it doesn't fall down
             if (heldItemRigid) {
                 heldItemWasKinematic = heldItemRigid.isKinematic;
+                if(wasKinematicKeepFalse)heldItemWasKinematic = false;
                 heldItemRigid.isKinematic = true;
             }
             else {
@@ -698,10 +783,10 @@ namespace BNG {
                 }
             }
         }
-        public void ChangeHeldItemName(string name)
+        public void ChangeHeldItemName()
         {
             if (HeldItem == null) return;
-            HeldItem.name = name;
+            if(HeldItem.name != nameChange)HeldItem.name = nameChange;
         }
     }
     

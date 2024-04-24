@@ -130,8 +130,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BeingHeld: 0
-  wasKinematicKeepFalse: 0
-  originalParentKeepNull: 0
+  wasKinematicKeepFalse: 1
+  originalParentKeepNull: 1
   GrabButton: 2
   Grabtype: 2
   GrabPhysics: 4
@@ -764,6 +764,8 @@ MonoBehaviour:
   ScaleItem: 1
   DisableColliders: 1
   DuplicateItemOnGrab: 0
+  ChangeNameWhenDuplicate: 0
+  nameChange: 
   MaxDropTime: 0.1
   LastSnapTime: 0
   turnOffReturnTo: 1
@@ -1032,6 +1034,8 @@ MonoBehaviour:
   ScaleItem: 1
   DisableColliders: 1
   DuplicateItemOnGrab: 0
+  ChangeNameWhenDuplicate: 0
+  nameChange: 
   MaxDropTime: 0.1
   LastSnapTime: 0
   turnOffReturnTo: 1

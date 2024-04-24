@@ -56,6 +56,7 @@ namespace Oculus.Interaction
         public object Data { get; protected set; } = null;
 
         protected bool _started = false;
+        public bool isOnDisable = false;
 
         #region Properties
         public int MaxInteractors
@@ -356,11 +357,13 @@ namespace Oculus.Interaction
 
         protected virtual void OnEnable()
         {
+            isOnDisable = false;
             Enable();
         }
 
         protected virtual void OnDisable()
         {
+            isOnDisable = true;
             Disable();
         }
 

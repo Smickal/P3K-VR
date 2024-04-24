@@ -34,5 +34,6 @@ public class GauzeWipesCase : MonoBehaviour
     {
         yield return new WaitForSeconds(_delayTime);
         _gauzeSnapZone.gameObject.SetActive(true);
+        _gauzeSnapZone.GetComponent<SnapZoneControllerHelper>().SnapSelected_ConnectToHandTrackSnap();
     }
 }

@@ -293,6 +293,7 @@ MonoBehaviour:
   _maxInteractors: 2
   _maxSelectingInteractors: 1
   _data: {fileID: 0}
+  isOnDisable: 0
   _rigidbody: {fileID: 22802927}
   _snapPoseDelegate: {fileID: 0}
   _movementProvider: {fileID: 22802925}
@@ -456,12 +457,16 @@ MonoBehaviour:
   HeldItem: {fileID: 0}
   StartingItem: {fileID: 414688608}
   CanDropItem: 1
-  CanSwapItem: 0
+  CanSwapItem: 1
   CanRemoveItem: 1
   UseOffset: 1
   ScaleItem: 1
   DisableColliders: 1
   DuplicateItemOnGrab: 0
+  ChangeNameWhenDropToSnapZone: 0
+  ChangeNameWhenDuplicate: 0
+  nameChange: 
+  isThereSnapZoneinChild: 0
   MaxDropTime: 0.1
   LastSnapTime: 0
   turnOffReturnTo: 1
@@ -578,6 +583,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  wasKinematicKeepFalse: 1
   ClosestGrabbable: {fileID: 0}
 --- !u!65 &22802932
 BoxCollider:
@@ -899,6 +905,7 @@ MonoBehaviour:
   _maxInteractors: -1
   _maxSelectingInteractors: -1
   _data: {fileID: 0}
+  isOnDisable: 0
   _rigidbody: {fileID: 34128868}
   _snapPoseDelegate: {fileID: 0}
   _movementProvider: {fileID: 0}
@@ -1039,7 +1046,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 0.10859108, y: 0.105599634, z: 0.0025}
   m_Center: {x: 0.00035572052, y: 0, z: 0}
@@ -1132,6 +1139,7 @@ MonoBehaviour:
   _candidateTiebreaker: {fileID: 0}
   _maxIterationsPerFrame: 3
   _data: {fileID: 0}
+  isOnDisable: 0
   _pointableElement: {fileID: 302496045}
   _rigidbody: {fileID: 302496042}
   _distanceThreshold: 0.01
@@ -2211,6 +2219,7 @@ MonoBehaviour:
   _candidateTiebreaker: {fileID: 0}
   _maxIterationsPerFrame: 3
   _data: {fileID: 0}
+  isOnDisable: 0
   _pointTransform: {fileID: 1957306436}
   _radius: 0.005
   _touchReleaseThreshold: 0.002
@@ -3755,6 +3764,7 @@ MonoBehaviour:
   _maxInteractors: -1
   _maxSelectingInteractors: -1
   _data: {fileID: 0}
+  isOnDisable: 0
   _pointableElement: {fileID: 786111101}
   _rigidbody: {fileID: 786111099}
   _physicsGrabbable: {fileID: 0}
@@ -3869,6 +3879,7 @@ MonoBehaviour:
   _maxInteractors: -1
   _maxSelectingInteractors: -1
   _data: {fileID: 0}
+  isOnDisable: 0
   _pointableElement: {fileID: 786111101}
   isInSnapZone: 0
   _rigidbody: {fileID: 786111099}
@@ -5316,6 +5327,7 @@ MonoBehaviour:
   _maxInteractors: -1
   _maxSelectingInteractors: -1
   _data: {fileID: 0}
+  isOnDisable: 0
   _pointableElement: {fileID: 1826740477}
   _rigidbody: {fileID: 1826740476}
   _physicsGrabbable: {fileID: 0}
@@ -6373,6 +6385,7 @@ MonoBehaviour:
   _candidateTiebreaker: {fileID: 0}
   _maxIterationsPerFrame: 3
   _data: {fileID: 0}
+  isOnDisable: 0
   _pointableElement: {fileID: 414688617}
   _rigidbody: {fileID: 414688611}
   _distanceThreshold: 0.01
@@ -7390,6 +7403,7 @@ MonoBehaviour:
   _maxInteractors: -1
   _maxSelectingInteractors: -1
   _data: {fileID: 0}
+  isOnDisable: 0
   _allowTeleport: 0
   _equalDistanceToBlockerOverride: 0
   _tieBreakerScore: -100
@@ -12349,6 +12363,10 @@ MonoBehaviour:
   ScaleItem: 1
   DisableColliders: 1
   DuplicateItemOnGrab: 1
+  ChangeNameWhenDropToSnapZone: 0
+  ChangeNameWhenDuplicate: 0
+  nameChange: 
+  isThereSnapZoneinChild: 0
   MaxDropTime: 0.1
   LastSnapTime: 0
   turnOffReturnTo: 1
@@ -12368,6 +12386,7 @@ MonoBehaviour:
   OnDetachHTEvent:
     m_PersistentCalls:
       m_Calls: []
+  wasKinematicKeepFalse: 0
   ClosestGrabbable: {fileID: 0}
 --- !u!114 &579499832
 MonoBehaviour:
@@ -15502,6 +15521,7 @@ MonoBehaviour:
   _candidateTiebreaker: {fileID: 0}
   _maxIterationsPerFrame: 3
   _data: {fileID: 0}
+  isOnDisable: 0
   _pointableElement: {fileID: 786111101}
   _rigidbody: {fileID: 786111099}
   _distanceThreshold: 0.01
@@ -20666,6 +20686,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: HandRayInteractor
       objectReference: {fileID: 0}
+    - target: {fileID: 8030197382645210609, guid: d27ac1ffd4cdd7c40a39dcfa6012355c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8030197382645210610, guid: d27ac1ffd4cdd7c40a39dcfa6012355c,
         type: 3}
       propertyPath: m_RootOrder
@@ -22073,6 +22098,7 @@ MonoBehaviour:
   _candidateTiebreaker: {fileID: 0}
   _maxIterationsPerFrame: 3
   _data: {fileID: 0}
+  isOnDisable: 0
   _pointTransform: {fileID: 2022807651}
   _radius: 0.005
   _touchReleaseThreshold: 0.002
@@ -22843,6 +22869,7 @@ MonoBehaviour:
   _candidateTiebreaker: {fileID: 0}
   _maxIterationsPerFrame: 3
   _data: {fileID: 0}
+  isOnDisable: 0
   _pointableElement: {fileID: 1826740477}
   _rigidbody: {fileID: 1826740476}
   _distanceThreshold: 0.01
@@ -25245,7 +25272,7 @@ PrefabInstance:
     - target: {fileID: 8030197382645210609, guid: d27ac1ffd4cdd7c40a39dcfa6012355c,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8030197382645210610, guid: d27ac1ffd4cdd7c40a39dcfa6012355c,
         type: 3}
@@ -26893,6 +26920,7 @@ MonoBehaviour:
   _maxInteractors: -1
   _maxSelectingInteractors: -1
   _data: {fileID: 0}
+  isOnDisable: 0
   _pointableElement: {fileID: 832670088}
   _rigidbody: {fileID: 832670082}
   _physicsGrabbable: {fileID: 0}
@@ -28385,6 +28413,7 @@ MonoBehaviour:
   _maxInteractors: 2
   _maxSelectingInteractors: 1
   _data: {fileID: 0}
+  isOnDisable: 0
   _rigidbody: {fileID: 1194111243}
   _snapPoseDelegate: {fileID: 0}
   _movementProvider: {fileID: 1194111242}
@@ -29545,6 +29574,7 @@ MonoBehaviour:
   _maxInteractors: 2
   _maxSelectingInteractors: 1
   _data: {fileID: 0}
+  isOnDisable: 0
   _rigidbody: {fileID: 1262001532}
   _snapPoseDelegate: {fileID: 0}
   _movementProvider: {fileID: 1262001531}
@@ -30673,6 +30703,7 @@ MonoBehaviour:
   _maxInteractors: -1
   _maxSelectingInteractors: -1
   _data: {fileID: 0}
+  isOnDisable: 0
   _pointableElement: {fileID: 436363967}
   _rigidbody: {fileID: 436363966}
   _physicsGrabbable: {fileID: 0}
@@ -32180,6 +32211,7 @@ MonoBehaviour:
   _candidateTiebreaker: {fileID: 0}
   _maxIterationsPerFrame: 3
   _data: {fileID: 0}
+  isOnDisable: 0
   _pointableElement: {fileID: 436363967}
   _rigidbody: {fileID: 436363966}
   _distanceThreshold: 0.01
@@ -34426,6 +34458,7 @@ MonoBehaviour:
   _maxInteractors: -1
   _maxSelectingInteractors: -1
   _data: {fileID: 0}
+  isOnDisable: 0
   _pointableElement: {fileID: 786111101}
   _rigidbody: {fileID: 786111099}
   _grabSource: {fileID: 0}
@@ -35202,6 +35235,7 @@ MonoBehaviour:
   _candidateTiebreaker: {fileID: 0}
   _maxIterationsPerFrame: 3
   _data: {fileID: 0}
+  isOnDisable: 0
   _pointTransform: {fileID: 265917534}
   _radius: 0.005
   _touchReleaseThreshold: 0.002
@@ -37591,6 +37625,7 @@ MonoBehaviour:
   _candidateTiebreaker: {fileID: 0}
   _maxIterationsPerFrame: 3
   _data: {fileID: 0}
+  isOnDisable: 0
   _pointableElement: {fileID: 321786974}
   _rigidbody: {fileID: 321786973}
   _distanceThreshold: 0.01
@@ -37655,6 +37690,7 @@ MonoBehaviour:
   _candidateTiebreaker: {fileID: 0}
   _maxIterationsPerFrame: 3
   _data: {fileID: 0}
+  isOnDisable: 0
   _pointableElement: {fileID: 832670088}
   _rigidbody: {fileID: 832670082}
   _distanceThreshold: 0.01
@@ -40163,6 +40199,10 @@ MonoBehaviour:
   ScaleItem: 1
   DisableColliders: 1
   DuplicateItemOnGrab: 1
+  ChangeNameWhenDropToSnapZone: 0
+  ChangeNameWhenDuplicate: 0
+  nameChange: 
+  isThereSnapZoneinChild: 0
   MaxDropTime: 0.1
   LastSnapTime: 0
   turnOffReturnTo: 1
@@ -40206,6 +40246,7 @@ MonoBehaviour:
   OnDetachHTEvent:
     m_PersistentCalls:
       m_Calls: []
+  wasKinematicKeepFalse: 0
   ClosestGrabbable: {fileID: 0}
 --- !u!114 &1714602727
 MonoBehaviour:
@@ -40375,7 +40416,7 @@ PrefabInstance:
     - target: {fileID: 539934168606065208, guid: a4f1c0be9187c8e44ba7f828bcd12c96,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.163
+      value: -0.08
       objectReference: {fileID: 0}
     - target: {fileID: 539934168606065208, guid: a4f1c0be9187c8e44ba7f828bcd12c96,
         type: 3}
@@ -40385,22 +40426,22 @@ PrefabInstance:
     - target: {fileID: 539934168606065208, guid: a4f1c0be9187c8e44ba7f828bcd12c96,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.79515606
       objectReference: {fileID: 0}
     - target: {fileID: 539934168606065208, guid: a4f1c0be9187c8e44ba7f828bcd12c96,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 539934168606065208, guid: a4f1c0be9187c8e44ba7f828bcd12c96,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 539934168606065208, guid: a4f1c0be9187c8e44ba7f828bcd12c96,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: -0.60640484
       objectReference: {fileID: 0}
     - target: {fileID: 539934168606065208, guid: a4f1c0be9187c8e44ba7f828bcd12c96,
         type: 3}
@@ -40415,7 +40456,7 @@ PrefabInstance:
     - target: {fileID: 539934168606065208, guid: a4f1c0be9187c8e44ba7f828bcd12c96,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: -74.66
       objectReference: {fileID: 0}
     - target: {fileID: 1871213108990741585, guid: a4f1c0be9187c8e44ba7f828bcd12c96,
         type: 3}
@@ -40442,6 +40483,26 @@ PrefabInstance:
       propertyPath: _gauzeSnapZone
       value: 
       objectReference: {fileID: 1900877781}
+    - target: {fileID: 4237726104431414509, guid: a4f1c0be9187c8e44ba7f828bcd12c96,
+        type: 3}
+      propertyPath: IndexBlendMin
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237726104431414509, guid: a4f1c0be9187c8e44ba7f828bcd12c96,
+        type: 3}
+      propertyPath: ShowAngleGizmo
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237726104431414509, guid: a4f1c0be9187c8e44ba7f828bcd12c96,
+        type: 3}
+      propertyPath: LeftHandIsValid
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237726104431414509, guid: a4f1c0be9187c8e44ba7f828bcd12c96,
+        type: 3}
+      propertyPath: RightHandIsValid
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4789937526193327317, guid: a4f1c0be9187c8e44ba7f828bcd12c96,
         type: 3}
       propertyPath: m_IsActive
@@ -41727,6 +41788,7 @@ MonoBehaviour:
   _maxInteractors: -1
   _maxSelectingInteractors: -1
   _data: {fileID: 0}
+  isOnDisable: 0
   _pointableElement: {fileID: 321786974}
   _rigidbody: {fileID: 321786973}
   _grabSource: {fileID: 0}
@@ -42849,6 +42911,7 @@ MonoBehaviour:
   _maxInteractors: -1
   _maxSelectingInteractors: -1
   _data: {fileID: 0}
+  isOnDisable: 0
   _pointableElement: {fileID: 321786974}
   _rigidbody: {fileID: 321786973}
   _physicsGrabbable: {fileID: 0}
@@ -42942,6 +43005,7 @@ MonoBehaviour:
   _maxInteractors: -1
   _maxSelectingInteractors: -1
   _data: {fileID: 0}
+  isOnDisable: 0
   _pointableElement: {fileID: 321786974}
   isInSnapZone: 0
   _rigidbody: {fileID: 321786973}
@@ -43189,6 +43253,7 @@ MonoBehaviour:
   _maxInteractors: -1
   _maxSelectingInteractors: -1
   _data: {fileID: 0}
+  isOnDisable: 0
   _pointableElement: {fileID: 302496045}
   _rigidbody: {fileID: 302496042}
   _physicsGrabbable: {fileID: 0}
@@ -44562,6 +44627,7 @@ MonoBehaviour:
   _maxInteractors: 2
   _maxSelectingInteractors: 1
   _data: {fileID: 0}
+  isOnDisable: 0
   _rigidbody: {fileID: 1900877777}
   _snapPoseDelegate: {fileID: 0}
   _movementProvider: {fileID: 1900877775}
@@ -44725,12 +44791,16 @@ MonoBehaviour:
   HeldItem: {fileID: 0}
   StartingItem: {fileID: 832670076}
   CanDropItem: 1
-  CanSwapItem: 0
+  CanSwapItem: 1
   CanRemoveItem: 1
   UseOffset: 1
   ScaleItem: 1
   DisableColliders: 1
   DuplicateItemOnGrab: 0
+  ChangeNameWhenDropToSnapZone: 0
+  ChangeNameWhenDuplicate: 0
+  nameChange: 
+  isThereSnapZoneinChild: 0
   MaxDropTime: 0.1
   LastSnapTime: 0
   turnOffReturnTo: 1
@@ -44847,6 +44917,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  wasKinematicKeepFalse: 1
   ClosestGrabbable: {fileID: 0}
 --- !u!135 &1900877782
 SphereCollider:
@@ -47059,6 +47130,7 @@ MonoBehaviour:
   _maxInteractors: -1
   _maxSelectingInteractors: -1
   _data: {fileID: 0}
+  isOnDisable: 0
   _pointableElement: {fileID: 414688617}
   _rigidbody: {fileID: 414688611}
   _physicsGrabbable: {fileID: 0}
@@ -49159,6 +49231,7 @@ MonoBehaviour:
   _candidateTiebreaker: {fileID: 0}
   _maxIterationsPerFrame: 3
   _data: {fileID: 0}
+  isOnDisable: 0
   _pointTransform: {fileID: 884716716}
   _radius: 0.005
   _touchReleaseThreshold: 0.002
@@ -49796,6 +49869,7 @@ MonoBehaviour:
   _maxInteractors: -1
   _maxSelectingInteractors: -1
   _data: {fileID: 0}
+  isOnDisable: 0
   _pointableElement: {fileID: 786111101}
   isInSnapZone: 0
   _rigidbody: {fileID: 786111099}
@@ -49909,6 +49983,7 @@ MonoBehaviour:
   _maxInteractors: -1
   _maxSelectingInteractors: -1
   _data: {fileID: 0}
+  isOnDisable: 0
   _pointableElement: {fileID: 786111101}
   _rigidbody: {fileID: 786111099}
   _physicsGrabbable: {fileID: 0}
@@ -50371,6 +50446,7 @@ MonoBehaviour:
   _maxInteractors: -1
   _maxSelectingInteractors: -1
   _data: {fileID: 0}
+  isOnDisable: 0
   _allowTeleport: 1
   _equalDistanceToBlockerOverride: 0
   _tieBreakerScore: -100

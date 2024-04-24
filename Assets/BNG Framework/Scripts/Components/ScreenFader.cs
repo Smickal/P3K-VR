@@ -219,6 +219,14 @@ namespace BNG {
         {
             OnFadeDone.RemoveAllListeners();
         }
+        public void AddEvent(UnityAction action)
+        {
+            OnFadeDone.AddListener(action);
+        }
+        public void RemoveEvent(UnityAction action)
+        {
+            OnFadeDone.RemoveListener(action);
+        }
     }
 }
 

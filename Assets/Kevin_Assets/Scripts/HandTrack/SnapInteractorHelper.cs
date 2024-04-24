@@ -36,6 +36,16 @@ public class SnapInteractorHelper : MonoBehaviour, ITurnOffStatic
     private void snapInteractor_OnUnSelect(object sender, Oculus.Interaction.SnapInteractor.OnUnSelectEventArgs e)
     {
         if(InteractToolsController.CheckIsHandTrackOn == null) return;
+        if(e.Interactable.isOnDisable)
+        {
+            e.Interactable.isOnDisable = false;
+            return; 
+        }
+        if(snapInteractor.isOnDisable)
+        {
+            snapInteractor.isOnDisable = false;
+            return;
+        }
         if(InteractToolsController.CheckIsHandTrackOn())LeaveSnapZone(e.Interactable);
 
         if(distanceHandGrabInteractable)
@@ -74,12 +84,17 @@ public class SnapInteractorHelper : MonoBehaviour, ITurnOffStatic
         // Debug.Log("Here" + OVRInput.IsControllerConnected(OVRInput.Controller.Hands) + interactor.name + " B " + interactable.name);
         BNG.Grabbable grab = interactor.GetComponentInParent<BNG.Grabbable>();
         snapZone = interactable.gameObject.GetComponent<BNG.SnapZone>();
-        if(grab && snapZone)snapZone.GrabGrabbable_ForSnapHandTrackOnly(grab);
+        if(grab && snapZone)
+        {
+            if(snapZone.HeldItem == null)snapZone.GrabGrabbable_ForSnapHandTrackOnly(grab);
+        }
+        
         // Debug.Log("what??");
     }
     public void LeaveSnapZone(Oculus.Interaction.SnapInteractable interactable)
     {
         // Debug.Log("Here" + OVRInput.IsControllerConnected(OVRInput.Controller.Hands));
+        Debug.Log("masuk ke sini + " + interactable.gameObject);
         interactable.gameObject.GetComponent<BNG.SnapZone>().ReleaseAll_ForSnapHandTrackOnly();
         // Debug.Log("whatthe??");
     }
