@@ -93,7 +93,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -2739554559135404904, guid: f2ac662c6da039b4283eec9b345deee6, type: 3}
+  - {fileID: -2739554559135404904, guid: 0ac58d5bcdd1da34cb4a5d9f7aca6970, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -176,7 +176,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -2739554559135404904, guid: f2ac662c6da039b4283eec9b345deee6, type: 3}
+  - {fileID: -2739554559135404904, guid: eff1fde11ee61944c982e94e3e7f2861, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -362,6 +362,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BeingHeld: 0
+  wasKinematicKeepFalse: 0
+  originalParentKeepNull: 0
   GrabButton: 2
   Grabtype: 2
   GrabPhysics: 4
@@ -463,4 +465,6 @@ MonoBehaviour:
   ReturnDelay: 0.1
   isBeingGrabHand: {fileID: 0}
   SnapDistance: 0.05
+  returnFirstTime: 0
   onlyReturnOnce: 0
+  briefCase: {fileID: 0}
