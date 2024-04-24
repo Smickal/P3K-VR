@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -5511544968506594325, guid: 6f154b074273ec343a6fec50c5d30434, type: 3}
+  - {fileID: -5511544968506594325, guid: eff1fde11ee61944c982e94e3e7f2861, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -97,8 +97,10 @@ GameObject:
   - component: {fileID: 5154532161817432548}
   - component: {fileID: 3483033728702432696}
   - component: {fileID: 8004407935582390764}
+  - component: {fileID: 8177582403718362404}
+  - component: {fileID: 7951407004705244926}
   m_Layer: 0
-  m_Name: AlchoholBox
+  m_Name: AlcoholWipesCase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -118,8 +120,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1528220727612044339}
-  - {fileID: 7084055783050227309}
   - {fileID: 7362599884712579116}
+  - {fileID: 7084055783050227309}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &5154532161817432548
@@ -241,6 +243,39 @@ MonoBehaviour:
   UseCustomInspector: 1
   lastFlickTime: 0
   FlickForce: 1
+--- !u!114 &8177582403718362404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2664372533491067180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91836ffeeed78ee4398ad0b81f2da05e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scriptableData: {fileID: 11400000, guid: a2c72e3a46d951045add8afcd65cb07f, type: 2}
+--- !u!114 &7951407004705244926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2664372533491067180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e7fc31b3b1411d4e8e8b77b687c7bef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ReturnTo: {fileID: 0}
+  LerpSpeed: 15
+  ReturnDelay: 0.1
+  isBeingGrabHand: {fileID: 0}
+  SnapDistance: 0.05
+  returnFirstTime: 0
+  onlyReturnOnce: 1
+  briefCase: {fileID: 0}
 --- !u!1 &4225354805229546000
 GameObject:
   m_ObjectHideFlags: 0
@@ -302,7 +337,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 4242274966576581948, guid: 6f154b074273ec343a6fec50c5d30434, type: 3}
+  - {fileID: 2100000, guid: 8ac5053d002edbb42959e8ab0bc7b328, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -581,7 +616,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -5511544968506594325, guid: 6f154b074273ec343a6fec50c5d30434, type: 3}
+  - {fileID: -5511544968506594325, guid: eff1fde11ee61944c982e94e3e7f2861, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
