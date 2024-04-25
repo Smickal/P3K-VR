@@ -60,6 +60,7 @@ public class BandageWithItemManager : MonoBehaviour
         foreach(SnapZone _bandageSnapZone in _bandageSnapZones)
         {
             _bandageSnapZone.CanRemoveItem = false;
+            _bandageSnapZone.CanRemoveChange(false);
         }
     }
 

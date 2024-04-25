@@ -89,6 +89,8 @@ namespace Oculus.Interaction
 
         private float _idleStarted = -1f;
         private IMovement _movement = null;
+        public bool isAtStart= true, isFirsTime=true;
+        public SnapInteractable snapInteractableTemp;
         
 
         #region Editor events
@@ -117,9 +119,16 @@ namespace Oculus.Interaction
         #endregion
 
         #region Unity Lifecycle
+        protected override void Awake()
+        {
+            base.Awake();
+            isAtStart = true;
+            // Debug.Log("Tiap spawn hrsnya ke sini");
+        }
 
         protected override void Start()
         {
+            
             this.BeginStart(ref _started, () => base.Start());
             this.AssertField(_pointableElement, nameof(_pointableElement));
             this.AssertField(Rigidbody, nameof(Rigidbody));
@@ -130,6 +139,25 @@ namespace Oculus.Interaction
             }
 
             this.EndStart(ref _started);
+            isAtStart = false;
+            if(snapInteractableTemp != null)
+            {
+                // Debug.Log("and we're here");
+                isFirsTime = false;
+                SetCandidate(snapInteractableTemp);
+            }
+            
+        }
+        protected override void Update() 
+        {
+            
+            base.Update();
+            // if(snapInteractableTemp != null && isFirsTime)
+            // {
+            //     isFirsTime = false;
+            //     SetCandidate(snapInteractableTemp);
+            // }
+            
         }
 
         protected override void OnEnable()
@@ -140,7 +168,7 @@ namespace Oculus.Interaction
                 _pointableElement.WhenPointerEventRaised += HandlePointerEventRaised;
                 if (_defaultInteractable != null)
                 {
-                    Debug.Log(_defaultInteractable);
+                    // Debug.Log(_defaultInteractable);
                     SetComputeCandidateOverride(() => _defaultInteractable, true);
                     SetComputeShouldSelectOverride(()=>true, true);
                 }
@@ -416,14 +444,26 @@ namespace Oculus.Interaction
         public void SetCandidate(SnapInteractable snapInteractableSet)
         {
             base.OnEnable();
+            // Debug.Log("Someone calls Candidate + " + snapInteractableSet.gameObject.name);
             if (_started)
             {
+                // Debug.Log(this.gameObject.transform.parent + " muncul pas start - connect - snapinteractor");
                 _pointableElement.WhenPointerEventRaised += HandlePointerEventRaised;
                 if (snapInteractableSet != null)
                 {
                     SetComputeCandidateOverride(() => snapInteractableSet, true);
                     SetComputeShouldSelectOverride(()=>true, true);
                 }
+            }
+            else
+            {
+                // Debug.Log("It's not started yet apparently");
+                if(isAtStart)
+                {
+                    // Debug.Log("masuk sini");
+                    snapInteractableTemp = snapInteractableSet;
+                }
+                
             }
             
         }

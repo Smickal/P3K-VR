@@ -21,18 +21,21 @@ public class GauzeWipesCase : MonoBehaviour
     public void OpenedPeelCase()
     {
         isOpened = true;
+        SmallTrashItem smallTrashItem = GetComponent<SmallTrashItem>();
+        if(smallTrashItem != null)smallTrashItem.AddTrash();
         _peelSnapZone.gameObject.SetActive(false);
         StartCoroutine(StartCoroutineDelay());
     }
 
     public void OpenedGauzeWipes()
     {
-        //_gauzeSnapZone.gameObject.SetActive(false);
+        _gauzeSnapZone.gameObject.SetActive(false);
     }
 
     IEnumerator StartCoroutineDelay()
     {
         yield return new WaitForSeconds(_delayTime);
         _gauzeSnapZone.gameObject.SetActive(true);
+        _gauzeSnapZone.GetComponent<SnapZoneControllerHelper>().SnapSelected_ConnectToHandTrackSnap();
     }
 }

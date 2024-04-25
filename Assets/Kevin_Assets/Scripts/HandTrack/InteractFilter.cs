@@ -6,10 +6,12 @@ using UnityEngine;
 public class InteractFilter : MonoBehaviour, IGameObjectFilter
 {
     [Tooltip("If banObject = false, hanya yang di list gameobject yang bisa masuk; sebaliknya jika true, object di list ke ban")]
+    [SerializeField]bool CanDropItem = true;
     [SerializeField]bool banObject = true;
     [SerializeField] private List<string> gameObjectNamesList;
     public bool Filter(GameObject gameObject)
     {
+        if(!CanDropItem)return false;
         if(gameObjectNamesList != null)
         {
             foreach (string currList in gameObjectNamesList)

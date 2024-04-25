@@ -56,6 +56,7 @@ namespace Oculus.Interaction
         public object Data { get; protected set; } = null;
 
         protected bool _started = false;
+        public bool isOnDisable = false;
 
         #region Properties
         public int MaxInteractors
@@ -237,7 +238,7 @@ namespace Oculus.Interaction
             {
                 return true;
             }
-
+            // Debug.Log("Did we do it ? " + interactor.gameObject.name);
             foreach (IGameObjectFilter interactorFilter in InteractorFilters)
             {
                 if (!interactorFilter.Filter(interactor.gameObject))
@@ -245,7 +246,7 @@ namespace Oculus.Interaction
                     return false;
                 }
             }
-
+            // Debug.Log("We did it " + interactor.gameObject.name);
             return true;
         }
 
@@ -356,11 +357,13 @@ namespace Oculus.Interaction
 
         protected virtual void OnEnable()
         {
+            isOnDisable = false;
             Enable();
         }
 
         protected virtual void OnDisable()
         {
+            isOnDisable = true;
             Disable();
         }
 

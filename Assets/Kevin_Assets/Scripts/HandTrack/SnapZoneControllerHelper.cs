@@ -11,11 +11,11 @@ public class SnapZoneControllerHelper : MonoBehaviour
     
     public void SnapSelected_ConnectToHandTrackSnap()
     {
-
+        
         snapInteractor = grabbable.HeldItem.GetComponentInChildren<Oculus.Interaction.SnapInteractor>();
         if(!snapInteractor.enabled)snapInteractor.enabled = true;
         snapInteractor.SetCandidate(chosenInteractable);
-        
+        Debug.Log(this.gameObject + " muncul pas start - connect");
         
     }
     public void SnapUnSelect_DisconnectHandTrackSnap()
