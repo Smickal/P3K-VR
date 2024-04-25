@@ -39,6 +39,7 @@ namespace BNG {
         void Start() {
             grab = GetComponent<Grabbable>();
             rigid = GetComponent<Rigidbody>();
+            if(isBeingGrabHand == null)isBeingGrabHand = GetComponent<IsBeingGrabHandTrack>();
             useGravityInitial = rigid.useGravity;
         }
 
