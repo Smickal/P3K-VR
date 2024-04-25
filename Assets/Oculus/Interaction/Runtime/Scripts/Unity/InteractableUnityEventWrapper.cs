@@ -159,7 +159,7 @@ namespace Oculus.Interaction
         }
         private void HandleBeforeSelectingInteractorViewRemoved(IInteractorView interactorView)
         {
-            Debug.Log("OIIIII BANG");
+            // Debug.Log("OIIIII BANG");
             BeforeSelectingInteractorViewRemoved.Invoke();
         }
 

@@ -314,6 +314,8 @@ namespace Oculus.Interaction
         public object Data { get; protected set; } = null;
 
         protected bool _started;
+        [Tooltip("Penanda apakah ada yg lwt OnDisable")] // KARENA HARUSNYA GA MUNGKIN SNAP NYALA SI ONDISABLE JG NYALA
+        public bool isOnDisable = false;
 
         protected virtual void Awake()
         {
@@ -341,6 +343,7 @@ namespace Oculus.Interaction
 
         protected virtual void OnEnable()
         {
+            isOnDisable = false;
             if (_started)
             {
                 if (_selector != null)
@@ -361,6 +364,7 @@ namespace Oculus.Interaction
                     _selector.WhenSelected -= HandleSelected;
                     _selector.WhenUnselected -= HandleUnselected;
                 }
+                isOnDisable = true;
                 Disable();
             }
         }

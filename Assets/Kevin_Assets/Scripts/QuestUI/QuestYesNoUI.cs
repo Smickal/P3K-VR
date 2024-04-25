@@ -17,6 +17,8 @@ public class QuestYesNoUI : MonoBehaviour
     public void CloseUI()
     {
         _baseUI.SetActive(false);
+        if(_vF.isActivate)_vF.RestartPos();
         _vF.Deactivate();
+
     }
 }

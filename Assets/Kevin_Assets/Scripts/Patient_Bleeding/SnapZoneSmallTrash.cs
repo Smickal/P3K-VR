@@ -12,10 +12,13 @@ public class SnapZoneSmallTrash : MonoBehaviour
     }
     public void AddTrashSnapOut()
     {
+        if(snapZone.HeldItem == null)return;
+        smallTrashItem = snapZone.HeldItem.GetComponent<SmallTrashItem>();
         if(smallTrashItem == null)return;
         Debug.Log("Ada Sampah" + smallTrashItem.name);
+        if(smallTrashItem.IsBigCase)return;
         smallTrashItem.AddTrash();
-        smallTrashItem = null;
+        // smallTrashItem = null;
     }
     public void RemoveTrashSnapIn()
     {

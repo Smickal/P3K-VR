@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AlcoholWipes : GrabbableEvents, ISmallTrash
+public class AlcoholWipes : GrabbableEvents
 {
     Grabber curGrabber;
 
