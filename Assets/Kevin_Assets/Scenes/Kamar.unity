@@ -5583,20 +5583,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1634619010747069638, guid: a4f1c0be9187c8e44ba7f828bcd12c96,
-        type: 3}
-      propertyPath: _handGrabPoses.Array.size
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1871213108990741585, guid: a4f1c0be9187c8e44ba7f828bcd12c96,
         type: 3}
       propertyPath: m_Name
       value: Container_GauzePads
-      objectReference: {fileID: 0}
-    - target: {fileID: 2451259698380842137, guid: a4f1c0be9187c8e44ba7f828bcd12c96,
-        type: 3}
-      propertyPath: _handGrabPoses.Array.size
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2854724477945513071, guid: a4f1c0be9187c8e44ba7f828bcd12c96,
         type: 3}
@@ -5618,21 +5608,6 @@ PrefabInstance:
       propertyPath: unityEventWrapper
       value: 
       objectReference: {fileID: 320405002}
-    - target: {fileID: 4261831643278770135, guid: a4f1c0be9187c8e44ba7f828bcd12c96,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4546209671944038336, guid: a4f1c0be9187c8e44ba7f828bcd12c96,
-        type: 3}
-      propertyPath: _handGrabPoses.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5210345097778741673, guid: a4f1c0be9187c8e44ba7f828bcd12c96,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5515503464341586819, guid: a4f1c0be9187c8e44ba7f828bcd12c96,
         type: 3}
       propertyPath: _handGrabPoses.Array.size
@@ -50849,6 +50824,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Prototype_Robot
       objectReference: {fileID: 0}
+    - target: {fileID: 2061521084165984475, guid: d38c86c219f77c34685aa09c68f7d65d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2212235773766665642, guid: d38c86c219f77c34685aa09c68f7d65d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -50894,6 +50874,46 @@ PrefabInstance:
       propertyPath: _rightGrabber
       value: 
       objectReference: {fileID: 2088954975}
+    - target: {fileID: 4801020843320421143, guid: d38c86c219f77c34685aa09c68f7d65d,
+        type: 3}
+      propertyPath: _onButtonCollisionEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4801020843320421143, guid: d38c86c219f77c34685aa09c68f7d65d,
+        type: 3}
+      propertyPath: _onButtonCollisionEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4801020843320421143, guid: d38c86c219f77c34685aa09c68f7d65d,
+        type: 3}
+      propertyPath: _onButtonCollisionEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1066109239}
+    - target: {fileID: 4801020843320421143, guid: d38c86c219f77c34685aa09c68f7d65d,
+        type: 3}
+      propertyPath: _onButtonCollisionEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 4324045423762375638}
+    - target: {fileID: 4801020843320421143, guid: d38c86c219f77c34685aa09c68f7d65d,
+        type: 3}
+      propertyPath: _onButtonCollisionEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Pause
+      objectReference: {fileID: 0}
+    - target: {fileID: 4801020843320421143, guid: d38c86c219f77c34685aa09c68f7d65d,
+        type: 3}
+      propertyPath: _onButtonCollisionEvent.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: ReleaseRobot
+      objectReference: {fileID: 0}
+    - target: {fileID: 4801020843320421143, guid: d38c86c219f77c34685aa09c68f7d65d,
+        type: 3}
+      propertyPath: _onButtonCollisionEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GameManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4801020843320421143, guid: d38c86c219f77c34685aa09c68f7d65d,
+        type: 3}
+      propertyPath: _onButtonCollisionEvent.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: Robot, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 5535879352898505364, guid: d38c86c219f77c34685aa09c68f7d65d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -50959,6 +50979,21 @@ PrefabInstance:
       propertyPath: _whenSelect.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 1066109239}
+    - target: {fileID: 6813633554350972061, guid: d38c86c219f77c34685aa09c68f7d65d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7850159571975445432, guid: d38c86c219f77c34685aa09c68f7d65d,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.0933
+      objectReference: {fileID: 0}
+    - target: {fileID: 7850159571975445432, guid: d38c86c219f77c34685aa09c68f7d65d,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.051
+      objectReference: {fileID: 0}
     - target: {fileID: 8095441838980641238, guid: d38c86c219f77c34685aa09c68f7d65d,
         type: 3}
       propertyPath: m_Size.x
@@ -50994,6 +51029,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d38c86c219f77c34685aa09c68f7d65d, type: 3}
+--- !u!114 &4324045423762375638 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5798878545848706029, guid: d38c86c219f77c34685aa09c68f7d65d,
+    type: 3}
+  m_PrefabInstance: {fileID: 4324045423762375637}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 334c8628e598690438171b16b1b80a65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4573858784870478603
 PrefabInstance:
   m_ObjectHideFlags: 0

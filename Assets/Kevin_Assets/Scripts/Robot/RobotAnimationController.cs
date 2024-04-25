@@ -14,6 +14,7 @@ public class RobotAnimationController : MonoBehaviour
     
     public void TriggerIdleAnim()
     {
+        // Debug.Log("Idle");
         _robotAnimator.SetBool(IdleHashAnim, true);
         _robotAnimator.SetBool(FrozeHashAnim, false);
         _robotAnimator.SetBool(ForwardHashAnim, false);
@@ -22,6 +23,7 @@ public class RobotAnimationController : MonoBehaviour
 
     public void TriggerForwardAnim()
     {
+        // Debug.Log("Forward");
         _robotAnimator.SetBool(FrozeHashAnim, false);
         _robotAnimator.SetBool(ForwardHashAnim, true);
         _robotAnimator.SetBool(BackwardHashAnim, false);
@@ -29,6 +31,7 @@ public class RobotAnimationController : MonoBehaviour
 
     public void TriggerBackwardAnim()
     {
+        // Debug.Log("Backward");
         _robotAnimator.SetBool(FrozeHashAnim, false);
         _robotAnimator.SetBool(BackwardHashAnim, true);
         _robotAnimator.SetBool(ForwardHashAnim, false);
@@ -36,6 +39,7 @@ public class RobotAnimationController : MonoBehaviour
 
     public void TriggerFrozeAnim()
     {
+        // Debug.Log("Froze");
         _robotAnimator.SetBool(FrozeHashAnim, true);
         _robotAnimator.SetBool(IdleHashAnim, false);
     }
