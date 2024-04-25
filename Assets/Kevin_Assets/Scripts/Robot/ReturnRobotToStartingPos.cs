@@ -10,29 +10,41 @@ public class ReturnRobotToStartingPos : MonoBehaviour
     [SerializeField] float _snapDistance = 0.05f;
 
     [SerializeField] Grabber _leftGrabber;
-    [SerializeField] Grabber _rightGrabber; 
+    [SerializeField] Grabber _rightGrabber;
 
     
+    RobotAnimationController _controller;
     Rigidbody rigid;
     Grabbable grabbable;
+    Robot robot;
     bool isMovingToSnapZone = false;
 
     private void Start()
     {
         rigid = GetComponent<Rigidbody>();
         grabbable = GetComponent<Grabbable>();
+        robot = GetComponent<Robot>();
+        _controller = GetComponent<RobotAnimationController>();
     }
 
     private void Update()
     {
+        if (robot.IsFollowingPlayer) return;
         if(isMovingToSnapZone)
         {
-            rigid.useGravity = false;
+            Vector3 moveDir = _startingPos.position - transform.position;
 
-            transform.position = Vector3.MoveTowards(transform.position, _startingPos.transform.position, Time.deltaTime * _lerpSpeed);
+            //rigid.AddForce(moveDir * Time.deltaTime * _lerpSpeed, ForceMode.Force);
+            rigid.velocity = moveDir * Time.deltaTime * _lerpSpeed;
+
+            //transform.position = Vector3.MoveTowards(transform.position, _startingPos.transform.position, Time.deltaTime * _lerpSpeed);
+
+
 
             if (Vector3.Distance(transform.position, _startingPos.transform.position) <= _snapDistance)
             {
+                _controller.TriggerIdleAnim();
+
                 isMovingToSnapZone = false;
                 rigid.velocity = Vector3.zero;
                 rigid.angularVelocity = Vector3.zero;
@@ -44,6 +56,7 @@ public class ReturnRobotToStartingPos : MonoBehaviour
             if (Vector3.Distance(transform.position, _startingPos.transform.position) <= _snapDistance) return;
             if ((_leftGrabber.RemoteGrabbingGrabbable == grabbable || _rightGrabber.RemoteGrabbingGrabbable == grabbable)) return;
             if (grabbable.BeingHeld) return;
+
             isMovingToSnapZone = true;
         }
 
