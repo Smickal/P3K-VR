@@ -21,6 +21,8 @@ public class GauzeWipesCase : MonoBehaviour
     public void OpenedPeelCase()
     {
         isOpened = true;
+        SmallTrashItem smallTrashItem = GetComponent<SmallTrashItem>();
+        if(smallTrashItem != null)smallTrashItem.AddTrash();
         _peelSnapZone.gameObject.SetActive(false);
         StartCoroutine(StartCoroutineDelay());
     }

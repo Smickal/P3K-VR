@@ -7,6 +7,9 @@ public class SmallTrashItem : MonoBehaviour
 {
     public UnityEvent OnDestroyTrash;
     private bool isTrash = false;
+    [Tooltip("Nyalakan ini kalo ternyata barangnya 1 paket, baru jadikan trash kalo barangnya itu ud kebuka")]
+    [SerializeField]private bool isBigCase = false;
+    public bool IsBigCase{get{return isBigCase;}}
     
     public void DestroyTrash()
     {

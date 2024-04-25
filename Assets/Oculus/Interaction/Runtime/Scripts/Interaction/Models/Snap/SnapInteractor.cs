@@ -123,6 +123,7 @@ namespace Oculus.Interaction
         {
             base.Awake();
             isAtStart = true;
+            // Debug.Log("Tiap spawn hrsnya ke sini");
         }
 
         protected override void Start()
@@ -139,7 +140,13 @@ namespace Oculus.Interaction
 
             this.EndStart(ref _started);
             isAtStart = false;
-            if(snapInteractableTemp != null)SetCandidate(snapInteractableTemp);
+            if(snapInteractableTemp != null)
+            {
+                // Debug.Log("and we're here");
+                isFirsTime = false;
+                SetCandidate(snapInteractableTemp);
+            }
+            
         }
         protected override void Update() 
         {
@@ -161,7 +168,7 @@ namespace Oculus.Interaction
                 _pointableElement.WhenPointerEventRaised += HandlePointerEventRaised;
                 if (_defaultInteractable != null)
                 {
-                    Debug.Log(_defaultInteractable);
+                    // Debug.Log(_defaultInteractable);
                     SetComputeCandidateOverride(() => _defaultInteractable, true);
                     SetComputeShouldSelectOverride(()=>true, true);
                 }
@@ -437,9 +444,10 @@ namespace Oculus.Interaction
         public void SetCandidate(SnapInteractable snapInteractableSet)
         {
             base.OnEnable();
+            // Debug.Log("Someone calls Candidate + " + snapInteractableSet.gameObject.name);
             if (_started)
             {
-                Debug.Log(this.gameObject + " muncul pas start - connect - snapinteractor");
+                // Debug.Log(this.gameObject.transform.parent + " muncul pas start - connect - snapinteractor");
                 _pointableElement.WhenPointerEventRaised += HandlePointerEventRaised;
                 if (snapInteractableSet != null)
                 {
@@ -449,7 +457,13 @@ namespace Oculus.Interaction
             }
             else
             {
-                if(isAtStart)snapInteractableTemp = snapInteractableSet;
+                // Debug.Log("It's not started yet apparently");
+                if(isAtStart)
+                {
+                    // Debug.Log("masuk sini");
+                    snapInteractableTemp = snapInteractableSet;
+                }
+                
             }
             
         }

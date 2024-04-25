@@ -16,6 +16,7 @@ public class SnapZoneSmallTrash : MonoBehaviour
         smallTrashItem = snapZone.HeldItem.GetComponent<SmallTrashItem>();
         if(smallTrashItem == null)return;
         Debug.Log("Ada Sampah" + smallTrashItem.name);
+        if(smallTrashItem.IsBigCase)return;
         smallTrashItem.AddTrash();
         // smallTrashItem = null;
     }

@@ -359,6 +359,7 @@ namespace BNG {
                     if(disabledColliders[x].name != "SnapInteractor") disabledColliders[x].enabled = false;
                     else{
                         if(CanRemoveItem == false) disabledColliders[x].enabled = false;
+                        else disabledColliders[x].enabled = true;
                     }
                 }
             }
@@ -427,6 +428,13 @@ namespace BNG {
                                 // }
                                 snapzones2[i].disableGrabbable(snapzones2[i].HeldItem.GetComponent<Grabbable>());
                                 snapzones2[i].heldItemRigid = snapzones2[i].HeldItem.GetComponent<Rigidbody>();
+                                if(snapzones2[i].gameObject.activeSelf)
+                                {
+                                    snapzones2[i].GetComponent<SnapZoneControllerHelper>().SnapSelected_ConnectToHandTrackSnap();
+                                }
+                                SnapKidsController snapKidsControllerInHeldItem = go.GetComponent<SnapKidsController>();
+                                if(snapKidsControllerInHeldItem != null)snapKidsControllerInHeldItem.AddSnapZoneCollider(snapzones2[i]);
+                                
                             }
 
                         }
@@ -491,7 +499,9 @@ namespace BNG {
             if (DisableColliders && disabledColliders != null) {
                 foreach (var c in disabledColliders) {
                     if (c) {
-                        c.enabled = true;
+                        Debug.Log(c.name);
+                        if(c.gameObject.name == "SnapInteractor") c.enabled = false;
+                        else c.enabled = true;
                     }
                 }
             }
@@ -580,11 +590,18 @@ namespace BNG {
             }
 
             HeldItem.ResetScale();
-
+            int x = 0;
             if (DisableColliders && disabledColliders != null) {
                 foreach (var c in disabledColliders) {
                     if (c) {
-                        c.enabled = true;
+                        Debug.Log(c.name);
+                        if(c.name == "SnapInteractor")
+                        {
+                            Debug.Log(++x);
+                            
+                        }
+                         
+                        else c.enabled = true;
                     }
                 }
             }
@@ -657,6 +674,12 @@ namespace BNG {
                         // }
                         snapzones2[i].disableGrabbable(snapzones2[i].HeldItem.GetComponent<Grabbable>());
                         snapzones2[i].heldItemRigid = snapzones2[i].HeldItem.GetComponent<Rigidbody>();
+                        if(snapzones2[i].gameObject.activeSelf)
+                        {
+                            snapzones2[i].GetComponent<SnapZoneControllerHelper>().SnapSelected_ConnectToHandTrackSnap();
+                        }
+                        SnapKidsController snapKidsControllerInHeldItem = go.GetComponent<SnapKidsController>();
+                        if(snapKidsControllerInHeldItem != null)snapKidsControllerInHeldItem.AddSnapZoneCollider(snapzones2[i]);
                     }
 
                 }
