@@ -274,7 +274,6 @@ GameObject:
   - component: {fileID: 6601598273695973694}
   - component: {fileID: 8646463814412550708}
   - component: {fileID: 741901620829503761}
-  - component: {fileID: 7198646379541696791}
   m_Layer: 0
   m_Name: Bandage
   m_TagString: Untagged
@@ -448,23 +447,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bandage: {fileID: 8646463814412550708}
---- !u!114 &7198646379541696791
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7348995417659462845}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e7fc31b3b1411d4e8e8b77b687c7bef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ReturnTo: {fileID: 0}
-  LerpSpeed: 15
-  ReturnDelay: 0.1
-  isBeingGrabHand: {fileID: 0}
-  SnapDistance: 0.05
-  returnFirstTime: 0
-  onlyReturnOnce: 0
-  briefCase: {fileID: 0}
