@@ -44,6 +44,7 @@ namespace BNG {
         [Tooltip("Multiply Item Scale times this when in snap zone.")]
         public float ScaleItem = 1f;
         private float _scaleTo;
+        public float GetScaleTo{get{return _scaleTo;}}
 
         public bool DisableColliders = true;
         List<Collider> disabledColliders = new List<Collider>();
@@ -294,7 +295,6 @@ namespace BNG {
             else {
                 _scaleTo = ScaleItem;
             }
-
             // Is there an offset to apply?
             SnapZoneOffset off = grab.GetComponent<SnapZoneOffset>();
             if (off) {
@@ -354,7 +354,7 @@ namespace BNG {
         void disableGrabbable(Grabbable grab) {
 
             if (DisableColliders) {
-                disabledColliders = grab.GetComponentsInChildren<Collider>(false).ToList();
+                disabledColliders = grab.GetComponentsInChildren<Collider>(true).ToList();
                 for (int x = 0; x < disabledColliders.Count; x++) {
                     if(disabledColliders[x].name != "SnapInteractor") disabledColliders[x].enabled = false;
                     else{
@@ -597,6 +597,7 @@ namespace BNG {
                         Debug.Log(c.name);
                         if(c.name == "SnapInteractor")
                         {
+                            c.enabled = false;
                             Debug.Log(++x);
                             
                         }

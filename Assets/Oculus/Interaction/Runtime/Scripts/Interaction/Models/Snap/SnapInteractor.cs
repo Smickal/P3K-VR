@@ -61,6 +61,8 @@ namespace Oculus.Interaction
         [FormerlySerializedAs("_dropPoint")]
         private Transform _snapPoseTransform;
         public Pose SnapPose => _snapPoseTransform.GetPose();
+        [Tooltip("If True, Bodo amat dengan transform pos and rotation")]
+        public bool transformZero = false;
 
         /// <summary>
         /// The default Interactable to snap to until you interact with the object.
@@ -386,14 +388,17 @@ namespace Oculus.Interaction
                 {
                     continue;
                 }
-
-                float positionDeltaSqr = (pose.position - _snapPoseTransform.position).sqrMagnitude;
+                float positionDeltaSqr = 0;
+                if(!transformZero)positionDeltaSqr = (pose.position - _snapPoseTransform.position).sqrMagnitude;
+                else positionDeltaSqr = (pose.position - Vector3.zero).sqrMagnitude;
                 if (positionDeltaSqr > bestPositionDeltaSqr)
                 {
                     continue;
                 }
 
-                float angularDist = Quaternion.Angle(pose.rotation, _snapPoseTransform.rotation);
+                float angularDist = 0;
+                if(!transformZero)angularDist = Quaternion.Angle(pose.rotation, _snapPoseTransform.rotation);
+                else angularDist = Quaternion.Angle(pose.rotation, Quaternion.identity);
                 if (Mathf.Abs(positionDeltaSqr - bestPositionDeltaSqr) < distanceThresholdSqr &&
                     angularDist >= bestAngularDelta)
                 {

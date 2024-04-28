@@ -11,6 +11,7 @@ public class SnapKidsController : MonoBehaviour
     IsBeingGrabHandTrack isBeingGrabHand;
     [SerializeField]SnapZone[] snapZoneChilds;
     private Dictionary<SnapZone, Collider> snapZoneColliderDictionary = new Dictionary<SnapZone, Collider>();
+    [SerializeField]bool isOkayToBeGrabWithoutGrabbing = false;
     private void Start()
     {
         grab = GetComponent<BNG.Grabbable>();
@@ -37,6 +38,19 @@ public class SnapKidsController : MonoBehaviour
             foreach(SnapZone snapzone in snapZoneChilds)
             {
                 if(!snapZoneColliderDictionary.ContainsKey(snapzone))continue;
+                if(isOkayToBeGrabWithoutGrabbing)
+                {
+                    bool change = true;
+                    if(transform.parent != null)
+                    {
+                        if(transform.parent.GetComponent<SnapZone>() != null)
+                        {
+                            change = false;
+                        }
+                    }
+                    snapZoneColliderDictionary[snapzone].enabled = change;
+                    continue;
+                }
                 if(snapZoneColliderDictionary[snapzone].enabled)snapZoneColliderDictionary[snapzone].enabled = false;
             }
         }

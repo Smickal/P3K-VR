@@ -23,9 +23,14 @@ public class CheckingTakeCorrectItem : MonoBehaviour
 
         if(patient_Bleeding.BleedingQuest_State == BleedingQuest_State.WithItem)
         {
-            if(CorrectState(BleedingWithoutEmbeddedItem_State.BandageTime))
+            if(!CorrectState(BleedingWithoutEmbeddedItem_State.BandageTime))
             {
                 dialogueManager.PlayDialogueScene(DialogueListTypeParent.Bleeding_WrongItem, DialogueListType_Bleeding_WrongItem.Bleeding_WrongItem_WithItem_Bandage);
+                return;
+            }
+            else
+            {
+                DialogueManager.HideFinishedDialogue_AfterFinishingTask();
                 return;
             }
             

@@ -5,6 +5,7 @@ using UnityEngine;
 using Oculus.Interaction.HandGrab;
 using Oculus.Interaction;
 using UnityEngine.Events;
+using System.Linq;
 
 public class SnapInteractorHelper : MonoBehaviour, ITurnOffStatic
 {
@@ -13,7 +14,7 @@ public class SnapInteractorHelper : MonoBehaviour, ITurnOffStatic
     [SerializeField]private string changeName;
     [SerializeField]private Oculus.Interaction.SnapInteractor snapInteractor;
     [SerializeField]private BNG.SnapZone snapZone;
-    [SerializeField]private DistanceHandGrabInteractable distanceHandGrabInteractable;
+    [SerializeField]private DistanceHandGrabInteractable[] distanceHandGrabInteractables;
     private UnityAction listener;
     private void Awake() 
     {
@@ -25,7 +26,7 @@ public class SnapInteractorHelper : MonoBehaviour, ITurnOffStatic
             
         if(snapInteractor)snapInteractor.OnSelect += snapInteractor_OnSelect;
         if(snapInteractor)snapInteractor.OnUnSelect += snapInteractor_OnUnSelect;
-        distanceHandGrabInteractable = transform.parent.GetComponentInChildren<DistanceHandGrabInteractable>();
+        distanceHandGrabInteractables = transform.parent.GetComponentsInChildren<DistanceHandGrabInteractable>(true).ToArray();
     }
 
     public void TurnOffStatic()
@@ -48,10 +49,14 @@ public class SnapInteractorHelper : MonoBehaviour, ITurnOffStatic
         }
         if(InteractToolsController.CheckIsHandTrackOn())LeaveSnapZone(e.Interactable);
 
-        if(distanceHandGrabInteractable)
+        if(distanceHandGrabInteractables != null)
         {
-            distanceHandGrabInteractable.InSnapZone(false);
-            distanceHandGrabInteractable.enabled = true;
+            foreach(DistanceHandGrabInteractable distanceHandGrabInteractable in distanceHandGrabInteractables)
+            {
+                distanceHandGrabInteractable.InSnapZone(false);
+                distanceHandGrabInteractable.enabled = true;
+            }
+            
         }
         
     }
@@ -67,10 +72,14 @@ public class SnapInteractorHelper : MonoBehaviour, ITurnOffStatic
             SetSnapZone(e.Interactable, e.Interactor);
         }
         
-        if(distanceHandGrabInteractable)
+        if(distanceHandGrabInteractables != null)
         {
-            distanceHandGrabInteractable.enabled = false;
-            distanceHandGrabInteractable.InSnapZone(true);
+            foreach(DistanceHandGrabInteractable distanceHandGrabInteractable in distanceHandGrabInteractables)
+            {
+                distanceHandGrabInteractable.enabled = false;
+                distanceHandGrabInteractable.InSnapZone(true);
+            }
+            
         }
     }
 

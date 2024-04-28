@@ -13,9 +13,12 @@ public class AlcoholCleanManager : MonoBehaviour
     [SerializeField]private GameManager gameManager;
     [SerializeField]private BleedingWithoutEmbeddedItem bleedingWithoutEmbeddedItem;
 
-    [Header("Reference - Hand")]
-    [SerializeField] Grabber _leftGrabber;
-    [SerializeField] Grabber _rightGrabber;
+    [Header("Reference - HandController")]
+    [SerializeField] GameObject _leftGrabber;
+    [SerializeField] GameObject _rightGrabber;
+    [Header("Reference - HandTrack")]
+    [SerializeField] GameObject _leftGrabberHT;
+    [SerializeField] GameObject _rightGrabberHT;
 
     [HideInInspector] public bool IsHolding = false;
 
@@ -28,8 +31,8 @@ public class AlcoholCleanManager : MonoBehaviour
     float currRightTime;
 
     float currTime;
-    Grabber currentGrabber;
-    Grabber currentNeedToCleanGrabber;
+    GameObject currentGrabber;
+    GameObject currentNeedToCleanGrabber;
 
     private void Awake()
     {
@@ -48,12 +51,14 @@ public class AlcoholCleanManager : MonoBehaviour
 
     private void Update()
     {
-        if (!IsHolding || gameManager.GameStateNow() != GameState.InGame || gameManager.LevelTypeNow() != LevelP3KType.Bleeding || gameManager.InGame_ModeNow() != InGame_Mode.FirstAid || bleedingWithoutEmbeddedItem.StateNow() != BleedingWithoutEmbeddedItem_State.CleanHands) return;
+        // if (!IsHolding || gameManager.GameStateNow() != GameState.InGame || gameManager.LevelTypeNow() != LevelP3KType.Bleeding || gameManager.InGame_ModeNow() != InGame_Mode.FirstAid || bleedingWithoutEmbeddedItem.StateNow() != BleedingWithoutEmbeddedItem_State.CleanHands) return;
+        if(!IsHolding)return;
+
         if (currentGrabber == null || currentNeedToCleanGrabber == null) return;
 
         currTime += Time.deltaTime;
 
-        if (currentNeedToCleanGrabber == _leftGrabber && currTime + currLeftTime > _timeToCleanGrabber)
+        if ((currentNeedToCleanGrabber == _leftGrabber || currentNeedToCleanGrabber == _leftGrabberHT) && currTime + currLeftTime > _timeToCleanGrabber)
         {
             isLeftCleaned = true;
             currTime = 0;
@@ -62,7 +67,7 @@ public class AlcoholCleanManager : MonoBehaviour
             CheckHandsAllClean();
         }
 
-        else if (currentNeedToCleanGrabber == _rightGrabber && currTime + currRightTime > _timeToCleanGrabber)
+        else if ((currentNeedToCleanGrabber == _rightGrabber || currentNeedToCleanGrabber == _rightGrabberHT) && currTime + currRightTime > _timeToCleanGrabber)
         {
             isRightCleaned = true;
             currTime = 0;
@@ -73,17 +78,21 @@ public class AlcoholCleanManager : MonoBehaviour
         }
     }
 
-    public void RegisterGrabber(Grabber grabber)
+    public void RegisterGrabber(GameObject grabber)
     {
         currentGrabber = grabber;
     }
 
-    public void RegisterCurrentNeedToCleanGrabber(Grabber grabber)
+    public void RegisterCurrentNeedToCleanGrabber(GameObject grabber)
     {
         if (IsHolding == false || grabber == currentGrabber) return; 
         
         currentNeedToCleanGrabber = grabber;
     }
+    // public void UnRegisterCurrentNeedToCleanGrabber(GameObject grabber)
+    // {
+    //     if(IsHolding == false || )
+    // }
 
     public void SaveCurrentTimeProgress()
     {

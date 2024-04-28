@@ -19,7 +19,10 @@ public class OnCollisionAlcoholWipes : MonoBehaviour
 
         if (grabber == null) return;
         Debug.Log("Yang kena sini adalah " + grabber.gameObject);
-        cleanManager.RegisterCurrentNeedToCleanGrabber(grabber);
+        cleanManager.RegisterCurrentNeedToCleanGrabber(grabber.gameObject);
+    }
+    private void OnCollisionExit(Collision other) {
+        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -29,6 +32,7 @@ public class OnCollisionAlcoholWipes : MonoBehaviour
 
         if (grabber == null) return;
         Debug.Log("Yang kena sini adalah " + grabber.gameObject);
-        cleanManager.RegisterCurrentNeedToCleanGrabber(grabber);
+        cleanManager.RegisterCurrentNeedToCleanGrabber(grabber.gameObject);
     }
+
 }

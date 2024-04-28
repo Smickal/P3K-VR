@@ -937,6 +937,7 @@ MonoBehaviour:
   _rigidbody: {fileID: 464369946943855717}
   _distanceThreshold: 0.01
   _snapPoseTransform: {fileID: 8082064695425891612}
+  transformZero: 0
   _defaultInteractable: {fileID: 0}
   _timeOutInteractable: {fileID: 0}
   _timeOut: 2
@@ -971,9 +972,9 @@ MonoBehaviour:
   _whenSelect:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: RotatePlanet, Assembly-CSharp
-        m_MethodName: ChangeRotation
+      - m_Target: {fileID: 6702648737481464268}
+        m_TargetAssemblyTypeName: IsBeingGrabHandTrack, Assembly-CSharp
+        m_MethodName: ChangeIsBeingGrab
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -981,23 +982,11 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 1
+          m_BoolArgument: 0
         m_CallState: 2
   _whenUnselect:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: RotatePlanet, Assembly-CSharp
-        m_MethodName: ChangeRotation
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: -450
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &4055420913520011803
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1010,11 +999,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db5e098dcf834af4bbcbb2446ed650e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unityEventWrapper: {fileID: 0}
-  changeName: 
+  unityEventWrapper: {fileID: 3743527685954385672}
+  changeName: GauseWipe_Case
   snapInteractor: {fileID: 1355658484489987186}
   snapZone: {fileID: 0}
-  distanceHandGrabInteractable: {fileID: 0}
+  distanceHandGrabInteractables: []
 --- !u!65 &4261831643278770135
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1034,8 +1023,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.10859108, y: 0.105599634, z: 0.0025}
-  m_Center: {x: 0.00035572052, y: 0, z: 0}
+  m_Size: {x: 0.123000145, y: 0.105599634, z: 0.0025}
+  m_Center: {x: -0.006848812, y: 0, z: 0}
 --- !u!1 &1667609438331585815
 GameObject:
   m_ObjectHideFlags: 0
@@ -1249,6 +1238,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isBeingGrabHandTrack: 0
+  distanceHandGrabInteractables: []
 --- !u!114 &1631712093523494354
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1908,7 +1898,7 @@ GameObject:
   - component: {fileID: 6221349324591693202}
   - component: {fileID: 597901523953845787}
   m_Layer: 12
-  m_Name: GauseWipes_Case
+  m_Name: GauseWipes_Case_New
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2106,6 +2096,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isBeingGrabHandTrack: 0
+  distanceHandGrabInteractables: []
 --- !u!114 &3074653020084759077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3158,6 +3149,7 @@ MonoBehaviour:
   _rigidbody: {fileID: 7574986422743981422}
   _distanceThreshold: 0.01
   _snapPoseTransform: {fileID: 8680293563543254044}
+  transformZero: 0
   _defaultInteractable: {fileID: 0}
   _timeOutInteractable: {fileID: 0}
   _timeOut: 2
@@ -3192,9 +3184,9 @@ MonoBehaviour:
   _whenSelect:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: RotatePlanet, Assembly-CSharp
-        m_MethodName: ChangeRotation
+      - m_Target: {fileID: 2824541478811113112}
+        m_TargetAssemblyTypeName: IsBeingGrabHandTrack, Assembly-CSharp
+        m_MethodName: ChangeIsBeingGrab
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3202,23 +3194,11 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 1
+          m_BoolArgument: 0
         m_CallState: 2
   _whenUnselect:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: RotatePlanet, Assembly-CSharp
-        m_MethodName: ChangeRotation
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: -450
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &6920207386862540035
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3235,7 +3215,7 @@ MonoBehaviour:
   changeName: 
   snapInteractor: {fileID: 3378409740334066613}
   snapZone: {fileID: 0}
-  distanceHandGrabInteractable: {fileID: 0}
+  distanceHandGrabInteractables: []
 --- !u!65 &6635657986096422168
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3639,6 +3619,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isBeingGrabHandTrack: 0
+  distanceHandGrabInteractables: []
 --- !u!114 &5375518192978882923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3782,6 +3763,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabbable: {fileID: 8880590639028959297}
+  isBeingGrabHandTrack: {fileID: 2824541478811113112}
 --- !u!114 &2899764365699031508
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4851,6 +4833,7 @@ MonoBehaviour:
   _rigidbody: {fileID: 5905908859062996525}
   _distanceThreshold: 0.01
   _snapPoseTransform: {fileID: 3464466639517834207}
+  transformZero: 0
   _defaultInteractable: {fileID: 0}
   _timeOutInteractable: {fileID: 0}
   _timeOut: 2
@@ -4885,9 +4868,9 @@ MonoBehaviour:
   _whenSelect:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: RotatePlanet, Assembly-CSharp
-        m_MethodName: ChangeRotation
+      - m_Target: {fileID: 5740338850522116790}
+        m_TargetAssemblyTypeName: IsBeingGrabHandTrack, Assembly-CSharp
+        m_MethodName: ChangeIsBeingGrab
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4895,23 +4878,11 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 1
+          m_BoolArgument: 0
         m_CallState: 2
   _whenUnselect:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: RotatePlanet, Assembly-CSharp
-        m_MethodName: ChangeRotation
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: -450
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &5927594234350760347
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4928,7 +4899,7 @@ MonoBehaviour:
   changeName: 
   snapInteractor: {fileID: 6823822776960055144}
   snapZone: {fileID: 0}
-  distanceHandGrabInteractable: {fileID: 0}
+  distanceHandGrabInteractables: []
 --- !u!65 &5210345097778741673
 BoxCollider:
   m_ObjectHideFlags: 0
