@@ -1,6 +1,7 @@
 using BNG;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -91,14 +92,24 @@ public class BandageMovement : MonoBehaviour
         currBandage = bandage;
         curBandageGrabbable = currBandage.GetComponent<Grabbable>();
 
-        _snapZone.HeldItem = curBandageGrabbable;
-        currBandage.GetComponent<ReturnToSnapZone>().ReturnTo = _snapZone;
+        _snapZone.HeldItem = curBandageGrabbable; 
+
+        ReturnToSnapZone returnToSnapZone = currBandage.GetComponent<ReturnToSnapZone>();
+        if(returnToSnapZone == null)
+        {
+            returnToSnapZone = currBandage.AddComponent<ReturnToSnapZone>();
+        }
+        returnToSnapZone.ReturnTo = _snapZone;
+        returnToSnapZone.OnlyReturnOnce = false;
+        // returnToSnapZone.Isbeing
+
         currBandage.RegisterBandageToMove(this);
 
         ResetTargeting();
         ResetSnapPositionToStartingIdx();
 
         curBandageGrabbable.GetPrimaryGrabber().TryRelease();
+        // Oculus.Grabbable
     }
 
     private void ResetSnapPositionToStartingIdx()

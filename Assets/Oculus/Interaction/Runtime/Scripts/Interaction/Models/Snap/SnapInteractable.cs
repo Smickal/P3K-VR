@@ -52,6 +52,8 @@ namespace Oculus.Interaction
         [SerializeField, Optional, Interface(typeof(IMovementProvider))]
         private UnityEngine.Object _movementProvider;
         private IMovementProvider MovementProvider { get; set; }
+        [Tooltip("If True, Bodo amat dengan transform pos and rotation")]
+        public bool transformZero = false;
 
         private static CollisionInteractionRegistry<SnapInteractor, SnapInteractable> _registry = null;
 
@@ -151,6 +153,7 @@ namespace Oculus.Interaction
                 IMovement movement = MovementProvider.CreateMovement();
                 movement.StopAndSetPose(from);
                 movement.MoveTo(to);
+                Debug.Log("Is this the person who move us ?" + to + " " + interactor.transform.parent.name + this.gameObject);
                 return movement;
             }
             return null;

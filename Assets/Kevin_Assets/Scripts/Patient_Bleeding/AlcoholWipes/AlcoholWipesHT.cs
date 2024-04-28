@@ -6,8 +6,11 @@ using UnityEngine;
 
 public class AlcoholWipesHT : MonoBehaviour
 {
+    [SerializeField]private HandGrabInteractable handGrab;
     [SerializeField]private HandGrabInteractor leftGrabberHT;
     [SerializeField]private HandGrabInteractor rightGrabberHT;
+    [SerializeField]private GameObject _leftGrabberHT, _rightGrabberHT;
+    GameObject currGrabber;
 
     AlcoholCleanManager alcoholManager;
 
@@ -16,34 +19,32 @@ public class AlcoholWipesHT : MonoBehaviour
         alcoholManager = AlcoholCleanManager.Instance;
     }
 
-    // public override void OnGrab(Grabber grabber)
-    // {
-    //     base.OnGrab(grabber);
-
-    //     curGrabber = grabber;
-    //     alcoholManager?.RegisterGrabber(grabber);
-    // }
-
-    // public override void OnGrip(float gripValue)
-    // {
-    //     base.OnGrip(gripValue);
-
-    //     if (!curGrabber) return;
-    //     alcoholManager.IsHolding = true;
-
-    // }
-
-    // public override void OnRelease()
-    // {
-    //     base.OnRelease();
-    //     curGrabber = null;
-
-    //     alcoholManager.IsHolding = false;
-    //     alcoholManager.SaveCurrentTimeProgress();
-    // }
-
-    public void DestroyTrash()
+    public void OnGrabHT()
     {
-        Destroy(this.gameObject);
+        if(handGrab.HasSelectingInteractor(leftGrabberHT))
+        {
+            currGrabber = _leftGrabberHT;
+        }
+        else if (handGrab.HasSelectingInteractor(rightGrabberHT))
+        {
+            currGrabber = _rightGrabberHT;
+        }
+        else
+        {
+            currGrabber = null;
+            // Debug.Log("Pasti Bakal Lewat Sini krn snap");
+            return;
+        }
+        alcoholManager?.RegisterGrabber(currGrabber);
+        alcoholManager.IsHolding = true;
     }
+
+    public void OnReleaseHT()
+    {
+        if(currGrabber == null)return;
+        currGrabber = null;
+        alcoholManager.IsHolding = false;
+        alcoholManager.SaveCurrentTimeProgress();
+    }
+
 }

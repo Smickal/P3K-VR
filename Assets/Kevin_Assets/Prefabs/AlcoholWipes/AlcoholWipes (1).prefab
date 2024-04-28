@@ -230,6 +230,7 @@ GameObject:
   - component: {fileID: 395292630332999925}
   - component: {fileID: 6408172366123294382}
   - component: {fileID: 4309435347200996761}
+  - component: {fileID: 7716434035027913421}
   - component: {fileID: 8439186759484607323}
   - component: {fileID: 4679926931294033030}
   - component: {fileID: 4701589645773888941}
@@ -409,7 +410,7 @@ MonoBehaviour:
   onRelease:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 3484971605585507730}
         m_TargetAssemblyTypeName: SnapInteractorHelper, Assembly-CSharp
         m_MethodName: ReviveSnapInteractorAfterReleaseController
         m_Mode: 1
@@ -539,6 +540,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 7716434035027913421}
+        m_TargetAssemblyTypeName: AlcoholWipesHT, Assembly-CSharp
+        m_MethodName: OnGrabHT
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   _whenUnselect:
     m_PersistentCalls:
       m_Calls:
@@ -546,6 +559,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: IsBeingGrabHandTrack, Assembly-CSharp
         m_MethodName: ChangeIsBeingGrab
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7716434035027913421}
+        m_TargetAssemblyTypeName: AlcoholWipesHT, Assembly-CSharp
+        m_MethodName: OnReleaseHT
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -572,6 +597,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d6decd6d291cd5489cec534b3671f2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7716434035027913421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5042025155904211745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b36573360093e84cbb4fb7f3d07a1a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  handGrab: {fileID: 7547261817880075684}
+  leftGrabberHT: {fileID: 0}
+  rightGrabberHT: {fileID: 0}
+  _leftGrabberHT: {fileID: 0}
+  _rightGrabberHT: {fileID: 0}
 --- !u!114 &8439186759484607323
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -584,6 +626,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47779588661235140b97e2b22963cde3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _leftGrabberHT: {fileID: 0}
+  _rightGrabberHT: {fileID: 0}
 --- !u!114 &4679926931294033030
 MonoBehaviour:
   m_ObjectHideFlags: 0

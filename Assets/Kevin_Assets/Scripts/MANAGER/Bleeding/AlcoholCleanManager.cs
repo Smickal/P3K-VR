@@ -32,7 +32,7 @@ public class AlcoholCleanManager : MonoBehaviour
 
     float currTime;
     GameObject currentGrabber;
-    GameObject currentNeedToCleanGrabber;
+    GameObject currentNeedToCleanGrabber, lastNeedToCleanGrabber;
 
     private void Awake()
     {
@@ -89,24 +89,44 @@ public class AlcoholCleanManager : MonoBehaviour
         
         currentNeedToCleanGrabber = grabber;
     }
-    // public void UnRegisterCurrentNeedToCleanGrabber(GameObject grabber)
-    // {
-    //     if(IsHolding == false || )
-    // }
+    public void UnRegisterCurrentNeedToCleanGrabber(GameObject grabber)
+    {
+        if (IsHolding == false || grabber == currentGrabber || currentNeedToCleanGrabber == null)return;
+        if(currentNeedToCleanGrabber == grabber)
+        {
+            lastNeedToCleanGrabber = grabber;
+            currentNeedToCleanGrabber = null;
+        }
+    }
 
     public void SaveCurrentTimeProgress()
     {
-
-        if (currentNeedToCleanGrabber== _leftGrabber)
+        if(currentNeedToCleanGrabber != null)
         {
-            currLeftTime += currTime;
-        }
+            if (currentNeedToCleanGrabber == _leftGrabber || currentNeedToCleanGrabber == _leftGrabberHT)
+            {
+                currLeftTime += currTime;
+            }
 
-        else if (currentNeedToCleanGrabber == _rightGrabber)
+            else if (currentNeedToCleanGrabber == _rightGrabber || currentNeedToCleanGrabber == _rightGrabberHT)
+            {
+                currRightTime += currTime;
+            }
+        }
+        else
         {
-            currRightTime += currTime;
-        }
+            if (lastNeedToCleanGrabber== _leftGrabber || lastNeedToCleanGrabber == _leftGrabberHT)
+            {
+                currLeftTime += currTime;
+            }
 
+            else if (lastNeedToCleanGrabber == _rightGrabber || lastNeedToCleanGrabber == _rightGrabberHT)
+            {
+                currRightTime += currTime;
+            }
+        }
+        
+        lastNeedToCleanGrabber = null;
         currentNeedToCleanGrabber = null;
         currentGrabber = null;
         currTime = 0f;

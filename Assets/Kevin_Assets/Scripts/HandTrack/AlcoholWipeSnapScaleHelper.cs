@@ -36,7 +36,7 @@ public class AlcoholWipeSnapScaleHelper : MonoBehaviour
 
         boxColliderSnapInteractor.center = changeCollCenter;
         boxColliderSnapInteractor.size = changeCollSize;
-        snapInteractorGO.transform.rotation = changeRotation;
+        // snapInteractorGO.transform.rotation = changeRotation;
     }
 
     public void ChangeBack()
@@ -46,7 +46,7 @@ public class AlcoholWipeSnapScaleHelper : MonoBehaviour
 
         boxColliderSnapInteractor.center = startCollCenter;
         boxColliderSnapInteractor.size = startCollSize;
-        snapInteractorGO.transform.rotation = startRotation;
+        snapInteractorGO.transform.localRotation = startRotation;
 
         boxColliderSnapInteractor = null;
         snapInteractorGO = null;

@@ -318,13 +318,13 @@ namespace BNG {
             if (offset) {
                 HeldItem.transform.localPosition = offset.LocalPositionOffset;
                 HeldItem.transform.localEulerAngles = offset.LocalRotationOffset;
-                // Debug.Log(HeldItem.transform.position + " " + gameObject);
+                
             }
             else {
                 HeldItem.transform.localPosition = Vector3.zero;
                 HeldItem.transform.localEulerAngles = Vector3.zero;
             }
-
+            // Debug.Log(HeldItem.transform.position + " " + gameObject + "posisinya" + HeldItem.transform.localEulerAngles);
             // Disable the grabbable. This is picked up through a Grab Action
             disableGrabbable(grab);
 
@@ -385,24 +385,6 @@ namespace BNG {
                     var g = HeldItem;
                     if (DuplicateItemOnGrab) {
                         
-                        // if(isThereSnapZoneinChild)
-                        // {
-                        //     if(snapZoneDictionary == null)
-                        //     {
-                        //         snapZoneDictionary = new Dictionary<string, Tuple<List<Collider>>>();
-                        //         SnapZone[] snapzones = HeldItem.GetComponentsInChildren<SnapZone>(true).ToArray();
-                        //         for(int i=0;i<snapzones.Length;i++)
-                        //         {
-                        //             if(snapzones[i].HeldItem == null)continue;
-                        //             string nameSnap = snapzones[i].name;
-                        //             List<Collider> coll = new List<Collider>(snapzones[i].disabledColliders);
-                        //             Debug.Log("Dictionary " + i + " " + nameSnap + " " + coll.Count);
-                        //             snapZoneDictionary.Add(nameSnap, new Tuple<List<Collider>>(coll));
-                        //         }
-                        //     }
-
-                        // }
-                        
                         ReleaseAll();
 
                         // Position next to grabber if somewhat far away
@@ -438,7 +420,6 @@ namespace BNG {
                             }
 
                         }
-
 
 
                         Grabbable grab = go.GetComponent<Grabbable>();

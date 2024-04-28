@@ -19,8 +19,9 @@ public class CheckingTakeCorrectItem : MonoBehaviour
     }
     public void CheckingState()
     {
+        // Debug.Log("Lewat sini ga checking");
         if(GameManager.CheckGameStateNow() != GameState.InGame || GameManager.CheckLevelTypeNow() != LevelP3KType.Bleeding || GameManager.CheckInGameModeNow() != InGame_Mode.FirstAid)return;
-
+        
         if(patient_Bleeding.BleedingQuest_State == BleedingQuest_State.WithItem)
         {
             if(!CorrectState(BleedingWithoutEmbeddedItem_State.BandageTime))

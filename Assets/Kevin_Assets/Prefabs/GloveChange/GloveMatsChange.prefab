@@ -92,10 +92,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4629285351029695504}
+  - component: {fileID: 684240132682210933}
   - component: {fileID: 4976028373027299365}
   - component: {fileID: 2733136647901302276}
   - component: {fileID: 6539650019267812862}
-  - component: {fileID: 684240132682210933}
   m_Layer: 0
   m_Name: GloveMatsChange
   m_TagString: Untagged
@@ -120,6 +120,27 @@ Transform:
   - {fileID: 6806306536372786168}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &684240132682210933
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5046749562809836831}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.16, y: 0.019999992, z: 0.2607934}
+  m_Center: {x: -0.030000003, y: 0.030000042, z: 0.007770197}
 --- !u!54 &4976028373027299365
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -231,27 +252,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _manager: {fileID: 0}
---- !u!65 &684240132682210933
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5046749562809836831}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.16, y: 0.019999992, z: 0.2607934}
-  m_Center: {x: -0.030000003, y: 0.030000042, z: 0.007770197}
 --- !u!1 &5101887100505877518
 GameObject:
   m_ObjectHideFlags: 0

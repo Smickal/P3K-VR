@@ -30,6 +30,7 @@ public class GauzeWipesCase : MonoBehaviour
     public void OpenedGauzeWipes()
     {
         _gauzeSnapZone.gameObject.SetActive(false);
+        ResetPositionOffset_GauzeWipe();
     }
 
     IEnumerator StartCoroutineDelay()
@@ -37,5 +38,15 @@ public class GauzeWipesCase : MonoBehaviour
         yield return new WaitForSeconds(_delayTime);
         _gauzeSnapZone.gameObject.SetActive(true);
         _gauzeSnapZone.GetComponent<SnapZoneControllerHelper>().SnapSelected_ConnectToHandTrackSnap();
+    }
+    public void ResetPositionOffset_GauzeWipe()
+    {
+        if(_gauzeSnapZone.HeldItem == null)return;
+        Transform find = _gauzeSnapZone.HeldItem.transform.Find("PositionOffset");
+        if(find != null)
+        {
+            find.localPosition = Vector3.zero;
+            find.localRotation = Quaternion.identity;
+        }
     }
 }

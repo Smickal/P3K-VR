@@ -31,7 +31,7 @@ namespace BNG {
         [Tooltip("Kalau mager taro di starting item snapzone - true; tp suara ada")]
         [SerializeField]private bool returnFirstTime = false;
         [SerializeField]private bool onlyReturnOnce = true;
-        public bool OnlyReturnOnce { get { return onlyReturnOnce; } }
+        public bool OnlyReturnOnce { get { return onlyReturnOnce;} set { onlyReturnOnce = value;}}
 
         [Header("isi ini kalo mo balik berdasarkan briefcase buka ato tutup")]
         [SerializeField]private Briefcase briefCase;

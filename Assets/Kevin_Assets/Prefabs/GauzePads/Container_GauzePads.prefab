@@ -452,6 +452,7 @@ MonoBehaviour:
   _rigidbody: {fileID: 9076962168169714413}
   _snapPoseDelegate: {fileID: 0}
   _movementProvider: {fileID: 277783251940812233}
+  transformZero: 0
 --- !u!114 &277783251940812233
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -937,7 +938,6 @@ MonoBehaviour:
   _rigidbody: {fileID: 464369946943855717}
   _distanceThreshold: 0.01
   _snapPoseTransform: {fileID: 8082064695425891612}
-  transformZero: 0
   _defaultInteractable: {fileID: 0}
   _timeOutInteractable: {fileID: 0}
   _timeOut: 2
@@ -2156,6 +2156,7 @@ MonoBehaviour:
   snapZoneChilds:
   - {fileID: 42961483064988440}
   - {fileID: 2422839651995356385}
+  isOkayToBeGrabWithoutGrabbing: 0
 --- !u!114 &1374127021388921761
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3149,7 +3150,6 @@ MonoBehaviour:
   _rigidbody: {fileID: 7574986422743981422}
   _distanceThreshold: 0.01
   _snapPoseTransform: {fileID: 8680293563543254044}
-  transformZero: 0
   _defaultInteractable: {fileID: 0}
   _timeOutInteractable: {fileID: 0}
   _timeOut: 2
@@ -4286,6 +4286,7 @@ MonoBehaviour:
   _rigidbody: {fileID: 3010472050415630655}
   _snapPoseDelegate: {fileID: 0}
   _movementProvider: {fileID: 5841885082846239387}
+  transformZero: 0
 --- !u!114 &5841885082846239387
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4551,7 +4552,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8680293563543254044}
   m_Layer: 13
-  m_Name: Position
+  m_Name: PositionOffset
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4755,7 +4756,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3464466639517834207}
   m_Layer: 13
-  m_Name: Position
+  m_Name: PositionOffset
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4833,7 +4834,6 @@ MonoBehaviour:
   _rigidbody: {fileID: 5905908859062996525}
   _distanceThreshold: 0.01
   _snapPoseTransform: {fileID: 3464466639517834207}
-  transformZero: 0
   _defaultInteractable: {fileID: 0}
   _timeOutInteractable: {fileID: 0}
   _timeOut: 2

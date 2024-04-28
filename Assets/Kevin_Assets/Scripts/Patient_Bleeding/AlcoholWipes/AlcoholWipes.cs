@@ -40,9 +40,5 @@ public class AlcoholWipes : GrabbableEvents
         alcoholManager.SaveCurrentTimeProgress();
     }
 
-    public void DestroyTrash()
-    {
-        Destroy(this.gameObject);
-    }
 
 }

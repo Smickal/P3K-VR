@@ -61,8 +61,8 @@ namespace Oculus.Interaction
         [FormerlySerializedAs("_dropPoint")]
         private Transform _snapPoseTransform;
         public Pose SnapPose => _snapPoseTransform.GetPose();
-        [Tooltip("If True, Bodo amat dengan transform pos and rotation")]
-        public bool transformZero = false;
+        
+        
 
         /// <summary>
         /// The default Interactable to snap to until you interact with the object.
@@ -316,6 +316,8 @@ namespace Oculus.Interaction
         private void GeneratePointerEvent(PointerEventType pointerEventType)
         {
             Pose pose = ComputePointerPose();
+            Debug.Log("PoseBefore" + pose + transform.parent.name);
+            Debug.Log("PoseAfter" + pose + transform.parent.name);
             _pointableElement.ProcessPointerEvent(
                 new PointerEvent(
                     Identifier, pointerEventType, pose, Data));
@@ -388,26 +390,25 @@ namespace Oculus.Interaction
                 {
                     continue;
                 }
-                float positionDeltaSqr = 0;
-                if(!transformZero)positionDeltaSqr = (pose.position - _snapPoseTransform.position).sqrMagnitude;
-                else positionDeltaSqr = (pose.position - Vector3.zero).sqrMagnitude;
+                float positionDeltaSqr = positionDeltaSqr = (pose.position - _snapPoseTransform.position).sqrMagnitude;
+
                 if (positionDeltaSqr > bestPositionDeltaSqr)
                 {
                     continue;
                 }
 
-                float angularDist = 0;
-                if(!transformZero)angularDist = Quaternion.Angle(pose.rotation, _snapPoseTransform.rotation);
-                else angularDist = Quaternion.Angle(pose.rotation, Quaternion.identity);
+                float angularDist = Quaternion.Angle(pose.rotation, _snapPoseTransform.rotation);
                 if (Mathf.Abs(positionDeltaSqr - bestPositionDeltaSqr) < distanceThresholdSqr &&
                     angularDist >= bestAngularDelta)
                 {
                     continue;
                 }
+                
 
                 bestPositionDeltaSqr = positionDeltaSqr;
                 bestAngularDelta = angularDist;
                 closestInteractable = interactable;
+                // Debug.Log(bestPositionDeltaSqr + "Posisi" + bestAngularDelta + "Rotasi" + interactable.gameObject + " " + this.transform.parent.name); 
 
             }
 

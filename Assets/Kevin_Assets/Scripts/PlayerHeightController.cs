@@ -7,6 +7,7 @@ using UnityEngine;
 
 public class PlayerHeightController : MonoBehaviour, ITurnOffStatic
 {
+    const string SaveStateKey = "HeightSaveKey";
     [SerializeField]private BNGPlayerController _heightConnectOBJ;
     [SerializeField]private float minHeigth, maxHeight, addHeight = 0.001f;
     private float startHeight;
@@ -17,6 +18,11 @@ public class PlayerHeightController : MonoBehaviour, ITurnOffStatic
         startHeight = _heightConnectOBJ.CharacterControllerYOffset;
         AddPlayerHeight += PlayerHeightControl;
         ResetPlayerHeight += ResetHeight;
+    }
+    private void Start() 
+    {
+        float startsHeight = PlayerPrefs.GetFloat(SaveStateKey, startHeight);
+        _heightConnectOBJ.ChangeCharacterControllerY(startsHeight);
     }
     public void TurnOffStatic()
     {
@@ -30,16 +36,20 @@ public class PlayerHeightController : MonoBehaviour, ITurnOffStatic
         {
             if(_heightConnectOBJ.CharacterControllerYOffset + addHeight > maxHeight)return;
             _heightConnectOBJ.ChangeCharacterControllerY(addHeight);
+            PlayerPrefs.SetFloat(SaveStateKey, _heightConnectOBJ.CharacterControllerYOffset+ addHeight);
         }
         else
         {
             if(_heightConnectOBJ.CharacterControllerYOffset - addHeight < minHeigth)return;
             _heightConnectOBJ.ChangeCharacterControllerY(-addHeight);
+            PlayerPrefs.SetFloat(SaveStateKey, _heightConnectOBJ.CharacterControllerYOffset-addHeight);
         }
     }
 
     private void ResetHeight()
     {
         _heightConnectOBJ.ResetCharacterController(startHeight);
+        PlayerPrefs.SetFloat(SaveStateKey, startHeight);
     }
+
 }
