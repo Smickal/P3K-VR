@@ -609,7 +609,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b36573360093e84cbb4fb7f3d07a1a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  handGrab: {fileID: 7547261817880075684}
+  handGrabs:
+  - {fileID: 7547261817880075684}
   leftGrabberHT: {fileID: 0}
   rightGrabberHT: {fileID: 0}
   _leftGrabberHT: {fileID: 0}
@@ -730,7 +731,6 @@ MonoBehaviour:
   _rigidbody: {fileID: 3214176476709376091}
   _distanceThreshold: 0.01
   _snapPoseTransform: {fileID: 3157108420228934140}
-  transformZero: 0
   _defaultInteractable: {fileID: 0}
   _timeOutInteractable: {fileID: 0}
   _timeOut: 2

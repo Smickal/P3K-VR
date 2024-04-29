@@ -316,8 +316,8 @@ namespace Oculus.Interaction
         private void GeneratePointerEvent(PointerEventType pointerEventType)
         {
             Pose pose = ComputePointerPose();
-            Debug.Log("PoseBefore" + pose + transform.parent.name);
-            Debug.Log("PoseAfter" + pose + transform.parent.name);
+            // Debug.Log("PoseBefore" + pose + transform.parent.name);
+            // Debug.Log("PoseAfter" + pose + transform.parent.name);
             _pointableElement.ProcessPointerEvent(
                 new PointerEvent(
                     Identifier, pointerEventType, pose, Data));

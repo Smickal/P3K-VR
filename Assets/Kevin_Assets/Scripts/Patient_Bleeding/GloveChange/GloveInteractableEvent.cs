@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Oculus.Interaction;
 using Oculus.Interaction.HandGrab;
 using UnityEngine;
@@ -14,6 +15,12 @@ public class GloveInteractableEvent : MonoBehaviour
     [SerializeField]private HandGrabInteractor rightGrabberHT;
     [Header("Pas di luar rumah, Freeze All Rb")]
     public bool DebugOnly;
+    private void Awake() {
+        if(handGrabs == null)
+        {
+            handGrabs = GetComponentsInChildren<HandGrabInteractable>().ToArray();
+        }
+    }
     public void OnGrabHT()
     {
         if(!DebugOnly)
@@ -22,9 +29,8 @@ public class GloveInteractableEvent : MonoBehaviour
             GameManager.CheckInGameModeNow() != InGame_Mode.FirstAid || 
             BleedingWithoutEmbeddedItem.StateFirstAidNow() != BleedingWithoutEmbeddedItem_State.WearGloves))return;
         }
-        
 
-        if(_manager)_manager.ChangeToGlove();
+        
         // if(handGrab.HasSelectingInteractor(leftGrabberHT))
         // {
         //     StartCoroutine(GrabRelease(leftGrabberHT));
@@ -36,7 +42,8 @@ public class GloveInteractableEvent : MonoBehaviour
         HandGrabInteractor currHand = CheckHandGrabInteractor();
         if(currHand != null)
         {
-            Debug.Log(currHand + " Hands ");
+            if(_manager)_manager.ChangeToGlove();
+            // Debug.Log(currHand + " Hands ");
             StartCoroutine(GrabRelease(currHand));
         }
     }
@@ -48,18 +55,17 @@ public class GloveInteractableEvent : MonoBehaviour
     }
     private HandGrabInteractor CheckHandGrabInteractor()
     {
-        Debug.Log("ini debug ga muncul??");
         foreach(HandGrabInteractable handGrabInteractable in handGrabs)
         {
-            Debug.Log("handgrab" + handGrabInteractable);
+            // Debug.Log("handgrab" + handGrabInteractable);
             if(handGrabInteractable.HasSelectingInteractor(leftGrabberHT))
             {
-                Debug.Log(handGrabInteractable + " This is the chosen onee");
+                // Debug.Log(handGrabInteractable + " This is the chosen onee");
                 return leftGrabberHT;
             }
             else if (handGrabInteractable.HasSelectingInteractor(rightGrabberHT))
             {
-                Debug.Log(handGrabInteractable + " This is the chosen onee");
+                // Debug.Log(handGrabInteractable + " This is the chosen onee");
                 return rightGrabberHT;
             }
         }
