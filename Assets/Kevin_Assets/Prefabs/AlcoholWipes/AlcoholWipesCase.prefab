@@ -692,6 +692,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 3883120679474283758}
+        m_TargetAssemblyTypeName: CheckingTakeCorrectItem, Assembly-CSharp
+        m_MethodName: CheckingStateHT
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   _whenUnselect:
     m_PersistentCalls:
       m_Calls:
@@ -728,6 +740,7 @@ MonoBehaviour:
   dialogueManager: {fileID: 0}
   patient_Bleeding: {fileID: 0}
   bleedingWithoutEmbeddedItem: {fileID: 0}
+  isBeingGrabHandTrack: {fileID: 0}
   _correctbleedingWithoutEmbeddedItem_State_List: 00000000
 --- !u!114 &3753313060720802383
 MonoBehaviour:
@@ -1637,7 +1650,8 @@ MonoBehaviour:
   WipeOut: {fileID: 7348488826203031373}
   SnapPoint: {fileID: 3703236057032913443}
   Lid_Collider: {fileID: 8228245244970433618}
-  handGrab: {fileID: 6324796626456275371}
+  handGrabs:
+  - {fileID: 6324796626456275371}
   leftGrabberHT: {fileID: 0}
   rightGrabberHT: {fileID: 0}
 --- !u!54 &9069757177835667397
@@ -1743,6 +1757,8 @@ MonoBehaviour:
   _movementProvider: {fileID: 0}
   _handAligment: 1
   _handGrabPoses: []
+  canCustomizeColliders: 0
+  collidersHere: []
 --- !u!114 &2907754630935471608
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1784,6 +1800,8 @@ MonoBehaviour:
   _movementProvider: {fileID: 0}
   _handAligment: 1
   _handGrabPoses: []
+  canCustomizeColliders: 0
+  collidersHere: []
 --- !u!114 &2824137123724958452
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2244,3 +2262,5 @@ MonoBehaviour:
   _movementProvider: {fileID: 0}
   _handAligment: 1
   _handGrabPoses: []
+  canCustomizeColliders: 0
+  collidersHere: []

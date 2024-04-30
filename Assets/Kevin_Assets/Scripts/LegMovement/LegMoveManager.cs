@@ -5,7 +5,10 @@ using System.Runtime.Remoting.Metadata;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using Oculus.Interaction;
+using Oculus.Interaction.HandGrab;
 using UnityEngine.Rendering;
+using System.Linq;
 
 public class LegMoveManager : MonoBehaviour
 {
@@ -33,12 +36,20 @@ public class LegMoveManager : MonoBehaviour
 
     Vector3 startingPos;
     Rigidbody legGrabbableRB;
-    Grabber currentGrabber;
+    GameObject currentGrabber;
+    [Header("Ref HT")]
+    [SerializeField]private HandGrabInteractable[] handGrabs;
+    [SerializeField]private HandGrabInteractor leftGrabberHT;
+    [SerializeField]private HandGrabInteractor rightGrabberHT;
     [Header("Debug Only")]
     public bool setEndPos;
 
     private void Awake()
     {
+        if(handGrabs == null)
+        {
+            handGrabs = _legGrabbable.gameObject.GetComponentsInChildren<HandGrabInteractable>().ToArray();
+        }
         startingPos = _targetTransform.position;
     }
 
@@ -56,7 +67,7 @@ public class LegMoveManager : MonoBehaviour
             _legSnapZone.transform.position = _endFeetPosition.position;
 
         }
-        //Debug.Log(legGrabbableRB.velocity.magnitude);
+        // Debug.Log(legGrabbableRB.velocity.magnitude + "fasttt");
 
         if (!isGrabbingFoot) return;
         if (legGrabbableRB.velocity.magnitude >= _maxDisplacementVelocity)
@@ -107,9 +118,11 @@ public class LegMoveManager : MonoBehaviour
 
         isGrabbingFoot = false;
         _brickSnapZone.CanRemoveItem = false;
+        _brickSnapZone.CanRemoveChange(false);
 
         _legSnapZone.transform.position = _endFeetPosition.position;
         _legSnapZone.CanRemoveItem = false;
+        _legSnapZone.CanRemoveChange(false);
 
         
         isDonePuttingBrick = true;
@@ -120,7 +133,45 @@ public class LegMoveManager : MonoBehaviour
 
     public void RegisterGrab(Grabber grabber)
     {
-       currentGrabber = grabber;
+        currentGrabber = grabber.gameObject;
     }
 
+    public void OnGrabFootHT()
+    {
+        HandGrabInteractor currHand = CheckHandGrabInteractor();
+        if(currHand == leftGrabberHT)
+        {
+            // Debug.Log("Left Hand Leg");
+            currentGrabber = leftGrabberHT.gameObject;
+        }
+        else if (currHand == rightGrabberHT)
+        {
+            // Debug.Log("Right Hand Leg");
+            currentGrabber = rightGrabberHT.gameObject;
+        }
+        else
+        {
+            currentGrabber = null;
+            return;
+        }
+        OnGrabFoot();
+    }
+    private HandGrabInteractor CheckHandGrabInteractor()
+    {
+        foreach(HandGrabInteractable handGrabInteractable in handGrabs)
+        {
+            // Debug.Log("handgrableg" + handGrabInteractable);
+            if(handGrabInteractable.HasSelectingInteractor(leftGrabberHT))
+            {
+                // Debug.Log(handGrabInteractable + " This is the chosen oneelegRight");
+                return leftGrabberHT;
+            }
+            else if (handGrabInteractable.HasSelectingInteractor(rightGrabberHT))
+            {
+                // Debug.Log(handGrabInteractable + " This is the chosen oneelegLeft");
+                return rightGrabberHT;
+            }
+        }
+        return null;
+    }
 }

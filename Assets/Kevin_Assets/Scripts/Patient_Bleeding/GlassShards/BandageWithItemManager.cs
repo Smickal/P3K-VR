@@ -7,6 +7,7 @@ using UnityEngine.Events;
 public class BandageWithItemManager : MonoBehaviour
 {
     [SerializeField] SnapZone[] _bandageSnapZones;
+    [SerializeField] GameObject[] snapZonesRings;
     [SerializeField] BandageMovement _bandageMovement;
     [SerializeField] private GameObject circleMovement;
 
@@ -62,6 +63,10 @@ public class BandageWithItemManager : MonoBehaviour
             _bandageSnapZone.CanRemoveItem = false;
             _bandageSnapZone.CanRemoveChange(false);
         }
+        foreach(GameObject snapzonering in snapZonesRings)
+        {
+            snapzonering.SetActive(false);
+        }
     }
 
     public void ActivateBandageWithItem()
@@ -78,6 +83,10 @@ public class BandageWithItemManager : MonoBehaviour
         {
             _bandageSnapZone.gameObject.SetActive(false);
         }
+        circleMovement.SetActive(false);
+    }
+    public void DeactivateBandageWithItem_WithoutSnapZone()
+    {
         circleMovement.SetActive(false);
     }
 }

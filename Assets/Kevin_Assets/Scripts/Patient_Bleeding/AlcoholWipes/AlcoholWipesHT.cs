@@ -9,7 +9,6 @@ using UnityEngine;
 public class AlcoholWipesHT : MonoBehaviour
 {
     [SerializeField]private HandGrabInteractable[] handGrabs;
-    [SerializeField]private HandGrabInteractable handgrab;
     [SerializeField]private DistanceHandGrabInteractable[] distanceHandGrabs;
     [SerializeField]private HandGrabInteractor leftGrabberHT,rightGrabberHT;
     [SerializeField]private DistanceHandGrabInteractor leftDistanceGrabberHT, rightDistanceGrabberHT;
@@ -40,12 +39,12 @@ public class AlcoholWipesHT : MonoBehaviour
         
         if(currHand == leftGrabberHT || currDistanceHand == leftDistanceGrabberHT)
         {
-            Debug.Log("Left Hand");
+            // Debug.Log("Left Hand");
             currGrabber = _leftGrabberHT;
         }
         else if (currHand == rightGrabberHT || currDistanceHand == rightDistanceGrabberHT)
         {
-            Debug.Log("Right Hand");
+            // Debug.Log("Right Hand");
             currGrabber = _rightGrabberHT;
         }
         else
@@ -72,12 +71,12 @@ public class AlcoholWipesHT : MonoBehaviour
             // Debug.Log("handgrab" + handGrabInteractable);
             if(handGrabInteractable.HasSelectingInteractor(leftGrabberHT))
             {
-                Debug.Log(handGrabInteractable + " This is the chosen onee left" + leftGrabberHT);
+                // Debug.Log(handGrabInteractable + " This is the chosen onee left" + leftGrabberHT);
                 return leftGrabberHT;
             }
             else if (handGrabInteractable.HasSelectingInteractor(rightGrabberHT))
             {
-                Debug.Log(handGrabInteractable + " This is the chosen onee right" + rightGrabberHT);
+                // Debug.Log(handGrabInteractable + " This is the chosen onee right" + rightGrabberHT);
                 return rightGrabberHT;
             }
         }
@@ -90,16 +89,17 @@ public class AlcoholWipesHT : MonoBehaviour
             // Debug.Log("handgrab" + handGrabInteractable);
             if(distanceHandGrabInteractable.HasSelectingInteractor(leftDistanceGrabberHT))
             {
-                Debug.Log(distanceHandGrabInteractable + " This is the chosen onee distancee" + leftGrabberHT);
+                // Debug.Log(distanceHandGrabInteractable + " This is the chosen onee distancee" + leftGrabberHT);
                 return leftDistanceGrabberHT;
             }
             else if (distanceHandGrabInteractable.HasSelectingInteractor(rightDistanceGrabberHT))
             {
-                Debug.Log(distanceHandGrabInteractable + " This is the chosen onee distancee" + rightGrabberHT);
+                // Debug.Log(distanceHandGrabInteractable + " This is the chosen onee distancee" + rightGrabberHT);
                 return rightDistanceGrabberHT;
             }
         }
         return null;
     }
+
 
 }

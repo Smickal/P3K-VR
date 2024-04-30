@@ -24,13 +24,14 @@ public class GauzeWipesCase : MonoBehaviour
         SmallTrashItem smallTrashItem = GetComponent<SmallTrashItem>();
         if(smallTrashItem != null)smallTrashItem.AddTrash();
         _peelSnapZone.gameObject.SetActive(false);
+        ResetPositionOffSet_GauzeWipePeel();
         StartCoroutine(StartCoroutineDelay());
     }
 
     public void OpenedGauzeWipes()
     {
         _gauzeSnapZone.gameObject.SetActive(false);
-        ResetPositionOffset_GauzeWipe();
+        ResetPositionOffset_GauzeWipeClean();
     }
 
     IEnumerator StartCoroutineDelay()
@@ -39,7 +40,7 @@ public class GauzeWipesCase : MonoBehaviour
         _gauzeSnapZone.gameObject.SetActive(true);
         _gauzeSnapZone.GetComponent<SnapZoneControllerHelper>().SnapSelected_ConnectToHandTrackSnap();
     }
-    public void ResetPositionOffset_GauzeWipe()
+    public void ResetPositionOffset_GauzeWipeClean()
     {
         if(_gauzeSnapZone.HeldItem == null)return;
         Transform find = _gauzeSnapZone.HeldItem.transform.Find("PositionOffset");
@@ -49,4 +50,15 @@ public class GauzeWipesCase : MonoBehaviour
             find.localRotation = Quaternion.identity;
         }
     }
+    public void ResetPositionOffSet_GauzeWipePeel()
+    {
+        if(_peelSnapZone.HeldItem == null)return;
+        Transform find = _peelSnapZone.HeldItem.transform.Find("PositionOffset");
+        if(find != null)
+        {
+            find.localPosition = Vector3.zero;
+            find.localRotation = Quaternion.identity;
+        }
+    }
+    
 }

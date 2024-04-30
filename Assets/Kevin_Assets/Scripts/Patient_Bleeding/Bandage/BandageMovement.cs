@@ -61,6 +61,8 @@ public class BandageMovement : MonoBehaviour
                 //Fire a Event that the movement is done!
                 OnMovementDone?.Invoke();
 
+                currBandage.GetComponent<ReturnToSnapZone>().ReturnTo = null;
+                curBandageGrabbable = null;
                 _snapZone.gameObject.SetActive(false);                
             }
 
@@ -111,7 +113,8 @@ public class BandageMovement : MonoBehaviour
         ResetTargeting();
         ResetSnapPositionToStartingIdx();
 
-        curBandageGrabbable.GetPrimaryGrabber().TryRelease();
+        Grabber grabber = curBandageGrabbable.GetPrimaryGrabber();
+        if(grabber != null)grabber.TryRelease();
         BandageInteractableEvent bandageInteractableEvent = currBandage.GetComponent<BandageInteractableEvent>();
         if(bandageInteractableEvent)bandageInteractableEvent.ReleaseHandGrabNow();
         // Oculus.Grabbable

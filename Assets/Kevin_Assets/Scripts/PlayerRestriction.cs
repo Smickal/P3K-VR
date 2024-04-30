@@ -15,7 +15,7 @@ public class PlayerRestriction : MonoBehaviour, ITurnOffStatic
     [SerializeField]private List<Grabber> playerHandController; //to prevent controller hand tetep pegang
     [SerializeField]private List<HandGrabInteractor> playerHandTrack;
     private List<Grabbable> all_BNG_Grabable;
-    [SerializeField]private Dictionary<Grabbable, bool> initial_BNG_GrabbableStates = new Dictionary<Grabbable, bool>();
+    // [SerializeField]private Dictionary<Grabbable, bool> initial_BNG_GrabbableStates = new Dictionary<Grabbable, bool>();
     private List<HandGrabInteractable> all_OVR_Grabable;
     private List<DistanceHandGrabInteractable> all_OVR_DistanceGrabable;
 
@@ -26,15 +26,19 @@ public class PlayerRestriction : MonoBehaviour, ITurnOffStatic
     
     private bool isRestrictAll, isRestrictGrabable, isRestrictRotation, isRestrictMovement;
     public static Func<bool> IsRestrictAll, IsRestrictMovement, IsRestrictRotation, IsRestrictGrabable;
-
+    public static Action<GameObject> AddData, RemoveData;
 
     public static Action LiftAllRestriction, ApplyAllRestriction, LiftGrabableRestriction, ApplyGrabableRestriction, LiftMovementRestriction, ApplyMovementRestriction, LiftRotationRestriction, ApplyRotationRestriction;
     
     [Header("Debug")]
     public bool enableNow;
+    public bool DebugOnly;
     private void Awake() 
     {
         InitiateGrabableReference();
+        AddData += AddExistingData;
+        RemoveData += DeleteFromExistingData;
+
         LiftAllRestriction += EnableAll;
         ApplyAllRestriction += DisableAll;
         LiftGrabableRestriction += EnableAllGrabable;
@@ -50,10 +54,13 @@ public class PlayerRestriction : MonoBehaviour, ITurnOffStatic
         IsRestrictRotation += RestrictRotation;
 
 
-        if(!playerManager.IsFinish_TutorialMain())DisableAllGrabable();
+        if(!DebugOnly)if(!playerManager.IsFinish_TutorialMain())DisableAllGrabable();
     }
     public void TurnOffStatic()
     {
+        AddData -= AddExistingData;
+        RemoveData -= DeleteFromExistingData;
+
         LiftAllRestriction -= EnableAll;
         ApplyAllRestriction -= DisableAll;
         LiftGrabableRestriction -= EnableAllGrabable;
@@ -95,7 +102,7 @@ public class PlayerRestriction : MonoBehaviour, ITurnOffStatic
         {
             Rigidbody getRigid = grabbable.GetComponent<Rigidbody>();
             if(getRigid)all_Grabable_Rigidbody.Add(getRigid);
-            initial_BNG_GrabbableStates.Add(grabbable, grabbable.enabled);
+            // initial_BNG_GrabbableStates.Add(grabbable, grabbable.enabled);
         }
     }
     private void DisableAllGrabable()
@@ -205,6 +212,100 @@ public class PlayerRestriction : MonoBehaviour, ITurnOffStatic
         EnableAllMovement();
         EnableAllGrabable();
     }
-    
+    public void AddExistingData(GameObject gameObject)
+    {
+        HandGrabInteractable[] grabs = gameObject.GetComponentsInChildren<HandGrabInteractable>(true);
+        foreach(HandGrabInteractable grab in grabs)
+        {
+            if(!all_OVR_Grabable.Contains(grab))
+            {
+                all_OVR_Grabable.Add(grab);
+                Debug.Log("I add handgrab " + gameObject);
+            }  
+            
+        }
 
+        DistanceHandGrabInteractable[] distanceGrabs = gameObject.GetComponentsInChildren<DistanceHandGrabInteractable>(true);
+        foreach(DistanceHandGrabInteractable grab in distanceGrabs)
+        {
+            if(!all_OVR_DistanceGrabable.Contains(grab))
+            {
+                all_OVR_DistanceGrabable.Add(grab);
+                Debug.Log("I add handgrabdis " + gameObject);
+            }
+            
+        }
+
+        Grabbable[] grabBNGs = gameObject.GetComponentsInChildren<Grabbable>(true);
+        foreach(Grabbable grab in grabBNGs)
+        {
+            if(!all_BNG_Grabable.Contains(grab))
+            {
+                all_BNG_Grabable.Add(grab);
+                Debug.Log("I add bngGrab " + gameObject);
+            }
+        }
+
+        foreach (Grabbable grabbable in grabBNGs)
+        {
+            Rigidbody getRigid = grabbable.GetComponent<Rigidbody>();
+            if(getRigid)
+            {
+                if(!all_Grabable_Rigidbody.Contains(getRigid))
+                {
+                    all_Grabable_Rigidbody.Add(getRigid);
+                    Debug.Log("I add rb " + gameObject);
+                }
+                
+            }
+            // if(!initial_BNG_GrabbableStates.ContainsKey(grabbable))initial_BNG_GrabbableStates.Add(grabbable, grabbable.enabled);
+        }
+    }
+    public void DeleteFromExistingData(GameObject gameObject)
+    {
+        HandGrabInteractable[] grabs = gameObject.GetComponentsInChildren<HandGrabInteractable>(true);
+        foreach(HandGrabInteractable grab in grabs)
+        {
+            if(all_OVR_Grabable.Contains(grab))
+            {
+                all_OVR_Grabable.Remove(grab);
+                Debug.Log("I remove handgrab " + grab+ gameObject);
+            }
+            
+        }
+
+        DistanceHandGrabInteractable[] distanceGrabs = gameObject.GetComponentsInChildren<DistanceHandGrabInteractable>(true);
+        foreach(DistanceHandGrabInteractable grab in distanceGrabs)
+        {
+            if(all_OVR_DistanceGrabable.Contains(grab))
+            {
+                all_OVR_DistanceGrabable.Remove(grab);
+                Debug.Log("I remove handgrabdis " + grab + gameObject);
+            }
+        }
+
+        Grabbable[] grabBNGs = gameObject.GetComponentsInChildren<Grabbable>(true);
+        foreach(Grabbable grab in grabBNGs)
+        {
+            if(all_BNG_Grabable.Contains(grab))
+            {
+                all_BNG_Grabable.Remove(grab);
+                Debug.Log("I remove rb " + grab+ gameObject);
+            }
+        }
+
+        foreach (Grabbable grabbable in grabBNGs)
+        {
+            Rigidbody getRigid = grabbable.GetComponent<Rigidbody>();
+            if(getRigid)
+            {
+                if(all_Grabable_Rigidbody.Contains(getRigid))
+                {
+                    all_Grabable_Rigidbody.Remove(getRigid);
+                    Debug.Log("I remove rb " + getRigid+ gameObject);
+                }
+            }
+            // if(initial_BNG_GrabbableStates.ContainsKey(grabbable))initial_BNG_GrabbableStates.Remove(grabbable);
+        }
+    }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Oculus.Interaction.HandGrab;
 using UnityEngine;
 
 public class CheckingTakeCorrectItem : MonoBehaviour
@@ -8,11 +9,16 @@ public class CheckingTakeCorrectItem : MonoBehaviour
     [SerializeField]DialogueManager dialogueManager;
     [SerializeField]private Patient_Bleeding patient_Bleeding;
     [SerializeField]private BleedingWithoutEmbeddedItem bleedingWithoutEmbeddedItem;
+    [Header("Ref HT")]
+    [SerializeField]private IsBeingGrabHandTrack isBeingGrabHandTrack;
+
     [Header("Correct State For Item - item ini buat pas kapan; Kalo ga ada yg kedua jdiin none")]
     [SerializeField]private List<BleedingWithoutEmbeddedItem_State> _correctbleedingWithoutEmbeddedItem_State_List;
+    
 
     private void Awake() 
     {
+        if(isBeingGrabHandTrack == null)isBeingGrabHandTrack = GetComponent<IsBeingGrabHandTrack>();
         if(dialogueManager == null)dialogueManager = FindAnyObjectByType<DialogueManager>();
         if(patient_Bleeding == null)patient_Bleeding = FindAnyObjectByType<Patient_Bleeding>();
         if(bleedingWithoutEmbeddedItem == null)bleedingWithoutEmbeddedItem = FindAnyObjectByType<BleedingWithoutEmbeddedItem>();
@@ -99,4 +105,10 @@ public class CheckingTakeCorrectItem : MonoBehaviour
         }
         return false;
     }
+    public void CheckingStateHT()
+    {
+        if(!isBeingGrabHandTrack.IsBeingGrab())return;
+        CheckingState();
+    }
+
 }

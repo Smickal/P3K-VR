@@ -394,6 +394,7 @@ namespace BNG {
 
                         // Instantiate the object before it is grabbed
                         GameObject go = Instantiate(g.gameObject, transform.position, Quaternion.identity) as GameObject;
+                        PlayerRestriction.AddData(go);
                         if(ChangeNameWhenDuplicate)go.name = nameChange;
 
                         if(isThereSnapZoneinChild)
@@ -640,6 +641,8 @@ namespace BNG {
             if(DuplicateItemOnGrab)
             {
                 GameObject go = Instantiate(g.gameObject, transform.position, Quaternion.identity) as GameObject;
+                PlayerRestriction.AddData(go);
+                
                 if(ChangeNameWhenDuplicate)go.name = nameChange;
                 Grabbable grab = go.GetComponent<Grabbable>();
                 if(isThereSnapZoneinChild)

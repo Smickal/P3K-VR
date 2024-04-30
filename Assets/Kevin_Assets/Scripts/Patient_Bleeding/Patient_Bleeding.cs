@@ -37,7 +37,7 @@ public class Patient_Bleeding : MonoBehaviour
 
     public void FirstAid_BleedingWithItemDone()
     {
-        BleedWithItemMgr.DeactivateBandageWithItem();
+        BleedWithItemMgr.DeactivateBandageWithItem_WithoutSnapZone();
         bleedingQuest_State = BleedingQuest_State.None;
         isDoneFirstAid = true;
     }
