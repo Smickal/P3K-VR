@@ -12,6 +12,7 @@ using System.Linq;
 
 public class LegMoveManager : MonoBehaviour
 {
+    [SerializeField] Bleeding_QuestManager questManager;
     [SerializeField] float _finishHeight = 0.15f;
     [SerializeField] float _maxDisplacementVelocity = 0.15f;
 
@@ -41,6 +42,7 @@ public class LegMoveManager : MonoBehaviour
     [SerializeField]private HandGrabInteractable[] handGrabs;
     [SerializeField]private HandGrabInteractor leftGrabberHT;
     [SerializeField]private HandGrabInteractor rightGrabberHT;
+    private Vector3 previousPos, currPos, velocity;
     [Header("Debug Only")]
     public bool setEndPos;
 
@@ -50,13 +52,14 @@ public class LegMoveManager : MonoBehaviour
         {
             handGrabs = _legGrabbable.gameObject.GetComponentsInChildren<HandGrabInteractable>().ToArray();
         }
-        startingPos = _targetTransform.position;
+        startingPos = _legGrabbable.position;
     }
 
     private void Start()
     {
         _brickSnapZone.gameObject.SetActive(false);
-        legGrabbableRB = _legGrabbable.gameObject.GetComponent<Rigidbody>();    
+        legGrabbableRB = _legGrabbable.gameObject.GetComponent<Rigidbody>(); 
+        previousPos = _legGrabbable.position;
     }
 
     private void Update()
@@ -67,15 +70,17 @@ public class LegMoveManager : MonoBehaviour
             _legSnapZone.transform.position = _endFeetPosition.position;
 
         }
-        // Debug.Log(legGrabbableRB.velocity.magnitude + "fasttt");
+        Debug.Log(legGrabbableRB.velocity.magnitude + "Velocity Rb");
 
         if (!isGrabbingFoot) return;
         if (legGrabbableRB.velocity.magnitude >= _maxDisplacementVelocity)
         {
-            Debug.Log("Kecepetan WOi");
+            Debug.Log("Kecepetan WOi Velocity Rb");
             // currentGrabber.TryRelease();
             // OnReleaseFoot();
+            if(questManager && !isMovementDone)questManager.PatientDissatisfy();
             return;
+            
         }
 
         if (_legGrabbable.position.y - startGrabHeight >= _finishHeight)
@@ -88,6 +93,25 @@ public class LegMoveManager : MonoBehaviour
             _brickSnapZone.gameObject.SetActive(false);
         }
 
+    }
+    private void FixedUpdate()
+    {
+        currPos = _legGrabbable.position;
+        if(isGrabbingFoot && (currentGrabber == leftGrabberHT.gameObject || currentGrabber == rightGrabberHT.gameObject))
+        {
+            velocity = (currPos - previousPos) / Time.fixedDeltaTime;
+            
+            // float currVelo = velocity.magnitude/100f;
+            Debug.Log(velocity.magnitude + "Velocity FixedUpdate");
+            if(velocity.magnitude/10 >= _maxDisplacementVelocity)
+            {
+                Debug.Log(velocity.magnitude/10 + "Masuk Velocity FixedUpdate");
+                Debug.Log("Kecepetan WOi Velocity FixedUpdate");
+                if(questManager && !isMovementDone)questManager.PatientDissatisfy();
+                return;
+            }
+        }
+        previousPos = currPos;
     }
 
     public void OnGrabFoot()
@@ -143,6 +167,7 @@ public class LegMoveManager : MonoBehaviour
         {
             // Debug.Log("Left Hand Leg");
             currentGrabber = leftGrabberHT.gameObject;
+            
         }
         else if (currHand == rightGrabberHT)
         {

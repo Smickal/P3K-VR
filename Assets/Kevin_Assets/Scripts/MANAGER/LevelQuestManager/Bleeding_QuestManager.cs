@@ -6,8 +6,6 @@ using UnityEngine;
 public class Bleeding_QuestManager : QuestManager
 {
     IEnumerator bleedingCoroutine;
-    public bool DebugChooseWithItemFirst, DebugChooseWithoutItemFirst;
-    public bool isBWIDone, isBWDone;
     [SerializeField] bool isTrashEverywhere = true;
     private int totalDissatisfaction;
     [SerializeField] int totalDissatisfactionMax;

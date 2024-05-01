@@ -218,14 +218,17 @@ namespace BNG {
         public void ResetEvent()
         {
             OnFadeDone.RemoveAllListeners();
+            Debug.Log("Total listener Remove" + OnFadeDone.GetPersistentEventCount());
         }
         public void AddEvent(UnityAction action)
         {
             OnFadeDone.AddListener(action);
+            Debug.Log("Total listener Add" + OnFadeDone.GetPersistentEventCount());
         }
         public void RemoveEvent(UnityAction action)
         {
             OnFadeDone.RemoveListener(action);
+            Debug.Log("Total listener Remove" + OnFadeDone.GetPersistentEventCount());
         }
     }
 }
