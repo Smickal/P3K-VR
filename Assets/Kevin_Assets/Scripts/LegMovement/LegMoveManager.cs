@@ -70,12 +70,12 @@ public class LegMoveManager : MonoBehaviour
             _legSnapZone.transform.position = _endFeetPosition.position;
 
         }
-        Debug.Log(legGrabbableRB.velocity.magnitude + "Velocity Rb");
+        // Debug.Log(legGrabbableRB.velocity.magnitude + "Velocity Rb");
 
         if (!isGrabbingFoot) return;
         if (legGrabbableRB.velocity.magnitude >= _maxDisplacementVelocity)
         {
-            Debug.Log("Kecepetan WOi Velocity Rb");
+            // Debug.Log("Kecepetan WOi Velocity Rb");
             // currentGrabber.TryRelease();
             // OnReleaseFoot();
             if(questManager && !isMovementDone)questManager.PatientDissatisfy();
@@ -102,11 +102,11 @@ public class LegMoveManager : MonoBehaviour
             velocity = (currPos - previousPos) / Time.fixedDeltaTime;
             
             // float currVelo = velocity.magnitude/100f;
-            Debug.Log(velocity.magnitude + "Velocity FixedUpdate");
+            // Debug.Log(velocity.magnitude + "Velocity FixedUpdate");
             if(velocity.magnitude/10 >= _maxDisplacementVelocity)
             {
-                Debug.Log(velocity.magnitude/10 + "Masuk Velocity FixedUpdate");
-                Debug.Log("Kecepetan WOi Velocity FixedUpdate");
+                // Debug.Log(velocity.magnitude/10 + "Masuk Velocity FixedUpdate");
+                // Debug.Log("Kecepetan WOi Velocity FixedUpdate");
                 if(questManager && !isMovementDone)questManager.PatientDissatisfy();
                 return;
             }

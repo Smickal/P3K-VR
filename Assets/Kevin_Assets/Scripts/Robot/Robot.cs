@@ -75,12 +75,23 @@ public class Robot : GrabbableEvents
                 (mainCam.transform.forward * _minDistanceToPlayer) +
                 (mainCam.transform.right * _xOffset) +
                     (mainCam.transform.up * _yOffset);
-
+        Debug.Log(targetPos + " target ");
 
         if(Vector3.Distance(mainCam.transform.position, transform.position) > _minDistanceToPlayer &&
             Vector3.Distance(mainCam.transform.position, transform.position) < _maxDistanceToPlayer)
         {
-            _controller.TriggerIdleAnim();
+            Vector3 robotCameraDistance = transform.position - mainCam.transform.position;
+            float dot = Vector3.Dot(robotCameraDistance, mainCam.transform.forward);
+            if(dot > 0)
+            {
+                Debug.Log("Ga di dalem kamera woi");
+            }
+            else
+            {
+                Debug.Log("Di dalem kamera woi");
+                _controller.TriggerIdleAnim();
+            }
+            
         }
 
         else if (Vector3.Distance(mainCam.transform.position, transform.position) > _maxDistanceToPlayer)
