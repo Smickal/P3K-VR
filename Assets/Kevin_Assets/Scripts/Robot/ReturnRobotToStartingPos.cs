@@ -1,6 +1,7 @@
 using BNG;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Rendering;
 using UnityEngine;
 
 public class ReturnRobotToStartingPos : MonoBehaviour
@@ -11,11 +12,13 @@ public class ReturnRobotToStartingPos : MonoBehaviour
 
     [SerializeField] Grabber _leftGrabber;
     [SerializeField] Grabber _rightGrabber;
+    
 
     
     RobotAnimationController _controller;
     Rigidbody rigid;
     Grabbable grabbable;
+    IsBeingGrabHandTrack isBeingGrabHandTrack;
     Robot robot;
     bool isMovingToSnapZone = false;
 
@@ -23,6 +26,7 @@ public class ReturnRobotToStartingPos : MonoBehaviour
     {
         rigid = GetComponent<Rigidbody>();
         grabbable = GetComponent<Grabbable>();
+        isBeingGrabHandTrack = GetComponent<IsBeingGrabHandTrack>();
         robot = GetComponent<Robot>();
         _controller = GetComponent<RobotAnimationController>();
     }
@@ -32,6 +36,10 @@ public class ReturnRobotToStartingPos : MonoBehaviour
         if (robot.IsFollowingPlayer) return;
         if(isMovingToSnapZone)
         {
+            if(rigid.constraints == RigidbodyConstraints.FreezeAll)
+            {
+                rigid.constraints = RigidbodyConstraints.None;
+            }
             Vector3 moveDir = _startingPos.position - transform.position;
 
             //rigid.AddForce(moveDir * Time.deltaTime * _lerpSpeed, ForceMode.Force);
@@ -43,6 +51,7 @@ public class ReturnRobotToStartingPos : MonoBehaviour
 
             if (Vector3.Distance(transform.position, _startingPos.transform.position) <= _snapDistance)
             {
+                Debug.Log("What???");
                 _controller.TriggerIdleAnim();
 
                 isMovingToSnapZone = false;
@@ -54,9 +63,11 @@ public class ReturnRobotToStartingPos : MonoBehaviour
         else
         {
             if (Vector3.Distance(transform.position, _startingPos.transform.position) <= _snapDistance) return;
+            Debug.Log("hayoo");
             if ((_leftGrabber.RemoteGrabbingGrabbable == grabbable || _rightGrabber.RemoteGrabbingGrabbable == grabbable)) return;
+            Debug.Log(grabbable.BeingHeld + "hayooooloooo" + isBeingGrabHandTrack.IsBeingGrab());
             if (grabbable.BeingHeld) return;
-
+            Debug.Log("yay");
             isMovingToSnapZone = true;
         }
 

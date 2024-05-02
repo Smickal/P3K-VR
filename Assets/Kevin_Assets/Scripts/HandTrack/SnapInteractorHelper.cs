@@ -15,6 +15,7 @@ public class SnapInteractorHelper : MonoBehaviour, ITurnOffStatic
     [SerializeField]private Oculus.Interaction.SnapInteractor snapInteractor;
     [SerializeField]private BNG.SnapZone snapZone;
     [SerializeField]private DistanceHandGrabInteractable[] distanceHandGrabInteractables;
+    public bool distanceGrabHTOn_WhileSnap;
     private UnityAction listener;
     private void Awake() 
     {
@@ -74,6 +75,7 @@ public class SnapInteractorHelper : MonoBehaviour, ITurnOffStatic
         
         if(distanceHandGrabInteractables != null)
         {
+            if(distanceGrabHTOn_WhileSnap)return;
             foreach(DistanceHandGrabInteractable distanceHandGrabInteractable in distanceHandGrabInteractables)
             {
                 distanceHandGrabInteractable.enabled = false;

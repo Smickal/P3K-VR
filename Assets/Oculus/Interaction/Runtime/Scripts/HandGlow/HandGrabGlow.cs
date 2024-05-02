@@ -214,6 +214,7 @@ namespace Oculus.Interaction
 
         private bool FingerOptionalOrRequired(GrabbingRule rules, HandFinger finger)
         {
+            Debug.Log("rusak disikah? " + rules[finger]);
             return rules[finger] == FingerRequirement.Optional ||
                    rules[finger] == FingerRequirement.Required;
         }
@@ -224,6 +225,8 @@ namespace Oculus.Interaction
             for (int i = 1; i < Input.Constants.NUM_FINGERS; i++)
             {
                 Input.HandFinger finger = (Input.HandFinger)i;
+                Debug.Log(finger + " aaa finger " );
+                Debug.Log(" aaa rules " + HandGrabInteractor.TargetInteractable.PinchGrabRules);
                 bool isPinchOptionalOrRequired =
                     FingerOptionalOrRequired(HandGrabInteractor.TargetInteractable.PinchGrabRules, finger);
                 float pinchStrength = TargetSupportsPinch() && isPinchOptionalOrRequired

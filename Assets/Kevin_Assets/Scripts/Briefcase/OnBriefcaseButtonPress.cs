@@ -12,7 +12,7 @@ public class OnBriefcaseButtonPress : MonoBehaviour
     {
         Grabber grabber = other.GetComponent<Grabber>();
 
-        if(grabber != null || other.gameObject.layer == 15 || other.gameObject == _handTrackLeft || other.gameObject == handTrackRight) 
+        if(grabber != null || other.gameObject.layer == 15 || (_handTrackLeft && other.gameObject == _handTrackLeft) || (handTrackRight && other.gameObject == handTrackRight)) 
         {
             Debug.Log(other.gameObject + "yang buka"); 
             // Debug.Log("Grabber " + grabber != null + "Layer" + other.gameObject.layer + " handtrack?" + )

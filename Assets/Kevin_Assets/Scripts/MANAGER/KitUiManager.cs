@@ -52,7 +52,6 @@ public class KitUiManager : MonoBehaviour
     public void DeactivateBaseUI()
     {
         _baseUI.SetActive(false);
-        if(_vF.isActivate)_vF.RestartPos();
         _robotGrab.enabled = true;
     }
 
@@ -60,6 +59,7 @@ public class KitUiManager : MonoBehaviour
     {
         CloseUI();
         _pauseMenuContainer.SetActive(true);
+        _vF.RestartPos();
         _vF.Activate();
     }
 
