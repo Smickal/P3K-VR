@@ -17,8 +17,9 @@ public class Briefcase : MonoBehaviour
     //[SerializeField] BoxCollider _boxCollider;
 
     [SerializeField] Collider[] _inventoryColliders;
+    [SerializeField] SnapZone[] _snapZones;
 
-    bool isOpen = false, isInventEnabled;
+    bool isOpen = false, isInventEnabled = true;
     public bool IsOpen { get { return isOpen; } }
 
     private void Start()
@@ -59,18 +60,46 @@ public class Briefcase : MonoBehaviour
 
     public void DisableInventory()
     {
-        if(isInventEnabled)isInventEnabled = false;
+        // if(!isInventEnabled) return;
+        if(!isInventEnabled)isInventEnabled = false;
         foreach(Collider _inventoryCollider in _inventoryColliders)
         {
+            if(!_inventoryCollider.enabled)continue;
+
             _inventoryCollider.enabled = false;
+        }
+        foreach(SnapZone snapzone in _snapZones)
+        {
+            if(snapzone.HeldItem != null)
+            {
+                GameObject SnapInteractor = snapzone.HeldItem.transform.Find("SnapInteractor").gameObject;
+                if(SnapInteractor != null)
+                {
+                    SnapInteractor.GetComponent<Collider>().enabled = false;
+                }
+            }
         }
     }
     public void EnableInventory()
     {
-        if(!isInventEnabled)isInventEnabled = true;
+        // if(isInventEnabled) return;
+        if(isInventEnabled)isInventEnabled = true;
         foreach(Collider _inventoryCollider in _inventoryColliders)
         {
+            if(_inventoryCollider.enabled)continue;
+
             _inventoryCollider.enabled = true;
+        }
+        foreach(SnapZone snapzone in _snapZones)
+        {
+            if(snapzone.HeldItem != null)
+            {
+                GameObject SnapInteractor = snapzone.HeldItem.transform.Find("SnapInteractor").gameObject;
+                if(SnapInteractor != null)
+                {
+                    SnapInteractor.GetComponent<Collider>().enabled = true;
+                }
+            }
         }
     }
 

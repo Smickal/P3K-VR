@@ -35,7 +35,12 @@ public class TrashCountManager : MonoBehaviour
                 ReturnToSnapZone returnToSnapZone = other.GetComponent<ReturnToSnapZone>();
                 if(returnToSnapZone != null)
                 {
-                    if(returnToSnapZone.enabled == false)returnToSnapZone.enabled = true;
+                    if(returnToSnapZone.enabled == false)
+                    {
+                        returnToSnapZone.OnlyReturnOnce = true;
+                        returnToSnapZone.enabled = true;
+                    }
+                    
                 }
                 else
                 {

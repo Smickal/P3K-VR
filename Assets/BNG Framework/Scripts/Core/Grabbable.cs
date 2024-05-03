@@ -306,6 +306,10 @@ namespace BNG {
         float journeyLength;
 
         public Vector3 OriginalScale { get; private set; }
+        // [ToolTip("Set true kalo mo di change ke scale ini")]
+        public bool ChangeToThisScale;
+        public Vector3 WantThisScale;
+        
 
         // Keep track of objects that are colliding with us
         [Header("Shown for Debug : ")]
@@ -1971,7 +1975,12 @@ namespace BNG {
         }
 
         public void ResetScale() {
-            transform.localScale = OriginalScale;
+            if(!ChangeToThisScale)transform.localScale = OriginalScale;
+            else
+            {
+                transform.localScale = WantThisScale;
+            }
+            
         }
 
         public void ResetParent() {

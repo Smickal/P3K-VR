@@ -186,7 +186,7 @@ namespace Oculus.Interaction.HandGrab.Recorder
             {
                 return Record(_rightHand.Hand, rightItem);
             }
-
+            
             Debug.LogError("No rigidbody detected near any hand");
             return false;
         }

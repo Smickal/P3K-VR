@@ -153,7 +153,7 @@ namespace Oculus.Interaction
                 IMovement movement = MovementProvider.CreateMovement();
                 movement.StopAndSetPose(from);
                 movement.MoveTo(to);
-                Debug.Log("Is this the person who move us ?" + to + " " + interactor.transform.parent.name + this.gameObject);
+                // Debug.Log("Is this the person who move us ?" + to + " " + interactor.transform.parent.name + this.gameObject);
                 return movement;
             }
             return null;

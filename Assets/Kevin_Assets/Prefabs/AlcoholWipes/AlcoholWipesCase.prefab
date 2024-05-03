@@ -692,6 +692,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 8177582403718362404}
+        m_TargetAssemblyTypeName: KitP3K, Assembly-CSharp
+        m_MethodName: OnGrabHT
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
       - m_Target: {fileID: 3883120679474283758}
         m_TargetAssemblyTypeName: CheckingTakeCorrectItem, Assembly-CSharp
         m_MethodName: CheckingStateHT
@@ -711,6 +723,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: IsBeingGrabHandTrack, Assembly-CSharp
         m_MethodName: ChangeIsBeingGrab
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8177582403718362404}
+        m_TargetAssemblyTypeName: KitP3K, Assembly-CSharp
+        m_MethodName: OnReleaseHT
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -742,6 +766,7 @@ MonoBehaviour:
   bleedingWithoutEmbeddedItem: {fileID: 0}
   isBeingGrabHandTrack: {fileID: 0}
   _correctbleedingWithoutEmbeddedItem_State_List: 00000000
+  isUsedOnWithItem: 0
 --- !u!114 &3753313060720802383
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -770,6 +795,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _scriptableData: {fileID: 11400000, guid: a2c72e3a46d951045add8afcd65cb07f, type: 2}
+  isBeingGrabHandTrack: {fileID: 0}
 --- !u!114 &7951407004705244926
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2167,6 +2193,7 @@ MonoBehaviour:
   snapInteractor: {fileID: 415693876921146869}
   snapZone: {fileID: 0}
   distanceHandGrabInteractables: []
+  distanceGrabHTOn_WhileSnap: 0
 --- !u!65 &2193090582595142930
 BoxCollider:
   m_ObjectHideFlags: 0

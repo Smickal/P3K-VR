@@ -352,6 +352,7 @@ MonoBehaviour:
   snapInteractor: {fileID: 6854003930416031200}
   snapZone: {fileID: 0}
   distanceHandGrabInteractables: []
+  distanceGrabHTOn_WhileSnap: 0
 --- !u!65 &8267603508041685078
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -879,6 +880,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 3868329540262990786}
+        m_TargetAssemblyTypeName: KitP3K, Assembly-CSharp
+        m_MethodName: OnGrabHT
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
       - m_Target: {fileID: 1287403140936953814}
         m_TargetAssemblyTypeName: CheckingTakeCorrectItem, Assembly-CSharp
         m_MethodName: CheckingStateHT
@@ -908,6 +921,18 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 8141101946673371625}
         m_TargetAssemblyTypeName: BandageInteractableEvent, Assembly-CSharp
+        m_MethodName: OnReleaseHT
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3868329540262990786}
+        m_TargetAssemblyTypeName: KitP3K, Assembly-CSharp
         m_MethodName: OnReleaseHT
         m_Mode: 1
         m_Arguments:
@@ -986,6 +1011,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _scriptableData: {fileID: 11400000, guid: 96c68a48368b34c44b49265a41f777de, type: 2}
+  isBeingGrabHandTrack: {fileID: 0}
 --- !u!114 &1287403140936953814
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1003,6 +1029,7 @@ MonoBehaviour:
   bleedingWithoutEmbeddedItem: {fileID: 0}
   isBeingGrabHandTrack: {fileID: 0}
   _correctbleedingWithoutEmbeddedItem_State_List: 05000000
+  isUsedOnWithItem: 1
 --- !u!1 &7903260573553961771
 GameObject:
   m_ObjectHideFlags: 0

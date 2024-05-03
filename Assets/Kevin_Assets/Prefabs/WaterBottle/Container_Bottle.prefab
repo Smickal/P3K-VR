@@ -447,6 +447,7 @@ MonoBehaviour:
   snapInteractor: {fileID: 6836727309761275711}
   snapZone: {fileID: 0}
   distanceHandGrabInteractables: []
+  distanceGrabHTOn_WhileSnap: 0
 --- !u!65 &3235759610136223479
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -792,6 +793,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 8209182217275326068}
+        m_TargetAssemblyTypeName: KitP3K, Assembly-CSharp
+        m_MethodName: OnGrabHT
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
       - m_Target: {fileID: 8762641967756553216}
         m_TargetAssemblyTypeName: CheckingTakeCorrectItem, Assembly-CSharp
         m_MethodName: CheckingStateHT
@@ -811,6 +824,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: IsBeingGrabHandTrack, Assembly-CSharp
         m_MethodName: ChangeIsBeingGrab
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8209182217275326068}
+        m_TargetAssemblyTypeName: KitP3K, Assembly-CSharp
+        m_MethodName: OnReleaseHT
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -856,6 +881,7 @@ MonoBehaviour:
   bleedingWithoutEmbeddedItem: {fileID: 0}
   isBeingGrabHandTrack: {fileID: 0}
   _correctbleedingWithoutEmbeddedItem_State_List: 03000000
+  isUsedOnWithItem: 0
 --- !u!114 &8209182217275326068
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -869,6 +895,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _scriptableData: {fileID: 11400000, guid: d219cb8e0e1e2b24e88a29ec6fa88822, type: 2}
+  isBeingGrabHandTrack: {fileID: 0}
 --- !u!1 &4180511090163060161
 GameObject:
   m_ObjectHideFlags: 0
@@ -1170,6 +1197,7 @@ MonoBehaviour:
   snapInteractor: {fileID: 3320864812645274045}
   snapZone: {fileID: 0}
   distanceHandGrabInteractables: []
+  distanceGrabHTOn_WhileSnap: 0
 --- !u!65 &6750763598881255846
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1213,7 +1241,7 @@ GameObject:
   - component: {fileID: 4096440515035175592}
   - component: {fileID: 2899524884972505762}
   m_Layer: 11
-  m_Name: Bottle
+  m_Name: BottleAquades
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1509,6 +1537,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 6244411572337710087}
+        m_TargetAssemblyTypeName: KitP3K, Assembly-CSharp
+        m_MethodName: OnGrabHT
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
       - m_Target: {fileID: 2146543157085783463}
         m_TargetAssemblyTypeName: CheckingTakeCorrectItem, Assembly-CSharp
         m_MethodName: CheckingStateHT
@@ -1528,6 +1568,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: IsBeingGrabHandTrack, Assembly-CSharp
         m_MethodName: ChangeIsBeingGrab
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6244411572337710087}
+        m_TargetAssemblyTypeName: KitP3K, Assembly-CSharp
+        m_MethodName: OnReleaseHT
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1573,6 +1625,7 @@ MonoBehaviour:
   bleedingWithoutEmbeddedItem: {fileID: 0}
   isBeingGrabHandTrack: {fileID: 0}
   _correctbleedingWithoutEmbeddedItem_State_List: 03000000
+  isUsedOnWithItem: 0
 --- !u!114 &6244411572337710087
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1586,6 +1639,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _scriptableData: {fileID: 11400000, guid: d219cb8e0e1e2b24e88a29ec6fa88822, type: 2}
+  isBeingGrabHandTrack: {fileID: 0}
 --- !u!114 &7885146239218959181
 MonoBehaviour:
   m_ObjectHideFlags: 0

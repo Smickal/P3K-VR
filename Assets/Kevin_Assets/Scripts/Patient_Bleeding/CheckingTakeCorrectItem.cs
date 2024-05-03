@@ -12,8 +12,9 @@ public class CheckingTakeCorrectItem : MonoBehaviour
     [Header("Ref HT")]
     [SerializeField]private IsBeingGrabHandTrack isBeingGrabHandTrack;
 
-    [Header("Correct State For Item - item ini buat pas kapan; Kalo ga ada yg kedua jdiin none")]
+    [Header("Correct State For Item - item ini buat pas kapan")]
     [SerializeField]private List<BleedingWithoutEmbeddedItem_State> _correctbleedingWithoutEmbeddedItem_State_List;
+    public bool isUsedOnWithItem;
     
 
     private void Awake() 
@@ -30,7 +31,7 @@ public class CheckingTakeCorrectItem : MonoBehaviour
         
         if(patient_Bleeding.BleedingQuest_State == BleedingQuest_State.WithItem)
         {
-            if(!CorrectState(BleedingWithoutEmbeddedItem_State.BandageTime))
+            if(!isUsedOnWithItem)
             {
                 dialogueManager.PlayDialogueScene(DialogueListTypeParent.Bleeding_WrongItem, DialogueListType_Bleeding_WrongItem.Bleeding_WrongItem_WithItem_Bandage);
                 return;
@@ -40,6 +41,16 @@ public class CheckingTakeCorrectItem : MonoBehaviour
                 DialogueManager.HideFinishedDialogue_AfterFinishingTask();
                 return;
             }
+            // if(!CorrectState(BleedingWithoutEmbeddedItem_State.BandageTime))
+            // {
+            //     dialogueManager.PlayDialogueScene(DialogueListTypeParent.Bleeding_WrongItem, DialogueListType_Bleeding_WrongItem.Bleeding_WrongItem_WithItem_Bandage);
+            //     return;
+            // }
+            // else
+            // {
+            //     DialogueManager.HideFinishedDialogue_AfterFinishingTask();
+            //     return;
+            // }
             
         }
         else if(patient_Bleeding.BleedingQuest_State == BleedingQuest_State.WithoutItem)
