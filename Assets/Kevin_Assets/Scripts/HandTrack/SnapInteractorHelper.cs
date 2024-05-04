@@ -27,7 +27,7 @@ public class SnapInteractorHelper : MonoBehaviour, ITurnOffStatic
             
         if(snapInteractor)snapInteractor.OnSelect += snapInteractor_OnSelect;
         if(snapInteractor)snapInteractor.OnUnSelect += snapInteractor_OnUnSelect;
-        distanceHandGrabInteractables = transform.parent.GetComponentsInChildren<DistanceHandGrabInteractable>(true).ToArray();
+        if(distanceHandGrabInteractables.Length == 0)distanceHandGrabInteractables = transform.parent.GetComponentsInChildren<DistanceHandGrabInteractable>(true).ToArray();
     }
 
     public void TurnOffStatic()

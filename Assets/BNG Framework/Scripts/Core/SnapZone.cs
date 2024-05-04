@@ -17,6 +17,7 @@ namespace BNG {
 
         [Tooltip("TSet this in the editor to equip on Start().")]
         public Grabbable StartingItem;
+        public bool canBriefCaseSnapToHere;
 
         [Header("Options")]
         /// <summary>
@@ -36,6 +37,8 @@ namespace BNG {
         /// </summary>
         [Tooltip("If false the snap zone cannot have it's content replaced.")]
         public bool CanRemoveItem = true;
+        [Tooltip("If not null, grabber yg ada di sini yang cuma bisa ambil")]
+        public Grabber OnlyThisGrabberCan_TakeFromThisSnap;
         [Tooltip("If false the snap zone wont use the offset that's already in the item")]
         public bool UseOffset = true;
         /// <summary>
@@ -264,6 +267,8 @@ namespace BNG {
             HeldItem = grab;
             heldItemRigid = HeldItem.GetComponent<Rigidbody>();
 
+            if(canBriefCaseSnapToHere)SnapZone_CheckBriefCase(true, HeldItem);
+
             // Mark as kinematic so it doesn't fall down
             if (heldItemRigid) {
                 heldItemWasKinematic = heldItemRigid.isKinematic;
@@ -381,7 +386,13 @@ namespace BNG {
                     if (!CanBeRemoved()) {
                         return;
                     }
-
+                    if(OnlyThisGrabberCan_TakeFromThisSnap != null)
+                    {
+                        if(grabber != OnlyThisGrabberCan_TakeFromThisSnap)
+                        {
+                            return;
+                        }
+                    }
                     var g = HeldItem;
                     if (DuplicateItemOnGrab) {
                         
@@ -516,6 +527,7 @@ namespace BNG {
                     }
                 }
                 
+                if(canBriefCaseSnapToHere)SnapZone_CheckBriefCase(false, HeldItem);
                 // Call event
                 if (OnDetachEvent != null) {
                     // Debug.Log(HeldItem.gameObject.name);
@@ -628,6 +640,7 @@ namespace BNG {
                     OnDetachHTEvent.Invoke(HeldItem);
                     
                 }
+                if(canBriefCaseSnapToHere)SnapZone_CheckBriefCase(false, HeldItem);
                 // Fire Off Grabbable Events
                 // GrabbableEvents[] ge = HeldItem.GetComponents<GrabbableEvents>();
                 // if (ge != null) {
@@ -686,6 +699,7 @@ namespace BNG {
             HeldItem = grab;
             heldItemRigid = HeldItem.GetComponent<Rigidbody>();
 
+            if(canBriefCaseSnapToHere)SnapZone_CheckBriefCase(true, HeldItem);
             // Mark as kinematic so it doesn't fall down
             if (heldItemRigid) {
                 heldItemWasKinematic = heldItemRigid.isKinematic;
@@ -795,6 +809,19 @@ namespace BNG {
         {
             if (HeldItem == null) return;
             if(HeldItem.name != nameChange)HeldItem.name = nameChange;
+        }
+        public void SnapZone_CheckBriefCase(bool isSnapping, Grabbable HeldItem)
+        {
+            Briefcase briefcase = HeldItem.GetComponent<Briefcase>();
+            if(briefcase == null) return;
+            if(isSnapping)
+            {
+                briefcase.SnapToSnapZone();
+            }
+            else
+            {
+                briefcase.UnSnap();
+            }
         }
     }
     

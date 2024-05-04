@@ -12,8 +12,7 @@ public class Briefcase : MonoBehaviour
 
     [Header("Reference")]
     [SerializeField] Animator _briefCaseAnim;
-    [SerializeField] Button _briefCaseBtn_Controller;
-    [SerializeField] InteractableUnityEventWrapper _briefCaseBtn_HandTrack;
+    [SerializeField] Collider[] _buttonColliders;
     //[SerializeField] BoxCollider _boxCollider;
 
     [SerializeField] Collider[] _inventoryColliders;
@@ -22,12 +21,6 @@ public class Briefcase : MonoBehaviour
     bool isOpen = false, isInventEnabled = true;
     public bool IsOpen { get { return isOpen; } }
 
-    private void Start()
-    {
-        _briefCaseBtn_Controller?.onButtonDown.AddListener(TriggerOpenCloseAnim);
-        _briefCaseBtn_HandTrack?.WhenSelect.AddListener(TriggerOpenCloseAnim);
-
-    }
 
     private void Update() 
     {
@@ -103,4 +96,24 @@ public class Briefcase : MonoBehaviour
         }
     }
 
+    public void SnapToSnapZone()
+    {
+        foreach(Collider buttonColl in _buttonColliders)
+        {
+            buttonColl.enabled = false;
+        }
+        if(isOpen)
+        {
+            TriggerOpenCloseAnim();
+            DisableInventory();
+        }
+        
+    }
+    public void UnSnap()
+    {
+        foreach(Collider buttonColl in _buttonColliders)
+        {
+            buttonColl.enabled = true;
+        }
+    }
 }
