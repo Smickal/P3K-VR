@@ -43,6 +43,11 @@ public class LegMoveManager : MonoBehaviour
     [SerializeField]private HandGrabInteractor leftGrabberHT;
     [SerializeField]private HandGrabInteractor rightGrabberHT;
     private Vector3 previousPos, currPos, velocity;
+    [Header("Ref For Visual")]
+    [SerializeField]private GameObject leftGrabber;
+    [SerializeField]private GameObject rightGrabber;
+    [SerializeField]private GameObject leftVisual, rightVisual, leftVisualHT, rightVisualHT;
+    [SerializeField]private GameObject modelLeft, modelRight;
     [Header("Debug Only")]
     public bool setEndPos;
 
@@ -58,6 +63,8 @@ public class LegMoveManager : MonoBehaviour
     private void Start()
     {
         _brickSnapZone.gameObject.SetActive(false);
+        modelLeft.SetActive(false);
+        modelRight.SetActive(false);
         legGrabbableRB = _legGrabbable.gameObject.GetComponent<Rigidbody>(); 
         previousPos = _legGrabbable.position;
     }
@@ -117,6 +124,26 @@ public class LegMoveManager : MonoBehaviour
     public void OnGrabFoot()
     {
         startGrabHeight = _legGrabbable.transform.position.y;
+        if(currentGrabber == leftGrabber)
+        {
+            leftVisual.SetActive(false);
+            modelLeft.SetActive(true);
+        }
+        else if(currentGrabber == rightGrabber)
+        {
+            rightVisual.SetActive(false);
+            modelRight.SetActive(true);
+        }
+        else if(currentGrabber == leftGrabberHT.gameObject)
+        {
+            leftVisualHT.SetActive(false);
+            modelLeft.SetActive(true);
+        }
+        else if(currentGrabber == rightGrabberHT.gameObject)
+        {
+            rightVisualHT.SetActive(false);
+            modelRight.SetActive(true);
+        }
         isGrabbingFoot = true;
     }
 
@@ -125,8 +152,30 @@ public class LegMoveManager : MonoBehaviour
         if(!isDonePuttingBrick)
         {
             _brickSnapZone.gameObject.SetActive(false);
-            currentGrabber = null;
+            
+            
         }
+        if(currentGrabber == leftGrabber)
+        {
+            leftVisual.SetActive(true);
+            modelLeft.SetActive(false);
+        }
+        else if(currentGrabber == rightGrabber)
+        {
+            rightVisual.SetActive(true);
+            modelRight.SetActive(false);
+        }
+        else if(currentGrabber == leftGrabberHT.gameObject)
+        {
+            leftVisualHT.SetActive(true);
+            modelLeft.SetActive(false);
+        }
+        else if(currentGrabber == rightGrabberHT.gameObject)
+        {
+            rightVisualHT.SetActive(true);
+            modelRight.SetActive(false);
+        }
+        currentGrabber = null;
 
         isGrabbingFoot = false;
     }

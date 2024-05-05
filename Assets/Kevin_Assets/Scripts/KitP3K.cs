@@ -20,14 +20,11 @@ public class KitP3K : GrabbableEvents
         base.OnTriggerDown();
     }
 
-    public override void OnGrip(float gripValue)
+    public override void OnGrab(Grabber grabber)
     {
-        if (gripValue > 0.8f)
-        {
             // Debug.Log("is this first?");
             UIKotakP3K.CheckUnlock(_scriptableData);
             if(GameManager.CheckLevelModeNow() == LevelMode.Home)UIKotakP3K.OpenDescriptioninRoom(_scriptableData);
-        }
     }
 
     public override void OnRelease()

@@ -33,8 +33,25 @@ public class CheckingTakeCorrectItem : MonoBehaviour
         {
             if(!isUsedOnWithItem)
             {
-                dialogueManager.PlayDialogueScene(DialogueListTypeParent.Bleeding_WrongItem, DialogueListType_Bleeding_WrongItem.Bleeding_WrongItem_WithItem_Bandage);
-                return;
+                if(!patient_Bleeding.isCleanHandsDone_WithItem)
+                {
+                    if(CorrectState(BleedingWithoutEmbeddedItem_State.CleanHands))
+                    {
+                        DialogueManager.HideFinishedDialogue_AfterFinishingTask();
+                        return;
+                    }
+                    else
+                    {
+                        dialogueManager.PlayDialogueScene(DialogueListTypeParent.Bleeding_WrongItem, DialogueListType_Bleeding_WrongItem.Bleeding_WrongItem_WithoutItem_CleanHands);
+                        return;
+                    }
+                }
+                else
+                {
+                    dialogueManager.PlayDialogueScene(DialogueListTypeParent.Bleeding_WrongItem, DialogueListType_Bleeding_WrongItem.Bleeding_WrongItem_WithItem_Bandage);
+                    return;
+                }
+                
             }
             else
             {

@@ -17,6 +17,7 @@ public class BandageWithItemManager : MonoBehaviour
     public bool IsDoneBandageMovement{get{return isDoneBandageMovement;}}
     bool isBandageSnappedToHold = false;
     
+    
     public UnityEvent OnBandageMovementDone;
     private void Start()
     {

@@ -145,4 +145,14 @@ public class AlcoholCleanManager : MonoBehaviour
             Debug.Log("All Done");
         }
     }
+    public void Reset()
+    {
+        isLeftCleaned = false;
+        isRightCleaned = false;
+        isDoneCleaning = false;
+        currRightTime = 0f;
+        currLeftTime = 0f;
+
+        currTime = 0f;
+    }
 }
