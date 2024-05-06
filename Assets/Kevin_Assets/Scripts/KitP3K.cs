@@ -47,6 +47,7 @@ public class KitP3K : GrabbableEvents
             wasGrabHT = false;
             if(GameManager.CheckLevelModeNow() == LevelMode.Home)UIKotakP3K.CloseDescriptioninRoom(_scriptableData);
         }
+        
     }
 
 }
