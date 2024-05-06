@@ -19,6 +19,7 @@ public class GlassShardsCollide : MonoBehaviour
             if(!CheckSnapZoneHeldItem(other.gameObject))
             {
                 Debug.Log("Patient Dissatisfied");
+                if(bleeding_QuestManager)bleeding_QuestManager.PatientDissatisfy();
             }
         }
         
@@ -34,7 +35,7 @@ public class GlassShardsCollide : MonoBehaviour
             {
                 Debug.Log(other.gameObject + " Collideee ");
                 Debug.Log("Patient Dissatisfied");
-                // if(bleeding_QuestManager)bleeding_QuestManager
+                if(bleeding_QuestManager)bleeding_QuestManager.PatientDissatisfy();
             }
         }
     }

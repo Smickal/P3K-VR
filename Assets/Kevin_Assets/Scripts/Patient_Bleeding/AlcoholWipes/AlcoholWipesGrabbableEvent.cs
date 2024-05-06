@@ -20,8 +20,13 @@ public class AlcoholWipesGrabbableEvent : GrabbableEvents
         SnapPoint.SetActive(true);
         
         Lid.SetActive(false);
-        // grabber.TryRelease();
+        StartCoroutine(GrabRelease(grabber));
         
         
+    }
+    IEnumerator GrabRelease(Grabber grabber)
+    {
+        yield return new WaitForSeconds(.1f);
+        grabber.TryRelease();
     }
 }

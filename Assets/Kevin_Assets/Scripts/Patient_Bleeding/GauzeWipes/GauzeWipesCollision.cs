@@ -9,6 +9,7 @@ public class GauzeWipesCollision : MonoBehaviour
     DirtyCleaner cleaner;
     GauzeWipes gauzeWipes;
     [SerializeField]Grabbable grabbable;
+    [SerializeField]IsBeingGrabHandTrack isBeingGrabHandTrack;
     private bool isChange;
 
     public void RegisterCleaner(GauzeWipes gauzeWipes, DirtyCleaner cleaner)
@@ -28,12 +29,12 @@ public class GauzeWipesCollision : MonoBehaviour
     private void OnCollisionStay(Collision collision)
     {
         if (cleaner == null || collision.gameObject.GetComponent<DirtyObject>() == null) return;
-        if(!isChange)
+        if(!isChange && collision.gameObject.GetComponent<DirtyObject>().IsDoneCleaning == false)
         {
             isChange = true;
             gameObject.name = DirtyGauzeName;
         }
-        if(grabbable.BeingHeld)cleaner.OnCleaning?.Invoke();
+        if(grabbable.BeingHeld || isBeingGrabHandTrack.IsBeingGrab())cleaner.OnCleaning?.Invoke();
         
     }
 
@@ -44,11 +45,11 @@ public class GauzeWipesCollision : MonoBehaviour
     }
     private void OnTriggerStay(Collider other) {
         if (cleaner == null || other.gameObject.GetComponent<DirtyObject>() == null) return;
-        if(!isChange)
+        if(!isChange && other.gameObject.GetComponent<DirtyObject>().IsDoneCleaning == false)
         {
             isChange = true;
             gameObject.name = DirtyGauzeName;
         }
-        if(grabbable.BeingHeld)cleaner.OnCleaning?.Invoke();
+        if(grabbable.BeingHeld || isBeingGrabHandTrack.IsBeingGrab())cleaner.OnCleaning?.Invoke();
     }
 }

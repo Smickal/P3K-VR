@@ -1,6 +1,7 @@
 using BNG;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -11,6 +12,7 @@ public class BandageMovement : MonoBehaviour
 
     [Header("Reference")]
     [SerializeField] SnapZone _snapZone;
+    [SerializeField] Collider _snapColl;
     [SerializeField] CircleMotionTransform _circleTransform;
     [SerializeField] BandageDraw _bandageDraw;
 
@@ -19,6 +21,7 @@ public class BandageMovement : MonoBehaviour
 
     Bandage currBandage;
     Grabbable curBandageGrabbable;
+    IsBeingGrabHandTrack isBeingGrabHandTrack;
 
 
     bool isMoving = false;
@@ -32,7 +35,7 @@ public class BandageMovement : MonoBehaviour
     {
 
         if (curBandageGrabbable == null) return;  
-        if (!isMoving || curBandageGrabbable.BeingHeld == false) return;
+        if (!isMoving || (curBandageGrabbable.BeingHeld == false&& isBeingGrabHandTrack.IsBeingGrab() == false)) return;
 
 
         //check if bandage in range of next target pos
@@ -58,6 +61,8 @@ public class BandageMovement : MonoBehaviour
                 //Fire a Event that the movement is done!
                 OnMovementDone?.Invoke();
 
+                currBandage.GetComponent<ReturnToSnapZone>().ReturnTo = null;
+                curBandageGrabbable = null;
                 _snapZone.gameObject.SetActive(false);                
             }
 
@@ -90,15 +95,29 @@ public class BandageMovement : MonoBehaviour
 
         currBandage = bandage;
         curBandageGrabbable = currBandage.GetComponent<Grabbable>();
+        isBeingGrabHandTrack = currBandage.GetComponent<IsBeingGrabHandTrack>();
 
-        _snapZone.HeldItem = curBandageGrabbable;
-        currBandage.GetComponent<ReturnToSnapZone>().ReturnTo = _snapZone;
+        // _snapZone.HeldItem = curBandageGrabbable; 
+
+        ReturnToSnapZone returnToSnapZone = currBandage.GetComponent<ReturnToSnapZone>();
+        if(returnToSnapZone == null)
+        {
+            returnToSnapZone = currBandage.AddComponent<ReturnToSnapZone>();
+        }
+        returnToSnapZone.ReturnTo = _snapZone;
+        returnToSnapZone.OnlyReturnOnce = false;
+        // returnToSnapZone.Isbeing
+
         currBandage.RegisterBandageToMove(this);
 
         ResetTargeting();
         ResetSnapPositionToStartingIdx();
 
-        curBandageGrabbable.GetPrimaryGrabber().TryRelease();
+        Grabber grabber = curBandageGrabbable.GetPrimaryGrabber();
+        if(grabber != null)grabber.TryRelease();
+        BandageInteractableEvent bandageInteractableEvent = currBandage.GetComponent<BandageInteractableEvent>();
+        if(bandageInteractableEvent)bandageInteractableEvent.ReleaseHandGrabNow();
+        // Oculus.Grabbable
     }
 
     private void ResetSnapPositionToStartingIdx()
@@ -116,12 +135,14 @@ public class BandageMovement : MonoBehaviour
     public void ActivateBandageMovement()
     {
         isMoving = true;
+        _snapColl.enabled = false;
     }
 
     public void DisableBandageMovement()
     {
         isMoving = false;
-        _snapZone.HeldItem = curBandageGrabbable;
+        // _snapZone.HeldItem = curBandageGrabbable;
+        _snapColl.enabled = true;
     }
 
     public void DeleteCustomPosMesh()

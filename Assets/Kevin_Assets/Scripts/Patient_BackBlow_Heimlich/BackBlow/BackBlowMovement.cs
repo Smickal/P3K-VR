@@ -28,6 +28,10 @@ public class BackBlowMovement : MonoBehaviour
     [SerializeField] Collider _rightGrabberHandTrack;
     [SerializeField] Collider _leftGrabberHandTrackFull;
     [SerializeField] Collider _rightGrabberHandTrackFull;
+    [Header("Ref For Visual")]
+    [SerializeField]private GameObject leftVisual;
+    [SerializeField]private GameObject rightVisual, leftVisualHT, rightVisualHT;
+    [SerializeField]private GameObject modelLeft, modelRight;
 
 
     [SerializeField] Transform _backColliderTrans;
@@ -37,7 +41,7 @@ public class BackBlowMovement : MonoBehaviour
     //
 
     [Header("debug")]
-    [SerializeField] bool isDebug;
+    [SerializeField] bool isDebug, isTurnOff;
     [SerializeField] TMP_Text _debugText;
     GameObject currentGrabberForPull;
     GameObject currentGrabberForBackBlow;
@@ -66,6 +70,8 @@ public class BackBlowMovement : MonoBehaviour
     int backblowCount = 0;
     private void Start()
     {
+        modelRight.SetActive(false);
+        modelLeft.SetActive(false);
         OnBackBlow.AddListener(CheckForBackBlowCollision);
         OnReleaseBackBlow.AddListener(CheckForExitingCollider);
     }
@@ -123,9 +129,10 @@ public class BackBlowMovement : MonoBehaviour
     {
         
         if (isHittingCollider) return;
+        if(isTurnOff) return;
         // Debug.Log("Di siniaaaaaaaabbbbbbbbaaaaaaaaaaaaaaaaaabb ???");
         bool isFullScores = false;
-
+        // Debug.Log("Test 1" + isTurnOff);
         // Debug.Log(col.gameObject == _rightGrabberFull);
         // Debug.Log(" " + col);
 
@@ -134,23 +141,31 @@ public class BackBlowMovement : MonoBehaviour
         {
             if(col == _leftGrabberFull || col == _rightGrabberFull || col == _leftGrabber || col == _rightGrabber)
             {
+                isTurnOff = true;
                 isHittingCollider = true;
                 if(col == _leftGrabberFull)
                 {
-                    currentHitCollider = _leftGrabber;
+                    currentHitCollider = _leftGrabberFull;
+                    _leftGrabber.enabled = false;
                     isFullScores = true;
                 }
                 else if(col == _rightGrabberFull)
                 {
-                    currentHitCollider = _rightGrabber;
+                    currentHitCollider = _rightGrabberFull;
+                    _rightGrabber.enabled = false;
                     isFullScores = true;
                 }
                 else
                 {
                     currentHitCollider = col;
+                    if(col == _leftGrabber)_leftGrabberFull.enabled = false;
+                    if(col == _rightGrabber)_rightGrabberFull.enabled = false;
                 }
             }
-            else return;
+            else {
+                TurnAll();
+                return;
+            } 
         }
         else
         {
@@ -161,36 +176,46 @@ public class BackBlowMovement : MonoBehaviour
                 isHittingCollider = true;
                 if(col == _leftGrabberHandTrackFull)
                 {
-                    currentHitCollider = _leftGrabberHandTrack;
+                    currentHitCollider = _leftGrabberHandTrackFull;
+                    _leftGrabberHandTrack.enabled = false;
                     isFullScores = true;
                 }
                 else if(col == _rightGrabberHandTrackFull)
                 {
-                    currentHitCollider = _rightGrabberHandTrack;
+                    currentHitCollider = _rightGrabberHandTrackFull;
+                    _rightGrabberHandTrack.enabled = false;
                     isFullScores = true;
                 }
                 else
                 {
                     currentHitCollider = col;
+                    if(col == _leftGrabberHandTrack)_leftGrabberHandTrackFull.enabled = false;
+                    if(col == _rightGrabberHandTrack)_rightGrabberHandTrackFull.enabled = false;
                 }
             }
-            else return;
+            else
+            {
+                TurnAll();
+                return;
+            } 
         }
-        
-        Debug.Log("Di siniKAHHH ???"); 
+        // Debug.Log("Test 2" + isTurnOff);
+        // Debug.Log("Di siniKAHHH ???"); 
 
         //CheckForChestPull
         if(currentGrabberForPull == null)
         {
             StopCalc();
+            TurnAll();
             return;
         }
-        Debug.Log("Di siniKAHHHAAAAAAAA ???"); 
+        // Debug.Log("Test 3" + isTurnOff);
+        // Debug.Log("Di siniKAHHHAAAAAAAA ???"); 
         endPos = currentGrabberForBackBlow.transform.position;
 
         float distance = Vector3.Distance(endPos, startPos);
         velocity = distance / curTime;
-
+        Debug.Log("Test 4" + isTurnOff);
         Debug.Log(velocity + " dan " + distance + " dan " + curTime); 
         if(currentGrabberForBackBlow && currentGrabberForPull && 
             velocity > _minSmackVelocity && velocity < _maxSmackVelocity
@@ -224,7 +249,7 @@ public class BackBlowMovement : MonoBehaviour
             enterNormalCollider = false;
                 // Debug.Log("ReducedBackBlow_Back");
                 //TODO: DROP FULL PROGGRESS HERE!
-                
+            
 
             if(isDebug)
             {
@@ -235,6 +260,8 @@ public class BackBlowMovement : MonoBehaviour
             StopCoroutine(BackBlowCoolDown());
             StartCoroutine(BackBlowCoolDown());
         }
+        TurnAll();
+        Debug.Log("Test 5" + isTurnOff);
     }
 
     public void CheckForExitingCollider(Collider collider)
@@ -243,6 +270,7 @@ public class BackBlowMovement : MonoBehaviour
         //Check if the ones triggered is the same as the ones exiting
         if (currentHitCollider == collider)
         {
+            // isTurnOff = false;
             _bbFull.HitFull = false;
             isHittingCollider = false;
             currentHitCollider = null;
@@ -270,8 +298,35 @@ public class BackBlowMovement : MonoBehaviour
 
     public void SetPullGrabber(GameObject grabber)
     {
-        
+        if(currentGrabberForPull != null && grabber == null)
+        {
+            // Debug.Log("Ga masuk sinikah?");
+            if(grabber == null)
+            {
+                if(currentGrabberForPull == _rightGrabber.gameObject)
+                {
+                    rightVisual.SetActive(true);
+                    modelRight.SetActive(false);
+                }
+                else if(currentGrabberForPull == _leftGrabber.gameObject)
+                {
+                    leftVisual.SetActive(true);
+                    modelLeft.SetActive(false);
+                }
+                else if(currentGrabberForPull == _rightGrabberHandTrack.gameObject)
+                {
+                    rightVisualHT.SetActive(true);
+                    modelRight.SetActive(false);
+                }
+                else if(currentGrabberForPull == _leftGrabberHandTrack.gameObject)
+                {
+                    leftVisualHT.SetActive(true);
+                    modelLeft.SetActive(false);
+                }
+            }
+        }
         currentGrabberForPull = grabber;
+        
         if (currentGrabberForPull == null) 
         {
             StopCalc();
@@ -279,13 +334,37 @@ public class BackBlowMovement : MonoBehaviour
         }
         if(!InteractToolsController.CheckIsHandTrackOn())
         {
-            if (grabber == _leftGrabber.gameObject) currentGrabberForBackBlow = _rightGrabber.gameObject;
-            else if (grabber == _rightGrabber.gameObject) currentGrabberForBackBlow = _leftGrabber.gameObject;
+            if (grabber == _leftGrabber.gameObject)
+            {
+                currentGrabberForBackBlow = _rightGrabber.gameObject;
+
+                leftVisual.SetActive(false);
+                modelLeft.SetActive(true);
+            }
+            else if (grabber == _rightGrabber.gameObject)
+            {
+                currentGrabberForBackBlow = _leftGrabber.gameObject;
+
+                rightVisual.SetActive(false);
+                modelRight.SetActive(true);
+            }
         }
         else
         {
-            if (grabber == _leftGrabberHandTrack.gameObject) currentGrabberForBackBlow = _rightGrabberHandTrack.gameObject;
-            else if (grabber == _rightGrabberHandTrack.gameObject) currentGrabberForBackBlow = _leftGrabberHandTrack.gameObject;
+            if (grabber == _leftGrabberHandTrack.gameObject)
+            {
+                currentGrabberForBackBlow = _rightGrabberHandTrack.gameObject;
+                
+                leftVisualHT.SetActive(false);
+                modelLeft.SetActive(true);
+            } 
+            else if (grabber == _rightGrabberHandTrack.gameObject)
+            {
+                currentGrabberForBackBlow = _leftGrabberHandTrack.gameObject;
+                
+                rightVisualHT.SetActive(false);
+                modelRight.SetActive(true);
+            }
         }
         StartCalc();
         
@@ -296,7 +375,10 @@ public class BackBlowMovement : MonoBehaviour
     {
         StopCalc ();
         yield return new WaitForSeconds(_backBlowCooldown);
+        Debug.Log("what???");
+        TurnAll();
         StartCalc();
+        
     }
 
     public void ResetCount()
@@ -304,4 +386,20 @@ public class BackBlowMovement : MonoBehaviour
         backblowCount = 0;
         _totalScore = 0;
     }
+    public void TurnAll()
+    {
+        _leftGrabber.enabled = true;
+        _rightGrabber.enabled = true;
+        _leftGrabberFull.enabled = true;
+        _rightGrabberFull.enabled = true;
+
+        _leftGrabberHandTrack.enabled = true;
+        _rightGrabberHandTrack.enabled = true;
+        _leftGrabberHandTrackFull.enabled = true;
+        _rightGrabberHandTrackFull.enabled = true;
+
+
+        isTurnOff = false;
+    }
+
 }

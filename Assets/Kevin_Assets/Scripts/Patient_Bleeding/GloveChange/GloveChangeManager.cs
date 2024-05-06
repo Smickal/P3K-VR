@@ -7,6 +7,7 @@ using UnityEngine.Events;
 public class GloveChangeManager : MonoBehaviour
 {
     [SerializeField] HandModelSelector _handModelSelector;
+    [SerializeField] ChangeHandMaterial changeHandMaterial;
     [SerializeField] int _defaultHandIdx = 0;
     [SerializeField] int _gloveHandIdx = 1;
     private bool isDoneChanging;
@@ -16,11 +17,11 @@ public class GloveChangeManager : MonoBehaviour
 
     public void ChangeToGlove()
     {
-        if(GameManager.CheckLevelTypeNow() != LevelP3KType.Bleeding || 
-            GameManager.CheckInGameModeNow() != InGame_Mode.FirstAid || 
-            BleedingWithoutEmbeddedItem.StateFirstAidNow() != BleedingWithoutEmbeddedItem_State.WearGloves)return;
+        // if(GameManager.CheckLevelTypeNow() != LevelP3KType.Bleeding || 
+        //     GameManager.CheckInGameModeNow() != InGame_Mode.FirstAid || 
+        //     BleedingWithoutEmbeddedItem.StateFirstAidNow() != BleedingWithoutEmbeddedItem_State.WearGloves)return;
         _handModelSelector.ChangeHandsModel(_gloveHandIdx, false);
-
+        changeHandMaterial.ChangeHandsMaterial(HandsMaterial.Gloves);
         isDoneChanging = true;
         //Trigger Something Through Event
         OnGrabberChangeModel?.Invoke();

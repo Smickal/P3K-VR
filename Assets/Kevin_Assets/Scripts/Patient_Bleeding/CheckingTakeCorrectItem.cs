@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Oculus.Interaction.HandGrab;
 using UnityEngine;
 
 public class CheckingTakeCorrectItem : MonoBehaviour
@@ -8,26 +9,65 @@ public class CheckingTakeCorrectItem : MonoBehaviour
     [SerializeField]DialogueManager dialogueManager;
     [SerializeField]private Patient_Bleeding patient_Bleeding;
     [SerializeField]private BleedingWithoutEmbeddedItem bleedingWithoutEmbeddedItem;
-    [Header("Correct State For Item - item ini buat pas kapan; Kalo ga ada yg kedua jdiin none")]
+    [Header("Ref HT")]
+    [SerializeField]private IsBeingGrabHandTrack isBeingGrabHandTrack;
+
+    [Header("Correct State For Item - item ini buat pas kapan")]
     [SerializeField]private List<BleedingWithoutEmbeddedItem_State> _correctbleedingWithoutEmbeddedItem_State_List;
+    public bool isUsedOnWithItem;
+    
 
     private void Awake() 
     {
+        if(isBeingGrabHandTrack == null)isBeingGrabHandTrack = GetComponent<IsBeingGrabHandTrack>();
         if(dialogueManager == null)dialogueManager = FindAnyObjectByType<DialogueManager>();
         if(patient_Bleeding == null)patient_Bleeding = FindAnyObjectByType<Patient_Bleeding>();
         if(bleedingWithoutEmbeddedItem == null)bleedingWithoutEmbeddedItem = FindAnyObjectByType<BleedingWithoutEmbeddedItem>();
     }
     public void CheckingState()
     {
+        // Debug.Log("Lewat sini ga checking");
         if(GameManager.CheckGameStateNow() != GameState.InGame || GameManager.CheckLevelTypeNow() != LevelP3KType.Bleeding || GameManager.CheckInGameModeNow() != InGame_Mode.FirstAid)return;
-
+        
         if(patient_Bleeding.BleedingQuest_State == BleedingQuest_State.WithItem)
         {
-            if(CorrectState(BleedingWithoutEmbeddedItem_State.BandageTime))
+            if(!isUsedOnWithItem)
             {
-                dialogueManager.PlayDialogueScene(DialogueListTypeParent.Bleeding_WrongItem, DialogueListType_Bleeding_WrongItem.Bleeding_WrongItem_WithItem_Bandage);
+                if(!patient_Bleeding.isCleanHandsDone_WithItem)
+                {
+                    if(CorrectState(BleedingWithoutEmbeddedItem_State.CleanHands))
+                    {
+                        DialogueManager.HideFinishedDialogue_AfterFinishingTask();
+                        return;
+                    }
+                    else
+                    {
+                        dialogueManager.PlayDialogueScene(DialogueListTypeParent.Bleeding_WrongItem, DialogueListType_Bleeding_WrongItem.Bleeding_WrongItem_WithoutItem_CleanHands);
+                        return;
+                    }
+                }
+                else
+                {
+                    dialogueManager.PlayDialogueScene(DialogueListTypeParent.Bleeding_WrongItem, DialogueListType_Bleeding_WrongItem.Bleeding_WrongItem_WithItem_Bandage);
+                    return;
+                }
+                
+            }
+            else
+            {
+                DialogueManager.HideFinishedDialogue_AfterFinishingTask();
                 return;
             }
+            // if(!CorrectState(BleedingWithoutEmbeddedItem_State.BandageTime))
+            // {
+            //     dialogueManager.PlayDialogueScene(DialogueListTypeParent.Bleeding_WrongItem, DialogueListType_Bleeding_WrongItem.Bleeding_WrongItem_WithItem_Bandage);
+            //     return;
+            // }
+            // else
+            // {
+            //     DialogueManager.HideFinishedDialogue_AfterFinishingTask();
+            //     return;
+            // }
             
         }
         else if(patient_Bleeding.BleedingQuest_State == BleedingQuest_State.WithoutItem)
@@ -93,4 +133,10 @@ public class CheckingTakeCorrectItem : MonoBehaviour
         }
         return false;
     }
+    public void CheckingStateHT()
+    {
+        if(!isBeingGrabHandTrack.IsBeingGrab())return;
+        CheckingState();
+    }
+
 }

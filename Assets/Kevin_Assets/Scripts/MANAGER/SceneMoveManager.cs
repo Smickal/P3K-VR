@@ -18,7 +18,7 @@ public class SceneMoveManager : MonoBehaviour
         turnOffStaticsList = new List<ITurnOffStatic>(turnOffStaticsArray);
 
         bGMManager = GameObject.FindGameObjectWithTag(BGM_Tag).GetComponent<BGMManager>();
-        Debug.Log(bGMManager + "WHat");
+        // Debug.Log(bGMManager + "WHat");
     }
     
     public void RestartScene()

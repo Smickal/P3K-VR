@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class TrashCountManager : MonoBehaviour
 {
+    [SerializeField]private PlayerRestriction playerRestriction;
     [SerializeField]private List<SmallTrashItem> SmallTrashItems;
     public static TrashCountManager Instance { get;private set;}
     private void Awake() {
@@ -25,6 +26,7 @@ public class TrashCountManager : MonoBehaviour
         {
             if(SmallTrashItems.Contains(smallTrash))
             {
+                playerRestriction.DeleteFromExistingData(smallTrash.gameObject);
                 SmallTrashItems.Remove(smallTrash);
                 smallTrash.DestroyTrash();
             }
@@ -33,7 +35,12 @@ public class TrashCountManager : MonoBehaviour
                 ReturnToSnapZone returnToSnapZone = other.GetComponent<ReturnToSnapZone>();
                 if(returnToSnapZone != null)
                 {
-                    if(returnToSnapZone.enabled == false)returnToSnapZone.enabled = true;
+                    if(returnToSnapZone.enabled == false)
+                    {
+                        returnToSnapZone.OnlyReturnOnce = true;
+                        returnToSnapZone.enabled = true;
+                    }
+                    
                 }
                 else
                 {

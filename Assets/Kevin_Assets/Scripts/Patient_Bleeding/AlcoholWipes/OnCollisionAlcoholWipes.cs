@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class OnCollisionAlcoholWipes : MonoBehaviour
 {
+    [SerializeField] GameObject _leftGrabberHT;
+    [SerializeField] GameObject _rightGrabberHT;
     AlcoholCleanManager cleanManager;
 
     private void Start()
@@ -17,9 +19,17 @@ public class OnCollisionAlcoholWipes : MonoBehaviour
         Grabber grabber = collision.gameObject.GetComponent<Grabber>();
         
 
-        if (grabber == null) return;
-        Debug.Log("Yang kena sini adalah " + grabber.gameObject);
-        cleanManager.RegisterCurrentNeedToCleanGrabber(grabber);
+        if (grabber == null && (collision.gameObject != _leftGrabberHT && collision.gameObject != _rightGrabberHT) ) return;
+        Debug.Log("Yang kena sini adalah EnterCol" + gameObject);
+        cleanManager.RegisterCurrentNeedToCleanGrabber(collision.gameObject);
+    }
+    private void OnCollisionExit(Collision other) {
+        Grabber grabber = other.gameObject.GetComponent<Grabber>();
+        
+
+        if (grabber == null && (other.gameObject != _leftGrabberHT && other.gameObject != _rightGrabberHT)) return;
+        Debug.Log("Yang kena sini adalah ExitCol" + gameObject);
+        cleanManager.UnRegisterCurrentNeedToCleanGrabber(other.gameObject);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -27,8 +37,17 @@ public class OnCollisionAlcoholWipes : MonoBehaviour
         Grabber grabber = other.gameObject.GetComponent<Grabber>();
 
 
-        if (grabber == null) return;
-        Debug.Log("Yang kena sini adalah " + grabber.gameObject);
-        cleanManager.RegisterCurrentNeedToCleanGrabber(grabber);
+        if (grabber == null && (other.gameObject != _leftGrabberHT && other.gameObject != _rightGrabberHT)) return;
+        Debug.Log("Yang kena sini adalah EnterTrig" + gameObject);
+        cleanManager.RegisterCurrentNeedToCleanGrabber(other.gameObject);
     }
+    private void OnTriggerExit(Collider other) {
+        Grabber grabber = other.gameObject.GetComponent<Grabber>();
+        
+
+        if (grabber == null && (other.gameObject != _leftGrabberHT && other.gameObject != _rightGrabberHT)) return;
+        Debug.Log("Yang kena sini adalah ExitTrig" + gameObject);
+        cleanManager.UnRegisterCurrentNeedToCleanGrabber(other.gameObject);
+    }
+
 }

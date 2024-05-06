@@ -9,6 +9,7 @@ public class InteractToolsController : MonoBehaviour, ITurnOffStatic
 {
     [SerializeField]private HandActiveState leftHand, rightHand;
     [SerializeField]private GameObject leftControllerGameObject, rightControllerGameObject;
+    [SerializeField]private GameObject[] HTCollider;
     [SerializeField]private PointableCanvasModule pointableCanvasModule;
     [SerializeField]private VRUISystem vRUISystem;
     private int checker = 0; //1 hands, 2 = controller
@@ -28,6 +29,7 @@ public class InteractToolsController : MonoBehaviour, ITurnOffStatic
             if(checker != 1)
             {
                 ControlSetActive(false);
+                ChangeHTColliderActive(true);
                 isHandTrackOn = true;
                 if(vRUISystem)vRUISystem.enabled = false;
                 
@@ -42,6 +44,7 @@ public class InteractToolsController : MonoBehaviour, ITurnOffStatic
             {
                 leftControllerGameObject.SetActive(true);
                 rightControllerGameObject.SetActive(true);
+                ChangeHTColliderActive(false);
                 if(vRUISystem)vRUISystem.enabled = true;
                 if(vRUISystem)vRUISystem.ReAddCameratoCanvas();
                 checker = 2;
@@ -56,6 +59,7 @@ public class InteractToolsController : MonoBehaviour, ITurnOffStatic
         
         leftControllerGameObject.SetActive(changeBool);
         rightControllerGameObject.SetActive(changeBool);
+        
         if(!changeBool) checker = 1;
         else checker = 2;
     }
@@ -67,5 +71,12 @@ public class InteractToolsController : MonoBehaviour, ITurnOffStatic
     public void TurnOffStatic()
     {
         CheckIsHandTrackOn -= IsHandTrackOn;
+    }
+    private void ChangeHTColliderActive(bool change)
+    {
+        foreach(GameObject HTcoll in HTCollider)
+        {
+            HTcoll.SetActive(change);
+        }
     }
 }

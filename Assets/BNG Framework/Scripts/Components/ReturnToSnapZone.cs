@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -31,7 +31,7 @@ namespace BNG {
         [Tooltip("Kalau mager taro di starting item snapzone - true; tp suara ada")]
         [SerializeField]private bool returnFirstTime = false;
         [SerializeField]private bool onlyReturnOnce = true;
-        public bool OnlyReturnOnce { get { return onlyReturnOnce; } }
+        public bool OnlyReturnOnce { get { return onlyReturnOnce;} set { onlyReturnOnce = value;}}
 
         [Header("isi ini kalo mo balik berdasarkan briefcase buka ato tutup")]
         [SerializeField]private Briefcase briefCase;
@@ -39,6 +39,7 @@ namespace BNG {
         void Start() {
             grab = GetComponent<Grabbable>();
             rigid = GetComponent<Rigidbody>();
+            if(isBeingGrabHand == null)isBeingGrabHand = GetComponent<IsBeingGrabHandTrack>();
             useGravityInitial = rigid.useGravity;
         }
 
@@ -88,7 +89,7 @@ namespace BNG {
 
             if (Vector3.Distance(transform.position, ReturnTo.transform.position) < SnapDistance) {
                 rigid.useGravity = useGravityInitial;
-                Debug.Log("is this your fault");
+                // Debug.Log("is this your fault");
                 ReturnTo.GrabGrabbable(grab);
                 if(onlyReturnOnce)this.enabled = false;
             }

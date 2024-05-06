@@ -34,6 +34,11 @@ public class HeimlichMovement : MonoBehaviour
 
     [Header("ConstraintMovement")]
     [SerializeField] LegTargetConstraint _targetConstraint;
+    [Header("Ref For Visual")]
+    [SerializeField]private GameObject leftVisual;
+    [SerializeField]private GameObject rightVisual, leftVisualHT, rightVisualHT;
+    [SerializeField]private GameObject modelLeft, modelRight;
+    private bool hasTurnOff;
 
     [Header("Debug")]
     [SerializeField] bool _isDebug = true;
@@ -66,6 +71,11 @@ public class HeimlichMovement : MonoBehaviour
     public bool IsGrabbing {  get { return isGrabbing; } }
 
     // Update is called once per frame
+    public void Start()
+    {
+        modelRight.SetActive(false);
+        modelLeft.SetActive(false);
+    }
     void Update()
     {
         CheckGrabber();
@@ -156,13 +166,35 @@ public class HeimlichMovement : MonoBehaviour
         if (curLeftGrabber && curRightGrabber)
         {
             isGrabbing = true;
+            if(!hasTurnOff)
+            {
+                hasTurnOff = true;
+                modelLeft.SetActive(true);
+                modelRight.SetActive(true);
+
+                leftVisual.SetActive(false);
+                rightVisual.SetActive(false);
+                leftVisualHT.SetActive(false);
+                rightVisualHT.SetActive(false);
+            }
             if(!PlayerRestriction.IsRestrictMovement())PlayerRestriction.ApplyMovementRestriction();
         }
         
         else 
         {
             isGrabbing = false;
-            
+            if(hasTurnOff)
+            {
+                hasTurnOff = false;
+
+                modelLeft.SetActive(false);
+                modelRight.SetActive(false);
+                
+                leftVisual.SetActive(true);
+                rightVisual.SetActive(true);
+                leftVisualHT.SetActive(true);
+                rightVisualHT.SetActive(true);
+            }
         }
         
     }

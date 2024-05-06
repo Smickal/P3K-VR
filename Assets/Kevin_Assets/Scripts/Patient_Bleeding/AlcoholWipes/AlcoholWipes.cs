@@ -19,7 +19,7 @@ public class AlcoholWipes : GrabbableEvents
         base.OnGrab(grabber);
 
         curGrabber = grabber;
-        alcoholManager?.RegisterGrabber(grabber);
+        alcoholManager?.RegisterGrabber(grabber.gameObject);
     }
 
     public override void OnGrip(float gripValue)
@@ -40,9 +40,5 @@ public class AlcoholWipes : GrabbableEvents
         alcoholManager.SaveCurrentTimeProgress();
     }
 
-    public void DestroyTrash()
-    {
-        Destroy(this.gameObject);
-    }
 
 }

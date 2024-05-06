@@ -322,7 +322,7 @@ public class PlayerManager : MonoBehaviour, ITurnOffStatic
         
         Vector3 destination = new Vector3(positionNow.playerPosition.x, playerTeleport_y, positionNow.playerPosition.z);
         Quaternion rotation = Quaternion.Euler(0,positionNow.playerRotation,0);
-        playerTeleport.TeleportPlayer(destination, rotation);
+        playerTeleport.TeleportPlayerAwake(destination, rotation);
         // Debug.Break();
 
 

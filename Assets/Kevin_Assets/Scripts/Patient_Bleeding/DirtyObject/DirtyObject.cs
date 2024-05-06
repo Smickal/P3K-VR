@@ -25,7 +25,7 @@ public class DirtyObject : MonoBehaviour
     [SerializeField]float _bleedingMultiplier = 0.02f;
     [SerializeField]int MAX_COUNTDOWN = 2;
     int bleedCountdown;
-
+    
 
     private void Start()
     {

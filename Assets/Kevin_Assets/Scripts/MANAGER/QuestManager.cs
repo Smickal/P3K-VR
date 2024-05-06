@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using BNG;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
@@ -18,6 +19,7 @@ public class QuestManager : MonoBehaviour
     [SerializeField]private Bleeding_QuestManager bleeding_QuestManager;
     [SerializeField]private Choking_QuestManager choking_QuestManager;
     [SerializeField]private SceneMoveManager sceneMoveManager;
+
     
 
     [Header("Level Data")]
@@ -32,8 +34,12 @@ public class QuestManager : MonoBehaviour
     
     [Header("Debug Only")]
     public bool Startq;
+    [Header("Scene Fade")]
+    [SerializeField]ScreenFader screenFader;
+    UnityAction questDoneMethodAfterFade;
     protected virtual void Awake() 
     {
+        questDoneMethodAfterFade = QuestDoneMethod;
         levelP3KTypeNow = gameManager.LevelTypeNow();
         levelPlayerDataNow = playerManager.GetLevelData((int)levelP3KTypeNow);
     }
@@ -111,10 +117,18 @@ public class QuestManager : MonoBehaviour
         else if (levelP3KTypeNow == LevelP3KType.Bleeding) bleeding_QuestManager.ScoreCounter();
         PlayerRestriction.ApplyAllRestriction();
 
+        screenFader.AddEvent(questDoneMethodAfterFade);
+        screenFader.DoFadeIn();
         //ntr perlu dinyalain fader sendiri di sini
+        
+
+    }
+    public void QuestDoneMethod()
+    {
         EnvironmentLevelManager.SetEnvironment_FinishQuest();
         PlayerManager.SetPlayerPosition_FinishP3k();
-
+        screenFader.ResetEvent();
+        screenFader.DoFadeOut();
     }
     protected virtual void Quest(){}
     protected virtual void ScoreCounter()
@@ -138,7 +152,7 @@ public class QuestManager : MonoBehaviour
     }
     protected virtual void ResetQuest() 
     {
-        Debug.Log(sceneMoveManager.gameObject);
+        // Debug.Log(sceneMoveManager.gameObject);
         sceneMoveManager.RestartScene();
         
     }

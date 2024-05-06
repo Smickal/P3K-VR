@@ -17,6 +17,11 @@ public class Patient_Bleeding : MonoBehaviour
     [SerializeField]BleedingWithoutEmbeddedItem bleedingWithoutEmbeddedItem;
     [SerializeField]BleedingQuest_State bleedingQuest_State;
     public BleedingQuest_State BleedingQuest_State{get{return bleedingQuest_State;}}
+    [Header("TambahanUntuk Bleed With Item")]
+    [Header("CleanHands")]
+    [SerializeField]AlcoholCleanManager alcoholCleanManager;
+    public bool isCleanHandsDone_WithItem = false;
+    IEnumerator FirstAidCoroutine_WithItem;
 
     private void Start() 
     {
@@ -32,12 +37,14 @@ public class Patient_Bleeding : MonoBehaviour
     public void ActivateGlassShard()
     {
         bleedingQuest_State = BleedingQuest_State.WithItem;
-        BleedWithItemMgr.ActivateBandageWithItem();
+        alcoholCleanManager.Reset();
+        FirstAidCoroutine_WithItem = FirstAid_CleanHands_WithItem();
+        StartCoroutine(FirstAidCoroutine_WithItem);
     }
 
     public void FirstAid_BleedingWithItemDone()
     {
-        BleedWithItemMgr.DeactivateBandageWithItem();
+        BleedWithItemMgr.DeactivateBandageWithItem_WithoutSnapZone();
         bleedingQuest_State = BleedingQuest_State.None;
         isDoneFirstAid = true;
     }
@@ -52,7 +59,15 @@ public class Patient_Bleeding : MonoBehaviour
     public void StopCoroutines()
     {
         bleedingWithoutEmbeddedItem.DeactivateFirstAid();
+        if(FirstAidCoroutine_WithItem != null)StopCoroutine(FirstAidCoroutine_WithItem);
         BleedWithItemMgr.DeactivateBandageWithItem();
+    }
+    private IEnumerator FirstAid_CleanHands_WithItem()
+    {
+        yield return new WaitUntil(()=> alcoholCleanManager.IsDoneCleaning);
+        isCleanHandsDone_WithItem = true;
+        BleedWithItemMgr.ActivateBandageWithItem();
+        FirstAidCoroutine_WithItem = null;
     }
 
 }

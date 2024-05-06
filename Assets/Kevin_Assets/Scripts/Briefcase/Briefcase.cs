@@ -12,21 +12,15 @@ public class Briefcase : MonoBehaviour
 
     [Header("Reference")]
     [SerializeField] Animator _briefCaseAnim;
-    [SerializeField] Button _briefCaseBtn_Controller;
-    [SerializeField] InteractableUnityEventWrapper _briefCaseBtn_HandTrack;
+    [SerializeField] Collider[] _buttonColliders;
     //[SerializeField] BoxCollider _boxCollider;
 
     [SerializeField] Collider[] _inventoryColliders;
+    [SerializeField] SnapZone[] _snapZones;
 
-    bool isOpen = false, isInventEnabled;
+    bool isOpen = false, isInventEnabled = true;
     public bool IsOpen { get { return isOpen; } }
 
-    private void Start()
-    {
-        _briefCaseBtn_Controller?.onButtonDown.AddListener(TriggerOpenCloseAnim);
-        _briefCaseBtn_HandTrack?.WhenSelect.AddListener(TriggerOpenCloseAnim);
-
-    }
 
     private void Update() 
     {
@@ -59,19 +53,67 @@ public class Briefcase : MonoBehaviour
 
     public void DisableInventory()
     {
-        if(isInventEnabled)isInventEnabled = false;
+        // if(!isInventEnabled) return;
+        if(!isInventEnabled)isInventEnabled = false;
         foreach(Collider _inventoryCollider in _inventoryColliders)
         {
+            if(!_inventoryCollider.enabled)continue;
+
             _inventoryCollider.enabled = false;
+        }
+        foreach(SnapZone snapzone in _snapZones)
+        {
+            if(snapzone.HeldItem != null)
+            {
+                GameObject SnapInteractor = snapzone.HeldItem.transform.Find("SnapInteractor").gameObject;
+                if(SnapInteractor != null)
+                {
+                    SnapInteractor.GetComponent<Collider>().enabled = false;
+                }
+            }
         }
     }
     public void EnableInventory()
     {
-        if(!isInventEnabled)isInventEnabled = true;
+        // if(isInventEnabled) return;
+        if(isInventEnabled)isInventEnabled = true;
         foreach(Collider _inventoryCollider in _inventoryColliders)
         {
+            if(_inventoryCollider.enabled)continue;
+
             _inventoryCollider.enabled = true;
+        }
+        foreach(SnapZone snapzone in _snapZones)
+        {
+            if(snapzone.HeldItem != null)
+            {
+                GameObject SnapInteractor = snapzone.HeldItem.transform.Find("SnapInteractor").gameObject;
+                if(SnapInteractor != null)
+                {
+                    SnapInteractor.GetComponent<Collider>().enabled = true;
+                }
+            }
         }
     }
 
+    public void SnapToSnapZone()
+    {
+        foreach(Collider buttonColl in _buttonColliders)
+        {
+            buttonColl.enabled = false;
+        }
+        if(isOpen)
+        {
+            TriggerOpenCloseAnim();
+            DisableInventory();
+        }
+        
+    }
+    public void UnSnap()
+    {
+        foreach(Collider buttonColl in _buttonColliders)
+        {
+            buttonColl.enabled = true;
+        }
+    }
 }

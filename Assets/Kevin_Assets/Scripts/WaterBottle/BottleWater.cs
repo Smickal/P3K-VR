@@ -53,9 +53,19 @@ public class BottleWater : MonoBehaviour
     {
         RaycastHit hitInfo;
         Physics.Raycast(_dropWaterTransform.position, Vector3.down, out hitInfo);
+        Debug.DrawRay(_dropWaterTransform.position, Vector3.down * 5, Color.red);
 
         //Check if is bottled cap is opened
-        if (!isBottleOpened) return;
+        if (!isBottleOpened) 
+        {
+            if(curSpawnedWLeak.isPlaying || curSpawnedWSplash.isPlaying)
+            {
+                curSpawnedWLeak.Stop();
+                curSpawnedWSplash.Stop();
+            }
+            return;
+        }
+        
 
         //Check if the bottle is upside down
         if (transform.up.y > -_waterSpillRotationThreshold)
@@ -78,6 +88,7 @@ public class BottleWater : MonoBehaviour
 
         //Update Splash Position
         Vector3 hitPos = hitInfo.point;
+        Debug.Log("Drop Water Posnya adalah " + _dropWaterTransform.position);
         curSpawnedWSplash.transform.position = hitPos;
 
     }

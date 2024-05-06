@@ -61,6 +61,8 @@ namespace Oculus.Interaction
         [FormerlySerializedAs("_dropPoint")]
         private Transform _snapPoseTransform;
         public Pose SnapPose => _snapPoseTransform.GetPose();
+        
+        
 
         /// <summary>
         /// The default Interactable to snap to until you interact with the object.
@@ -314,6 +316,8 @@ namespace Oculus.Interaction
         private void GeneratePointerEvent(PointerEventType pointerEventType)
         {
             Pose pose = ComputePointerPose();
+            // Debug.Log("PoseBefore" + pose + transform.parent.name);
+            // Debug.Log("PoseAfter" + pose + transform.parent.name);
             _pointableElement.ProcessPointerEvent(
                 new PointerEvent(
                     Identifier, pointerEventType, pose, Data));
@@ -386,8 +390,8 @@ namespace Oculus.Interaction
                 {
                     continue;
                 }
+                float positionDeltaSqr = positionDeltaSqr = (pose.position - _snapPoseTransform.position).sqrMagnitude;
 
-                float positionDeltaSqr = (pose.position - _snapPoseTransform.position).sqrMagnitude;
                 if (positionDeltaSqr > bestPositionDeltaSqr)
                 {
                     continue;
@@ -399,10 +403,12 @@ namespace Oculus.Interaction
                 {
                     continue;
                 }
+                
 
                 bestPositionDeltaSqr = positionDeltaSqr;
                 bestAngularDelta = angularDist;
                 closestInteractable = interactable;
+                // Debug.Log(bestPositionDeltaSqr + "Posisi" + bestAngularDelta + "Rotasi" + interactable.gameObject + " " + this.transform.parent.name); 
 
             }
 

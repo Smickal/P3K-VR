@@ -3,7 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Serialization;
 using UnityEditor;
+using Oculus.Interaction;
+using Oculus.Interaction.HandGrab;
 using UnityEngine;
+using Unity.VisualScripting;
+using System.Linq;
 
 public class Robot : GrabbableEvents
 {
@@ -18,6 +22,16 @@ public class Robot : GrabbableEvents
     ReturnRobotToStartingPos returnPos;
     Camera mainCam;
     Rigidbody myRb;
+    [Header("For Handtrack")]
+    [SerializeField]private HandGrabInteractable[] handGrabs;
+    [SerializeField]private DistanceHandGrabInteractable[] distanceHandGrabs;
+    [SerializeField]private HandGrabInteractor leftGrabberHT;
+    [SerializeField]private HandGrabInteractor rightGrabberHT;
+    [SerializeField]private DistanceHandGrabInteractor leftDistanceGrabberHT, rightDistanceGrabberHT;
+    private HandGrabInteractor currHand;
+    private DistanceHandGrabInteractor currDistanceHand;
+    IsBeingGrabHandTrack isBeingGrabHandTrack;
+    private DistanceHandGrabInteractable curr;
 
     [Header("Debug")]
     [SerializeField] bool isActivated = false;
@@ -35,10 +49,14 @@ public class Robot : GrabbableEvents
     }
 
 
-
-
     private void Start()
     {
+        // Debug.Log("Ini lewat sinikann??" + handGrabs);
+        // Debug.Log("ya ?" + distanceHandGrabs);
+        handGrabs = GetComponentsInChildren<HandGrabInteractable>().ToArray();
+        distanceHandGrabs = GetComponentsInChildren<DistanceHandGrabInteractable>().ToArray();
+        
+        isBeingGrabHandTrack = GetComponent<IsBeingGrabHandTrack>();
         _controller = GetComponent<RobotAnimationController>();
         myRb = GetComponent<Rigidbody>();
         returnPos = GetComponent<ReturnRobotToStartingPos>();
@@ -64,7 +82,7 @@ public class Robot : GrabbableEvents
 
 
         //Tries to stay in front of the camera
-        if (!isFollowingPlayer || grab.RemoteGrabbing || grab.BeingHeld) return;
+        if (!isFollowingPlayer || grab.RemoteGrabbing || grab.BeingHeld || isBeingGrabHandTrack.IsBeingGrab()) return;
         ActivateLookAt();
 
         myRb.velocity = Vector3.zero;
@@ -75,12 +93,20 @@ public class Robot : GrabbableEvents
                 (mainCam.transform.forward * _minDistanceToPlayer) +
                 (mainCam.transform.right * _xOffset) +
                     (mainCam.transform.up * _yOffset);
-
+        // Debug.Log(targetPos + " target ");
 
         if(Vector3.Distance(mainCam.transform.position, transform.position) > _minDistanceToPlayer &&
             Vector3.Distance(mainCam.transform.position, transform.position) < _maxDistanceToPlayer)
         {
+            Vector3 robotCameraDistance = transform.position - mainCam.transform.position;
+            float dot = Vector3.Dot(robotCameraDistance, mainCam.transform.forward);
+            if(dot <= 0)
+            {
+                // Debug.Log("Ga di dalem kamera woi");
+                transform.position += (targetPos - transform.position) * 0.025f;
+            }
             _controller.TriggerIdleAnim();
+            
         }
 
         else if (Vector3.Distance(mainCam.transform.position, transform.position) > _maxDistanceToPlayer)
@@ -117,6 +143,35 @@ public class Robot : GrabbableEvents
         ActivateLookAt();
         returnPos.MoveToSnapZone();
     }
+    public void OnGrabHT()
+    {
+        HandGrabInteractor curHand = CheckHandGrabInteractor();
+        DistanceHandGrabInteractor curDistanceHand = CheckDistanceHandGrabInteractor();
+        if(curHand == null && curDistanceHand == null)return;
+        if(curHand != null)
+        {
+            currHand = curHand;
+        }
+        else if(curDistanceHand != null)
+        {
+            currDistanceHand = curDistanceHand;
+        }
+
+        _controller.TriggerFrozeAnim();
+        DeactivateLookAt();
+        returnPos.StopMoveToSnapZone();
+    }
+    public void OnReleaseHT()
+    {
+        if(currHand == null && currDistanceHand == null)return;
+        currHand = null;
+        currDistanceHand = null;
+
+        _controller.TriggerBackwardAnim();
+
+        ActivateLookAt();
+        returnPos.MoveToSnapZone();
+    }
 
 
     public void ReleaseRobot()
@@ -126,7 +181,23 @@ public class Robot : GrabbableEvents
             return;
         }
         ActivateLookAt();
-        grab.DropItem(thisGrabber, true, false);
+        if(grab)grab.DropItem(thisGrabber, true, false);
+        if(currHand != null)
+        {
+            currHand.ForceRelease();
+            isBeingGrabHandTrack.ChangeIsBeingGrab(false);
+        }
+        else if(currDistanceHand != null)
+        {
+            // curr.RemoveSelectingInteractor(currDistanceHand);
+            // curr.RemoveInteractor(currDistanceHand);
+            currDistanceHand.Unselect();
+            isBeingGrabHandTrack.ChangeIsBeingGrab(false);
+            // Debug.Log("Halooo ???");
+        }
+        isBeingGrabHandTrack.ChangeIsBeingGrab(false);
+        currHand = null;
+        currDistanceHand = null;
         returnPos.MoveToSnapZone();
     }
 
@@ -140,4 +211,43 @@ public class Robot : GrabbableEvents
         isFollowingPlayer = false;
     }
 
+
+        private HandGrabInteractor CheckHandGrabInteractor()
+    {
+        foreach(HandGrabInteractable handGrabInteractable in handGrabs)
+        {
+            // Debug.Log("handgrab" + handGrabInteractable);
+            if(handGrabInteractable.HasSelectingInteractor(leftGrabberHT))
+            {
+                // Debug.Log(handGrabInteractable + " This is the chosen onee");
+                return leftGrabberHT;
+            }
+            else if (handGrabInteractable.HasSelectingInteractor(rightGrabberHT))
+            {
+                // Debug.Log(handGrabInteractable + " This is the chosen onee");
+                return rightGrabberHT;
+            }
+        }
+        return null;
+    }
+    private DistanceHandGrabInteractor CheckDistanceHandGrabInteractor()
+    {
+        foreach(DistanceHandGrabInteractable distanceHandGrabInteractable in distanceHandGrabs)
+        {
+            // Debug.Log("handgrab" + handGrabInteractable);
+            if(distanceHandGrabInteractable.HasSelectingInteractor(leftDistanceGrabberHT))
+            {
+                // Debug.Log(distanceHandGrabInteractable + " This is the chosen onee distancee" + leftGrabberHT);
+                curr = distanceHandGrabInteractable;
+                return leftDistanceGrabberHT;
+            }
+            else if (distanceHandGrabInteractable.HasSelectingInteractor(rightDistanceGrabberHT))
+            {
+                // Debug.Log(distanceHandGrabInteractable + " This is the chosen onee distancee" + rightGrabberHT);
+                curr = distanceHandGrabInteractable;
+                return rightDistanceGrabberHT;
+            }
+        }
+        return null;
+    }
 }

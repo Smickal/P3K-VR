@@ -17,6 +17,7 @@ namespace BNG {
 
         [Tooltip("TSet this in the editor to equip on Start().")]
         public Grabbable StartingItem;
+        public bool canBriefCaseSnapToHere;
 
         [Header("Options")]
         /// <summary>
@@ -36,6 +37,8 @@ namespace BNG {
         /// </summary>
         [Tooltip("If false the snap zone cannot have it's content replaced.")]
         public bool CanRemoveItem = true;
+        [Tooltip("If not null, grabber yg ada di sini yang cuma bisa ambil")]
+        public Grabber OnlyThisGrabberCan_TakeFromThisSnap;
         [Tooltip("If false the snap zone wont use the offset that's already in the item")]
         public bool UseOffset = true;
         /// <summary>
@@ -44,6 +47,7 @@ namespace BNG {
         [Tooltip("Multiply Item Scale times this when in snap zone.")]
         public float ScaleItem = 1f;
         private float _scaleTo;
+        public float GetScaleTo{get{return _scaleTo;}}
 
         public bool DisableColliders = true;
         List<Collider> disabledColliders = new List<Collider>();
@@ -263,6 +267,8 @@ namespace BNG {
             HeldItem = grab;
             heldItemRigid = HeldItem.GetComponent<Rigidbody>();
 
+            if(canBriefCaseSnapToHere)SnapZone_CheckBriefCase(true, HeldItem);
+
             // Mark as kinematic so it doesn't fall down
             if (heldItemRigid) {
                 heldItemWasKinematic = heldItemRigid.isKinematic;
@@ -294,7 +300,6 @@ namespace BNG {
             else {
                 _scaleTo = ScaleItem;
             }
-
             // Is there an offset to apply?
             SnapZoneOffset off = grab.GetComponent<SnapZoneOffset>();
             if (off) {
@@ -318,13 +323,13 @@ namespace BNG {
             if (offset) {
                 HeldItem.transform.localPosition = offset.LocalPositionOffset;
                 HeldItem.transform.localEulerAngles = offset.LocalRotationOffset;
-                // Debug.Log(HeldItem.transform.position + " " + gameObject);
+                
             }
             else {
                 HeldItem.transform.localPosition = Vector3.zero;
                 HeldItem.transform.localEulerAngles = Vector3.zero;
             }
-
+            // Debug.Log(HeldItem.transform.position + " " + gameObject + "posisinya" + HeldItem.transform.localEulerAngles);
             // Disable the grabbable. This is picked up through a Grab Action
             disableGrabbable(grab);
 
@@ -354,7 +359,7 @@ namespace BNG {
         void disableGrabbable(Grabbable grab) {
 
             if (DisableColliders) {
-                disabledColliders = grab.GetComponentsInChildren<Collider>(false).ToList();
+                disabledColliders = grab.GetComponentsInChildren<Collider>(true).ToList();
                 for (int x = 0; x < disabledColliders.Count; x++) {
                     if(disabledColliders[x].name != "SnapInteractor") disabledColliders[x].enabled = false;
                     else{
@@ -381,27 +386,15 @@ namespace BNG {
                     if (!CanBeRemoved()) {
                         return;
                     }
-
+                    if(OnlyThisGrabberCan_TakeFromThisSnap != null)
+                    {
+                        if(grabber != OnlyThisGrabberCan_TakeFromThisSnap)
+                        {
+                            return;
+                        }
+                    }
                     var g = HeldItem;
                     if (DuplicateItemOnGrab) {
-                        
-                        // if(isThereSnapZoneinChild)
-                        // {
-                        //     if(snapZoneDictionary == null)
-                        //     {
-                        //         snapZoneDictionary = new Dictionary<string, Tuple<List<Collider>>>();
-                        //         SnapZone[] snapzones = HeldItem.GetComponentsInChildren<SnapZone>(true).ToArray();
-                        //         for(int i=0;i<snapzones.Length;i++)
-                        //         {
-                        //             if(snapzones[i].HeldItem == null)continue;
-                        //             string nameSnap = snapzones[i].name;
-                        //             List<Collider> coll = new List<Collider>(snapzones[i].disabledColliders);
-                        //             Debug.Log("Dictionary " + i + " " + nameSnap + " " + coll.Count);
-                        //             snapZoneDictionary.Add(nameSnap, new Tuple<List<Collider>>(coll));
-                        //         }
-                        //     }
-
-                        // }
                         
                         ReleaseAll();
 
@@ -412,6 +405,7 @@ namespace BNG {
 
                         // Instantiate the object before it is grabbed
                         GameObject go = Instantiate(g.gameObject, transform.position, Quaternion.identity) as GameObject;
+                        PlayerRestriction.AddData(go);
                         if(ChangeNameWhenDuplicate)go.name = nameChange;
 
                         if(isThereSnapZoneinChild)
@@ -438,7 +432,6 @@ namespace BNG {
                             }
 
                         }
-
 
 
                         Grabbable grab = go.GetComponent<Grabbable>();
@@ -534,6 +527,7 @@ namespace BNG {
                     }
                 }
                 
+                if(canBriefCaseSnapToHere)SnapZone_CheckBriefCase(false, HeldItem);
                 // Call event
                 if (OnDetachEvent != null) {
                     // Debug.Log(HeldItem.gameObject.name);
@@ -597,6 +591,7 @@ namespace BNG {
                         Debug.Log(c.name);
                         if(c.name == "SnapInteractor")
                         {
+                            c.enabled = false;
                             Debug.Log(++x);
                             
                         }
@@ -645,6 +640,7 @@ namespace BNG {
                     OnDetachHTEvent.Invoke(HeldItem);
                     
                 }
+                if(canBriefCaseSnapToHere)SnapZone_CheckBriefCase(false, HeldItem);
                 // Fire Off Grabbable Events
                 // GrabbableEvents[] ge = HeldItem.GetComponents<GrabbableEvents>();
                 // if (ge != null) {
@@ -658,6 +654,8 @@ namespace BNG {
             if(DuplicateItemOnGrab)
             {
                 GameObject go = Instantiate(g.gameObject, transform.position, Quaternion.identity) as GameObject;
+                PlayerRestriction.AddData(go);
+                
                 if(ChangeNameWhenDuplicate)go.name = nameChange;
                 Grabbable grab = go.GetComponent<Grabbable>();
                 if(isThereSnapZoneinChild)
@@ -701,6 +699,7 @@ namespace BNG {
             HeldItem = grab;
             heldItemRigid = HeldItem.GetComponent<Rigidbody>();
 
+            if(canBriefCaseSnapToHere)SnapZone_CheckBriefCase(true, HeldItem);
             // Mark as kinematic so it doesn't fall down
             if (heldItemRigid) {
                 heldItemWasKinematic = heldItemRigid.isKinematic;
@@ -810,6 +809,19 @@ namespace BNG {
         {
             if (HeldItem == null) return;
             if(HeldItem.name != nameChange)HeldItem.name = nameChange;
+        }
+        public void SnapZone_CheckBriefCase(bool isSnapping, Grabbable HeldItem)
+        {
+            Briefcase briefcase = HeldItem.GetComponent<Briefcase>();
+            if(briefcase == null) return;
+            if(isSnapping)
+            {
+                briefcase.SnapToSnapZone();
+            }
+            else
+            {
+                briefcase.UnSnap();
+            }
         }
     }
     

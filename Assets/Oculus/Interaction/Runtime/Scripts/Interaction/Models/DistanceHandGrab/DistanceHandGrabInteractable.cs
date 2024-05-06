@@ -132,8 +132,10 @@ namespace Oculus.Interaction.HandGrab
         public GrabbingRule PalmGrabRules => _palmGrabRules;
 
         public List<HandGrabPose> HandGrabPoses => _handGrabPoses;
-        public Collider[] Colliders { get; private set; }
-
+        public Collider[] Colliders { get; set; }
+        [Tooltip("True, kalau mau isi sendiri")]
+        public bool canCustomizeColliders;
+        public Collider[] collidersHere;
         private GrabPoseFinder _grabPoseFinder;
 
         private readonly PoseMeasureParameters SCORE_MODIFIER = new PoseMeasureParameters(1f);
@@ -168,7 +170,12 @@ namespace Oculus.Interaction.HandGrab
         {
             this.BeginStart(ref _started, () => base.Start());
             this.AssertField(Rigidbody, nameof(Rigidbody));
-            Colliders = Rigidbody.GetComponentsInChildren<Collider>();
+            if(!canCustomizeColliders)Colliders = Rigidbody.GetComponentsInChildren<Collider>();
+            else 
+            {
+                Colliders = new Collider[collidersHere.Length];
+                collidersHere.CopyTo(Colliders,0);
+            }
             this.AssertCollectionField(Colliders, nameof(Colliders),
                 whyItFailed: $"The associated {nameof(Rigidbody)} must have at least one collider.");
 
