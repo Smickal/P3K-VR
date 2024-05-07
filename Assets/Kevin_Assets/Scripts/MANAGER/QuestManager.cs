@@ -19,6 +19,7 @@ public class QuestManager : MonoBehaviour
     [SerializeField]private Bleeding_QuestManager bleeding_QuestManager;
     [SerializeField]private Choking_QuestManager choking_QuestManager;
     [SerializeField]private SceneMoveManager sceneMoveManager;
+    [SerializeField]Robot robot;
 
     
 
@@ -37,11 +38,13 @@ public class QuestManager : MonoBehaviour
     [Header("Scene Fade")]
     [SerializeField]ScreenFader screenFader;
     UnityAction questDoneMethodAfterFade;
+    private bool hasClickRestartQuit;
     protected virtual void Awake() 
     {
         questDoneMethodAfterFade = QuestDoneMethod;
         levelP3KTypeNow = gameManager.LevelTypeNow();
         levelPlayerDataNow = playerManager.GetLevelData((int)levelP3KTypeNow);
+        hasClickRestartQuit = false;
     }
     private void Start()
     {
@@ -54,7 +57,7 @@ public class QuestManager : MonoBehaviour
             Startq = false;
             Restart();
         }
-        if(isQuestStart && gameManager.GameStateNow() == GameState.InGame)
+        if(isQuestStart && gameManager.GameStateNow() == GameState.InGame && !screenFader.IsFading)
         {
             if(timerInSecs < timerInSecsMax)
             {
@@ -88,7 +91,12 @@ public class QuestManager : MonoBehaviour
     public void YesNoStartQuest(bool choice)
     {
         PlayerRestriction.LiftAllRestriction();
-        if(choice)StartQuest();
+        if(choice)
+        {
+            StartQuest();
+            robot.DeactivateFollowPlayer();
+        }
+        
         questYesNoUI.CloseUI();
     }
     public void StartQuest()
@@ -139,12 +147,18 @@ public class QuestManager : MonoBehaviour
 
     public virtual void Restart()
     {
+        if(hasClickRestartQuit)return;
+        hasClickRestartQuit = true;
+
         PlayerManager.ChangeInGame_Mode_Now(InGame_Mode.FirstAid);
         if(levelP3KTypeNow == LevelP3KType.Choking) choking_QuestManager.ResetQuest();
         else if (levelP3KTypeNow == LevelP3KType.Bleeding) bleeding_QuestManager.ResetQuest();
     }
     public virtual void QuitQuest()
     {
+        if(hasClickRestartQuit)return;
+        hasClickRestartQuit = true;
+
         PlayerManager.ChangeInGame_Mode_Now(InGame_Mode.NormalWalk);
         BGMManager.ChangeBGMAudio(BGM_Type.main);
         if(levelP3KTypeNow == LevelP3KType.Choking) choking_QuestManager.ResetQuest();
@@ -153,9 +167,10 @@ public class QuestManager : MonoBehaviour
     protected virtual void ResetQuest() 
     {
         // Debug.Log(sceneMoveManager.gameObject);
-        sceneMoveManager.RestartScene();
         
+        sceneMoveManager.RestartScene();
     }
+
 
 
 }

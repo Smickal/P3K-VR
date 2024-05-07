@@ -11,6 +11,9 @@ using System.Linq;
 
 public class Robot : GrabbableEvents
 {
+    [Header("Reference")]
+    [SerializeField]private GameManager gameManager;
+    [SerializeField]private PlayerManager playerManager;
     [SerializeField] float _minDistanceToPlayer = 2.0f;
     [SerializeField] float _maxDistanceToPlayer = 3.0f;
     [SerializeField] float _followVelocity = 500f;
@@ -31,7 +34,8 @@ public class Robot : GrabbableEvents
     private HandGrabInteractor currHand;
     private DistanceHandGrabInteractor currDistanceHand;
     IsBeingGrabHandTrack isBeingGrabHandTrack;
-    private DistanceHandGrabInteractable curr;
+
+    
 
     [Header("Debug")]
     [SerializeField] bool isActivated = false;
@@ -61,7 +65,40 @@ public class Robot : GrabbableEvents
         myRb = GetComponent<Rigidbody>();
         returnPos = GetComponent<ReturnRobotToStartingPos>();
         mainCam = Camera.main;
-        ActivateLookAt();
+        
+
+        if(gameManager.LevelModeNow() == LevelMode.Home)
+        {
+            if(!playerManager.IsFinish_TutorialMain())
+            {
+                _controller.TriggerFrozeAnim();
+                
+            }
+            else
+            {
+                ActivateLookAt();
+            }
+        }
+        else if(gameManager.LevelModeNow() == LevelMode.Level)
+        {
+            if(!playerManager.IsFinish_IntroLevel((int)gameManager.LevelTypeNow()))
+            {
+                
+            }
+            else
+            {
+                ActivateLookAt();
+                if(playerManager.PlayerLastInGameMode() == InGame_Mode.NormalWalk)
+                {
+                    ActivateFollowPlayer();
+                }
+                else
+                {
+                    transform.position = returnPos.StartingPos.position;
+                }
+            }
+        }
+
     }
 
     private void Update()
@@ -238,13 +275,12 @@ public class Robot : GrabbableEvents
             if(distanceHandGrabInteractable.HasSelectingInteractor(leftDistanceGrabberHT))
             {
                 // Debug.Log(distanceHandGrabInteractable + " This is the chosen onee distancee" + leftGrabberHT);
-                curr = distanceHandGrabInteractable;
                 return leftDistanceGrabberHT;
             }
             else if (distanceHandGrabInteractable.HasSelectingInteractor(rightDistanceGrabberHT))
             {
                 // Debug.Log(distanceHandGrabInteractable + " This is the chosen onee distancee" + rightGrabberHT);
-                curr = distanceHandGrabInteractable;
+
                 return rightDistanceGrabberHT;
             }
         }

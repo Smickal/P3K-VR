@@ -14,15 +14,18 @@ public class DoorUIManager : MonoBehaviour
 
     [Header("Debug Only")]
     public bool canShow;
+    private bool hasClickTeleport;
+    public bool HasClickTeleport{get{return hasClickTeleport;}set{hasClickTeleport = value;}}
 
     private void Start() 
     {
         int totalLevel = PlayerManager.TotalLevels();
+        hasClickTeleport = false;
         for(int i = 1; i < totalLevel; i++)
         {
             // Debug.Log(i + " what" + totalLevel);
             TeleportLevelUI newUI = Instantiate(_teleportLevelPrefab, _contentTransform);
-            newUI.SetData(PlayerManager.LevelDataNow(i), i, sceneMoveManager);
+            newUI.SetData(PlayerManager.LevelDataNow(i), i, sceneMoveManager, this);
 
             ListOfDataInstance.Add(newUI);
         }

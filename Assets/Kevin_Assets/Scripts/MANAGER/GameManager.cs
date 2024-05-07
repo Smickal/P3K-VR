@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using BNG;
 using System;
 using UnityEngine.Events;
 
@@ -11,6 +12,7 @@ public class GameManager : MonoBehaviour, ITurnOffStatic
     [SerializeField]private InGame_Mode inGame_Mode;
     [SerializeField]private LevelMode levelMode;
     [SerializeField]private LevelP3KType levelType;
+    [SerializeField]private ScreenFader screenFader;
     private bool isPause;
     public UnityEvent OnPause, OnUnPause;
     public static Func<LevelMode> CheckLevelModeNow;
@@ -78,11 +80,13 @@ public class GameManager : MonoBehaviour, ITurnOffStatic
         if(isPause)
         {
             state = GameState.Pause;
+            screenFader.SetFadeLevel(0.2f);
             OnPause.Invoke();
         }
         else
         {
             OnUnPause.Invoke();
+            screenFader.SetFadeLevel(0f);
             state = GameState.InGame;
         }
     }

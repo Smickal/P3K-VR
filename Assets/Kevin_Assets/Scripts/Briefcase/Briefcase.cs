@@ -17,6 +17,7 @@ public class Briefcase : MonoBehaviour
 
     [SerializeField] Collider[] _inventoryColliders;
     [SerializeField] SnapZone[] _snapZones;
+    public AudioClip SoundOnTriggerButton;
 
     bool isOpen = false, isInventEnabled = true, isAnimPlay = false;
     public bool IsOpen { get { return isOpen; } }
@@ -37,6 +38,7 @@ public class Briefcase : MonoBehaviour
     public void TriggerOpenCloseAnim()
     {
         if(isAnimPlay)return;
+        PlaySound();
         if (isOpen == false)
         {
             _briefCaseAnim.SetTrigger(OpenBriefHash);
@@ -110,8 +112,11 @@ public class Briefcase : MonoBehaviour
         }
         if(isOpen)
         {
-            TriggerOpenCloseAnim();
+            _briefCaseAnim.SetTrigger(CloseBriefHash);
             DisableInventory();
+            isOpen = false;
+            isAnimPlay = true;
+
         }
         
     }
@@ -120,6 +125,15 @@ public class Briefcase : MonoBehaviour
         foreach(Collider buttonColl in _buttonColliders)
         {
             buttonColl.enabled = true;
+        }
+    }
+    private void PlaySound()
+    {
+        if (SoundOnTriggerButton) {
+            // Only play the sound if not just starting the scene
+            if (Time.timeSinceLevelLoad > 0.1f) {
+                VRUtils.Instance.PlaySpatialClipAt(SoundOnTriggerButton, transform.position, 0.75f);
+            }
         }
     }
 }

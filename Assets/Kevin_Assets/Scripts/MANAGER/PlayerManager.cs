@@ -130,6 +130,10 @@ public class PlayerManager : MonoBehaviour, ITurnOffStatic
         // Debug.Log(playerGameObject.position + "dua");
     }
     public bool IsFinish_TutorialMain(){ return realFile.isTutorialFinish; }
+    public bool IsFinish_IntroLevel(int level)
+    {
+        return realFile.levelPlayerDataList[level].hasFinishIntro;
+    }
     public LevelPlayerData GetLevelData(int level){ return realFile.levelPlayerDataList[level]; }
     public InGame_Mode PlayerLastInGameMode(){return realFile.lastInGameMode;}
     private void ChangePlayerLastInGameMode(InGame_Mode change)

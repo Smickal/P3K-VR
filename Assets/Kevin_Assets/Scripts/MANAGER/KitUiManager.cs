@@ -39,7 +39,7 @@ public class KitUiManager : MonoBehaviour
         }
 
         KitUI.StartData();
-        _robotGrab.enabled = false;
+        // _robotGrab.enabled = false;
     }
 
     public void ActivateBaseUI(String titleBase)
@@ -52,7 +52,7 @@ public class KitUiManager : MonoBehaviour
     public void DeactivateBaseUI()
     {
         _baseUI.SetActive(false);
-        _robotGrab.enabled = true;
+        // _robotGrab.enabled = true;
     }
 
     public void OpenPauseUI()

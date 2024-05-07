@@ -14,6 +14,7 @@ public class AudioManager : MonoBehaviour
     const string BGM_Tag = "BGM";
     [SerializeField]private IChangeVolume _BGMIChange;
     [SerializeField]private List<IChangeVolume> _SFXIChange;
+    [SerializeField]private List<AudioSource> audioSourcesList;
     [SerializeField]private float startMasterVol, startBGMVol, startSFXVol;
 
     [Header("Slider")]
@@ -56,8 +57,8 @@ public class AudioManager : MonoBehaviour
         }
 
         AudioSource bgmSource = theTrueBGM.GetComponent<AudioSource>();
-        AudioSource[] audioSources = GameObject.FindObjectsOfType<AudioSource>();
-        List<AudioSource> audioSourcesList = new List<AudioSource>(audioSources);
+        AudioSource[] audioSources = GameObject.FindObjectsOfType<AudioSource>(true);
+        audioSourcesList = new List<AudioSource>(audioSources);
         audioSourcesList.Remove(bgmSource);
         foreach(AudioSource audioSource in audioSourcesList)
         {

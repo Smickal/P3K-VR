@@ -33,6 +33,8 @@ namespace BNG {
         public bool debugIn, debugOut, debugInWithLevel;
         public float levelFade;
         public UnityEvent OnFadeDone;
+        private bool isFading;
+        public bool IsFading{get{return isFading;}}
 
         void Awake() {
             initialize();
@@ -163,7 +165,7 @@ namespace BNG {
         }
 
         IEnumerator doFade(float alphaFrom, float alphaTo) {
-
+            isFading = true;
             float alpha = alphaFrom;
 
             updateImageAlpha(alpha);
@@ -192,6 +194,7 @@ namespace BNG {
 
             // Ensure alpha is always applied
             updateImageAlpha(alphaTo);
+            isFading = false;
             OnFadeDone?.Invoke();
         }
 

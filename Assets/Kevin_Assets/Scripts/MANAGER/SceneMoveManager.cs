@@ -2,7 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using BNG;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 
@@ -12,8 +14,15 @@ public class SceneMoveManager : MonoBehaviour
     [SerializeField]private List<ITurnOffStatic> turnOffStaticsList;
     public static Action<string> GoToAnotherScene;
     public BGMManager bGMManager;
+    [SerializeField]ScreenFader screenFader;
+    UnityAction questDoneRestartSceneAfterFade, questGoToSceneAfterFade;
     private void Awake() 
     {
+        questDoneRestartSceneAfterFade = ()=>
+        {
+            screenFader.ResetEvent();
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        };
         ITurnOffStatic[] turnOffStaticsArray = GameObject.FindObjectsOfType<MonoBehaviour>().OfType<ITurnOffStatic>().ToArray();
         turnOffStaticsList = new List<ITurnOffStatic>(turnOffStaticsArray);
 
@@ -25,7 +34,10 @@ public class SceneMoveManager : MonoBehaviour
     {
         // Debug.Log("What??");
         TurnOffAllStatics();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
+        screenFader.AddEvent(questDoneRestartSceneAfterFade);
+        screenFader.DoFadeIn();
+        // SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     public void GoToScene(string sceneName)
     {
@@ -35,7 +47,14 @@ public class SceneMoveManager : MonoBehaviour
         // SceneManager.LoadScene(sceneName);
 
         bGMManager.DestroyInstance();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
+        screenFader.AddEvent(questDoneRestartSceneAfterFade);
+        questGoToSceneAfterFade = ()=>
+        {
+            screenFader.ResetEvent();
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        };
+        screenFader.DoFadeIn();
 
     }
 

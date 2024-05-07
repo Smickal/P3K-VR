@@ -15,10 +15,11 @@ public class TeleportLevelUI : MonoBehaviour
     [SerializeField] Image _scoreIMG;
     [SerializeField] Button _levelButton;
     [SerializeField] SceneMoveManager sceneMoveManager;
+    [SerializeField] DoorUIManager doorUIManager;
 
     private string levelName;
 
-    public void SetData(LevelPlayerData levelPlayerData, int level, SceneMoveManager sceneMoveManagers)
+    public void SetData(LevelPlayerData levelPlayerData, int level, SceneMoveManager sceneMoveManagers, DoorUIManager doorUIManager)
     {
         sceneMoveManager = sceneMoveManagers;
 
@@ -54,7 +55,8 @@ public class TeleportLevelUI : MonoBehaviour
     public void TeleportToLevel()
     {
         Debug.Log("Teleport to" + levelName);
-        
+        if(doorUIManager.HasClickTeleport)return;
+        doorUIManager.HasClickTeleport = true;
         if(sceneMoveManager)sceneMoveManager.GoToScene(levelName);
     }
 }
