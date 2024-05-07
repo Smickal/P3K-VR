@@ -10,15 +10,19 @@ public class AlcoholCleanManager : MonoBehaviour
 
     [SerializeField] float _timeToCleanGrabber = 3f;
     [Header("Reference")]
-    [SerializeField]private GameManager gameManager;
-    [SerializeField]private BleedingWithoutEmbeddedItem bleedingWithoutEmbeddedItem;
+    [SerializeField] private GameManager gameManager;
+    [SerializeField] private BleedingWithoutEmbeddedItem bleedingWithoutEmbeddedItem;
+    [SerializeField] private ParticleSystem _whiteSparkleParticle;
+    [SerializeField] private ParticleSystem _yellowSparkleParticle;
 
     [Header("Reference - HandController")]
     [SerializeField] GameObject _leftGrabber;
     [SerializeField] GameObject _rightGrabber;
+
     [Header("Reference - HandTrack")]
     [SerializeField] GameObject _leftGrabberHT;
     [SerializeField] GameObject _rightGrabberHT;
+
 
     [HideInInspector] public bool IsHolding = false;
 
@@ -80,15 +84,20 @@ public class AlcoholCleanManager : MonoBehaviour
 
     public void RegisterGrabber(GameObject grabber)
     {
-        currentGrabber = grabber;
+        currentGrabber = grabber;     
     }
 
     public void RegisterCurrentNeedToCleanGrabber(GameObject grabber)
     {
-        if (IsHolding == false || grabber == currentGrabber) return; 
-        
+        if (IsHolding == false || grabber == currentGrabber) return;
         currentNeedToCleanGrabber = grabber;
+
+        _whiteSparkleParticle.Play();
+        _whiteSparkleParticle.transform.SetParent(grabber.transform);
+        _whiteSparkleParticle.transform.localPosition = Vector3.zero;
+
     }
+
     public void UnRegisterCurrentNeedToCleanGrabber(GameObject grabber)
     {
         if (IsHolding == false || grabber == currentGrabber || currentNeedToCleanGrabber == null)return;
@@ -130,15 +139,26 @@ public class AlcoholCleanManager : MonoBehaviour
         currentNeedToCleanGrabber = null;
         currentGrabber = null;
         currTime = 0f;
+
+        _whiteSparkleParticle.Stop();
+        _whiteSparkleParticle.transform.SetParent(this.transform);
+        _whiteSparkleParticle.transform.localPosition = Vector3.zero;
     }
 
     public void CheckHandsAllClean()
     {
         if(isDoneCleaning)return;
+
         if((isLeftCleaned && !isRightCleaned) || (!isLeftCleaned && isRightCleaned))
         {
-            Debug.Log("Bersihkan tangan 1 nya");
+            Debug.Log("A Hand is Cleared!");
+
+            _yellowSparkleParticle.Stop();
+            _yellowSparkleParticle.transform.position = currentGrabber.transform.position;
+            _yellowSparkleParticle.Play();
+            
         }
+
         else if (isLeftCleaned && isRightCleaned)
         {
             isDoneCleaning = true;
