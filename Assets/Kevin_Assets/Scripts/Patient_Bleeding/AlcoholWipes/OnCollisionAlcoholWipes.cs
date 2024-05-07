@@ -14,23 +14,23 @@ public class OnCollisionAlcoholWipes : MonoBehaviour
         cleanManager = AlcoholCleanManager.Instance;
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        Grabber grabber = collision.gameObject.GetComponent<Grabber>();
+    // private void OnCollisionEnter(Collision collision)
+    // {
+    //     Grabber grabber = collision.gameObject.GetComponent<Grabber>();
         
 
-        if (grabber == null && (collision.gameObject != _leftGrabberHT && collision.gameObject != _rightGrabberHT) ) return;
-        Debug.Log("Yang kena sini adalah EnterCol" + gameObject);
-        cleanManager.RegisterCurrentNeedToCleanGrabber(collision.gameObject);
-    }
-    private void OnCollisionExit(Collision other) {
-        Grabber grabber = other.gameObject.GetComponent<Grabber>();
+    //     if (grabber == null && (collision.gameObject != _leftGrabberHT && collision.gameObject != _rightGrabberHT) ) return;
+    //     Debug.Log("Yang kena sini adalah EnterCol" + gameObject);
+    //     cleanManager.RegisterCurrentNeedToCleanGrabber(collision.gameObject);
+    // }
+    // private void OnCollisionExit(Collision other) {
+    //     Grabber grabber = other.gameObject.GetComponent<Grabber>();
         
 
-        if (grabber == null && (other.gameObject != _leftGrabberHT && other.gameObject != _rightGrabberHT)) return;
-        Debug.Log("Yang kena sini adalah ExitCol" + gameObject);
-        cleanManager.UnRegisterCurrentNeedToCleanGrabber(other.gameObject);
-    }
+    //     if (grabber == null && (other.gameObject != _leftGrabberHT && other.gameObject != _rightGrabberHT)) return;
+    //     Debug.Log("Yang kena sini adalah ExitCol" + gameObject);
+    //     cleanManager.UnRegisterCurrentNeedToCleanGrabber(other.gameObject);
+    // }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -38,7 +38,7 @@ public class OnCollisionAlcoholWipes : MonoBehaviour
 
 
         if (grabber == null && (other.gameObject != _leftGrabberHT && other.gameObject != _rightGrabberHT)) return;
-        Debug.Log("Yang kena sini adalah EnterTrig" + gameObject);
+        Debug.Log("Yang kena sini adalah EnterTrig" + other.gameObject);
         cleanManager.RegisterCurrentNeedToCleanGrabber(other.gameObject);
     }
     private void OnTriggerExit(Collider other) {
@@ -46,7 +46,7 @@ public class OnCollisionAlcoholWipes : MonoBehaviour
         
 
         if (grabber == null && (other.gameObject != _leftGrabberHT && other.gameObject != _rightGrabberHT)) return;
-        Debug.Log("Yang kena sini adalah ExitTrig" + gameObject);
+        Debug.Log("Yang kena sini adalah ExitTrig" + other.gameObject);
         cleanManager.UnRegisterCurrentNeedToCleanGrabber(other.gameObject);
     }
 

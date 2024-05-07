@@ -52,6 +52,11 @@ public class AlcoholCleanManager : MonoBehaviour
         
 
     }
+    private void Start()
+    {
+        if(_whiteSparkleParticle.isPlaying)_whiteSparkleParticle.Stop();
+        if(_yellowSparkleParticle.isPlaying)_yellowSparkleParticle.Stop();
+    }
 
     private void Update()
     {
@@ -92,9 +97,17 @@ public class AlcoholCleanManager : MonoBehaviour
         if (IsHolding == false || grabber == currentGrabber) return;
         currentNeedToCleanGrabber = grabber;
 
-        _whiteSparkleParticle.Play();
-        _whiteSparkleParticle.transform.SetParent(grabber.transform);
-        _whiteSparkleParticle.transform.localPosition = Vector3.zero;
+        if(!isDoneCleaning)
+        {
+            if(((currentNeedToCleanGrabber == _rightGrabber || currentNeedToCleanGrabber == _rightGrabberHT) && !isRightCleaned) || ((currentNeedToCleanGrabber == _leftGrabber || currentNeedToCleanGrabber == _leftGrabberHT) && !isLeftCleaned))
+            {
+                _whiteSparkleParticle.Play();
+                _whiteSparkleParticle.transform.SetParent(grabber.transform);
+                _whiteSparkleParticle.transform.localPosition = Vector3.zero;
+            }
+            
+        }
+        
 
     }
 
@@ -103,6 +116,12 @@ public class AlcoholCleanManager : MonoBehaviour
         if (IsHolding == false || grabber == currentGrabber || currentNeedToCleanGrabber == null)return;
         if(currentNeedToCleanGrabber == grabber)
         {
+            if(_whiteSparkleParticle.isPlaying)
+            {
+                _whiteSparkleParticle.Stop();
+                _whiteSparkleParticle.transform.SetParent(this.transform);
+                _whiteSparkleParticle.transform.localPosition = Vector3.zero;
+            }
             lastNeedToCleanGrabber = grabber;
             currentNeedToCleanGrabber = null;
         }
@@ -140,9 +159,13 @@ public class AlcoholCleanManager : MonoBehaviour
         currentGrabber = null;
         currTime = 0f;
 
-        _whiteSparkleParticle.Stop();
-        _whiteSparkleParticle.transform.SetParent(this.transform);
-        _whiteSparkleParticle.transform.localPosition = Vector3.zero;
+        if(_whiteSparkleParticle.isPlaying)
+        {
+            _whiteSparkleParticle.Stop();
+            _whiteSparkleParticle.transform.SetParent(this.transform);
+            _whiteSparkleParticle.transform.localPosition = Vector3.zero;
+        }
+        
     }
 
     public void CheckHandsAllClean()
@@ -151,6 +174,13 @@ public class AlcoholCleanManager : MonoBehaviour
 
         if((isLeftCleaned && !isRightCleaned) || (!isLeftCleaned && isRightCleaned))
         {
+
+            if(_whiteSparkleParticle.isPlaying)
+            {
+                _whiteSparkleParticle.Stop();
+                _whiteSparkleParticle.transform.SetParent(this.transform);
+                _whiteSparkleParticle.transform.localPosition = Vector3.zero;
+            }
             Debug.Log("A Hand is Cleared!");
 
             _yellowSparkleParticle.Stop();
@@ -161,7 +191,17 @@ public class AlcoholCleanManager : MonoBehaviour
 
         else if (isLeftCleaned && isRightCleaned)
         {
+            if(_whiteSparkleParticle.isPlaying)
+            {
+                _whiteSparkleParticle.Stop();
+                _whiteSparkleParticle.transform.SetParent(this.transform);
+                _whiteSparkleParticle.transform.localPosition = Vector3.zero;
+            }
+
             isDoneCleaning = true;
+            _yellowSparkleParticle.Stop();
+            _yellowSparkleParticle.transform.position = currentGrabber.transform.position;
+            _yellowSparkleParticle.Play();
             Debug.Log("All Done");
         }
     }

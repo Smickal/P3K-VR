@@ -7,6 +7,7 @@ public class AlcoholWipeSnapScaleHelper : MonoBehaviour
 {
     [SerializeField]SnapZone snapZone;
     [SerializeField]GameObject snapInteractorGO;
+    [Header("For Changing Collider")]
     [SerializeField]BoxCollider boxColliderSnapInteractor;
     [SerializeField]Vector3 changeCollCenter, changeCollSize;
     [SerializeField]Quaternion changeRotation;

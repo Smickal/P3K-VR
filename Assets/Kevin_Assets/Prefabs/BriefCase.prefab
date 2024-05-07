@@ -8751,6 +8751,7 @@ GameObject:
   - component: {fileID: 5896095036911446196}
   - component: {fileID: 2740873658057706679}
   - component: {fileID: 8269698326963889084}
+  - component: {fileID: 5776148555600074462}
   m_Layer: 10
   m_Name: BriefCase
   m_TagString: Untagged
@@ -8769,7 +8770,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.164, y: -0.159, z: -8.884}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4801808946425179100}
   - {fileID: 7732657765774980198}
@@ -9041,7 +9042,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bf056c6a3c5d3844912dc06d0a30eaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Scale: 0.25
+  Scale: 0.5
 --- !u!114 &512966354316343511
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9245,6 +9246,33 @@ MonoBehaviour:
   returnFirstTime: 1
   onlyReturnOnce: 1
   briefCase: {fileID: 0}
+--- !u!114 &5776148555600074462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3320422822694198511}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0eb0f94b8487174418d8b0625f1f43d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HandInteractables:
+  - {fileID: 7354789244764033027}
+  - {fileID: 5549653928122620870}
+  - {fileID: 3421361146178676929}
+  - {fileID: 913911081312380378}
+  HandInteractablesPositionAtStart:
+  - {x: 0.0026750565, y: 0.017369159, z: 0.24964619}
+  - {x: -0.0148, y: 0.013801396, z: 0.2439}
+  - {x: -0.006175041, y: 0.017369159, z: 0.24964619}
+  - {x: 0.0119, y: 0.013801396, z: 0.2439003}
+  HandInteractablesPositionChange:
+  - {x: 0.005350113, y: 0.034738317, z: 0.49929237}
+  - {x: -0.029600143, y: 0.027602792, z: 0.4878006}
+  - {x: -0.012350082, y: 0.034738317, z: 0.49929237}
+  - {x: 0.023799896, y: 0.027602792, z: 0.4878006}
 --- !u!1 &3340967256896268782
 GameObject:
   m_ObjectHideFlags: 0
@@ -27547,16 +27575,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2372586002341510177}
     m_Modifications:
-    - target: {fileID: 4312718326137473655, guid: 4fd8c0bf1cfbb9e4eb55cca8e2ac9b32,
-        type: 3}
-      propertyPath: SecondaryGrabBehavior
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4312718326137473655, guid: 4fd8c0bf1cfbb9e4eb55cca8e2ac9b32,
-        type: 3}
-      propertyPath: originalParentKeepNull
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5042025155904211745, guid: 4fd8c0bf1cfbb9e4eb55cca8e2ac9b32,
         type: 3}
       propertyPath: m_Name
@@ -28017,20 +28035,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2372586002341510177}
     m_Modifications:
-    - target: {fileID: 1593369134113786033, guid: 47ef88197a0a9284ca66b3f560957c03,
-        type: 3}
-      propertyPath: _handPose._fingersFreedom.Array.data[2]
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 2664372533491067180, guid: 47ef88197a0a9284ca66b3f560957c03,
         type: 3}
       propertyPath: m_Name
       value: AlcoholBox
-      objectReference: {fileID: 0}
-    - target: {fileID: 2664372533491067180, guid: 47ef88197a0a9284ca66b3f560957c03,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3426373786786476792, guid: 47ef88197a0a9284ca66b3f560957c03,
         type: 3}
@@ -28082,21 +28090,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3614040901120625471, guid: 47ef88197a0a9284ca66b3f560957c03,
-        type: 3}
-      propertyPath: _handPose._fingersFreedom.Array.data[2]
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4780833337377644392, guid: 47ef88197a0a9284ca66b3f560957c03,
-        type: 3}
-      propertyPath: _handPose._fingersFreedom.Array.data[2]
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5187142941076519871, guid: 47ef88197a0a9284ca66b3f560957c03,
-        type: 3}
-      propertyPath: _handPose._fingersFreedom.Array.data[2]
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 7951407004705244926, guid: 47ef88197a0a9284ca66b3f560957c03,
         type: 3}
       propertyPath: ReturnTo
@@ -28107,26 +28100,6 @@ PrefabInstance:
       propertyPath: briefCase
       value: 
       objectReference: {fileID: 44745686647538673}
-    - target: {fileID: 7951407004705244926, guid: 47ef88197a0a9284ca66b3f560957c03,
-        type: 3}
-      propertyPath: onlyReturnOnce
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004407935582390764, guid: 47ef88197a0a9284ca66b3f560957c03,
-        type: 3}
-      propertyPath: SecondaryGrabBehavior
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004407935582390764, guid: 47ef88197a0a9284ca66b3f560957c03,
-        type: 3}
-      propertyPath: originalParentKeepNull
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8996246448097142781, guid: 47ef88197a0a9284ca66b3f560957c03,
-        type: 3}
-      propertyPath: HeldItem
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 8996246448097142781, guid: 47ef88197a0a9284ca66b3f560957c03,
         type: 3}
       propertyPath: StartingItem
@@ -28443,6 +28416,11 @@ PrefabInstance:
     - target: {fileID: 5411444059504429597, guid: fed29ecc8d237204ba32260285434d8c,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6601598273695973694, guid: fed29ecc8d237204ba32260285434d8c,
+        type: 3}
+      propertyPath: GrabMechanic
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6601598273695973694, guid: fed29ecc8d237204ba32260285434d8c,

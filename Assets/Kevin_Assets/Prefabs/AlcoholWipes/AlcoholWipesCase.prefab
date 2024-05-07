@@ -49,7 +49,7 @@ MonoBehaviour:
   _usesHandPose: 1
   _handPose:
     _handedness: 0
-    _fingersFreedom: 0200000002000000010000000100000000000000
+    _fingersFreedom: 0200000002000000020000000100000000000000
     _jointRotations:
     - {x: 0.45080253, y: -0.33102444, z: -0.14743832, w: 0.81575805}
     - {x: 0.33371186, y: 0.032014802, z: -0.11064573, w: 0.9356113}
@@ -117,7 +117,7 @@ MonoBehaviour:
   _usesHandPose: 1
   _handPose:
     _handedness: 0
-    _fingersFreedom: 0200000002000000010000000100000000000000
+    _fingersFreedom: 0200000002000000020000000100000000000000
     _jointRotations:
     - {x: 0.45080253, y: -0.33102444, z: -0.14743832, w: 0.81575805}
     - {x: 0.33371186, y: 0.032014802, z: -0.11064573, w: 0.9356113}
@@ -759,7 +759,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BeingHeld: 0
   wasKinematicKeepFalse: 0
-  originalParentKeepNull: 0
+  originalParentKeepNull: 1
   GrabButton: 2
   Grabtype: 2
   GrabPhysics: 4
@@ -783,7 +783,7 @@ MonoBehaviour:
   handPoseType: 1
   SelectedHandPose: {fileID: 0}
   CustomHandPose: 0
-  SecondaryGrabBehavior: 0
+  SecondaryGrabBehavior: 1
   TwoHandedPosition: 0
   TwoHandedPostionLerpAmount: 0.5
   TwoHandedRotation: 1
@@ -1183,6 +1183,7 @@ GameObject:
   - component: {fileID: 5828864029723398487}
   - component: {fileID: 3413379968417641034}
   - component: {fileID: 1376115968901417015}
+  - component: {fileID: 2559355782451553484}
   m_Layer: 2
   m_Name: SnapPoint_AlcoholBox
   m_TagString: Untagged
@@ -1242,9 +1243,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HeldItem: {fileID: 0}
   StartingItem: {fileID: 0}
+  canBriefCaseSnapToHere: 0
   CanDropItem: 1
   CanSwapItem: 1
   CanRemoveItem: 1
+  OnlyThisGrabberCan_TakeFromThisSnap: {fileID: 0}
   UseOffset: 1
   ScaleItem: 0.1
   DisableColliders: 1
@@ -1312,6 +1315,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2559355782451553484}
+        m_TargetAssemblyTypeName: SnapZoneHandInteractablePositionChangeHelper, Assembly-CSharp
+        m_MethodName: ChangeWhenSnap
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnDetachEvent:
     m_PersistentCalls:
       m_Calls:
@@ -1363,6 +1378,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2559355782451553484}
+        m_TargetAssemblyTypeName: SnapZoneHandInteractablePositionChangeHelper, Assembly-CSharp
+        m_MethodName: ChangeWhenUnSnap
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnSnapHTEvent:
     m_PersistentCalls:
       m_Calls:
@@ -1402,6 +1429,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2559355782451553484}
+        m_TargetAssemblyTypeName: SnapZoneHandInteractablePositionChangeHelper, Assembly-CSharp
+        m_MethodName: ChangeWhenSnap
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnDetachHTEvent:
     m_PersistentCalls:
       m_Calls:
@@ -1432,6 +1471,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1376115968901417015}
         m_TargetAssemblyTypeName: AlcoholWipeSnapScaleHelper, Assembly-CSharp
         m_MethodName: ChangeBack
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2559355782451553484}
+        m_TargetAssemblyTypeName: SnapZoneHandInteractablePositionChangeHelper, Assembly-CSharp
+        m_MethodName: ChangeWhenUnSnap
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1712,6 +1763,22 @@ MonoBehaviour:
   changeCollCenter: {x: -1.64768e-16, y: 0.1190387, z: 0.002071522}
   changeCollSize: {x: 0.08597267, y: 0.2419836, z: 0.6180763}
   changeRotation: {x: 0, y: 0, z: 0, w: 1}
+--- !u!114 &2559355782451553484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3703236057032913443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a8635ff8b4c9aa40b46213b182253be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  snapZone: {fileID: 8996246448097142781}
+  helper: {fileID: 0}
+  OnlyAllowNames:
+  - Alcohol_Wipes_New
 --- !u!1 &4514096975044238723
 GameObject:
   m_ObjectHideFlags: 0
@@ -2359,7 +2426,7 @@ MonoBehaviour:
   _usesHandPose: 1
   _handPose:
     _handedness: 1
-    _fingersFreedom: 0200000002000000010000000100000000000000
+    _fingersFreedom: 0200000002000000020000000100000000000000
     _jointRotations:
     - {x: 0.45080253, y: -0.33102444, z: -0.14743832, w: 0.81575805}
     - {x: 0.33371186, y: 0.032014802, z: -0.11064573, w: 0.9356113}
@@ -2801,7 +2868,7 @@ MonoBehaviour:
   _usesHandPose: 1
   _handPose:
     _handedness: 1
-    _fingersFreedom: 0200000002000000010000000100000000000000
+    _fingersFreedom: 0200000002000000020000000100000000000000
     _jointRotations:
     - {x: 0.45080253, y: -0.33102444, z: -0.14743832, w: 0.81575805}
     - {x: 0.33371186, y: 0.032014802, z: -0.11064573, w: 0.9356113}

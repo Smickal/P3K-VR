@@ -18,7 +18,7 @@ public class Briefcase : MonoBehaviour
     [SerializeField] Collider[] _inventoryColliders;
     [SerializeField] SnapZone[] _snapZones;
 
-    bool isOpen = false, isInventEnabled = true;
+    bool isOpen = false, isInventEnabled = true, isAnimPlay = false;
     public bool IsOpen { get { return isOpen; } }
 
 
@@ -36,19 +36,25 @@ public class Briefcase : MonoBehaviour
     }
     public void TriggerOpenCloseAnim()
     {
-        
+        if(isAnimPlay)return;
         if (isOpen == false)
         {
             _briefCaseAnim.SetTrigger(OpenBriefHash);
             EnableInventory();
             isOpen = true;
+            isAnimPlay = true;
         }
         else
         {
             _briefCaseAnim.SetTrigger(CloseBriefHash);
             DisableInventory();
             isOpen = false;
+            isAnimPlay = true;
         }
+    }
+    public void AnimationFinish()
+    {
+        isAnimPlay = false;
     }
 
     public void DisableInventory()

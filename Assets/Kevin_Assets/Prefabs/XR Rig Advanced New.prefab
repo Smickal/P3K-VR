@@ -37962,6 +37962,7 @@ GameObject:
   - component: {fileID: 620504222400165133}
   - component: {fileID: 1706237755418610655}
   - component: {fileID: 4119481673528245812}
+  - component: {fileID: 7888104653079305508}
   m_Layer: 2
   m_Name: HolsterRight
   m_TagString: Untagged
@@ -38062,9 +38063,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 4119481673528245812}
-        m_TargetAssemblyTypeName: SnapZoneSmallTrash, Assembly-CSharp
-        m_MethodName: RemoveTrashSnapIn
+      - m_Target: {fileID: 7888104653079305508}
+        m_TargetAssemblyTypeName: SnapZoneHandInteractablePositionChangeHelper, Assembly-CSharp
+        m_MethodName: ChangeWhenSnap
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -38089,9 +38090,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 4119481673528245812}
-        m_TargetAssemblyTypeName: SnapZoneSmallTrash, Assembly-CSharp
-        m_MethodName: AddTrashSnapOut
+      - m_Target: {fileID: 7888104653079305508}
+        m_TargetAssemblyTypeName: SnapZoneHandInteractablePositionChangeHelper, Assembly-CSharp
+        m_MethodName: ChangeWhenUnSnap
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -38103,10 +38104,34 @@ MonoBehaviour:
         m_CallState: 2
   OnSnapHTEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7888104653079305508}
+        m_TargetAssemblyTypeName: SnapZoneHandInteractablePositionChangeHelper, Assembly-CSharp
+        m_MethodName: ChangeWhenSnap
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnDetachHTEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7888104653079305508}
+        m_TargetAssemblyTypeName: SnapZoneHandInteractablePositionChangeHelper, Assembly-CSharp
+        m_MethodName: ChangeWhenUnSnap
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   wasKinematicKeepFalse: 0
   ClosestGrabbable: {fileID: 0}
 --- !u!114 &3471114451106272692
@@ -38365,6 +38390,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   snapZone: {fileID: 8840659838333815106}
+--- !u!114 &7888104653079305508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4006928779222999974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a8635ff8b4c9aa40b46213b182253be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  snapZone: {fileID: 8840659838333815106}
+  helper: {fileID: 0}
+  OnlyAllowNames:
+  - BriefCase
 --- !u!1 &4017537953810081497
 GameObject:
   m_ObjectHideFlags: 0
@@ -81002,6 +81043,7 @@ GameObject:
   - component: {fileID: 386783472936416800}
   - component: {fileID: 1950462528898173810}
   - component: {fileID: 8217336639563750581}
+  - component: {fileID: 1937687878961716797}
   m_Layer: 2
   m_Name: HolsterLeft
   m_TagString: Untagged
@@ -81102,9 +81144,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 4119481673528245812}
-        m_TargetAssemblyTypeName: SnapZoneSmallTrash, Assembly-CSharp
-        m_MethodName: RemoveTrashSnapIn
+      - m_Target: {fileID: 1937687878961716797}
+        m_TargetAssemblyTypeName: SnapZoneHandInteractablePositionChangeHelper, Assembly-CSharp
+        m_MethodName: ChangeWhenSnap
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -81129,9 +81171,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 4119481673528245812}
-        m_TargetAssemblyTypeName: SnapZoneSmallTrash, Assembly-CSharp
-        m_MethodName: AddTrashSnapOut
+      - m_Target: {fileID: 1937687878961716797}
+        m_TargetAssemblyTypeName: SnapZoneHandInteractablePositionChangeHelper, Assembly-CSharp
+        m_MethodName: ChangeWhenUnSnap
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -81143,10 +81185,34 @@ MonoBehaviour:
         m_CallState: 2
   OnSnapHTEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1937687878961716797}
+        m_TargetAssemblyTypeName: SnapZoneHandInteractablePositionChangeHelper, Assembly-CSharp
+        m_MethodName: ChangeWhenSnap
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnDetachHTEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1937687878961716797}
+        m_TargetAssemblyTypeName: SnapZoneHandInteractablePositionChangeHelper, Assembly-CSharp
+        m_MethodName: ChangeWhenUnSnap
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   wasKinematicKeepFalse: 0
   ClosestGrabbable: {fileID: 0}
 --- !u!114 &1092968747697103320
@@ -81444,7 +81510,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13ea861ea200498418b38c62409a7939, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  snapZone: {fileID: 8840659838333815106}
+  snapZone: {fileID: 6949636756477856537}
+--- !u!114 &1937687878961716797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8694948819392314790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a8635ff8b4c9aa40b46213b182253be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  snapZone: {fileID: 6949636756477856537}
+  helper: {fileID: 0}
+  OnlyAllowNames:
+  - BriefCase
 --- !u!1 &8695370762216207282
 GameObject:
   m_ObjectHideFlags: 0
