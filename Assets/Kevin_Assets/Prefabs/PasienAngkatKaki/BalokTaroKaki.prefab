@@ -123,6 +123,7 @@ MonoBehaviour:
   snapInteractor: {fileID: 821229570009213387}
   snapZone: {fileID: 0}
   distanceHandGrabInteractables: []
+  distanceGrabHTOn_WhileSnap: 0
 --- !u!65 &7591910840063528213
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -545,6 +546,8 @@ MonoBehaviour:
   LastGrabTime: 0
   LastDropTime: 0
   AddControllerVelocityOnDrop: 1
+  ChangeToThisScale: 0
+  WantThisScale: {x: 0, y: 0, z: 0}
   collisions: []
   ActiveGrabPoint: {fileID: 0}
   SecondaryLookOffset: {x: 0, y: 0, z: 0}
@@ -584,7 +587,7 @@ MonoBehaviour:
   onRelease:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 6796294754127780962}
         m_TargetAssemblyTypeName: SnapInteractorHelper, Assembly-CSharp
         m_MethodName: ReviveSnapInteractorAfterReleaseController
         m_Mode: 1
@@ -764,3 +767,4 @@ MonoBehaviour:
   bleedingWithoutEmbeddedItem: {fileID: 0}
   isBeingGrabHandTrack: {fileID: 0}
   _correctbleedingWithoutEmbeddedItem_State_List: 06000000
+  isUsedOnWithItem: 0

@@ -9,6 +9,7 @@ using Oculus.Interaction.HandGrab;
 public class PlayerRestriction : MonoBehaviour, ITurnOffStatic
 {
     [Header("Reference")]
+    [SerializeField]private GameManager gameManager;
     [SerializeField]private PlayerManager playerManager;
     [Tooltip("Kalo ada button yg ikut grabable, buttonnya jg masukkin ya")]
     [SerializeField]private List<Rigidbody> all_Grabable_Rigidbody;
@@ -54,7 +55,24 @@ public class PlayerRestriction : MonoBehaviour, ITurnOffStatic
         IsRestrictRotation += RestrictRotation;
 
 
-        if(!DebugOnly)if(!playerManager.IsFinish_TutorialMain())DisableAllGrabable();
+        if(!DebugOnly)
+        {
+            if(!playerManager.IsFinish_TutorialMain() && gameManager.LevelModeNow() == LevelMode.Home)
+            {
+                DisableAllGrabable();
+                DisableAllMovement();
+            }
+            else if(gameManager.LevelModeNow() == LevelMode.Level)
+            {
+                if(!playerManager.IsFinish_IntroLevel((int)gameManager.LevelTypeNow()))
+                {
+                    DisableAllGrabable();
+                    DisableAllMovement();
+                }
+            }
+
+        }
+        
     }
     public void TurnOffStatic()
     {

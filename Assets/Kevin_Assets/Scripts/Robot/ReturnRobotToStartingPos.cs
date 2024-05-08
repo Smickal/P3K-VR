@@ -6,7 +6,9 @@ using UnityEngine;
 
 public class ReturnRobotToStartingPos : MonoBehaviour
 {
+    [SerializeField]GameManager gameManager;
     [SerializeField] Transform _startingPos;
+    public Transform StartingPos{get{return _startingPos;}}
     [SerializeField] float _lerpSpeed = 15f;
     [SerializeField] float _snapDistance = 0.05f;
 
@@ -33,7 +35,7 @@ public class ReturnRobotToStartingPos : MonoBehaviour
 
     private void Update()
     {
-        if (robot.IsFollowingPlayer) return;
+        if (robot.IsFollowingPlayer || gameManager.GameStateNow() == GameState.Cinematic) return;
         if(isMovingToSnapZone)
         {
             if(rigid.constraints == RigidbodyConstraints.FreezeAll)
@@ -51,7 +53,6 @@ public class ReturnRobotToStartingPos : MonoBehaviour
 
             if (Vector3.Distance(transform.position, _startingPos.transform.position) <= _snapDistance)
             {
-                Debug.Log("What???");
                 _controller.TriggerIdleAnim();
 
                 isMovingToSnapZone = false;
@@ -63,11 +64,11 @@ public class ReturnRobotToStartingPos : MonoBehaviour
         else
         {
             if (Vector3.Distance(transform.position, _startingPos.transform.position) <= _snapDistance) return;
-            Debug.Log("hayoo");
+            // Debug.Log("hayoo");
             if ((_leftGrabber.RemoteGrabbingGrabbable == grabbable || _rightGrabber.RemoteGrabbingGrabbable == grabbable)) return;
-            Debug.Log(grabbable.BeingHeld + "hayooooloooo" + isBeingGrabHandTrack.IsBeingGrab());
+            // Debug.Log(grabbable.BeingHeld + "hayooooloooo" + isBeingGrabHandTrack.IsBeingGrab());
             if (grabbable.BeingHeld) return;
-            Debug.Log("yay");
+            // Debug.Log("yay");
             isMovingToSnapZone = true;
         }
 
@@ -83,5 +84,10 @@ public class ReturnRobotToStartingPos : MonoBehaviour
     public void StopMoveToSnapZone()
     {
         isMovingToSnapZone = false;
+    }
+
+    public void SetStartingPos(Transform newPos)
+    {
+        _startingPos = newPos;
     }
 }
