@@ -83,7 +83,11 @@ public class Robot : GrabbableEvents
         {
             if(!playerManager.IsFinish_IntroLevel((int)gameManager.LevelTypeNow()))
             {
-                
+                if(gameManager.LevelTypeNow() == LevelP3KType.Bleeding)
+                {
+                    ActivateLookAt();
+                    ActivateFollowPlayer();
+                }
             }
             else
             {

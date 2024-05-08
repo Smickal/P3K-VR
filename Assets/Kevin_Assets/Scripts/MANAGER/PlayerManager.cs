@@ -308,6 +308,7 @@ public class PlayerManager : MonoBehaviour, ITurnOffStatic
 
         gameManager.ChangeInGameMode(InGame_Mode.FirstAid);
         
+        
     }
 
     private void SetPlayerPostion_InGame_AfterP3K()

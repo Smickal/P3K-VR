@@ -165,7 +165,7 @@ GameObject:
   - component: {fileID: 5143780833471213544}
   - component: {fileID: 2940537378298837526}
   - component: {fileID: 3350657255511686093}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -380,7 +380,6 @@ Transform:
   - {fileID: 5354763154297752770}
   - {fileID: 5066080804252205095}
   - {fileID: 1722862894884078095}
-  - {fileID: 4758277856039573729}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!114 &8838724527019254780
@@ -399,6 +398,7 @@ MonoBehaviour:
   _maxInteractors: -1
   _maxSelectingInteractors: -1
   _data: {fileID: 0}
+  isOnDisable: 0
   _pointableElement: {fileID: 7471080152942315738}
   _surface: {fileID: 3350657255511686093}
   _selectSurface: {fileID: 0}
@@ -833,67 +833,6 @@ MonoBehaviour:
   _renderingLayers:
     serializedVersion: 2
     m_Bits: 32
---- !u!1 &5032522146479801275
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4758277856039573729}
-  - component: {fileID: 1915013821652573406}
-  - component: {fileID: 3999150182582410361}
-  m_Layer: 0
-  m_Name: CylinderSurface
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &4758277856039573729
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5032522146479801275}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.95}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6213770518269792118}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1915013821652573406
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5032522146479801275}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41bad9aebb942ca4b809bc97e711df55, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _radius: 1
---- !u!114 &3999150182582410361
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5032522146479801275}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 804765e8da96b404fb7767affc7d8a57, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _cylinder: {fileID: 0}
-  _facing: 2
-  _height: 0
 --- !u!1 &5185773290469703876
 GameObject:
   m_ObjectHideFlags: 0

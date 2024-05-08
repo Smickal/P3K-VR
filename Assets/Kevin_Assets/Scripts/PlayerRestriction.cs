@@ -59,15 +59,20 @@ public class PlayerRestriction : MonoBehaviour, ITurnOffStatic
         {
             if(!playerManager.IsFinish_TutorialMain() && gameManager.LevelModeNow() == LevelMode.Home)
             {
-                DisableAllGrabable();
-                DisableAllMovement();
+                DisableAll();
             }
             else if(gameManager.LevelModeNow() == LevelMode.Level)
             {
                 if(!playerManager.IsFinish_IntroLevel((int)gameManager.LevelTypeNow()))
                 {
-                    DisableAllGrabable();
-                    DisableAllMovement();
+                    if(gameManager.LevelTypeNow() == LevelP3KType.Choking)
+                    {
+                        DisableAll();
+                    }
+                    else if(gameManager.LevelTypeNow() == LevelP3KType.Bleeding)
+                    {
+                        DisableAllGrabable();
+                    }
                 }
             }
 

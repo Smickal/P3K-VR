@@ -7,11 +7,15 @@ public class EnvironmentLevelManager : MonoBehaviour, ITurnOffStatic
 {
     [Tooltip("0- Pas Intro, 1 - biasa, 2 - first aid, 3- ending doang")]
     [SerializeField] private GameObject[] Environments;
-    public static Action SetEnvironment_FinishQuest, SetEnvironment_FirstAid;
+    [SerializeField] private Transform[] robotPositionEveryEnvironment;
+    [Header("Reference")]
+    [SerializeField] ReturnRobotToStartingPos returnRobot;
+    public static Action SetEnvironment_FinishQuest, SetEnvironment_FirstAid, SetEnvironment_AfterIntro;
     private void Awake() 
     {
         SetEnvironment_FirstAid += SetEnvironmentFirstAid;
         SetEnvironment_FinishQuest += SetEnvironmentEndQuest;
+        SetEnvironment_AfterIntro += SetEnvironmentAfterIntro;
     }
     
     public void SetEnvironmentAwake(bool hasFinishIntro_ThisLevel, bool isPlayerLastModeFirstAid)
@@ -20,11 +24,20 @@ public class EnvironmentLevelManager : MonoBehaviour, ITurnOffStatic
         if(isPlayerLastModeFirstAid)
         {
             Environments[2].SetActive(true);
+            returnRobot.SetStartingPos(robotPositionEveryEnvironment[2]);
         }
         else
         {
-            if(!hasFinishIntro_ThisLevel) Environments[0].SetActive(true);
-            else Environments[1].SetActive(true);
+            if(!hasFinishIntro_ThisLevel)
+            {
+                Environments[0].SetActive(true);
+                returnRobot.SetStartingPos(robotPositionEveryEnvironment[0]);
+            }
+            else
+            {
+                Environments[1].SetActive(true);
+                returnRobot.SetStartingPos(robotPositionEveryEnvironment[1]);
+            }
         }
         
     }
@@ -32,12 +45,20 @@ public class EnvironmentLevelManager : MonoBehaviour, ITurnOffStatic
     {
         CloseAllGameObject();
         Environments[3].SetActive(true);
+        returnRobot.SetStartingPos(robotPositionEveryEnvironment[3]);
     }
     public void SetEnvironmentFirstAid()
     {
-        Debug.Log("SetEnvironmentFirstAid");
+        // Debug.Log("SetEnvironmentFirstAid");
         CloseAllGameObject();
         Environments[2].SetActive(true);
+        returnRobot.SetStartingPos(robotPositionEveryEnvironment[2]);
+    }
+    public void SetEnvironmentAfterIntro()
+    {
+        CloseAllGameObject();
+        Environments[1].SetActive(true);
+        returnRobot.OnlySetStartPos(robotPositionEveryEnvironment[1]);
     }
     public void CloseAllGameObject()
     {
@@ -50,5 +71,6 @@ public class EnvironmentLevelManager : MonoBehaviour, ITurnOffStatic
     {
         SetEnvironment_FirstAid -= SetEnvironmentFirstAid;
         SetEnvironment_FinishQuest -= SetEnvironmentEndQuest;
+        SetEnvironment_AfterIntro -= SetEnvironmentAfterIntro;
     }
 }

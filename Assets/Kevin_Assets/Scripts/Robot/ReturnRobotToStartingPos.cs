@@ -31,6 +31,8 @@ public class ReturnRobotToStartingPos : MonoBehaviour
         isBeingGrabHandTrack = GetComponent<IsBeingGrabHandTrack>();
         robot = GetComponent<Robot>();
         _controller = GetComponent<RobotAnimationController>();
+        
+        transform.position = _startingPos.position;
     }
 
     private void Update()
@@ -87,6 +89,11 @@ public class ReturnRobotToStartingPos : MonoBehaviour
     }
 
     public void SetStartingPos(Transform newPos)
+    {
+        _startingPos = newPos;
+        transform.position = _startingPos.transform.position;
+    }
+    public void OnlySetStartPos(Transform newPos)
     {
         _startingPos = newPos;
     }

@@ -27,7 +27,7 @@ public class Briefcase : MonoBehaviour
     {
         if(isOpen)
         {
-            if(!PlayerRestriction.IsRestrictGrabable()) EnableInventory();
+            if((PlayerRestriction.IsRestrictGrabable != null) && !PlayerRestriction.IsRestrictGrabable()) EnableInventory();
             else DisableInventory();
         }
         else if(!isOpen)
