@@ -493,7 +493,7 @@ GameObject:
   - component: {fileID: 4752707567812459714}
   - component: {fileID: 1623193278978018954}
   - component: {fileID: 8350606809709081011}
-  m_Layer: 10
+  m_Layer: 19
   m_Name: Prototype_Robot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -703,13 +703,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onGrab:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5263405650099763137}
+        m_TargetAssemblyTypeName: Oculus.Interaction.AudioTrigger, Oculus.Interaction.OVR.Samples
+        m_MethodName: PlayAudio
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onRelease:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1211198726530819161}
         m_TargetAssemblyTypeName: SnapInteractorHelper, Assembly-CSharp
         m_MethodName: ReviveSnapInteractorAfterReleaseController
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8647033512039978938}
+        m_TargetAssemblyTypeName: Oculus.Interaction.AudioTrigger, Oculus.Interaction.OVR.Samples
+        m_MethodName: PlayAudio
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2844,7 +2868,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2f8f6e9e6f3e114b9bf9a57c2160615, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pointable: {fileID: 4490158108552328819}
+  _pointable: {fileID: 855812779347738273}
   _whenRelease:
     m_PersistentCalls:
       m_Calls: []
@@ -3496,7 +3520,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2f8f6e9e6f3e114b9bf9a57c2160615, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pointable: {fileID: 2115209143590237148}
+  _pointable: {fileID: 1637462719688152478}
   _whenRelease:
     m_PersistentCalls:
       m_Calls: []

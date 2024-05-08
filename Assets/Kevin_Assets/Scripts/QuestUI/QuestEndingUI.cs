@@ -71,15 +71,6 @@ public class QuestEndingUI : MonoBehaviour, ITurnOffStatic
         _procedureIMG.sprite = scriptableData.ProcedureIMG;
         _procedureDescText.SetText(scriptableData.ProcedureDescription);
         
-        //Create Step Procedure
-        // for(int i = 0; i < scriptableData.Procedures.Count; i++)
-        // {
-        //     UILangkahDescPrefab newUI = Instantiate(_langkahDescPrefab, _stepTransform);
-        //     newUI.SetData((i+1).ToString(),
-        //                   scriptableData.Procedures[i].StepsDescription, 
-        //                   scriptableData.Procedures[i].StepsSprite);
-        //     listOfLangkahDescPrefab.Add(newUI);
-        // }
         Transform _langkahDescPrefabTransform = Instantiate(scriptableData._prefabProcedure, _stepTransform);
         endButton.transform.SetAsLastSibling();
     }

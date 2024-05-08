@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour, ITurnOffStatic
     [SerializeField]private LevelMode levelMode;
     [SerializeField]private LevelP3KType levelType;
     [SerializeField]private ScreenFader screenFader;
+    [SerializeField]private PlayerInventoryController playerInventoryController;
     private bool isPause;
     public UnityEvent OnPause, OnUnPause;
     public static Func<LevelMode> CheckLevelModeNow;
@@ -37,6 +38,7 @@ public class GameManager : MonoBehaviour, ITurnOffStatic
     }
     private void Start() 
     {
+        playerInventoryController.ChangeEnable();
         OnPause.AddListener(
             ()=>
             {
@@ -94,6 +96,7 @@ public class GameManager : MonoBehaviour, ITurnOffStatic
     public void ChangeInGameMode(InGame_Mode change)
     {
         inGame_Mode = change;
+        playerInventoryController.ChangeEnable();
     }
     public void TurnOffStatic()
     {

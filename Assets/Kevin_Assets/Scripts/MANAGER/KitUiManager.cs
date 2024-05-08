@@ -87,6 +87,7 @@ public class KitUiManager : MonoBehaviour
     public void OpenQuestEnding()
     {
         CloseUI();
+        _vF.RestartPos();
         _questEndingContainer.SetActive(true);
         _vF.Deactivate();
     }

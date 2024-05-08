@@ -21,6 +21,8 @@ public class BandageMovement : MonoBehaviour
 
     Bandage currBandage;
     Grabbable curBandageGrabbable;
+    Collider bandageCollider;
+    public Collider BandageCollider{get{return bandageCollider;}}
     IsBeingGrabHandTrack isBeingGrabHandTrack;
 
 
@@ -63,6 +65,7 @@ public class BandageMovement : MonoBehaviour
 
                 currBandage.GetComponent<ReturnToSnapZone>().ReturnTo = null;
                 curBandageGrabbable = null;
+                bandageCollider = null;
                 _snapZone.gameObject.SetActive(false);                
             }
 
@@ -94,6 +97,7 @@ public class BandageMovement : MonoBehaviour
         //2. Make Bandage return to latest snapPosition when grab is released
 
         currBandage = bandage;
+        bandageCollider = currBandage.GetComponent<Collider>();
         curBandageGrabbable = currBandage.GetComponent<Grabbable>();
         isBeingGrabHandTrack = currBandage.GetComponent<IsBeingGrabHandTrack>();
 

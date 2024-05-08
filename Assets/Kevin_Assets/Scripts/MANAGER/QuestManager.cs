@@ -111,8 +111,17 @@ public class QuestManager : MonoBehaviour
             BGMManager.ChangeBGMAudio(BGM_Type.tense);
         }
         
-        if(levelP3KTypeNow == LevelP3KType.Choking) choking_QuestManager.Quest();
-        else if (levelP3KTypeNow == LevelP3KType.Bleeding) bleeding_QuestManager.Quest();
+        if(levelP3KTypeNow == LevelP3KType.Choking)
+        {
+            // PlayerRestriction.LiftAllRestriction();
+            choking_QuestManager.Quest();
+        }
+        
+        else if (levelP3KTypeNow == LevelP3KType.Bleeding)
+        {
+            // PlayerRestriction.LiftGrabableRestriction();
+            bleeding_QuestManager.Quest();
+        }
         
 
     }
@@ -133,6 +142,8 @@ public class QuestManager : MonoBehaviour
     }
     public void QuestDoneMethod()
     {
+        questManagerUI.DeactivateBaseUI();
+        questManagerUI.CloseHelper_Bleeding_WithoutItem();
         EnvironmentLevelManager.SetEnvironment_FinishQuest();
         PlayerManager.SetPlayerPosition_FinishP3k();
         screenFader.ResetEvent();

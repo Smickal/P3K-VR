@@ -11,6 +11,9 @@ public class VisionFollower : MonoBehaviour
     [SerializeField] float _moveSpeed = 0.025f;
     [SerializeField] Vector3 _followOffet;
     public bool isActivate = false;
+    private void Start() {
+        transform.position = _robotTransform.position;
+    }
 
     private void Update()
     {
