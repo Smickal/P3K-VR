@@ -19,9 +19,10 @@ public class TeleportLevelUI : MonoBehaviour
 
     private string levelName;
 
-    public void SetData(LevelPlayerData levelPlayerData, int level, SceneMoveManager sceneMoveManagers, DoorUIManager doorUIManager)
+    public void SetData(LevelPlayerData levelPlayerData, int level, SceneMoveManager sceneMoveManagers, DoorUIManager doorUIManagers)
     {
         sceneMoveManager = sceneMoveManagers;
+        doorUIManager = doorUIManagers;
 
         _levelTitle.SetText(levelPlayerData.levelName);
         levelName = levelPlayerData.levelName;

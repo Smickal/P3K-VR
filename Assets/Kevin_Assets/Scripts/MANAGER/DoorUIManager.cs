@@ -31,17 +31,18 @@ public class DoorUIManager : MonoBehaviour
         }
     }
 
-    private void Update() 
-    {
-        if(canShow && !_containerDoorOBJ.activeSelf) Show();
-        else if(!canShow && _containerDoorOBJ.activeSelf) Hide();
-    }
+    // private void Update() 
+    // {
+    //     if(canShow && !_containerDoorOBJ.activeSelf) Show();
+    //     else if(!canShow && _containerDoorOBJ.activeSelf) Hide();
+    // }
 
-    private void Show()
+    public void Show()
     {
+        if(GameManager.CheckGameStateNow() != GameState.InGame) return;
         _containerDoorOBJ.SetActive(true);
     }
-    private void Hide()
+    public void Hide()
     {
         _containerDoorOBJ.SetActive(false);
     }

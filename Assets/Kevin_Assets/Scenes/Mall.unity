@@ -5654,6 +5654,7 @@ Transform:
   - {fileID: 487343378}
   - {fileID: 394900355}
   - {fileID: 1496102422}
+  - {fileID: 2145685208}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &663942095 stripped
@@ -15952,6 +15953,92 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.56716335, y: 0.5, z: 0.35695434}
   m_Center: {x: -0.0070421696, y: -0.25, z: 0.039418653}
+--- !u!1 &2145685207
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2145685208}
+  - component: {fileID: 2145685210}
+  - component: {fileID: 2145685209}
+  m_Layer: 0
+  m_Name: Door
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2145685208
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2145685207}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1.25}
+  m_LocalScale: {x: 1.25, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 662007927}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2145685209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2145685207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6a43fee58c45844883234d56b081947, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnTriggerCollision:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1066109246}
+        m_TargetAssemblyTypeName: SceneMoveManager, Assembly-CSharp
+        m_MethodName: GoBackHome
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnTriggerExitCollision:
+    m_PersistentCalls:
+      m_Calls: []
+  SoundOnEnter: {fileID: 8300000, guid: 24b79582593d6b943ae5a57d8058d29a, type: 3}
+  SoundOnExit: {fileID: 8300000, guid: 19363979333a0f740b2e9601b323dd00, type: 3}
+--- !u!65 &2145685210
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2145685207}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1.6482272}
+  m_Center: {x: 0, y: 0, z: 0.3241136}
 --- !u!1 &2147413373
 GameObject:
   m_ObjectHideFlags: 0
@@ -16168,6 +16255,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BGMsss
       objectReference: {fileID: 0}
+    - target: {fileID: 6352313713290410119, guid: e80946d97e05034409832444fde2c126,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 1388802c239c1e94b9039e94b2c38998, type: 3}
     - target: {fileID: 7278584427605086411, guid: e80946d97e05034409832444fde2c126,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -16218,6 +16310,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9095536078071878619, guid: e80946d97e05034409832444fde2c126,
+        type: 3}
+      propertyPath: BGM_Main
+      value: 
+      objectReference: {fileID: 8300000, guid: 1388802c239c1e94b9039e94b2c38998, type: 3}
+    - target: {fileID: 9095536078071878619, guid: e80946d97e05034409832444fde2c126,
+        type: 3}
+      propertyPath: BGM_Tense
+      value: 
+      objectReference: {fileID: 8300000, guid: e2a94391f58c2284fbd170aa2c853510, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -16700,7 +16802,7 @@ PrefabInstance:
     - target: {fileID: 9174866596624764610, guid: d44fbf779a16b734f91d8ecbe3f16cbd,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9174866596624764610, guid: d44fbf779a16b734f91d8ecbe3f16cbd,
         type: 3}
