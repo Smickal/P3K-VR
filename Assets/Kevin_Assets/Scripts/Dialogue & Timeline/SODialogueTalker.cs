@@ -10,6 +10,7 @@ public class DialogueTalker
 {
     public DialogueTalkerType dialogueTalkerType;
     public CharaName charaName;
+    public string name;
     public Color _textColor;
 
 }

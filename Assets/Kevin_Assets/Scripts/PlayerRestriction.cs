@@ -243,7 +243,7 @@ public class PlayerRestriction : MonoBehaviour, ITurnOffStatic
             if(!all_OVR_Grabable.Contains(grab))
             {
                 all_OVR_Grabable.Add(grab);
-                Debug.Log("I add handgrab " + gameObject);
+                // Debug.Log("I add handgrab " + gameObject);
             }  
             
         }
@@ -254,7 +254,7 @@ public class PlayerRestriction : MonoBehaviour, ITurnOffStatic
             if(!all_OVR_DistanceGrabable.Contains(grab))
             {
                 all_OVR_DistanceGrabable.Add(grab);
-                Debug.Log("I add handgrabdis " + gameObject);
+                // Debug.Log("I add handgrabdis " + gameObject);
             }
             
         }

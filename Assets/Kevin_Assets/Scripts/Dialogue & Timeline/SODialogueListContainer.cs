@@ -59,6 +59,54 @@ public class DialogueListContainersPropertyDrawer : PropertyDrawer
 
             DialogueListType_Bleeding_WrongItem dialogueFinishActions_Home_QuizExp1 = (DialogueListType_Bleeding_WrongItem)child.enumValueIndex;
         }
+        else if(dialogueListTypeParent == DialogueListTypeParent.Choking_Intro)
+        {
+            Rect childPos = new Rect(position.x, position.y + EditorGUIUtility.singleLineHeight * 2, position.width, EditorGUIUtility.singleLineHeight);
+            SerializedProperty child = property.FindPropertyRelative("dialogueListType_Choking_Intro");
+            EditorGUI.PropertyField(childPos, child);
+
+            DialogueListType_Choking_Intro dialogueFinishActions_Home_QuizExp1 = (DialogueListType_Choking_Intro)child.enumValueIndex;
+        }
+        else if(dialogueListTypeParent == DialogueListTypeParent.Bleeding_Intro)
+        {
+            Rect childPos = new Rect(position.x, position.y + EditorGUIUtility.singleLineHeight * 2, position.width, EditorGUIUtility.singleLineHeight);
+            SerializedProperty child = property.FindPropertyRelative("dialogueListType_Bleeding_Intro");
+            EditorGUI.PropertyField(childPos, child);
+
+            DialogueListType_Bleeding_Intro dialogueFinishActions_Home_QuizExp1 = (DialogueListType_Bleeding_Intro)child.enumValueIndex;
+        }
+        else if(dialogueListTypeParent == DialogueListTypeParent.Choking_Explanation)
+        {
+            Rect childPos = new Rect(position.x, position.y + EditorGUIUtility.singleLineHeight * 2, position.width, EditorGUIUtility.singleLineHeight);
+            SerializedProperty child = property.FindPropertyRelative("dialogueListType_Choking_Explanation");
+            EditorGUI.PropertyField(childPos, child);
+
+            DialogueListType_Choking_Explanation dialogueFinishActions_Home_QuizExp1 = (DialogueListType_Choking_Explanation)child.enumValueIndex;
+        }
+        else if(dialogueListTypeParent == DialogueListTypeParent.Bleeding_Explanation)
+        {
+            Rect childPos = new Rect(position.x, position.y + EditorGUIUtility.singleLineHeight * 2, position.width, EditorGUIUtility.singleLineHeight);
+            SerializedProperty child = property.FindPropertyRelative("dialogueListType_Bleeding_Explanation");
+            EditorGUI.PropertyField(childPos, child);
+
+            DialogueListType_Bleeding_Explanation dialogueFinishActions_Home_QuizExp1 = (DialogueListType_Bleeding_Explanation)child.enumValueIndex;
+        }
+        else if(dialogueListTypeParent == DialogueListTypeParent.Choking_Ending)
+        {
+            Rect childPos = new Rect(position.x, position.y + EditorGUIUtility.singleLineHeight * 2, position.width, EditorGUIUtility.singleLineHeight);
+            SerializedProperty child = property.FindPropertyRelative("dialogueListType_Choking_Ending");
+            EditorGUI.PropertyField(childPos, child);
+
+            DialogueListType_Choking_Ending dialogueFinishActions_Home_QuizExp1 = (DialogueListType_Choking_Ending)child.enumValueIndex;
+        }
+        else if(dialogueListTypeParent == DialogueListTypeParent.Bleeding_Ending)
+        {
+            Rect childPos = new Rect(position.x, position.y + EditorGUIUtility.singleLineHeight * 2, position.width, EditorGUIUtility.singleLineHeight);
+            SerializedProperty child = property.FindPropertyRelative("dialogueListType_Bleeding_Ending");
+            EditorGUI.PropertyField(childPos, child);
+
+            DialogueListType_Bleeding_Ending dialogueFinishActions_Home_QuizExp1 = (DialogueListType_Bleeding_Ending)child.enumValueIndex;
+        }
         
 
         Rect dialoguePos = new Rect(position.x, position.y + EditorGUIUtility.singleLineHeight * 3, position.width, EditorGUIUtility.singleLineHeight);
@@ -80,6 +128,12 @@ public class DialogueListContainers{
     public DialogueListType_Home_Quiz dialogueListType_Home_Quiz;
     public DialogueListType_Home_QuizExplanation dialogueListType_Home_QuizExplanation;
     public DialogueListType_Bleeding_WrongItem dialogueListType_Bleeding_WrongItem;
+    public DialogueListType_Choking_Intro dialogueListType_Choking_Intro;
+    public DialogueListType_Bleeding_Intro dialogueListType_Bleeding_Intro;
+    public DialogueListType_Choking_Explanation dialogueListType_Choking_Explanation;
+    public DialogueListType_Bleeding_Explanation dialogueListType_Bleeding_Explanation;
+    public DialogueListType_Choking_Ending dialogueListType_Choking_Ending;
+    public DialogueListType_Bleeding_Ending dialogueListType_Bleeding_Ending;
     public SODialogue dialogue;
 }
 public class SODialogueListContainer : ScriptableObject

@@ -5,6 +5,7 @@ using DialogueSystem;
 using UnityEngine;
 using UnityEditor;
 using UnityEngine.Events;
+using BNG;
 
 [Serializable]
 public class DialogueFinishActions
@@ -14,43 +15,27 @@ public class DialogueFinishActions
     public DialogueListType_Home_Intro dialogueListType_Home_Intro;
     public DialogueListType_Home_Quiz dialogueListType_Home_Quiz;
     public DialogueListType_Home_QuizExplanation dialogueListType_Home_QuizExplanation;
+    public DialogueListType_Bleeding_WrongItem dialogueListType_Bleeding_WrongItem;
+    public DialogueListType_Choking_Intro dialogueListType_Choking_Intro;
+    public DialogueListType_Bleeding_Intro dialogueListType_Bleeding_Intro;
+    public DialogueListType_Choking_Explanation dialogueListType_Choking_Explanation;
+    public DialogueListType_Bleeding_Explanation dialogueListType_Bleeding_Explanation;
+    public DialogueListType_Choking_Ending dialogueListType_Choking_Ending;
+    public DialogueListType_Bleeding_Ending dialogueListType_Bleeding_Ending;
     public UnityEvent OnDialogueFinish;
 }
 
-// [Serializable]
-// public class DialogueFinishActions_Home_Intro
-// {
-//     public DialogueListType_Home_Intro dialogueListType_Home_Intro;
-//     public UnityEvent OnDialogueFinish;
-// }
-// [Serializable]
-// public class DialogueFinishActions_Home_Quiz
-// {
-//     public DialogueListType_Home_Quiz dialogueListType_Home_Quiz;
-//     public UnityEvent OnDialogueFinish;
-// }
-// [Serializable]
-// public class DialogueFinishActions_Home_QuizExp1
-// {
-//     public DialogueListType_Home_QuizExp1 dialogueListType_Home_QuizExp1;
-//     public UnityEvent OnDialogueFinish;
-// }
-// [Serializable]
-// public class DialogueFinishActions_Home_QuizExp2
-// {
-//     public DialogueListType_Home_QuizExp2 dialogueListType_Home_QuizExp2;
-//     public UnityEvent OnDialogueFinish;
-// }
-// [Serializable]
-// public class DialogueFinishActions_Home_QuizExp3
-// {
-//     public DialogueListType_Home_QuizExp3 dialogueListType_Home_QuizExp3;
-//     public UnityEvent OnDialogueFinish;
-// }
+
 
 
 public class DialogueManager : MonoBehaviour, ITurnOffStatic
 {
+    [Header("Reference")]
+    [SerializeField]private PlayerManager playerManager;
+    [SerializeField]private GameManager gameManager;
+    [SerializeField]private ScreenFader screenFader;
+    [SerializeField]private Robot robot;
+    [Space(5)]
     [SerializeField]private SODialogueList SODialogueList;
     [SerializeField]private DialogueHolder dialogueHolder; // dialogueholder nerima scene dialogue, trus berdasarkan itu dikirim textnya beserta data berdasarkan namanya ke dialogue line
     [Header("Dialogue List Type")]
@@ -75,58 +60,6 @@ public class DialogueManager : MonoBehaviour, ITurnOffStatic
         // PlaySceneDialogueNew += PlayDialogueScene;
     }
 
-    private void Start() 
-    {
-        if(isPlayScene1AtStart)PlayDialogueScene(DialogueListTypeParent.Home_Intro, DialogueListType_Home_Intro.Home_Introduction1);
-    }
-    private void Update() 
-    {
-        if(isPlayScene2)
-        {
-            isPlayScene2 = false;
-            // PlayDialogueScene(DialogueListType.Home_Introduction2);
-            PlayDialogueScene(DialogueListTypeParent.Home_Intro, DialogueListType_Home_Intro.Home_Introduction2);
-        }
-        if(DialogueListType_Home_Intro.Home_Introduction2.Equals(dialogueSceneTypeNow) && isFinishTaskScene2)
-        {
-            isFinishTaskScene2 = false;
-            HideFinishedDialogueNow();
-        }
-        
-    }
-    // private void PlayDialogueScene(DialogueListType inputDialogueSceneType)
-    // {
-    //     dialogueSceneTypeNow = inputDialogueSceneType;
-    //     SODialogue chosenDialogue = SODialogueList.SearchDialogue(dialogueSceneTypeNow);
-
-    //     // OnFinishDialogue.RemoveAllListeners();
-        
-    //     if(chosenDialogue)
-    //     {
-    //         dialogueHolder.ShowDialogue(chosenDialogue);
-    //     }
-    //     // if(dialogueSceneTypeNow == DialogueListType.Home_Introduction1)
-    //     // {
-    //     //     dialogueHolder.ShowDialogue(SODialogueList.Home_Introduction1_dialogue);
-    //     // }
-    //     // else if (dialogueSceneTypeNow == DialogueListType.Home_Introduction2)
-    //     // {
-    //     //     dialogueHolder.ShowDialogue(SODialogueList.Home_Introduction2_dialogue);
-    //     // }
-    // }
-    
-    // public void PlayDialogueSceneOnEvent(GetDialogueListType inputDialogueSceneType)
-    // {
-    //     dialogueSceneTypeNow = inputDialogueSceneType.dialogueListType;
-    //     SODialogue chosenDialogue = SODialogueList.SearchDialogue(dialogueSceneTypeNow);
-
-    //     // OnFinishDialogue.RemoveAllListeners();
-        
-    //     if(chosenDialogue)
-    //     {
-    //         dialogueHolder.ShowDialogue(chosenDialogue);
-    //     }
-    // }
     
     public void PlayDialogueScene<T>(DialogueListTypeParent dialogueListTypeParent, T enumValue) where T : struct, Enum
     {
@@ -154,19 +87,53 @@ public class DialogueManager : MonoBehaviour, ITurnOffStatic
             DialogueListType_Home_Intro dialogueSceneType = (DialogueListType_Home_Intro)dialogueSceneTypeNow;
             chosenDialogue = SODialogueList.SearchDialogue(dialogueSceneTypeNow_Parent, dialogueSceneType);
         }
-        if(dialogueSceneTypeNow_Parent == DialogueListTypeParent.Home_Quiz)
+        else if(dialogueSceneTypeNow_Parent == DialogueListTypeParent.Home_Quiz)
         {
             DialogueListType_Home_Quiz dialogueSceneType = (DialogueListType_Home_Quiz)dialogueSceneTypeNow;
             chosenDialogue = SODialogueList.SearchDialogue(dialogueSceneTypeNow_Parent, dialogueSceneType);
         }
-        if(dialogueSceneTypeNow_Parent == DialogueListTypeParent.Home_QuizExplanation)
+        else if(dialogueSceneTypeNow_Parent == DialogueListTypeParent.Home_QuizExplanation)
         {
             DialogueListType_Home_QuizExplanation dialogueSceneType = (DialogueListType_Home_QuizExplanation)dialogueSceneTypeNow;
             chosenDialogue = SODialogueList.SearchDialogue(dialogueSceneTypeNow_Parent, dialogueSceneType);
         }
-        
+        else if(dialogueSceneTypeNow_Parent == DialogueListTypeParent.Bleeding_WrongItem)
+        {
+            DialogueListType_Bleeding_WrongItem dialogueSceneType = (DialogueListType_Bleeding_WrongItem)dialogueSceneTypeNow;
+            chosenDialogue = SODialogueList.SearchDialogue(dialogueSceneTypeNow_Parent, dialogueSceneType);
+        }
+        else if(dialogueSceneTypeNow_Parent == DialogueListTypeParent.Choking_Intro)
+        {
+            DialogueListType_Choking_Intro dialogueSceneType = (DialogueListType_Choking_Intro)dialogueSceneTypeNow;
+            chosenDialogue = SODialogueList.SearchDialogue(dialogueSceneTypeNow_Parent, dialogueSceneType);
+        }
+        else if(dialogueSceneTypeNow_Parent == DialogueListTypeParent.Bleeding_Intro)
+        {
+            DialogueListType_Bleeding_Intro dialogueSceneType = (DialogueListType_Bleeding_Intro)dialogueSceneTypeNow;
+            chosenDialogue = SODialogueList.SearchDialogue(dialogueSceneTypeNow_Parent, dialogueSceneType);
+        }
+        else if(dialogueSceneTypeNow_Parent == DialogueListTypeParent.Choking_Explanation)
+        {
+            DialogueListType_Choking_Explanation dialogueSceneType = (DialogueListType_Choking_Explanation)dialogueSceneTypeNow;
+            chosenDialogue = SODialogueList.SearchDialogue(dialogueSceneTypeNow_Parent, dialogueSceneType);
+        }
+        else if(dialogueSceneTypeNow_Parent == DialogueListTypeParent.Bleeding_Explanation)
+        {
+            DialogueListType_Bleeding_Explanation dialogueSceneType = (DialogueListType_Bleeding_Explanation)dialogueSceneTypeNow;
+            chosenDialogue = SODialogueList.SearchDialogue(dialogueSceneTypeNow_Parent, dialogueSceneType);
+        }
+        else if(dialogueSceneTypeNow_Parent == DialogueListTypeParent.Choking_Ending)
+        {
+            DialogueListType_Choking_Ending dialogueSceneType = (DialogueListType_Choking_Ending)dialogueSceneTypeNow;
+            chosenDialogue = SODialogueList.SearchDialogue(dialogueSceneTypeNow_Parent, dialogueSceneType);
+        }
+        else if(dialogueSceneTypeNow_Parent == DialogueListTypeParent.Bleeding_Ending)
+        {
+            DialogueListType_Bleeding_Ending dialogueSceneType = (DialogueListType_Bleeding_Ending)dialogueSceneTypeNow;
+            chosenDialogue = SODialogueList.SearchDialogue(dialogueSceneTypeNow_Parent, dialogueSceneType);
+        }
 
-        // OnFinishDialogue.RemoveAllListeners();
+        
         
         if(chosenDialogue)
         {
@@ -194,13 +161,79 @@ public class DialogueManager : MonoBehaviour, ITurnOffStatic
                 action.OnDialogueFinish.Invoke();
                 return;
             }
-            
+            if(dialogueSceneTypeNow_Parent == DialogueListTypeParent.Bleeding_WrongItem && action.dialogueListType_Bleeding_WrongItem.Equals(dialogueSceneTypeNow))
+            {
+                action.OnDialogueFinish.Invoke();
+                return;
+            }
+            if(dialogueSceneTypeNow_Parent == DialogueListTypeParent.Choking_Intro && action.dialogueListType_Choking_Intro.Equals(dialogueSceneTypeNow))
+            {
+                action.OnDialogueFinish.Invoke();
+                return;
+            }
+            if(dialogueSceneTypeNow_Parent == DialogueListTypeParent.Bleeding_Intro && action.dialogueListType_Bleeding_Intro.Equals(dialogueSceneTypeNow))
+            {
+                action.OnDialogueFinish.Invoke();
+                return;
+            }
+            if(dialogueSceneTypeNow_Parent == DialogueListTypeParent.Choking_Explanation && action.dialogueListType_Choking_Explanation.Equals(dialogueSceneTypeNow))
+            {
+                action.OnDialogueFinish.Invoke();
+                return;
+            }
+            if(dialogueSceneTypeNow_Parent == DialogueListTypeParent.Bleeding_Explanation && action.dialogueListType_Bleeding_Explanation.Equals(dialogueSceneTypeNow))
+            {
+                action.OnDialogueFinish.Invoke();
+                return;
+            }
+            if(dialogueSceneTypeNow_Parent == DialogueListTypeParent.Choking_Ending && action.dialogueListType_Choking_Ending.Equals(dialogueSceneTypeNow))
+            {
+                action.OnDialogueFinish.Invoke();
+                return;
+            }
+            if(dialogueSceneTypeNow_Parent == DialogueListTypeParent.Bleeding_Ending && action.dialogueListType_Bleeding_Ending.Equals(dialogueSceneTypeNow))
+            {
+                action.OnDialogueFinish.Invoke();
+                return;
+            }
+
         }
 
-        // if (dialogueSceneTypeNow == DialogueListType.Home_Introduction2)
-        // {
-        //     Debug.Log("Click That Bool Yo to HideTheDialogue");
-        // }
+        if (dialogueSceneTypeNow_Parent == DialogueListTypeParent.Choking_Intro)
+        {
+            if((DialogueListType_Choking_Intro)dialogueSceneTypeNow == DialogueListType_Choking_Intro.Choking_Intro_1)
+            {
+                PlayDialogueScene(DialogueListTypeParent.Choking_Intro, DialogueListType_Choking_Intro.Choking_Intro_2);
+                return;
+            }
+            if((DialogueListType_Choking_Intro)dialogueSceneTypeNow == DialogueListType_Choking_Intro.Choking_Intro_2)
+            {
+                
+                UnityAction afterIntro2_fadeOut = ()=>
+                {
+                    screenFader.ResetEvent();
+                    gameManager.ChangeGameState(GameState.InGame);
+                    PlayerRestriction.LiftAllRestriction();
+                    robot.ActivateLookAt();
+                    robot.ActivateFollowPlayer();
+                    PlayDialogueScene(DialogueListTypeParent.Choking_Intro, DialogueListType_Choking_Intro.Choking_Intro_3);
+                return;
+
+                };
+                UnityAction afterIntro2_fadeIn = ()=>
+                {
+                    screenFader.ResetEvent();
+                    PlayerManager.HasFinishedIntroLevel((int)gameManager.LevelTypeNow());
+                    EnvironmentLevelManager.SetEnvironment_AfterIntro();
+                    screenFader.AddEvent(afterIntro2_fadeOut);
+                    screenFader.DoFadeOut();
+                };
+                screenFader.AddEvent(afterIntro2_fadeIn);
+                screenFader.DoFadeIn();
+                return;
+            }
+            
+        }
     }
 
     private void HideFinishedDialogueNow()
@@ -214,6 +247,31 @@ public class DialogueManager : MonoBehaviour, ITurnOffStatic
         DoSomethingAfterFinish -= DoSomethingAfterDialogueFinish;
         HideFinishedDialogue_AfterFinishingTask -= HideFinishedDialogueNow;
         // PlaySceneDialogue -= PlayDialogueScene;
+    }
+
+    public void PlayIntro()
+    {
+        if(!playerManager.IsFinish_TutorialMain() && gameManager.LevelModeNow() == LevelMode.Home)
+        {
+            gameManager.ChangeGameState(GameState.Cinematic);
+            PlayDialogueScene(DialogueListTypeParent.Home_Intro, DialogueListType_Home_Intro.Home_Intro_Wake);
+        }
+        else if(gameManager.LevelModeNow() == LevelMode.Level)
+        {
+            if(!playerManager.IsFinish_IntroLevel((int)gameManager.LevelTypeNow()))
+            {
+                if(gameManager.LevelTypeNow() == LevelP3KType.Choking)
+                {
+                    gameManager.ChangeGameState(GameState.Cinematic);
+                    PlayDialogueScene(DialogueListTypeParent.Choking_Intro, DialogueListType_Choking_Intro.Choking_Intro_1);
+                }
+                else if(gameManager.LevelTypeNow() == LevelP3KType.Bleeding)
+                {
+                    gameManager.ChangeGameState(GameState.Cinematic);
+                    PlayDialogueScene(DialogueListTypeParent.Bleeding_Intro, DialogueListType_Bleeding_Intro.Bleeding_Intro_1);
+                }
+            }
+        }
     }
     
 }

@@ -39,7 +39,7 @@ public class DoorUIManager : MonoBehaviour
 
     public void Show()
     {
-        if(GameManager.CheckGameStateNow() != GameState.InGame) return;
+        // if(GameManager.CheckGameStateNow() != GameState.InGame) return;
         _containerDoorOBJ.SetActive(true);
     }
     public void Hide()

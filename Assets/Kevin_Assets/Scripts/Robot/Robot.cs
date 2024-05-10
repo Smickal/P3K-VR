@@ -35,9 +35,6 @@ public class Robot : GrabbableEvents
     private DistanceHandGrabInteractor currDistanceHand;
     IsBeingGrabHandTrack isBeingGrabHandTrack;
 
-    
-
-    [Header("Debug")]
     [SerializeField] bool isActivated = false;
     [SerializeField] bool isFollowingPlayer = false;
 
