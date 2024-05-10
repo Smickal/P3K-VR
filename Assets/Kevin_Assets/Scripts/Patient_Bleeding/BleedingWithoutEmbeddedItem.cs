@@ -88,16 +88,19 @@ public class BleedingWithoutEmbeddedItem : MonoBehaviour, ITurnOffStatic
         yield return new WaitUntil(()=> _bleedingObj.IsDoneCleaning);
         state = BleedingWithoutEmbeddedItem_State.CleanBlood;
         _bleedingColl.enabled = false;
+        _bleedingColl.gameObject.SetActive(false);
         _cleanColl.enabled = true;
 
         yield return new WaitUntil(()=> _cleanObj.IsDoneCleaning);
         state = BleedingWithoutEmbeddedItem_State.DryWater;
         _cleanColl.enabled = false;
+        _cleanColl.gameObject.SetActive(false);
         _dryColl.enabled = true;
 
         yield return new WaitUntil(()=> _dryObj.IsDoneCleaning);
         state = BleedingWithoutEmbeddedItem_State.BandageTime;
         _dryColl.enabled = false;
+        _dryColl.gameObject.SetActive(false);
         bandageTime.ActivateBandageWithItem();
 
         yield return new WaitUntil(()=> bandageTime.IsDoneBandageMovement);
