@@ -31,16 +31,6 @@ public class SODialogueList : ScriptableObject
     
     public List<SODialogueListContainer> dialogueListContainers;
 
-    // [Header("Home")]
-    // public DialogueListContainers[] dialogueListContainers_Home_Intro;
-    // public DialogueListContainers[] dialogueListContainers_Home_Quiz;
-    // public DialogueListContainers[] dialogueListContainers_Home_QuizExp_1;
-    // public DialogueListContainers[] dialogueListContainers_Home_QuizExp_2;
-    // public DialogueListContainers[] dialogueListContainers_Home_QuizExp_3;
-
-    // [Header("Choking")]
-    // public DialogueListContainer[] dialogueList_Choke_Intro;
-
     public SODialogue SearchDialogue<T>(DialogueListTypeParent dialogueListTypeParent, T enumValue) where T : struct, Enum
     {
         if(dialogueListTypeParent == DialogueListTypeParent.None)return null;
@@ -65,8 +55,6 @@ public class SODialogueList : ScriptableObject
                 if(dialogueContainer.dialogueListType_Home_Intro == DialogueListType_Home_Intro.None) return null;
                 return dialogueContainer.dialogue;
             }
-            // Debug.Log(enumValue + " Kok Bisa tidak masukkkk ???" + dialogueContainer.dialogueListType_Home_Quiz.Equals(enumValue));
-            // Debug.Log(dialogueContainer.dialogueListType_Home_Quiz + " dan " + enumValue);
             if(dialogueListTypeParent == DialogueListTypeParent.Home_Quiz && dialogueContainer.dialogueListType_Home_Quiz.Equals(enumValue))
             {
                 // Debug.Log("Emang ga masuk sini kah ?" + enumValue);

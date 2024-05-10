@@ -6,14 +6,14 @@ using UnityEngine.Events;
 
 public class PlayerTriggerEvents : MonoBehaviour
 {
-    public UnityEvent OnTriggerCollision;
-    public AudioClip SoundOnEnter;
+    public UnityEvent OnTriggerCollision, OnTriggerExitCollision;
+    public AudioClip SoundOnEnter, SoundOnExit;
     private void OnTriggerEnter(Collider other) 
     {
         if(other.gameObject.CompareTag("Player"))
         {
             // Debug.Log("Wat???");
-            PlaySound();
+            PlaySoundEnter();
             OnTriggerCollision.Invoke();
         }
     }
@@ -22,17 +22,43 @@ public class PlayerTriggerEvents : MonoBehaviour
     {
         if(other.gameObject.CompareTag("Player"))
         {
-            PlaySound();
+            PlaySoundEnter();
             OnTriggerCollision.Invoke();
         }
     }
-    private void PlaySound()
+    private void PlaySoundEnter()
     {
         if (SoundOnEnter) {
             // Only play the sound if not just starting the scene
             if (Time.timeSinceLevelLoad > 0.1f) {
                 VRUtils.Instance.PlaySpatialClipAt(SoundOnEnter, transform.position, 0.75f);
             }
+        }
+    }
+    private void PlaySoundExit()
+    {
+        if (SoundOnExit) {
+            // Only play the sound if not just starting the scene
+            if (Time.timeSinceLevelLoad > 0.1f) {
+                VRUtils.Instance.PlaySpatialClipAt(SoundOnExit, transform.position, 0.75f);
+            }
+        }
+    }
+    private void OnTriggerExit(Collider other) 
+    {
+        if(other.gameObject.CompareTag("Player"))
+        {
+            // Debug.Log("Wat???");
+            PlaySoundExit();
+            OnTriggerExitCollision?.Invoke();
+        }
+    }
+    private void OnCollisionExit(Collision other) 
+    {
+        if(other.gameObject.CompareTag("Player"))
+        {
+            PlaySoundExit();
+            OnTriggerExitCollision?.Invoke();
         }
     }
 }

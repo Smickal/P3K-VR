@@ -34,6 +34,8 @@ public class AlcoholWipesHT : MonoBehaviour
 
     public void OnGrabHT()
     {
+        if((GameManager.CheckLevelTypeNow() != LevelP3KType.Bleeding || 
+            GameManager.CheckInGameModeNow() != InGame_Mode.FirstAid))return;
         HandGrabInteractor currHand = CheckHandGrabInteractor();
         DistanceHandGrabInteractor currDistanceHand = CheckDistanceHandGrabInteractor();
         
@@ -61,8 +63,11 @@ public class AlcoholWipesHT : MonoBehaviour
     {
         if(currGrabber == null)return;
         currGrabber = null;
-        alcoholManager.IsHolding = false;
-        alcoholManager.SaveCurrentTimeProgress();
+        if(alcoholManager)
+        {
+            alcoholManager.IsHolding = false;
+            alcoholManager.SaveCurrentTimeProgress();
+        }
     }
     private HandGrabInteractor CheckHandGrabInteractor()
     {

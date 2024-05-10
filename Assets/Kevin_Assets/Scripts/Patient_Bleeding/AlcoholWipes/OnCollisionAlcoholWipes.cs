@@ -34,6 +34,9 @@ public class OnCollisionAlcoholWipes : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if((GameManager.CheckLevelTypeNow() != LevelP3KType.Bleeding || 
+            GameManager.CheckInGameModeNow() != InGame_Mode.FirstAid))return;
+
         Grabber grabber = other.gameObject.GetComponent<Grabber>();
 
 
@@ -42,6 +45,9 @@ public class OnCollisionAlcoholWipes : MonoBehaviour
         cleanManager.RegisterCurrentNeedToCleanGrabber(other.gameObject);
     }
     private void OnTriggerExit(Collider other) {
+        if((GameManager.CheckLevelTypeNow() != LevelP3KType.Bleeding || 
+            GameManager.CheckInGameModeNow() != InGame_Mode.FirstAid))return;
+
         Grabber grabber = other.gameObject.GetComponent<Grabber>();
         
 

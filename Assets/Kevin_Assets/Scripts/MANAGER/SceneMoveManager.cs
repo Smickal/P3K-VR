@@ -48,14 +48,27 @@ public class SceneMoveManager : MonoBehaviour
 
         bGMManager.DestroyInstance();
 
-        screenFader.AddEvent(questDoneRestartSceneAfterFade);
+        
         questGoToSceneAfterFade = ()=>
         {
             screenFader.ResetEvent();
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            SceneManager.LoadScene(sceneName);
         };
+        screenFader.AddEvent(questGoToSceneAfterFade);
         screenFader.DoFadeIn();
 
+    }
+    public void GoBackHome()
+    {
+        if(GameManager.CheckGameStateNow() != GameState.InGame || GameManager.CheckInGameModeNow() == InGame_Mode.FirstAid) return;
+        TurnOffAllStatics();
+        questGoToSceneAfterFade = ()=>
+        {
+            screenFader.ResetEvent();
+            SceneManager.LoadScene("Home");
+        };
+        screenFader.AddEvent(questGoToSceneAfterFade);
+        screenFader.DoFadeIn();
     }
 
     private void TurnOffAllStatics()

@@ -16,6 +16,8 @@ public class AlcoholWipes : GrabbableEvents
 
     public override void OnGrab(Grabber grabber)
     {
+        if((GameManager.CheckLevelTypeNow() != LevelP3KType.Bleeding || 
+            GameManager.CheckInGameModeNow() != InGame_Mode.FirstAid))return;
         base.OnGrab(grabber);
 
         curGrabber = grabber;
@@ -24,8 +26,10 @@ public class AlcoholWipes : GrabbableEvents
 
     public override void OnGrip(float gripValue)
     {
+        if((GameManager.CheckLevelTypeNow() != LevelP3KType.Bleeding || 
+            GameManager.CheckInGameModeNow() != InGame_Mode.FirstAid))return;
         base.OnGrip(gripValue);
-
+    
         if (!curGrabber) return;
         alcoholManager.IsHolding = true;
 
@@ -35,7 +39,7 @@ public class AlcoholWipes : GrabbableEvents
     {
         base.OnRelease();
         curGrabber = null;
-
+        if(alcoholManager == null)return;
         alcoholManager.IsHolding = false;
         alcoholManager.SaveCurrentTimeProgress();
     }

@@ -5,9 +5,10 @@ public enum DialogueListTypeParent
     None, 
     Home_Intro, Home_Quiz, Home_QuizExplanation,
 
-    Bleeding_WrongItem 
-
-
+    Bleeding_WrongItem,
+    Intro_Home, Intro_Choking, Intro_Bleeding,
+    Choking_Explanation, Bleeding_Explanation,
+    Ending_Choking, Ending_Bleeding
 }
 [Serializable]
 
@@ -33,3 +34,32 @@ public enum DialogueListType_Bleeding_WrongItem
     Bleeding_WrongItem_WithItem_Bandage,
     Bleeding_WrongItem_WithoutItem_CleanHands, Bleeding_WrongItem_WithoutItem_WearGloves, Bleeding_WrongItem_WithoutItem_StopBleed, Bleeding_WrongItem_WithoutItem_CleanBlood, Bleeding_WrongItem_WithoutItem_DryWater, Bleeding_WrongItem_WithoutItem_BandageTime, Bleeding_WrongItem_WithoutItem_PuttingLegOnTopSomethingTime, Bleeding_WrongItem_WithoutItem_Done 
 }
+public enum DialogueListType_Intro_Home
+{
+
+}
+public enum DialogueListType_Intro_Choking
+{
+
+}
+public enum DialogueListType_Intro_Bleeding
+{
+
+}
+public enum DialogueListType_Choking_Explanation
+{
+
+}
+public enum DialogueListType_Bleeding_Explanation
+{
+
+}
+public enum DialogueListType_Ending_Choking
+{
+
+}
+public enum DialogueListType_Ending_Bleeding
+{
+
+}
+
