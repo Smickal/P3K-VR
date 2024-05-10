@@ -38,5 +38,12 @@ public class GetDialogueListType : MonoBehaviour
     private DialogueListType_Home_Intro[] dialogueListType_Home_Intro;
     private DialogueListType_Home_Quiz[] dialogueListType_Home_Quiz;
     private DialogueListType_Home_QuizExplanation[] dialogueListType_Home_QuizExplanation;
+    private DialogueListType_Bleeding_WrongItem[] dialogueListType_Bleeding_WrongItems;
+    private DialogueListType_Choking_Intro[] dialogueListType_Choking_Intros;
+    private DialogueListType_Bleeding_Intro[] dialogueListType_Bleeding_Intros;
+    private DialogueListType_Choking_Explanation[] dialogueListType_Choking_Explanations;
+    private DialogueListType_Bleeding_Explanation[] dialogueListType_Bleeding_Explanations;
+    private DialogueListType_Choking_Ending[] dialogueListType_Choking_Endings;
+    private DialogueListType_Bleeding_Ending[] dialogueListType_Bleeding_Endings;
 
 }

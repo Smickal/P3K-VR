@@ -45,6 +45,7 @@ public class Choking_QuestManager : QuestManager, ITurnOffStatic
     protected override void Quest()
     {
         OnStartQuest.Invoke();// krn ud ga berhubungan ama questmanager jd hrsnya aman..
+        // dialogueManager.PlayDialogueScene(DialogueListTypeParent.Choking_Explanation, Dialouge)
         timerInSecs = 0;
         questManagerUI.SetTimerSlider(timerInSecsMax);
 

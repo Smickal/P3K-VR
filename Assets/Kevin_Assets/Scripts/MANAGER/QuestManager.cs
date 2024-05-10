@@ -19,6 +19,7 @@ public class QuestManager : MonoBehaviour
     [SerializeField]private Bleeding_QuestManager bleeding_QuestManager;
     [SerializeField]private Choking_QuestManager choking_QuestManager;
     [SerializeField]private SceneMoveManager sceneMoveManager;
+    [SerializeField]protected DialogueManager dialogueManager;
     [SerializeField]Robot robot;
 
     

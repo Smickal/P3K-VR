@@ -36,7 +36,17 @@ namespace BNG {
         private bool isFading;
         public bool IsFading{get{return isFading;}}
 
+        [Header("Reference")]
+        [SerializeField]private DialogueManager dialogueManager;
+
         void Awake() {
+            OnFadeDone.AddListener(
+                ()=>
+                    {
+                        dialogueManager.PlayIntro();
+                        ResetEvent();
+                    }
+            );
             initialize();
         }
         private void Update() {

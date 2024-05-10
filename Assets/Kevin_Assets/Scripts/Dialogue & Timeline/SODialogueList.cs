@@ -24,9 +24,6 @@ public class SODialogueList : ScriptableObject
     }
 #endif
 
-    public SODialogue Home_Introduction1_dialogue;
-
-    public SODialogue Home_Introduction2_dialogue;
     [SerializeField]
     
     public List<SODialogueListContainer> dialogueListContainers;
@@ -37,14 +34,14 @@ public class SODialogueList : ScriptableObject
         DialogueListContainers[] chosenDialogue = null;
         foreach(SODialogueListContainer dialogueListContainers in dialogueListContainers)
         {
-            Debug.Log(dialogueListContainers.dialogueListTypeParent + " ada isi ga " + dialogueListContainers.dialogueListContainers.Length + " ya");
+            // Debug.Log(dialogueListContainers.dialogueListTypeParent + " ada isi ga " + dialogueListContainers.dialogueListContainers.Length + " ya");
             if(dialogueListContainers.dialogueListTypeParent == dialogueListTypeParent)
             {
                 chosenDialogue = dialogueListContainers.dialogueListContainers;
                 break;
             }
         }
-        Debug.Log(chosenDialogue.Length + " Tes" + enumValue);
+        // Debug.Log(chosenDialogue.Length + " Tes" + enumValue);
         if(chosenDialogue == null)return null;
         foreach(DialogueListContainers dialogueContainer in chosenDialogue)
         {
@@ -71,22 +68,40 @@ public class SODialogueList : ScriptableObject
                 if(dialogueContainer.dialogueListType_Bleeding_WrongItem == DialogueListType_Bleeding_WrongItem.None) return null;
                 return dialogueContainer.dialogue;
             }
+            if(dialogueListTypeParent == DialogueListTypeParent.Choking_Intro && dialogueContainer.dialogueListType_Choking_Intro.Equals(enumValue))
+            {
+                if(dialogueContainer.dialogueListType_Choking_Intro == DialogueListType_Choking_Intro.None) return null;
+                return dialogueContainer.dialogue;
+            }
+            if(dialogueListTypeParent == DialogueListTypeParent.Bleeding_Intro && dialogueContainer.dialogueListType_Bleeding_Intro.Equals(enumValue))
+            {
+                if(dialogueContainer.dialogueListType_Bleeding_Intro == DialogueListType_Bleeding_Intro.None) return null;
+                return dialogueContainer.dialogue;
+            }
+            if(dialogueListTypeParent == DialogueListTypeParent.Choking_Explanation && dialogueContainer.dialogueListType_Choking_Explanation.Equals(enumValue))
+            {
+                if(dialogueContainer.dialogueListType_Choking_Explanation == DialogueListType_Choking_Explanation.None) return null;
+                return dialogueContainer.dialogue;
+            }
+            if(dialogueListTypeParent == DialogueListTypeParent.Bleeding_Explanation && dialogueContainer.dialogueListType_Bleeding_Explanation.Equals(enumValue))
+            {
+                if(dialogueContainer.dialogueListType_Bleeding_Explanation == DialogueListType_Bleeding_Explanation.None) return null;
+                return dialogueContainer.dialogue;
+            }
+            if(dialogueListTypeParent == DialogueListTypeParent.Choking_Ending && dialogueContainer.dialogueListType_Bleeding_Explanation.Equals(enumValue))
+            {
+                if(dialogueContainer.dialogueListType_Bleeding_Explanation == DialogueListType_Bleeding_Explanation.None) return null;
+                return dialogueContainer.dialogue;
+            }
+            if(dialogueListTypeParent == DialogueListTypeParent.Bleeding_Ending && dialogueContainer.dialogueListType_Bleeding_Ending.Equals(enumValue))
+            {
+                if(dialogueContainer.dialogueListType_Bleeding_Ending == DialogueListType_Bleeding_Ending.None) return null;
+                return dialogueContainer.dialogue;
+            }
         }
         
         
         return null;
     }
-    // public SODialogue SearchDialogue(DialogueListType dialogueListTypeNow)
-    // {
-    //     if(dialogueListTypeNow == DialogueListType.None)return null;
-    //     foreach(DialogueListContainer dialogueContainer in dialogueListContainers)
-    //     {
-    //         if(dialogueContainer.dialogueListType == dialogueListTypeNow)
-    //         {
-    //             return dialogueContainer.dialogue;
-    //         }
-    //     }
-    //     return null;
-    // }
 
 }
