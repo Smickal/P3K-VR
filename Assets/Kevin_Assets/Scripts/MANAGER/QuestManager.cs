@@ -51,10 +51,12 @@ public class QuestManager : MonoBehaviour
         levelPlayerDataNow = playerManager.GetLevelData((int)levelP3KTypeNow);
         hasClickRestartQuit = false;
     }
+
     private void Start()
     {
         if(PlayerManager.LastInGameMode() == InGame_Mode.FirstAid)StartQuest();
     }
+
     protected virtual void Update() 
     {
         if(Startq)
@@ -170,6 +172,7 @@ public class QuestManager : MonoBehaviour
     {
         PlayerManager.HasBeatenLvl((int)levelP3KTypeNow, score);
         QuestEndingUI.SetUIData(score, levelP3KTypeNow);
+        // DataSaveManager.Instance.SaveScoreAndTime(levelP3KTypeNow, score, timerInSecs);
     }
 
     public virtual void Restart()
