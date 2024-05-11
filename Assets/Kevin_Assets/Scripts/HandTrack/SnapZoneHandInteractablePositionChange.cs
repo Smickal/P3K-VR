@@ -33,7 +33,7 @@ public class SnapZoneHandInteractablePositionChange : MonoBehaviour
         for(int i = 0; i< HandInteractables.Length; i++)
         {
             HandInteractables[i].transform.localPosition = HandInteractablesPositionAtStart[i];
-            Debug.Log(HandInteractables[i].transform.localPosition + "start" + HandInteractablesPositionAtStart[i]);
+            // Debug.Log(HandInteractables[i].transform.localPosition + "start" + HandInteractablesPositionAtStart[i]);
         }
     }
 

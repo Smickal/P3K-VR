@@ -37222,8 +37222,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Take a <size=120%><b>Block</b></size> to keep the casualty's legs elevated
-    above their heart.
+  m_text: Go to where Reina is <color=#02D4BA><i><size=110%>(BLUE LIGHT)</i></size></color>.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -37305,8 +37304,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueType: 0
-  delayTypeText: 0.025
-  delayBetweenLines: 0.05
+  delayTypeText: 0.05
+  delayBetweenLines: 0.2
   charaName: Yaya
   _nametextContainer: {fileID: 6238448290643122520}
   _bgContainer: {fileID: 7113976538113434619}
@@ -53183,7 +53182,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FadeOnSceneLoaded: 1
   FadeColor: {r: 0, g: 0, b: 0, a: 0.9882353}
-  FadeInSpeed: 2
+  FadeInSpeed: 1
   FadeOutSpeed: 1
   SceneFadeInDelay: 0.5
   debugIn: 0
@@ -53193,6 +53192,7 @@ MonoBehaviour:
   OnFadeDone:
     m_PersistentCalls:
       m_Calls: []
+  dialogueManager: {fileID: 0}
 --- !u!114 &410164102863905834
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66845,7 +66845,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.09803922}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.29411766}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

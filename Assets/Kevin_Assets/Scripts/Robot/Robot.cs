@@ -39,6 +39,7 @@ public class Robot : GrabbableEvents
     [SerializeField] bool isFollowingPlayer = false;
 
     public bool IsFollowingPlayer {  get { return isFollowingPlayer; } }
+    [SerializeField]Quaternion rotationforRobot;
     public void ActivateLookAt()
     {
         isActivated = true;
@@ -80,11 +81,7 @@ public class Robot : GrabbableEvents
         {
             if(!playerManager.IsFinish_IntroLevel((int)gameManager.LevelTypeNow()))
             {
-                if(gameManager.LevelTypeNow() == LevelP3KType.Bleeding)
-                {
-                    ActivateLookAt();
-                    ActivateFollowPlayer();
-                }
+
             }
             else
             {
@@ -286,5 +283,10 @@ public class Robot : GrabbableEvents
             }
         }
         return null;
+    }
+    public void SetPosForIntro()
+    {
+        transform.position = returnPos.StartingPos.position;
+        transform.rotation = rotationforRobot;
     }
 }

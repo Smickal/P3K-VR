@@ -19,6 +19,7 @@ public class BGMManager : MonoBehaviour, IChangeVolume
     [Header("Kalo mau ubah audio clip pas first aid")]
     [SerializeField]private AudioClip BGM_Main;
     [SerializeField]private AudioClip BGM_Tense;
+    BGM_Type bgm_TypeNow = BGM_Type.main;
     public static Action<BGM_Type> ChangeBGMAudio;
 
     [SerializeField]private bool isInstance;
@@ -106,9 +107,10 @@ public class BGMManager : MonoBehaviour, IChangeVolume
 
     public void ChangeBGMClip(BGM_Type bGM_Type)
     {
+        if(bgm_TypeNow == bGM_Type)return;
         StopBGM(bGM_Type, true);
         
-        
+        bgm_TypeNow = bGM_Type;
         if(bGM_Type == BGM_Type.main)
         {
             BGM.clip = BGM_Main;

@@ -81,6 +81,7 @@ namespace DialogueSystem
             StopCoroutine(lineText);
             lineText = null;
             finished = false;
+            Debug.Log("Ke sini ada orang dul");
         }
     }
 }

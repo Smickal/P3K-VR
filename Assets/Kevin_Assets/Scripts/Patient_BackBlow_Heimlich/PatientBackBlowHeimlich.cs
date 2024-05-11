@@ -10,6 +10,8 @@ using UnityEngine.Events;
 public class PatientBackBlowHeimlich : MonoBehaviour
 {
     [SerializeField] RigBuilder _rig;
+    [SerializeField] Choking_QuestManager choking_QuestManager;
+    public AudioClip SoundOnDone;
     [SerializeField] Grabber[] grabbers;
     [SerializeField] HandGrabInteractor[] grabbersHandTrack;
 
@@ -58,6 +60,7 @@ public class PatientBackBlowHeimlich : MonoBehaviour
         // _backBlowDone = false;
         _heimlichMove.ResetCount();
         _backBlowMove.ResetCount();
+        choking_QuestManager.PlayDialogueBackBlow();
         QuestManagerUI.ChangeHelperDesc_Choking(titleChokingBackblow);
     }
 
@@ -72,6 +75,7 @@ public class PatientBackBlowHeimlich : MonoBehaviour
         // _backBlowDone = false;
         _heimlichMove.ResetCount();
         _backBlowMove.ResetCount();
+        choking_QuestManager.PlayDialogueHeimlich();
         QuestManagerUI.ChangeHelperDesc_Choking(titleChokingHeimlich);
     }
     public void UnActivateAll()
@@ -95,6 +99,7 @@ public class PatientBackBlowHeimlich : MonoBehaviour
     {
         if(count >= _backBlowMaxCount)
         {
+            PlaySoundCorrect();
             ActivateContainerHeimlichOnly();
             TurnOffGrabber();
             
@@ -110,6 +115,7 @@ public class PatientBackBlowHeimlich : MonoBehaviour
     {
         if(count >= _heimlichMaxCount)
         {
+            PlaySoundCorrect();
             ActivateContainerBackblowOnly();
             TurnOffGrabber();
             
@@ -134,4 +140,13 @@ public class PatientBackBlowHeimlich : MonoBehaviour
         }
         
     }
+    private void PlaySoundCorrect()
+    {
+        if (SoundOnDone) {
+            if (Time.timeSinceLevelLoad > 0.1f) {
+                VRUtils.Instance.PlaySpatialClipAt(SoundOnDone, transform.position, 0.75f);
+            }
+        }
+    }
+
 }

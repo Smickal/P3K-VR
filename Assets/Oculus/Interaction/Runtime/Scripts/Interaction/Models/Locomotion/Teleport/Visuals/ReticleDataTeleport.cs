@@ -52,6 +52,14 @@ namespace Oculus.Interaction.DistanceReticles
                 _reticleMode = value;
             }
         }
+        public void ChangeReticleModeToInvalid()
+        {
+            ReticleMode = TeleportReticleMode.InvalidTarget;
+        }
+        public void ChangeReticleModeToValid()
+        {
+            ReticleMode = TeleportReticleMode.ValidTarget;
+        }
 
         public Vector3 ProcessHitPoint(Vector3 hitPoint)
         {

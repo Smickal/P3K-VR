@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Oculus.Interaction;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -19,6 +20,7 @@ public class QuestManagerUI : MonoBehaviour, ITurnOffStatic
     [TextArea(5,7)][SerializeField]private string _followBackBlow;
     [TextArea(5,7)][SerializeField]private string _followHeimlich;
     [SerializeField]GraphicRaycaster graphicRaycaster;
+    [SerializeField]RayInteractable rayInteractable;
     [Header("Base UI")]
     [SerializeField] GameObject _baseUI;
     [SerializeField] TMP_Text _titleBase;
@@ -65,6 +67,7 @@ public class QuestManagerUI : MonoBehaviour, ITurnOffStatic
     {
         ActivateBaseUI();
         graphicRaycaster.enabled = false;
+        rayInteractable.enabled = false;
         CloseUI();
         _chokingHelperContainer.SetActive(true);
 
@@ -73,12 +76,13 @@ public class QuestManagerUI : MonoBehaviour, ITurnOffStatic
     {
         DeactivateBaseUI();
         graphicRaycaster.enabled = true;
+        rayInteractable.enabled = true;
         _chokingHelperContainer.SetActive(false);
     }
     public void ChangeHelper_ChokingDesc(string choke_P3KType)
     {
         _titleBase.text = titleChoking + "-" + choke_P3KType;
-        Debug.Log("ini maksudnya " + _chokingDescIMG.gameObject + "ilang???");
+        // Debug.Log("ini maksudnya " + _chokingDescIMG.gameObject + "ilang???");
         if(choke_P3KType == titleChokingBackblow)
         {
             _chokingDescIMG.sprite = _chokingDescSprite[0];
@@ -97,6 +101,7 @@ public class QuestManagerUI : MonoBehaviour, ITurnOffStatic
     {
         ActivateBaseUI();
         graphicRaycaster.enabled = true;
+        rayInteractable.enabled = true;
         CloseUI();
         _titleBase.text = titleBleedingWithItem;
         _bleedingHelperContainer_WithItem.SetActive(true);

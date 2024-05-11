@@ -34,7 +34,7 @@ public class SODialogueList : ScriptableObject
         DialogueListContainers[] chosenDialogue = null;
         foreach(SODialogueListContainer dialogueListContainers in dialogueListContainers)
         {
-            // Debug.Log(dialogueListContainers.dialogueListTypeParent + " ada isi ga " + dialogueListContainers.dialogueListContainers.Length + " ya");
+            // Debug.Log(dialogueListTypeParent + " ada isi ga " + dialogueListContainers.dialogueListTypeParent+ " aaa" +dialogueListContainers.dialogueListContainers.Length + " ya");
             if(dialogueListContainers.dialogueListTypeParent == dialogueListTypeParent)
             {
                 chosenDialogue = dialogueListContainers.dialogueListContainers;
@@ -88,9 +88,9 @@ public class SODialogueList : ScriptableObject
                 if(dialogueContainer.dialogueListType_Bleeding_Explanation == DialogueListType_Bleeding_Explanation.None) return null;
                 return dialogueContainer.dialogue;
             }
-            if(dialogueListTypeParent == DialogueListTypeParent.Choking_Ending && dialogueContainer.dialogueListType_Bleeding_Explanation.Equals(enumValue))
+            if(dialogueListTypeParent == DialogueListTypeParent.Choking_Ending && dialogueContainer.dialogueListType_Choking_Ending.Equals(enumValue))
             {
-                if(dialogueContainer.dialogueListType_Bleeding_Explanation == DialogueListType_Bleeding_Explanation.None) return null;
+                if(dialogueContainer.dialogueListType_Choking_Ending == DialogueListType_Choking_Ending.None) return null;
                 return dialogueContainer.dialogue;
             }
             if(dialogueListTypeParent == DialogueListTypeParent.Bleeding_Ending && dialogueContainer.dialogueListType_Bleeding_Ending.Equals(enumValue))

@@ -50,7 +50,9 @@ public enum DialogueListType_Bleeding_Intro
 {
     None,
     Bleeding_Intro_1, Bleeding_Intro_2,
-    Bleeding_Intro_3
+    Bleeding_Intro_3_1,
+    Bleeding_Intro_3_2,
+    Bleeding_Intro_4
 }
 public enum DialogueListType_Choking_Explanation
 {
@@ -59,7 +61,9 @@ public enum DialogueListType_Choking_Explanation
     Choking_Exp_2,
     Choking_Exp_3,
     Choking_Exp_Backblow,
-    Choking_Exp_Heimlich
+    Choking_Exp_Heimlich,
+    Choking_GettingRedder,
+    Choking_GettingRedder_2
 
 }
 public enum DialogueListType_Bleeding_Explanation
