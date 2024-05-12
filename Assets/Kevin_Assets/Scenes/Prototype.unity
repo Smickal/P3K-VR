@@ -2923,6 +2923,7 @@ MonoBehaviour:
 
     -------------------------------------------------------'
   graphicRaycaster: {fileID: 1661932678}
+  rayInteractable: {fileID: 0}
   _baseUI: {fileID: 1582538021}
   _titleBase: {fileID: 1206325298}
   _baseContainers:
@@ -2956,6 +2957,7 @@ MonoBehaviour:
   _kitUIMgr: {fileID: 990936895}
   _uiLangkahP3K: {fileID: 990936899}
   _stepTransform: {fileID: 1509650061}
+  dialogueManager: {fileID: 0}
   _endingContainer:
   - {fileID: 1229299138}
   - {fileID: 1006706860}
@@ -4670,6 +4672,30 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -155}
   m_SizeDelta: {x: 0, y: 145.59}
   m_Pivot: {x: 0.5, y: 1}
+--- !u!114 &308871683 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5798878545848706029, guid: d38c86c219f77c34685aa09c68f7d65d,
+    type: 3}
+  m_PrefabInstance: {fileID: 2052949413}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 334c8628e598690438171b16b1b80a65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &308871689 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4752707567812459714, guid: d38c86c219f77c34685aa09c68f7d65d,
+    type: 3}
+  m_PrefabInstance: {fileID: 2052949413}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ba7fbcd6c0920243b1c5b2a81d61e50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &320404999
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11355,6 +11381,18 @@ Transform:
   - {fileID: 1371811445}
   m_Father: {fileID: 153244740}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &417641724 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3101866133312832325, guid: d44fbf779a16b734f91d8ecbe3f16cbd,
+    type: 3}
+  m_PrefabInstance: {fileID: 3469582195863069421}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fb573fcaf0634d48bdff59547bb0079, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &436033546 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7192365112047797454, guid: 471aa8266d6265345ab261438c86a3a1,
@@ -15062,6 +15100,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bcc7dae09eb746458b319b4194142af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerManager: {fileID: 1066109241}
+  gameManager: {fileID: 1066109239}
+  screenFader: {fileID: 4276642493770886526}
+  robot: {fileID: 308871683}
   SODialogueList: {fileID: 11400000, guid: 493dbc40276aa3f49a4b8f91437d8fdb, type: 2}
   dialogueHolder: {fileID: 1026722215}
   dialogueFinishActions:
@@ -15069,6 +15111,13 @@ MonoBehaviour:
     dialogueListType_Home_Intro: 1
     dialogueListType_Home_Quiz: 0
     dialogueListType_Home_QuizExplanation: 0
+    dialogueListType_Bleeding_WrongItem: 0
+    dialogueListType_Choking_Intro: 0
+    dialogueListType_Bleeding_Intro: 0
+    dialogueListType_Choking_Explanation: 0
+    dialogueListType_Bleeding_Explanation: 0
+    dialogueListType_Choking_Ending: 0
+    dialogueListType_Bleeding_Ending: 0
     OnDialogueFinish:
       m_PersistentCalls:
         m_Calls:
@@ -15084,6 +15133,10 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+  playerChecker: {fileID: 0}
+  playerTeleport: {fileID: 0}
+  positionForIntro3Bleed: {x: 0, y: 0, z: 0}
+  rotationforIntro3Bleed: {x: 0, y: 0, z: 0, w: 0}
   isPlayScene1AtStart: 0
   isPlayScene2: 0
   isFinishTaskScene2: 0
@@ -17020,8 +17073,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 789427394574226319, guid: 164cf3d5431cf31499c51a7be443e757,
         type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.06420076
+      objectReference: {fileID: 0}
+    - target: {fileID: 789427394574226319, guid: 164cf3d5431cf31499c51a7be443e757,
+        type: 3}
       propertyPath: m_LocalRotation.y
       value: 0.028149785
+      objectReference: {fileID: 0}
+    - target: {fileID: 789427394574226319, guid: 164cf3d5431cf31499c51a7be443e757,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.3118522
       objectReference: {fileID: 0}
     - target: {fileID: 943634073366716470, guid: 164cf3d5431cf31499c51a7be443e757,
         type: 3}
@@ -17105,8 +17168,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2266874751406019855, guid: 164cf3d5431cf31499c51a7be443e757,
         type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.06420076
+      objectReference: {fileID: 0}
+    - target: {fileID: 2266874751406019855, guid: 164cf3d5431cf31499c51a7be443e757,
+        type: 3}
       propertyPath: m_LocalRotation.y
       value: 0.028149785
+      objectReference: {fileID: 0}
+    - target: {fileID: 2266874751406019855, guid: 164cf3d5431cf31499c51a7be443e757,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.3118522
       objectReference: {fileID: 0}
     - target: {fileID: 2617095254580400147, guid: 164cf3d5431cf31499c51a7be443e757,
         type: 3}
@@ -17180,6 +17253,11 @@ PrefabInstance:
       objectReference: {fileID: 8516297023253496736}
     - target: {fileID: 3612161021366108249, guid: 164cf3d5431cf31499c51a7be443e757,
         type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.07449575
+      objectReference: {fileID: 0}
+    - target: {fileID: 3612161021366108249, guid: 164cf3d5431cf31499c51a7be443e757,
+        type: 3}
       propertyPath: m_LocalRotation.z
       value: 0.77094054
       objectReference: {fileID: 0}
@@ -17250,8 +17328,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3881061746010803636, guid: 164cf3d5431cf31499c51a7be443e757,
         type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.06420076
+      objectReference: {fileID: 0}
+    - target: {fileID: 3881061746010803636, guid: 164cf3d5431cf31499c51a7be443e757,
+        type: 3}
       propertyPath: m_LocalRotation.y
       value: 0.028149785
+      objectReference: {fileID: 0}
+    - target: {fileID: 3881061746010803636, guid: 164cf3d5431cf31499c51a7be443e757,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.3118522
+      objectReference: {fileID: 0}
+    - target: {fileID: 5065388883694136788, guid: 164cf3d5431cf31499c51a7be443e757,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.07449575
       objectReference: {fileID: 0}
     - target: {fileID: 5065388883694136788, guid: 164cf3d5431cf31499c51a7be443e757,
         type: 3}
@@ -17272,6 +17365,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Pasien 2 _ ANGKAT KAKI
+      objectReference: {fileID: 0}
+    - target: {fileID: 6037905162051890004, guid: 164cf3d5431cf31499c51a7be443e757,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.07449575
       objectReference: {fileID: 0}
     - target: {fileID: 6037905162051890004, guid: 164cf3d5431cf31499c51a7be443e757,
         type: 3}
@@ -17345,6 +17443,11 @@ PrefabInstance:
       objectReference: {fileID: 6969157711539281492}
     - target: {fileID: 8746889095752905711, guid: 164cf3d5431cf31499c51a7be443e757,
         type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.07449575
+      objectReference: {fileID: 0}
+    - target: {fileID: 8746889095752905711, guid: 164cf3d5431cf31499c51a7be443e757,
+        type: 3}
       propertyPath: m_LocalRotation.z
       value: 0.77094054
       objectReference: {fileID: 0}
@@ -17355,8 +17458,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9124157733271518722, guid: 164cf3d5431cf31499c51a7be443e757,
         type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.06420076
+      objectReference: {fileID: 0}
+    - target: {fileID: 9124157733271518722, guid: 164cf3d5431cf31499c51a7be443e757,
+        type: 3}
       propertyPath: m_LocalRotation.y
       value: 0.028149785
+      objectReference: {fileID: 0}
+    - target: {fileID: 9124157733271518722, guid: 164cf3d5431cf31499c51a7be443e757,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.3118522
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -20212,6 +20325,12 @@ MonoBehaviour:
   - {fileID: 436033546}
   - {fileID: 186847533}
   - {fileID: 1636710750}
+  robotPositionEveryEnvironment:
+  - {fileID: 2128347350}
+  - {fileID: 2128347350}
+  - {fileID: 2128347350}
+  - {fileID: 2128347350}
+  returnRobot: {fileID: 308871689}
 --- !u!1 &1039209061
 GameObject:
   m_ObjectHideFlags: 0
@@ -20669,6 +20788,7 @@ MonoBehaviour:
   levelMode: 1
   levelType: 2
   screenFader: {fileID: 4276642493770886526}
+  playerInventoryController: {fileID: 417641724}
   OnPause:
     m_PersistentCalls:
       m_Calls:
@@ -20752,7 +20872,7 @@ MonoBehaviour:
   checkSave: 0
   SetAwakePos: 0
   SetOtherPos: 0
-  WantToExploreWorld: 0
+  WantToExploreWorld: 1
   MasukQuest: 0
 --- !u!114 &1066109242
 MonoBehaviour:
@@ -20804,6 +20924,7 @@ MonoBehaviour:
   bleeding_QuestManager: {fileID: 1066109244}
   choking_QuestManager: {fileID: 1066109243}
   sceneMoveManager: {fileID: 1066109246}
+  dialogueManager: {fileID: 0}
   robot: {fileID: 0}
   timerInSecsMax: 50
   isQuestStart: 0
@@ -20816,12 +20937,16 @@ MonoBehaviour:
       m_Calls: []
   Startq: 0
   screenFader: {fileID: 4276642493770886526}
+  audioSource: {fileID: 0}
   patientChoking: {fileID: 1789048275}
   progressTotal: 150
   _minusProgress: 0.5
   timerTarget:
   - 50
   - 25
+  skinnedMesh: {fileID: 0}
+  materials_RedSkin: []
+  materials_RedderSkin: []
 --- !u!114 &1066109244
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20841,6 +20966,7 @@ MonoBehaviour:
   bleeding_QuestManager: {fileID: 1066109244}
   choking_QuestManager: {fileID: 1066109243}
   sceneMoveManager: {fileID: 1066109246}
+  dialogueManager: {fileID: 0}
   robot: {fileID: 0}
   timerInSecsMax: 1000
   isQuestStart: 0
@@ -20853,6 +20979,7 @@ MonoBehaviour:
       m_Calls: []
   Startq: 0
   screenFader: {fileID: 4276642493770886526}
+  audioSource: {fileID: 0}
   isTrashEverywhere: 0
   totalDissatisfactionMax: 0
   patient_Bleeding: {fileID: 1706366130}
@@ -20875,6 +21002,7 @@ MonoBehaviour:
   bleeding_QuestManager: {fileID: 1066109244}
   choking_QuestManager: {fileID: 1066109243}
   sceneMoveManager: {fileID: 1066109246}
+  dialogueManager: {fileID: 0}
   robot: {fileID: 0}
   timerInSecsMax: 0
   isQuestStart: 0
@@ -20911,6 +21039,7 @@ MonoBehaviour:
         m_CallState: 2
   Startq: 0
   screenFader: {fileID: 4276642493770886526}
+  audioSource: {fileID: 0}
 --- !u!114 &1066109246
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20925,6 +21054,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bGMManager: {fileID: 0}
   screenFader: {fileID: 4276642493770886526}
+  playerHeightController: {fileID: 0}
+  playerManager: {fileID: 0}
 --- !u!1 &1067655405
 GameObject:
   m_ObjectHideFlags: 0
@@ -22480,6 +22611,21 @@ PrefabInstance:
       propertyPath: rightGrabberHT
       value: 
       objectReference: {fileID: 787151350}
+    - target: {fileID: 828637386190666054, guid: 06bbd138adbc4d74db7e070d9c11485a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.00000029249398
+      objectReference: {fileID: 0}
+    - target: {fileID: 828637386190666054, guid: 06bbd138adbc4d74db7e070d9c11485a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.000000050889636
+      objectReference: {fileID: 0}
+    - target: {fileID: 828637386190666054, guid: 06bbd138adbc4d74db7e070d9c11485a,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.00000027538618
+      objectReference: {fileID: 0}
     - target: {fileID: 2084359348541723600, guid: 06bbd138adbc4d74db7e070d9c11485a,
         type: 3}
       propertyPath: leftGrabberHT
@@ -45284,6 +45430,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ====> Pasien BackBlow
       objectReference: {fileID: 0}
+    - target: {fileID: 2794253051887939945, guid: 471aa8266d6265345ab261438c86a3a1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2865947573823711885, guid: 471aa8266d6265345ab261438c86a3a1,
         type: 3}
       propertyPath: HandControl
@@ -46132,6 +46283,16 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3101866133312832325, guid: d44fbf779a16b734f91d8ecbe3f16cbd,
+        type: 3}
+      propertyPath: debugOpen
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3101866133312832325, guid: d44fbf779a16b734f91d8ecbe3f16cbd,
+        type: 3}
+      propertyPath: gameManager
+      value: 
+      objectReference: {fileID: 1066109239}
     - target: {fileID: 4261414057298016375, guid: d44fbf779a16b734f91d8ecbe3f16cbd,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -46157,6 +46318,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4514517773906052865, guid: d44fbf779a16b734f91d8ecbe3f16cbd,
+        type: 3}
+      propertyPath: dialogueManager
+      value: 
+      objectReference: {fileID: 723106684}
     - target: {fileID: 5178015071670007574, guid: d44fbf779a16b734f91d8ecbe3f16cbd,
         type: 3}
       propertyPath: m_Name
@@ -46280,7 +46446,7 @@ PrefabInstance:
     - target: {fileID: 9174866596624764610, guid: d44fbf779a16b734f91d8ecbe3f16cbd,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -18.17
       objectReference: {fileID: 0}
     - target: {fileID: 9174866596624764610, guid: d44fbf779a16b734f91d8ecbe3f16cbd,
         type: 3}
@@ -46290,12 +46456,12 @@ PrefabInstance:
     - target: {fileID: 9174866596624764610, guid: d44fbf779a16b734f91d8ecbe3f16cbd,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -8.05
       objectReference: {fileID: 0}
     - target: {fileID: 9174866596624764610, guid: d44fbf779a16b734f91d8ecbe3f16cbd,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9174866596624764610, guid: d44fbf779a16b734f91d8ecbe3f16cbd,
         type: 3}
@@ -46305,7 +46471,7 @@ PrefabInstance:
     - target: {fileID: 9174866596624764610, guid: d44fbf779a16b734f91d8ecbe3f16cbd,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9174866596624764610, guid: d44fbf779a16b734f91d8ecbe3f16cbd,
         type: 3}
@@ -46320,7 +46486,7 @@ PrefabInstance:
     - target: {fileID: 9174866596624764610, guid: d44fbf779a16b734f91d8ecbe3f16cbd,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 9174866596624764610, guid: d44fbf779a16b734f91d8ecbe3f16cbd,
         type: 3}
@@ -47592,6 +47758,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Pasien_Heimlich_BackBlow
+      objectReference: {fileID: 0}
+    - target: {fileID: 8434442686364447842, guid: 50478ce835c4e8e40ad5483fe321eeda,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8654334509110080999, guid: 50478ce835c4e8e40ad5483fe321eeda,
         type: 3}

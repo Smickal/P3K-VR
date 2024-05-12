@@ -21,10 +21,20 @@ public class Briefcase : MonoBehaviour
 
     bool isOpen = false, isInventEnabled = true, isAnimPlay = false;
     public bool IsOpen { get { return isOpen; } }
+    public bool canOnlyOpenInCertainSpot;
 
-
+    private void Start() {
+        if(canOnlyOpenInCertainSpot)
+        {
+            ChangeButtonCollEnable(false);
+        }
+    }   
     private void Update() 
     {
+        if(canOnlyOpenInCertainSpot)
+        {
+            ChangeButtonCollEnable(false);
+        }
         if(isOpen)
         {
             if((PlayerRestriction.IsRestrictGrabable != null) && !PlayerRestriction.IsRestrictGrabable()) EnableInventory();
@@ -106,10 +116,7 @@ public class Briefcase : MonoBehaviour
 
     public void SnapToSnapZone()
     {
-        foreach(Collider buttonColl in _buttonColliders)
-        {
-            buttonColl.enabled = false;
-        }
+        ChangeButtonCollEnable(false);
         if(isOpen)
         {
             _briefCaseAnim.SetTrigger(CloseBriefHash);
@@ -122,10 +129,14 @@ public class Briefcase : MonoBehaviour
     }
     public void UnSnap()
     {
-        foreach(Collider buttonColl in _buttonColliders)
+        if(canOnlyOpenInCertainSpot)
         {
-            buttonColl.enabled = true;
+            Debug.Log("here");
+            ChangeButtonCollEnable(false);
+            return;
         }
+        Debug.Log("Kan ga bisa lwt sini");
+        ChangeButtonCollEnable(true);
     }
     private void PlaySound()
     {
@@ -134,6 +145,21 @@ public class Briefcase : MonoBehaviour
             if (Time.timeSinceLevelLoad > 0.1f) {
                 VRUtils.Instance.PlaySpatialClipAt(SoundOnTriggerButton, transform.position, 0.75f);
             }
+        }
+    }
+    public void ChangeButtonCollEnable(bool change)
+    {
+        foreach(Collider buttonColl in _buttonColliders)
+        {
+            buttonColl.enabled = change;
+        }
+    }
+    public void ChangeButtonCollEnableOnPlace(bool change)
+    {
+        canOnlyOpenInCertainSpot = false;
+        foreach(Collider buttonColl in _buttonColliders)
+        {
+            buttonColl.enabled = change;
         }
     }
 }

@@ -181,7 +181,7 @@ namespace Oculus.Interaction
             else
             {
                 _audioSource.volume = _volume;
-                Debug.Log(_audioSource.gameObject + " " + Volume + " hm "+ _volume);
+                // Debug.Log(_audioSource.gameObject + " " + Volume + " hm "+ _volume);
             }
 
             // Check if pitch randomization is set

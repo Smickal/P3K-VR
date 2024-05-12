@@ -16,6 +16,8 @@ public class BleedingWithoutEmbeddedItem : MonoBehaviour, ITurnOffStatic
     IEnumerator FirstAidCoroutine;
     private bool isDoneFirstAid;
     public bool IsDoneFirstAid{get{return isDoneFirstAid;}}
+    [Header("BriefCase")]
+    [SerializeField]OnPutBriefCase _putBriefCase;
     [Header("CleanHands")]
     [SerializeField]AlcoholCleanManager alcoholCleanManager;
     [Header("WearGloves")]
@@ -57,7 +59,7 @@ public class BleedingWithoutEmbeddedItem : MonoBehaviour, ITurnOffStatic
     
     public void ActivateFirstAid()
     {
-        state = BleedingWithoutEmbeddedItem_State.CleanHands;
+        
         Leg.SetActive(false);
         _bleedingColl.enabled = false;
         _cleanColl.enabled = false;
@@ -73,11 +75,13 @@ public class BleedingWithoutEmbeddedItem : MonoBehaviour, ITurnOffStatic
         _bleedingColl.enabled = false;
         _cleanColl.enabled = false;
         _dryColl.enabled = false;
-        bandageTime.DeactivateBandageWithItem();
+        bandageTime.DeactivateBandageWithItem_WithoutSnapZone();
         if(FirstAidCoroutine != null)StopCoroutine(FirstAidCoroutine);
     }
     private IEnumerator BleedingWithoutItem()
     {
+        yield return new WaitUntil(()=> _putBriefCase.IsThereBriefCase);
+        state = BleedingWithoutEmbeddedItem_State.CleanHands;
         yield return new WaitUntil(()=> alcoholCleanManager.IsDoneCleaning);
         state = BleedingWithoutEmbeddedItem_State.WearGloves;
 
