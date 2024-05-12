@@ -19,27 +19,27 @@ public class OnPutBriefCase : MonoBehaviour
     [SerializeField] float _snapDistance = 0.05f;
     private void Update() 
     {
-        if(!isMovingTowardsPlace)return;
-        Vector3 moveDir = positionBriefCase.position - briefcase.transform.position;
+        // if(!isMovingTowardsPlace)return;
+        // Vector3 moveDir = positionBriefCase.position - briefcase.transform.position;
 
-        //rigid.AddForce(moveDir * Time.deltaTime * _lerpSpeed, ForceMode.Force);
-        rb.velocity = moveDir * Time.deltaTime * _lerpSpeed;
+        // //rigid.AddForce(moveDir * Time.deltaTime * _lerpSpeed, ForceMode.Force);
+        // rb.velocity = moveDir * Time.deltaTime * _lerpSpeed;
 
-        //transform.position = Vector3.MoveTowards(transform.position, _startingPos.transform.position, Time.deltaTime * _lerpSpeed);
+        // //transform.position = Vector3.MoveTowards(transform.position, _startingPos.transform.position, Time.deltaTime * _lerpSpeed);
 
 
 
-        if (Vector3.Distance(briefcase.transform.position, positionBriefCase.transform.position) <= _snapDistance)
-        {
-            isMovingTowardsPlace = false;
-            rb.velocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
-            rb.isKinematic = true;
-            briefcase.transform.position = positionBriefCase.transform.position;
-            briefcase.transform.rotation = rotationBriefCase;
-            if(briefcase)briefcase.ChangeButtonCollEnableOnPlace(true);
-            checker.SetActive(false);
-        }  
+        // if (Vector3.Distance(briefcase.transform.position, positionBriefCase.transform.position) <= _snapDistance)
+        // {
+        //     isMovingTowardsPlace = false;
+        //     rb.velocity = Vector3.zero;
+        //     rb.angularVelocity = Vector3.zero;
+        //     rb.isKinematic = true;
+        //     briefcase.transform.position = positionBriefCase.transform.position;
+        //     briefcase.transform.rotation = rotationBriefCase;
+        //     if(briefcase)briefcase.ChangeButtonCollEnableOnPlace(true);
+        //     checker.SetActive(false);
+        // }  
     }
     public void PutInPlace(GameObject briefCase)
     {
@@ -65,7 +65,17 @@ public class OnPutBriefCase : MonoBehaviour
         briefInteractable.TurnOffAll();
         rb = briefCase.GetComponent<Rigidbody>();
         briefcase = briefCase.GetComponent<Briefcase>();
-        isMovingTowardsPlace = true;
+        // isMovingTowardsPlace = true;
+
+        isMovingTowardsPlace = false;
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+        rb.isKinematic = true;
+        rb.constraints = RigidbodyConstraints.FreezeAll;
+        briefcase.transform.position = positionBriefCase.transform.position;
+        briefcase.transform.rotation = rotationBriefCase;
+        if(briefcase)briefcase.ChangeButtonCollEnableOnPlace(true);
+        checker.SetActive(false);
     }
     private void OnTriggerStay(Collider other)
     {
