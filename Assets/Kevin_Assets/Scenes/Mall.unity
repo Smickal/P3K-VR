@@ -141,7 +141,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &11968724
 Transform:
   m_ObjectHideFlags: 0
@@ -1685,12 +1685,32 @@ PrefabInstance:
         type: 3}
       propertyPath: OnTriggerCollision.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1066109245}
+      objectReference: {fileID: 723106684}
     - target: {fileID: 384401627265427689, guid: 208af828f81df4a4cbab96444556e1c3,
         type: 3}
       propertyPath: OnTriggerCollision.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 723106684}
+      objectReference: {fileID: 1066109245}
+    - target: {fileID: 384401627265427689, guid: 208af828f81df4a4cbab96444556e1c3,
+        type: 3}
+      propertyPath: OnTriggerCollision.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: HideFinishedDialogueNow
+      objectReference: {fileID: 0}
+    - target: {fileID: 384401627265427689, guid: 208af828f81df4a4cbab96444556e1c3,
+        type: 3}
+      propertyPath: OnTriggerCollision.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: CheckStartQuest
+      objectReference: {fileID: 0}
+    - target: {fileID: 384401627265427689, guid: 208af828f81df4a4cbab96444556e1c3,
+        type: 3}
+      propertyPath: OnTriggerCollision.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: DialogueManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 384401627265427689, guid: 208af828f81df4a4cbab96444556e1c3,
+        type: 3}
+      propertyPath: OnTriggerCollision.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: QuestManager, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 1562442020007237208, guid: 208af828f81df4a4cbab96444556e1c3,
         type: 3}
       propertyPath: m_Name

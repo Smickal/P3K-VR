@@ -91,6 +91,7 @@ public class BriefCaseInteractableEvent : MonoBehaviour
     public void ReleaseHandGrabNow()
     {
         if(currHand == null && currDistanceHand == null)return;
+        Debug.Log("Yang ada isi adalah " + currHand + " dan " + currDistanceHand);
         if(currHand != null)currHand.ForceRelease();
         if(currDistanceHand != null)
         {

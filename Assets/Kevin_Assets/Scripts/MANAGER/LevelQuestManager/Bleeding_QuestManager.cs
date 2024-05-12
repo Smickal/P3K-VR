@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using BNG;
 using UnityEngine;
 
 public class Bleeding_QuestManager : QuestManager
@@ -11,14 +12,16 @@ public class Bleeding_QuestManager : QuestManager
     [SerializeField] int totalDissatisfactionMax;
     [Header ("All Bleeding GameObject and Manager - Without Item")]
     [SerializeField]private Patient_Bleeding patient_Bleeding;
-    
+    [SerializeField]PatientBleedingQuestUI patientBleedingQuestUI;
+    public AudioClip SoundOnDissatisfy;
+    [SerializeField]private float timeToFinish_WithoutItem, timeToFinish_WithItem; 
     protected override void Quest()
     {
         OnStartQuest.Invoke();// krn ud ga berhubungan ama questmanager jd hrsnya aman..
         timerInSecs = 0;
         questManagerUI.SetTimerSlider(timerInSecsMax);
         
-        isQuestStart = true;
+        
         
         // questManagerUI.OpenHelper_Bleeding_All();
         
@@ -28,7 +31,12 @@ public class Bleeding_QuestManager : QuestManager
         
 
         bleedingCoroutine = Bleeding();
+        dialogueManager.PlayDialogueScene(DialogueListTypeParent.Bleeding_Explanation, DialogueListType_Bleeding_Explanation.Bleeding_WithoutItem_Start);
         StartCoroutine(bleedingCoroutine);
+    }
+    public void StartTimer()
+    {
+        isQuestStart = true;
     }
     protected override void ScoreCounter()
     {
@@ -55,7 +63,7 @@ public class Bleeding_QuestManager : QuestManager
     private IEnumerator Bleeding()
     {
         yield return new WaitUntil(()=> patient_Bleeding.IsDoneFirstAid && isQuestStart && !TrashCountManager.Instance.IsThereAnySmallTrash());
-
+        patientBleedingQuestUI.CloseAllUI();
 
         bleedingCoroutine = null;
         
@@ -74,6 +82,25 @@ public class Bleeding_QuestManager : QuestManager
     }
     public void PatientDissatisfy()
     {
+        dialogueManager.PlayDialogueScene(DialogueListTypeParent.Bleeding_Explanation, DialogueListType_Bleeding_Explanation.Bleeding_PatientDissatisfied);
+        PlaySoundDissatisfy();
         totalDissatisfaction++;
+    }
+    public void PlaySoundDissatisfy()
+    {
+        if (SoundOnDissatisfy) {
+            // Only play the sound if not just starting the scene
+            if (Time.timeSinceLevelLoad > 0.1f) {
+                VRUtils.Instance.PlaySpatialClipAt(SoundOnDissatisfy, transform.position, 0.75f);
+            }
+        }
+    }
+    public void SaveFinish_WithoutItem()
+    {
+        timeToFinish_WithoutItem = timerInSecs;
+    }
+    public void SaveFinish_WithItem()
+    {
+        timeToFinish_WithItem = timerInSecs;
     }
 }

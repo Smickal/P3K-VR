@@ -69,9 +69,9 @@ public enum DialogueListType_Choking_Explanation
 public enum DialogueListType_Bleeding_Explanation
 {
     None, 
-    Bleeding_WithItem_CleanHands,
-    Bleeding_WithItem_Bandage,
-    Bleeding_WithoutItem_CleanHands, Bleeding_WithoutItem_WearGloves, Bleeding_WithoutItem_StopBleed, Bleeding_WithoutItem_CleanBlood, Bleeding_WithoutItem_DryWater, Bleeding_WithoutItem_BandageTime, Bleeding_WithoutItem_PuttingLegOnTopSomethingTime, Bleeding_WithoutItem_Done,
+    Bleeding_WithItem_Start, Bleeding_WithoutItem_Start,
+    Bleeding_NextStep,
+    
     Bleeding_PatientDissatisfied
 }
 public enum DialogueListType_Choking_Ending

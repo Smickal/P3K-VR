@@ -8,6 +8,7 @@ using Unity.Mathematics;
 public class OnPutBriefCase : MonoBehaviour
 {
     [SerializeField]GameObject checker;
+    [SerializeField]Collider coll;
     private bool isThereBriefCase, isMovingTowardsPlace;
     public bool IsThereBriefCase{get{return isThereBriefCase;}}
     Rigidbody rb;
@@ -19,55 +20,25 @@ public class OnPutBriefCase : MonoBehaviour
     [SerializeField] float _snapDistance = 0.05f;
     private void Update() 
     {
-        // if(!isMovingTowardsPlace)return;
-        // Vector3 moveDir = positionBriefCase.position - briefcase.transform.position;
-
-        // //rigid.AddForce(moveDir * Time.deltaTime * _lerpSpeed, ForceMode.Force);
-        // rb.velocity = moveDir * Time.deltaTime * _lerpSpeed;
-
-        // //transform.position = Vector3.MoveTowards(transform.position, _startingPos.transform.position, Time.deltaTime * _lerpSpeed);
-
-
-
-        // if (Vector3.Distance(briefcase.transform.position, positionBriefCase.transform.position) <= _snapDistance)
-        // {
-        //     isMovingTowardsPlace = false;
-        //     rb.velocity = Vector3.zero;
-        //     rb.angularVelocity = Vector3.zero;
-        //     rb.isKinematic = true;
-        //     briefcase.transform.position = positionBriefCase.transform.position;
-        //     briefcase.transform.rotation = rotationBriefCase;
-        //     if(briefcase)briefcase.ChangeButtonCollEnableOnPlace(true);
-        //     checker.SetActive(false);
-        // }  
+        if(!isMovingTowardsPlace)return;
+        if(briefcase.transform.position == positionBriefCase.transform.position)return;
+        if(briefcase.transform.position != positionBriefCase.transform.position)
+        {
+            
+            briefcase.transform.position = positionBriefCase.transform.position;
+            briefcase.transform.rotation = rotationBriefCase;
+        } 
+        
     }
     public void PutInPlace(GameObject briefCase)
     {
         isThereBriefCase = true;
-        // PlayerRestriction.RemoveData(briefCase);
-        
-        // grabs = briefCase.GetComponentsInChildren<HandGrabInteractable>(true);
-        // foreach(HandGrabInteractable grab in grabs)
-        // {
-        //     grab.enabled = false;
-        // }
-        // distanceGrabs = briefCase.GetComponentsInChildren<DistanceHandGrabInteractable>(true);
-        // foreach(DistanceHandGrabInteractable grab in distanceGrabs)
-        // {
-        //     grab.enabled = false;
-        // }
 
-        // grabBNGs = briefCase.GetComponentsInChildren<Grabbable>(true);
-        // foreach(Grabbable grab in grabBNGs)
-        // {
-        //     grab.enabled = false;
-        // }
         briefInteractable.TurnOffAll();
         rb = briefCase.GetComponent<Rigidbody>();
         briefcase = briefCase.GetComponent<Briefcase>();
-        // isMovingTowardsPlace = true;
+        
 
-        isMovingTowardsPlace = false;
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
         rb.isKinematic = true;
@@ -76,29 +47,27 @@ public class OnPutBriefCase : MonoBehaviour
         briefcase.transform.rotation = rotationBriefCase;
         if(briefcase)briefcase.ChangeButtonCollEnableOnPlace(true);
         checker.SetActive(false);
+        coll.enabled = false;
+        isMovingTowardsPlace = true;
     }
     private void OnTriggerStay(Collider other)
     {
         if(isThereBriefCase)return;
         if(other.gameObject.name.Contains("BriefCase"))
         {
-            Debug.Log("yes");
+            // Debug.Log("yes");
             if(other.gameObject.transform.parent != null && other.gameObject.transform.parent.GetComponent<SnapZone>() != null) return;
-            Debug.Log("lewat");
+            // Debug.Log("lewat");
             Grabbable grabHere = other.GetComponent<Grabbable>();
             // IsBeingGrabHandTrack _isBeing = other.GetComponent<IsBeingGrabHandTrack>();
             // if((grabHere != null && grabHere.BeingHeld) || (_isBeing != null && _isBeing.IsBeingGrab()))return;
             // Debug.Log("lewat");
             briefInteractable = other.gameObject.GetComponent<BriefCaseInteractableEvent>();
-            if(grabHere != null && grabHere.BeingHeld) 
-            {
-                Grabber grabber = grabHere.GetPrimaryGrabber();
-                if(grabber != null)grabber.TryRelease();
-            }
-            else
-            {
-                briefInteractable.ReleaseHandGrabNow();
-            }
+
+            Grabber grabber = grabHere.GetPrimaryGrabber();
+            if(grabber != null)grabber.TryRelease();
+            briefInteractable.ReleaseHandGrabNow();
+            
             PutInPlace(other.gameObject);
         }
     }
