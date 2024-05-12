@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using BNG;
 using Oculus.Interaction;
 using Oculus.Interaction.HandGrab;
 using UnityEngine;
@@ -8,6 +9,7 @@ using UnityEngine;
 public class BriefCaseInteractableEvent : MonoBehaviour
 {
     [Header("Reference")]
+    [SerializeField]BNG.Grabbable grabBNG;
     [SerializeField]private HandGrabInteractable[] handGrabs;
     [SerializeField]private DistanceHandGrabInteractable[] distanceHandGrabs;
     [SerializeField]private HandGrabInteractor leftGrabberHT;
@@ -15,6 +17,7 @@ public class BriefCaseInteractableEvent : MonoBehaviour
     [SerializeField]private DistanceHandGrabInteractor leftDistanceGrabberHT, rightDistanceGrabberHT;
     private HandGrabInteractor currHand;
     private DistanceHandGrabInteractor currDistanceHand;
+    [SerializeField]PlayerRestriction playerRestriction;
     private void Awake() {
         if(handGrabs == null)
         {
@@ -98,5 +101,21 @@ public class BriefCaseInteractableEvent : MonoBehaviour
         
         currHand = null;
         currDistanceHand = null;
+    }
+    public void TurnOffAll()
+    {
+        foreach(HandGrabInteractable grab in handGrabs)
+        {
+            playerRestriction.DeleteHandGrabInteractable(grab);
+            grab.enabled = false;
+        }
+        foreach(DistanceHandGrabInteractable grab in distanceHandGrabs)
+        {
+            playerRestriction.DeleteDistanceHandGrab(grab);
+            grab.enabled = false;
+        }
+
+        grabBNG.enabled = false;
+        playerRestriction.DeleteGrabbable(grabBNG);
     }
 }

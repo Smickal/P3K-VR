@@ -337,4 +337,37 @@ public class PlayerRestriction : MonoBehaviour, ITurnOffStatic
             // if(initial_BNG_GrabbableStates.ContainsKey(grabbable))initial_BNG_GrabbableStates.Remove(grabbable);
         }
     }
+    public void DeleteHandGrabInteractable(HandGrabInteractable grab)
+    {
+        if(all_OVR_Grabable.Contains(grab))
+        {
+            all_OVR_Grabable.Remove(grab);
+            Debug.Log("I remove handgrab " + grab+ gameObject);
+        }
+    }
+    public void DeleteDistanceHandGrab(DistanceHandGrabInteractable grab)
+    {
+        if(all_OVR_DistanceGrabable.Contains(grab))
+        {
+            all_OVR_DistanceGrabable.Remove(grab);
+            Debug.Log("I remove handgrabdis " + grab + gameObject);
+        }
+    }
+    public void DeleteGrabbable(Grabbable grab)
+    {
+        if(all_BNG_Grabable.Contains(grab))
+        {
+            all_BNG_Grabable.Remove(grab);
+            Debug.Log("I remove rb " + grab+ gameObject);
+        }
+        Rigidbody getRigid = grab.GetComponent<Rigidbody>();
+        if(getRigid)
+        {
+            if(all_Grabable_Rigidbody.Contains(getRigid))
+            {
+                all_Grabable_Rigidbody.Remove(getRigid);
+                Debug.Log("I remove rb " + getRigid+ gameObject);
+            }
+        }
+    }
 }
