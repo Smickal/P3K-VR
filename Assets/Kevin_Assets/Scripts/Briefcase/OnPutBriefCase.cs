@@ -12,9 +12,7 @@ public class OnPutBriefCase : MonoBehaviour
     public bool IsThereBriefCase{get{return isThereBriefCase;}}
     Rigidbody rb;
     Briefcase briefcase;
-    [SerializeField]HandGrabInteractable[] grabs;
-    [SerializeField]DistanceHandGrabInteractable[] distanceGrabs;
-    [SerializeField] Grabbable[] grabBNGs;
+    BriefCaseInteractableEvent briefInteractable;
     [SerializeField]private Transform positionBriefCase;
     [SerializeField]private Quaternion rotationBriefCase;
     [SerializeField] float _lerpSpeed = 15f;
@@ -46,24 +44,25 @@ public class OnPutBriefCase : MonoBehaviour
     public void PutInPlace(GameObject briefCase)
     {
         isThereBriefCase = true;
-        PlayerRestriction.RemoveData(briefCase);
+        // PlayerRestriction.RemoveData(briefCase);
         
-        grabs = briefCase.GetComponentsInChildren<HandGrabInteractable>(true);
-        foreach(HandGrabInteractable grab in grabs)
-        {
-            grab.enabled = false;
-        }
-        distanceGrabs = briefCase.GetComponentsInChildren<DistanceHandGrabInteractable>(true);
-        foreach(DistanceHandGrabInteractable grab in distanceGrabs)
-        {
-            grab.enabled = false;
-        }
+        // grabs = briefCase.GetComponentsInChildren<HandGrabInteractable>(true);
+        // foreach(HandGrabInteractable grab in grabs)
+        // {
+        //     grab.enabled = false;
+        // }
+        // distanceGrabs = briefCase.GetComponentsInChildren<DistanceHandGrabInteractable>(true);
+        // foreach(DistanceHandGrabInteractable grab in distanceGrabs)
+        // {
+        //     grab.enabled = false;
+        // }
 
-        grabBNGs = briefCase.GetComponentsInChildren<Grabbable>(true);
-        foreach(Grabbable grab in grabBNGs)
-        {
-            grab.enabled = false;
-        }
+        // grabBNGs = briefCase.GetComponentsInChildren<Grabbable>(true);
+        // foreach(Grabbable grab in grabBNGs)
+        // {
+        //     grab.enabled = false;
+        // }
+        briefInteractable.TurnOffAll();
         rb = briefCase.GetComponent<Rigidbody>();
         briefcase = briefCase.GetComponent<Briefcase>();
         isMovingTowardsPlace = true;
@@ -80,7 +79,7 @@ public class OnPutBriefCase : MonoBehaviour
             // IsBeingGrabHandTrack _isBeing = other.GetComponent<IsBeingGrabHandTrack>();
             // if((grabHere != null && grabHere.BeingHeld) || (_isBeing != null && _isBeing.IsBeingGrab()))return;
             // Debug.Log("lewat");
-            BriefCaseInteractableEvent brief = other.gameObject.GetComponent<BriefCaseInteractableEvent>();
+            briefInteractable = other.gameObject.GetComponent<BriefCaseInteractableEvent>();
             if(grabHere != null && grabHere.BeingHeld) 
             {
                 Grabber grabber = grabHere.GetPrimaryGrabber();
@@ -88,7 +87,7 @@ public class OnPutBriefCase : MonoBehaviour
             }
             else
             {
-                brief.ReleaseHandGrabNow();
+                briefInteractable.ReleaseHandGrabNow();
             }
             PutInPlace(other.gameObject);
         }

@@ -2660,7 +2660,7 @@ Transform:
   m_GameObject: {fileID: 808628305732136135}
   serializedVersion: 2
   m_LocalRotation: {x: -0.000000014901159, y: 0.000000014901159, z: -0, w: 1}
-  m_LocalPosition: {x: 0.000000015364364, y: -0.000000039754642, z: 0.00000010250358}
+  m_LocalPosition: {x: 0.00000029249398, y: 0.000000050889636, z: -0.00000027538618}
   m_LocalScale: {x: 0.9999999, y: 0.9999999, z: 0.9999999}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9625,6 +9625,7 @@ GameObject:
   - component: {fileID: 8269698326963889084}
   - component: {fileID: 5776148555600074462}
   - component: {fileID: 3255722783650152098}
+  - component: {fileID: 8248169623128697926}
   m_Layer: 10
   m_Name: BriefCase
   m_TagString: Untagged
@@ -9709,7 +9710,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _briefCaseAnim: {fileID: 479638274978664102}
-  _buttonColliders: []
+  _buttonColliders:
+  - {fileID: 1890293554954370547}
+  - {fileID: 5924761511790685476}
   _inventoryColliders:
   - {fileID: 4843361574577412646}
   - {fileID: 6118388885536747168}
@@ -9740,6 +9743,7 @@ MonoBehaviour:
   - {fileID: 2638889506643688045}
   SoundOnTriggerButton: {fileID: 8300000, guid: 9c7f85ce3536b3b4c89aa4bd0db96665,
     type: 3}
+  canOnlyOpenInCertainSpot: 1
 --- !u!65 &2788282102446649330
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10185,6 +10189,34 @@ MonoBehaviour:
   MaximumVolume: 1
   RecentlyPlayedSound: 0
   LastRelativeVelocity: 0
+--- !u!114 &8248169623128697926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3320422822694198511}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69dcbf58ec0e01d4098c8c9c979af02e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grabBNG: {fileID: 4211957193428056180}
+  handGrabs:
+  - {fileID: 3457900674892064163}
+  - {fileID: 8467530975204459602}
+  - {fileID: 1917423755411109517}
+  - {fileID: 3686714625244995809}
+  distanceHandGrabs:
+  - {fileID: 5154265716974645262}
+  - {fileID: 9053560536650857130}
+  - {fileID: 1468696320068329418}
+  - {fileID: 6755194352821408380}
+  leftGrabberHT: {fileID: 0}
+  rightGrabberHT: {fileID: 0}
+  leftDistanceGrabberHT: {fileID: 0}
+  rightDistanceGrabberHT: {fileID: 0}
+  playerRestriction: {fileID: 0}
 --- !u!1 &3340967256896268782
 GameObject:
   m_ObjectHideFlags: 0

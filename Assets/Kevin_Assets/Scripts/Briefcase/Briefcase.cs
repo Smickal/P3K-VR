@@ -31,10 +31,10 @@ public class Briefcase : MonoBehaviour
     }   
     private void Update() 
     {
-        if(canOnlyOpenInCertainSpot)
-        {
-            ChangeButtonCollEnable(false);
-        }
+        // if(canOnlyOpenInCertainSpot)
+        // {
+        //     ChangeButtonCollEnable(false);
+        // }
         if(isOpen)
         {
             if((PlayerRestriction.IsRestrictGrabable != null) && !PlayerRestriction.IsRestrictGrabable()) EnableInventory();
