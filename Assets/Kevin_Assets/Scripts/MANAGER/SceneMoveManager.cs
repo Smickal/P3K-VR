@@ -16,10 +16,16 @@ public class SceneMoveManager : MonoBehaviour
     public BGMManager bGMManager;
     [SerializeField]ScreenFader screenFader;
     UnityAction questDoneRestartSceneAfterFade, questGoToSceneAfterFade;
+    [SerializeField]PlayerHeightController playerHeightController;
+    [SerializeField]PlayerManager playerManager;
     private void Awake() 
     {
         questDoneRestartSceneAfterFade = ()=>
         {
+            if(playerManager.PlayerLastInGameMode() == InGame_Mode.NormalWalk)
+            {
+                playerHeightController.ResetHeight();
+            }
             screenFader.ResetEvent();
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         };
@@ -41,6 +47,7 @@ public class SceneMoveManager : MonoBehaviour
     }
     public void GoToScene(string sceneName)
     {
+        
         TurnOffAllStatics();
 
         //debug bntr yaa
@@ -51,6 +58,7 @@ public class SceneMoveManager : MonoBehaviour
         
         questGoToSceneAfterFade = ()=>
         {
+            playerHeightController.ResetHeight();
             screenFader.ResetEvent();
             SceneManager.LoadScene(sceneName);
         };

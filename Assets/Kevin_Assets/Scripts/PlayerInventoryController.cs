@@ -9,8 +9,10 @@ public class PlayerInventoryController : MonoBehaviour
     [SerializeField] SnapZone[] snapzones;
     [SerializeField] GameManager gameManager;
     private bool isUnlock = true;
+    public bool debugOpen;
     public void ChangeEnable()
     {
+        if(debugOpen)return;
         if(gameManager.LevelModeNow() == LevelMode.Level)
         {
             if(gameManager.InGame_ModeNow() == InGame_Mode.NormalWalk)

@@ -26,7 +26,7 @@ public class CircleMotionTransform : MonoBehaviour
 
     void Start()
     {
-        RecreateCircle();
+        if(wantToRecreateCircleBeforeStart)RecreateCircle();
     }
 
 

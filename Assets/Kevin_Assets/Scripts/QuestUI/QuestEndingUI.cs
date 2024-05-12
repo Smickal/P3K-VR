@@ -12,6 +12,8 @@ public class QuestEndingUI : MonoBehaviour, ITurnOffStatic
     [SerializeField] private KitUiManager _kitUIMgr;
     [SerializeField] private UILangkahP3K _uiLangkahP3K;
     [SerializeField] Transform _stepTransform;
+    [SerializeField] DialogueManager dialogueManager;
+    private ScoreName scoreNowName;
     [Header("Container")]
     [SerializeField] private GameObject[] _endingContainer;
     [SerializeField] private GameObject _evalContainer, _GlossaryContainer;
@@ -55,7 +57,7 @@ public class QuestEndingUI : MonoBehaviour, ITurnOffStatic
     {
         SOLangkahP3K selectedData = _soLangkahData[(int)levelP3KTypeNow-1];
         UILangkahP3K.UnlockLangkahSave(selectedData);
-
+        scoreNowName = scoreNow;
         _scoreIMG.sprite = _scoreSprite[(int)scoreNow-1];
 
         string scoreName = scoreNow.ToString();
@@ -80,11 +82,60 @@ public class QuestEndingUI : MonoBehaviour, ITurnOffStatic
         _kitUIMgr.ActivateBaseUI("Evaluation");
         _kitUIMgr.OpenQuestEnding();
         _evalContainer.gameObject.SetActive(true);
+
+        if(GameManager.CheckLevelTypeNow() == LevelP3KType.Choking)
+        {
+            if(scoreNowName == ScoreName.Sad_Face)
+            {
+                
+                dialogueManager.PlayDialogueScene(DialogueListTypeParent.Choking_Ending, DialogueListType_Choking_Ending.Ending_Sad);
+                Debug.Log("Sad");
+            }
+            else if(scoreNowName == ScoreName.Small_Happy_Face)
+            {
+                
+                dialogueManager.PlayDialogueScene(DialogueListTypeParent.Choking_Ending, DialogueListType_Choking_Ending.Ending_SmallHappy);
+                Debug.Log("Small_Happy_Face");
+            }
+            else if(scoreNowName == ScoreName.Big_Happy_Face)
+            {
+                
+                dialogueManager.PlayDialogueScene(DialogueListTypeParent.Choking_Ending, DialogueListType_Choking_Ending.Ending_Happy);
+                Debug.Log("Big_Happy_Face");
+            }
+            
+        }
+        else if (GameManager.CheckLevelTypeNow() == LevelP3KType.Bleeding)
+        {
+            if(scoreNowName == ScoreName.Sad_Face)
+            {
+                dialogueManager.PlayDialogueScene(DialogueListTypeParent.Bleeding_Ending, DialogueListType_Bleeding_Ending.Ending_Sad);
+            }
+            else if(scoreNowName == ScoreName.Small_Happy_Face)
+            {
+                dialogueManager.PlayDialogueScene(DialogueListTypeParent.Bleeding_Ending, DialogueListType_Bleeding_Ending.Ending_SmallHappy);
+            }
+            else if(scoreNowName == ScoreName.Big_Happy_Face)
+            {
+                dialogueManager.PlayDialogueScene(DialogueListTypeParent.Bleeding_Ending, DialogueListType_Bleeding_Ending.Ending_Happy);
+            }
+        }
+        
     }
     public void ShowGlossary()
     {
         _evalContainer.gameObject.SetActive(false);
         _GlossaryContainer.gameObject.SetActive(true);
+
+        if(GameManager.CheckLevelTypeNow() == LevelP3KType.Choking)
+        {
+            dialogueManager.PlayDialogueScene(DialogueListTypeParent.Choking_Ending, DialogueListType_Choking_Ending.EndingAfter);
+            
+        }
+        else if (GameManager.CheckLevelTypeNow() == LevelP3KType.Bleeding)
+        {
+            dialogueManager.PlayDialogueScene(DialogueListTypeParent.Bleeding_Ending, DialogueListType_Bleeding_Ending.EndingAfter);
+        }
     }
     public void CloseQuestEnding()
     {

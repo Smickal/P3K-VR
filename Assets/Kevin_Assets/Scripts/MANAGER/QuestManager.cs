@@ -40,6 +40,10 @@ public class QuestManager : MonoBehaviour
     [SerializeField]ScreenFader screenFader;
     UnityAction questDoneMethodAfterFade;
     private bool hasClickRestartQuit;
+
+    [Header("Ambulance Sound")]
+    [SerializeField] AudioSource audioSource;
+    private bool soundHasStart;
     protected virtual void Awake() 
     {
         questDoneMethodAfterFade = QuestDoneMethod;
@@ -62,6 +66,8 @@ public class QuestManager : MonoBehaviour
         }
         if(isQuestStart && gameManager.GameStateNow() == GameState.InGame && !screenFader.IsFading)
         {
+            PlayAmbulanceSound();
+            
             if(timerInSecs < timerInSecsMax)
             {
                 timerInSecs += Time.deltaTime;
@@ -105,13 +111,13 @@ public class QuestManager : MonoBehaviour
     public void StartQuest()
     {
         OnStartQuest.Invoke();
-        
+        BGMManager.ChangeBGMAudio(BGM_Type.tense);
         if(PlayerManager.LastInGameMode() != InGame_Mode.FirstAid)
         {
             PlayerManager.ChangeInGame_Mode_Now(InGame_Mode.FirstAid);
             PlayerManager.SetPlayerPosition_DoP3k();
             EnvironmentLevelManager.SetEnvironment_FirstAid();
-            BGMManager.ChangeBGMAudio(BGM_Type.tense);
+            
         }
         
         if(levelP3KTypeNow == LevelP3KType.Choking)
@@ -132,6 +138,7 @@ public class QuestManager : MonoBehaviour
     {
         OnFinishQuest.Invoke();
         isQuestStart = false;
+        audioSource.volume = 1f;
         PlayerManager.ChangeInGame_Mode_Now(InGame_Mode.NormalWalk);
         if(levelP3KTypeNow == LevelP3KType.Choking) choking_QuestManager.ScoreCounter();
         else if (levelP3KTypeNow == LevelP3KType.Bleeding) bleeding_QuestManager.ScoreCounter();
@@ -149,8 +156,16 @@ public class QuestManager : MonoBehaviour
         questManagerUI.CloseHelper_Bleeding_WithoutItem();
         EnvironmentLevelManager.SetEnvironment_FinishQuest();
         PlayerManager.SetPlayerPosition_FinishP3k();
+        if(soundHasStart)
+        {
+            soundHasStart = false;
+            audioSource.Stop();
+            audioSource.volume = 0f; 
+        }
+        
         screenFader.ResetEvent();
         screenFader.DoFadeOut();
+        
     }
     protected virtual void Quest(){}
     protected virtual void ScoreCounter()
@@ -181,9 +196,59 @@ public class QuestManager : MonoBehaviour
     }
     protected virtual void ResetQuest() 
     {
+        dialogueManager.HideFinishedDialogueNow();
         // Debug.Log(sceneMoveManager.gameObject);
         
         sceneMoveManager.RestartScene();
     }
 
+
+    public void PlayAmbulanceSound()
+    {
+        if(Mathf.Round(timerInSecs) == timerInSecsMax - 5)
+            {
+                audioSource.volume = 0.2f;
+                if(!soundHasStart)
+                {
+                    soundHasStart = true;
+                    audioSource.Play();
+                }
+            }
+            else if(Mathf.Round(timerInSecs) == timerInSecsMax - 4)
+            {
+                audioSource.volume = 0.4f;
+                if(!soundHasStart)
+                {
+                    soundHasStart = true;
+                    audioSource.Play();
+                }
+            }
+            else if(Mathf.Round(timerInSecs) == timerInSecsMax - 3)
+            {
+                audioSource.volume = 0.6f;
+                if(!soundHasStart)
+                {
+                    soundHasStart = true;
+                    audioSource.Play();
+                }
+            }
+            else if(Mathf.Round(timerInSecs) == timerInSecsMax - 2)
+            {
+                audioSource.volume = 0.8f;
+                if(!soundHasStart)
+                {
+                    soundHasStart = true;
+                    audioSource.Play();
+                }
+            }
+            else if(Mathf.Round(timerInSecs) == timerInSecsMax - 1)
+            {
+                audioSource.volume = 1f;
+                if(!soundHasStart)
+                {
+                    soundHasStart = true;
+                    audioSource.Play();
+                }
+            }
+    }
 }

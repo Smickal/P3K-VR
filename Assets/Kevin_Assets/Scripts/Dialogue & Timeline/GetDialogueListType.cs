@@ -32,6 +32,55 @@ public class GetDialogueListType : MonoBehaviour
                 if(enumNumber > dialogueListType_Home_QuizExplanation.Length)return dialogueListType_Home_QuizExplanation[0];
                 return dialogueListType_Home_QuizExplanation[enumNumber];
             }
+            if(dialogueListTypeParent == DialogueListTypeParent.Bleeding_WrongItem)
+            {
+                if(dialogueListType_Bleeding_WrongItems == null)dialogueListType_Bleeding_WrongItems = (DialogueListType_Bleeding_WrongItem[])Enum.GetValues(typeof(DialogueListType_Bleeding_WrongItem));
+
+                if(enumNumber > dialogueListType_Bleeding_WrongItems.Length)return dialogueListType_Bleeding_WrongItems[0];
+                return dialogueListType_Bleeding_WrongItems[enumNumber];
+            }
+            if(dialogueListTypeParent == DialogueListTypeParent.Choking_Intro)
+            {
+                if(dialogueListType_Choking_Intros == null)dialogueListType_Choking_Intros = (DialogueListType_Choking_Intro[])Enum.GetValues(typeof(DialogueListType_Choking_Intro));
+
+                if(enumNumber > dialogueListType_Choking_Intros.Length)return dialogueListType_Choking_Intros[0];
+                return dialogueListType_Choking_Intros[enumNumber];
+            }
+            if(dialogueListTypeParent == DialogueListTypeParent.Bleeding_Intro)
+            {
+                if(dialogueListType_Bleeding_Intros == null)dialogueListType_Bleeding_Intros = (DialogueListType_Bleeding_Intro[])Enum.GetValues(typeof(DialogueListType_Bleeding_Intro));
+
+                if(enumNumber > dialogueListType_Bleeding_Intros.Length)return dialogueListType_Bleeding_Intros[0];
+                return dialogueListType_Bleeding_Intros[enumNumber];
+            }
+            if(dialogueListTypeParent == DialogueListTypeParent.Choking_Explanation)
+            {
+                if(dialogueListType_Choking_Explanations == null)dialogueListType_Choking_Explanations = (DialogueListType_Choking_Explanation[])Enum.GetValues(typeof(DialogueListType_Choking_Explanation));
+
+                if(enumNumber > dialogueListType_Choking_Explanations.Length)return dialogueListType_Choking_Explanations[0];
+                return dialogueListType_Choking_Explanations[enumNumber];
+            }
+            if(dialogueListTypeParent == DialogueListTypeParent.Bleeding_Explanation)
+            {
+                if(dialogueListType_Bleeding_Explanations == null)dialogueListType_Bleeding_Explanations = (DialogueListType_Bleeding_Explanation[])Enum.GetValues(typeof(DialogueListType_Bleeding_Explanation));
+
+                if(enumNumber > dialogueListType_Bleeding_Explanations.Length)return dialogueListType_Bleeding_Explanations[0];
+                return dialogueListType_Bleeding_Explanations[enumNumber];
+            }
+            if(dialogueListTypeParent == DialogueListTypeParent.Choking_Ending)
+            {
+                if(dialogueListType_Choking_Endings == null)dialogueListType_Choking_Endings = (DialogueListType_Choking_Ending[])Enum.GetValues(typeof(DialogueListType_Choking_Ending));
+
+                if(enumNumber > dialogueListType_Choking_Endings.Length)return dialogueListType_Choking_Endings[0];
+                return dialogueListType_Choking_Endings[enumNumber];
+            }
+            if(dialogueListTypeParent == DialogueListTypeParent.Bleeding_Ending)
+            {
+                if(dialogueListType_Bleeding_Endings == null)dialogueListType_Bleeding_Endings = (DialogueListType_Bleeding_Ending[])Enum.GetValues(typeof(DialogueListType_Bleeding_Ending));
+
+                if(enumNumber > dialogueListType_Bleeding_Endings.Length)return dialogueListType_Bleeding_Endings[0];
+                return dialogueListType_Bleeding_Endings[enumNumber];
+            }
             return dialogueListType_Home_Intro[0];
         }
     } 

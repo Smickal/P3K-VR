@@ -20,7 +20,7 @@ namespace DialogueSystem
         [Tooltip("If true, langsung hide, if not true, tunggu Action apa baru tutup dr sana")]
         [SerializeField]private bool isCloseAfterFinished, hasSceneDialogueFinish;
 
-        IEnumerator dialogSeq;
+        [SerializeField]IEnumerator dialogSeq;
         private void Awake() 
         {
             HideDialogue();
@@ -75,7 +75,6 @@ namespace DialogueSystem
         public void StopCourotineNow()
         {
             if(!_dialogueLineContainer.finished)_dialogueLineContainer.StopLineText();
-            
             if(dialogSeq == null)return;
             if(!hasSceneDialogueFinish)StopCoroutine(dialogSeq);
             dialogSeq = null;

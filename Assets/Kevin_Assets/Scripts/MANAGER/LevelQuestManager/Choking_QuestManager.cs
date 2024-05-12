@@ -14,6 +14,10 @@ public class Choking_QuestManager : QuestManager, ITurnOffStatic
     private float progressNow;
     [SerializeField]private float _minusProgress;
     [SerializeField]private float[] timerTarget;
+    [Header("Change Skin")]
+    [SerializeField]SkinnedMeshRenderer skinnedMesh;
+    [SerializeField]Material[] materials_RedSkin, materials_RedderSkin;
+    bool hasChangeRedSkin, hasChangeRedderSkin;
     
     public static Action<float> AddProgressBar;
     // public static Action Questt;
@@ -40,12 +44,36 @@ public class Choking_QuestManager : QuestManager, ITurnOffStatic
             {
                 progressNow = 0;
             }
+            if(timerInSecs > timerTarget[1])
+            {
+                if(!hasChangeRedderSkin)
+                {
+                    hasChangeRedderSkin = true;
+                    skinnedMesh.materials = materials_RedderSkin;
+
+                    dialogueManager.PlayDialogueScene(DialogueListTypeParent.Choking_Explanation, DialogueListType_Choking_Explanation.Choking_GettingRedder_2);
+                }
+                
+                
+            }
+            else if(timerInSecs > timerTarget[0])
+            {
+                
+                if(!hasChangeRedSkin)
+                {
+                    hasChangeRedSkin = true;
+                    skinnedMesh.materials = materials_RedSkin;
+
+                    dialogueManager.PlayDialogueScene(DialogueListTypeParent.Choking_Explanation, DialogueListType_Choking_Explanation.Choking_GettingRedder);
+                }
+            }
         }
+        
     }
     protected override void Quest()
     {
         OnStartQuest.Invoke();// krn ud ga berhubungan ama questmanager jd hrsnya aman..
-        // dialogueManager.PlayDialogueScene(DialogueListTypeParent.Choking_Explanation, Dialouge)
+        dialogueManager.PlayDialogueScene(DialogueListTypeParent.Choking_Explanation, DialogueListType_Choking_Explanation.Choking_Exp_1);
         timerInSecs = 0;
         questManagerUI.SetTimerSlider(timerInSecsMax);
 
@@ -59,24 +87,25 @@ public class Choking_QuestManager : QuestManager, ITurnOffStatic
     {
         score = ScoreName.Sad_Face;
         
-        if(timerInSecs <= timerTarget[1])
-        {
-            score = ScoreName.Small_Happy_Face;
-        }
+        
         if(timerInSecs <= timerTarget[0])
         {
             score = ScoreName.Big_Happy_Face;
+        }
+        else if(timerInSecs <= timerTarget[1])
+        {
+            score = ScoreName.Small_Happy_Face;
         }
         base.ScoreCounter();
     }
 
     private IEnumerator ChokingStart()
     {
-        // Debug.Log("Start BangNGGGGGGGGGGGGGGGGG");
-        Debug.Log("ShowBekblow");
         yield return new WaitUntil(()=> patientChoking.BackBlowDone);
-        Debug.Log("ShowGeimlich");
+        dialogueManager.PlayDialogueScene(DialogueListTypeParent.Choking_Explanation, DialogueListType_Choking_Explanation.Choking_Exp_2);
+
         yield return new WaitUntil(()=> patientChoking.HeimlichDone);
+        dialogueManager.PlayDialogueScene(DialogueListTypeParent.Choking_Explanation, DialogueListType_Choking_Explanation.Choking_Exp_3);
         //do the dialogue
         questManagerUI.ShowTimer();
         isQuestStart = true;
@@ -102,5 +131,15 @@ public class Choking_QuestManager : QuestManager, ITurnOffStatic
     {
         if(chokingCourotine != null)StopCoroutine(chokingCourotine);
         base.ResetQuest();
+    }
+    public void PlayDialogueBackBlow()
+    {
+        if(!isQuestStart)return;
+        dialogueManager.PlayDialogueScene(DialogueListTypeParent.Choking_Explanation, DialogueListType_Choking_Explanation.Choking_Exp_Backblow);
+    }
+    public void PlayDialogueHeimlich()
+    {
+        if(!isQuestStart)return;
+        dialogueManager.PlayDialogueScene(DialogueListTypeParent.Choking_Explanation, DialogueListType_Choking_Explanation.Choking_Exp_Heimlich);
     }
 }

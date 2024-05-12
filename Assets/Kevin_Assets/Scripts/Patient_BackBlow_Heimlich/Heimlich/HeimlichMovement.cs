@@ -158,7 +158,19 @@ public class HeimlichMovement : MonoBehaviour
 
         //harusnya ini balikin ke asal
         //move Target According to left&right grabber
-        _targetTr.position = _targetTRStartPos;
+        if(hasTurnOff)
+        {
+            hasTurnOff = false;
+
+            modelLeft.SetActive(false);
+            modelRight.SetActive(false);
+            
+            leftVisual.SetActive(true);
+            rightVisual.SetActive(true);
+            leftVisualHT.SetActive(true);
+            rightVisualHT.SetActive(true);
+        }
+        _targetTr.localPosition = _targetTRStartPos;
     }
 
     private void CheckGrabber()

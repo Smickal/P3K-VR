@@ -41,7 +41,7 @@ public class OnCollisionAlcoholWipes : MonoBehaviour
 
 
         if (grabber == null && (other.gameObject != _leftGrabberHT && other.gameObject != _rightGrabberHT)) return;
-        Debug.Log("Yang kena sini adalah EnterTrig" + other.gameObject);
+        // Debug.Log("Yang kena sini adalah EnterTrig" + other.gameObject);
         cleanManager.RegisterCurrentNeedToCleanGrabber(other.gameObject);
     }
     private void OnTriggerExit(Collider other) {
@@ -52,7 +52,7 @@ public class OnCollisionAlcoholWipes : MonoBehaviour
         
 
         if (grabber == null && (other.gameObject != _leftGrabberHT && other.gameObject != _rightGrabberHT)) return;
-        Debug.Log("Yang kena sini adalah ExitTrig" + other.gameObject);
+        // Debug.Log("Yang kena sini adalah ExitTrig" + other.gameObject);
         cleanManager.UnRegisterCurrentNeedToCleanGrabber(other.gameObject);
     }
 

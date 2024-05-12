@@ -56,18 +56,18 @@ public class TimelineManager : MonoBehaviour, ITurnOffStatic
     private void PlayTimeline(TimelineType typeTimeline)
     {
         timelineTypeNow = typeTimeline;
-        if(timelineTypeNow == TimelineType.Home_Cutscene1)
+        if(timelineTypeNow == TimelineType.BleedIntro3_Cutscene)
         {
-            director.playableAsset = tImelineList.Home_Cutscene1;
+            director.playableAsset = tImelineList.BleedIntro3_Cutscene;
         }
         director.Play();
     }
     public void PlayTimelineOnEvent(GetTimelineType typeTimeline)
     {
         timelineTypeNow = typeTimeline.timelineType;
-        if(timelineTypeNow == TimelineType.Home_Cutscene1)
+        if(timelineTypeNow == TimelineType.BleedIntro3_Cutscene)
         {
-            director.playableAsset = tImelineList.Home_Cutscene1;
+            director.playableAsset = tImelineList.BleedIntro3_Cutscene;
         }
         director.Play();
     }

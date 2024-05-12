@@ -46,7 +46,7 @@ public class PlayerHeightController : MonoBehaviour, ITurnOffStatic
         }
     }
 
-    private void ResetHeight()
+    public void ResetHeight()
     {
         _heightConnectOBJ.ResetCharacterController(startHeight);
         PlayerPrefs.SetFloat(SaveStateKey, startHeight);

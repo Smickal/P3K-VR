@@ -55,6 +55,10 @@ public class PlayerRestriction : MonoBehaviour, ITurnOffStatic
         IsRestrictRotation += RestrictRotation;
 
 
+        
+        
+    }
+    private void Start() {
         if(!DebugOnly)
         {
             if(!playerManager.IsFinish_TutorialMain() && gameManager.LevelModeNow() == LevelMode.Home)
@@ -68,16 +72,17 @@ public class PlayerRestriction : MonoBehaviour, ITurnOffStatic
                     if(gameManager.LevelTypeNow() == LevelP3KType.Choking)
                     {
                         DisableAll();
+                        Debug.Log(playerMovement_BNG.enabled + " OI APA SIStart");
                     }
                     else if(gameManager.LevelTypeNow() == LevelP3KType.Bleeding)
                     {
                         DisableAllGrabable();
+                        DisableAllMovement();
                     }
                 }
             }
 
         }
-        
     }
     public void TurnOffStatic()
     {
@@ -100,12 +105,13 @@ public class PlayerRestriction : MonoBehaviour, ITurnOffStatic
         
     }
     private void Update() {
+        Debug.Log(playerMovement_BNG.enabled + " OI APA SI");
         if(enableNow)
         {
             enableNow = false;
             EnableAll();
         }
-        // Debug.Log(playerMovement_BNG.enabled);
+        
     }
 
     private bool RestrictAll(){return isRestrictAll;}
@@ -184,7 +190,7 @@ public class PlayerRestriction : MonoBehaviour, ITurnOffStatic
         isRestrictMovement = true;
         // Debug.Log("WHAT DO YOU MEAN THERE'S NO PLAYER MOVEMENT" + playerMovement_BNG + "???");
         if(playerMovement_BNG)playerMovement_BNG.enabled = false;
-        // Debug.Log("test");
+        Debug.Log(playerMovement_BNG.enabled + " HALOOO");
         // Debug.Log(playerMovements_OVR + " Kok bisa i;ang???");
         foreach(GameObject playermovement_OVR in playerMovements_OVR)
         {
