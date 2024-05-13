@@ -106,7 +106,7 @@ public class PlayerRestriction : MonoBehaviour, ITurnOffStatic
         
     }
     private void Update() {
-        Debug.Log(playerMovement_BNG.enabled + " OI APA SI");
+        // Debug.Log(playerMovement_BNG.enabled + " OI APA SI");
         if(enableNow)
         {
             enableNow = false;

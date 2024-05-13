@@ -21,6 +21,8 @@ public class Bleeding_QuestManager : QuestManager
     {
         OnStartQuest.Invoke();// krn ud ga berhubungan ama questmanager jd hrsnya aman..
         timerInSecs = 0;
+        timeToFinish_WithoutItem = 0;
+        timeToFinish_WithItem = 0;
         questManagerUI.SetTimerSlider(timerInSecsMax);
         
         

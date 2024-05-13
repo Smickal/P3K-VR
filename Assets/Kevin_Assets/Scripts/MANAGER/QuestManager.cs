@@ -116,7 +116,8 @@ public class QuestManager : MonoBehaviour
         if(PlayerManager.LastInGameMode() != InGame_Mode.FirstAid)
         {
             PlayerManager.ChangeInGame_Mode_Now(InGame_Mode.FirstAid);
-            // ResetQuest(); -> nyalakan ini jika ketemu bug yg kalo lsg ga kebaca grabbable eventnya
+            ResetQuest();
+            //cek apakah bsk bikin aneh ato ga -> nyalakan ini jika ketemu bug yg kalo lsg ga kebaca grabbable eventnya
             PlayerManager.SetPlayerPosition_DoP3k();
             
             EnvironmentLevelManager.SetEnvironment_FirstAid();

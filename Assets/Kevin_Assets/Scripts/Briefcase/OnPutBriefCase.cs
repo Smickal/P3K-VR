@@ -11,6 +11,7 @@ public class OnPutBriefCase : MonoBehaviour
     [SerializeField]Collider coll;
     private bool isThereBriefCase, isMovingTowardsPlace;
     public bool IsThereBriefCase{get{return isThereBriefCase;}}
+    [SerializeField]GameObject BriefCaseStart;
     Rigidbody rb;
     Briefcase briefcase;
     BriefCaseInteractableEvent briefInteractable;
@@ -18,6 +19,16 @@ public class OnPutBriefCase : MonoBehaviour
     [SerializeField]private Quaternion rotationBriefCase;
     [SerializeField] float _lerpSpeed = 15f;
     [SerializeField] float _snapDistance = 0.05f;
+    
+    private void Start() 
+    {
+        if(BriefCaseStart != null)
+        {
+            briefInteractable = BriefCaseStart.GetComponent<BriefCaseInteractableEvent>();
+            PutInPlace(BriefCaseStart);
+            
+        }
+    }
     private void Update() 
     {
         if(!isMovingTowardsPlace)return;
@@ -53,8 +64,8 @@ public class OnPutBriefCase : MonoBehaviour
         
 
         
-        checker.SetActive(false);
-        coll.enabled = false;
+        if(checker)checker.SetActive(false);
+        if(coll)coll.enabled = false;
         isMovingTowardsPlace = true;
     }
     private void OnTriggerStay(Collider other)

@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEditor;
 using UnityEngine.Events;
 using BNG;
+using UnityEditor.Rendering.LookDev;
 
 [Serializable]
 public class DialogueFinishActions
@@ -52,6 +53,7 @@ public class DialogueManager : MonoBehaviour, ITurnOffStatic
     [SerializeField]PlayerTeleport playerTeleport;
     [SerializeField]Vector3 positionForIntro3Bleed;
     [SerializeField]Quaternion rotationforIntro3Bleed;
+    [SerializeField]ToolTipHomeManager toolTipHomeManager;
 
     [Header("DEBUG ONLY")]
     public bool isPlayScene1AtStart;
@@ -257,6 +259,34 @@ public class DialogueManager : MonoBehaviour, ITurnOffStatic
                     screenFader.ResetEvent();
                     PlayerManager.HasFinishedIntroLevel((int)gameManager.LevelTypeNow());
                     playerChecker.SetActive(true);
+                    screenFader.AddEvent(afterIntro2_fadeOut);
+                    screenFader.DoFadeOut();
+                };
+                screenFader.AddEvent(afterIntro2_fadeIn);
+                screenFader.DoFadeIn();
+                return;
+            }
+        }
+        else if (dialogueSceneTypeNow_Parent == DialogueListTypeParent.Home_Intro)
+        {
+            if((DialogueListType_Home_Intro)dialogueSceneTypeNow == DialogueListType_Home_Intro.Home_Intro_AfterQuiz)
+            {
+                
+                UnityAction afterIntro2_fadeOut = ()=>
+                {
+                    screenFader.ResetEvent();
+                    gameManager.ChangeGameState(GameState.InGame);
+                    PlayerRestriction.LiftAllRestriction();
+                    PlayerRestriction.LiftRotationRestriction();
+                    robot.ActivateLookAt();
+
+                };
+                UnityAction afterIntro2_fadeIn = ()=>
+                {
+                    screenFader.ResetEvent();
+                    PlayerManager.HasFinishedTutorialMain();
+                    toolTipHomeManager.Activate();
+                    EnvironmentLevelManager.SetEnvironment_HomeAfterIntro();
                     screenFader.AddEvent(afterIntro2_fadeOut);
                     screenFader.DoFadeOut();
                 };
