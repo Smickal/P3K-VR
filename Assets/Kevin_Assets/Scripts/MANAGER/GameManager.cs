@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour, ITurnOffStatic
     public static Action<InGame_Mode> ChangeInGameModeNow;
     public static Action PauseGame;
     public static Action<GameState> ChangeGameStateNow;
-    [SerializeField]TMP_Text tMP_Text;
+    // [SerializeField]TMP_Text tMP_Text;
 
     private void Awake() 
     {
@@ -54,9 +54,7 @@ public class GameManager : MonoBehaviour, ITurnOffStatic
             }
         );
     }
-    private void Update() {
-        tMP_Text.text = levelType.ToString() + "aaaa" + inGame_Mode.ToString();
-    }
+
     public GameState GameStateNow()
     {
         return state;

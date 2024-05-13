@@ -12,6 +12,7 @@ public class BriefCaseInteractableEvent : MonoBehaviour
     [SerializeField]BNG.Grabbable grabBNG;
     [SerializeField]private HandGrabInteractable[] handGrabs;
     [SerializeField]private DistanceHandGrabInteractable[] distanceHandGrabs;
+    [SerializeField]private Collider[] briefColls;
     [SerializeField]private HandGrabInteractor leftGrabberHT;
     [SerializeField]private HandGrabInteractor rightGrabberHT;
     [SerializeField]private DistanceHandGrabInteractor leftDistanceGrabberHT, rightDistanceGrabberHT;
@@ -91,7 +92,7 @@ public class BriefCaseInteractableEvent : MonoBehaviour
     public void ReleaseHandGrabNow()
     {
         if(currHand == null && currDistanceHand == null)return;
-        Debug.Log("Yang ada isi adalah " + currHand + " dan " + currDistanceHand);
+        // Debug.Log("Yang ada isi adalah " + currHand + " dan " + currDistanceHand);
         if(currHand != null)currHand.ForceRelease();
         if(currDistanceHand != null)
         {
@@ -105,6 +106,10 @@ public class BriefCaseInteractableEvent : MonoBehaviour
     }
     public void TurnOffAll()
     {
+        foreach(Collider collider in briefColls)
+        {
+            collider.enabled = false;
+        }
         foreach(HandGrabInteractable grab in handGrabs)
         {
             playerRestriction.DeleteHandGrabInteractable(grab);

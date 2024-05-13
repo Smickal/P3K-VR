@@ -88,6 +88,7 @@ public class BleedingWithoutEmbeddedItem : MonoBehaviour, ITurnOffStatic
         patient_Bleeding.PlaySoundFinish();
         bleeding_QuestManager.StartTimer();
         patientBleedingQuestUI.DeactivateBriefCase();
+        patientBleedingQuestUI.ActivateBriefItem();
         patientBleedingQuestUI.ActivateToolTipWithoutItem(0);
         dialogueManager.PlayDialogueScene(DialogueListTypeParent.Bleeding_Explanation, DialogueListType_Bleeding_Explanation.Bleeding_NextStep);
         state = BleedingWithoutEmbeddedItem_State.CleanHands;

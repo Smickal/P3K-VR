@@ -7,6 +7,8 @@ using UnityEngine;
 public class Bleeding_QuestManager : QuestManager
 {
     IEnumerator bleedingCoroutine;
+    [Header("target time")]
+    private float timeTarget_WithoutItem, timeTarget_WithItem;
     [SerializeField] bool isTrashEverywhere = true;
     private int totalDissatisfaction;
     [SerializeField] int totalDissatisfactionMax;
@@ -40,10 +42,10 @@ public class Bleeding_QuestManager : QuestManager
     }
     protected override void ScoreCounter()
     {
-        if(TrashCountManager.Instance)
-        {
-            isTrashEverywhere = TrashCountManager.Instance.IsThereAnySmallTrash();
-        }
+        // if(TrashCountManager.Instance)
+        // {
+        //     isTrashEverywhere = TrashCountManager.Instance.IsThereAnySmallTrash();
+        // }
         questManagerUI.CloseHelper_Bleeding_WithItem();
         if(isTimerUp)
         {
@@ -54,7 +56,9 @@ public class Bleeding_QuestManager : QuestManager
             if(patient_Bleeding.IsDoneFirstAid)
             {
                 score = ScoreName.Small_Happy_Face;
-                if(!isTrashEverywhere && totalDissatisfaction <= totalDissatisfactionMax) score = ScoreName.Big_Happy_Face;
+                // if(!isTrashEverywhere && totalDissatisfaction <= totalDissatisfactionMax) score = ScoreName.Big_Happy_Face;
+                if(timeToFinish_WithoutItem <= timeTarget_WithoutItem && timeToFinish_WithItem <= timeTarget_WithItem)score = ScoreName.Big_Happy_Face;
+                
             }
         }
         base.ScoreCounter();
@@ -62,9 +66,8 @@ public class Bleeding_QuestManager : QuestManager
 
     private IEnumerator Bleeding()
     {
-        yield return new WaitUntil(()=> patient_Bleeding.IsDoneFirstAid && isQuestStart && !TrashCountManager.Instance.IsThereAnySmallTrash());
-        patientBleedingQuestUI.CloseAllUI();
-
+        yield return new WaitUntil(()=> patient_Bleeding.IsDoneFirstAid && isQuestStart);
+        patientBleedingQuestUI.CloseALL();
         bleedingCoroutine = null;
         
         if(isQuestStart)
@@ -98,9 +101,15 @@ public class Bleeding_QuestManager : QuestManager
     public void SaveFinish_WithoutItem()
     {
         timeToFinish_WithoutItem = timerInSecs;
+        if(timeToFinish_WithoutItem <= timeTarget_WithoutItem)
+        {
+            questManagerUI.Change_BleedingEmotionScoreTracker_Place();
+        }
     }
     public void SaveFinish_WithItem()
     {
         timeToFinish_WithItem = timerInSecs;
     }
+
+
 }

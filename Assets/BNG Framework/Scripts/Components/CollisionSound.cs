@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 namespace BNG {
 
@@ -31,6 +32,7 @@ namespace BNG {
 
         float lastPlayedSound;
         public float LastRelativeVelocity = 0;
+        [SerializeField]private AudioMixerGroup SFXAudioMixer;
 
         void Start() {
             audioSource = GetComponent<AudioSource>();
@@ -38,6 +40,7 @@ namespace BNG {
             if(audioSource == null) {
                 audioSource = gameObject.AddComponent<AudioSource>();
                 audioSource.spatialBlend = 1f;
+                if(SFXAudioMixer)audioSource.outputAudioMixerGroup = SFXAudioMixer;
             }
 
             startTime = Time.time;

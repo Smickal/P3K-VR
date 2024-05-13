@@ -72,7 +72,7 @@ public class PlayerRestriction : MonoBehaviour, ITurnOffStatic
                     if(gameManager.LevelTypeNow() == LevelP3KType.Choking)
                     {
                         DisableAll();
-                        Debug.Log(playerMovement_BNG.enabled + " OI APA SIStart");
+                        DisableAllRotation();
                     }
                     else if(gameManager.LevelTypeNow() == LevelP3KType.Bleeding)
                     {

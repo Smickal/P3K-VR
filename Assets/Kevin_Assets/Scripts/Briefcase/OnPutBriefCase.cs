@@ -21,13 +21,26 @@ public class OnPutBriefCase : MonoBehaviour
     private void Update() 
     {
         if(!isMovingTowardsPlace)return;
-        if(briefcase.transform.position == positionBriefCase.transform.position)return;
-        if(briefcase.transform.position != positionBriefCase.transform.position)
-        {
-            
+        rb.useGravity = false;
+        briefcase.transform.position = Vector3.MoveTowards(briefcase.transform.position, positionBriefCase.transform.position, Time.deltaTime * _lerpSpeed);
+        
+        if (Vector3.Distance(briefcase.transform.position, positionBriefCase.transform.position) < _snapDistance) {
+            rb.useGravity = true;
+            briefcase.transform.position = positionBriefCase.transform.position;
+            // Debug.Log("Posisi biref" + briefcase.transform.position + " adala " + positionBriefCase.transform.position);
+
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+            rb.isKinematic = true;
+            rb.constraints = RigidbodyConstraints.FreezeAll;
             briefcase.transform.position = positionBriefCase.transform.position;
             briefcase.transform.rotation = rotationBriefCase;
-        } 
+            if(briefcase)briefcase.ChangeButtonCollEnableOnPlace(true);
+            isMovingTowardsPlace = false;
+
+            
+        }
+        // Debug.Log("Posisi biref" + briefcase.transform.position + " adala " + positionBriefCase.transform.position);
         
     }
     public void PutInPlace(GameObject briefCase)
@@ -39,13 +52,7 @@ public class OnPutBriefCase : MonoBehaviour
         briefcase = briefCase.GetComponent<Briefcase>();
         
 
-        rb.velocity = Vector3.zero;
-        rb.angularVelocity = Vector3.zero;
-        rb.isKinematic = true;
-        rb.constraints = RigidbodyConstraints.FreezeAll;
-        briefcase.transform.position = positionBriefCase.transform.position;
-        briefcase.transform.rotation = rotationBriefCase;
-        if(briefcase)briefcase.ChangeButtonCollEnableOnPlace(true);
+        
         checker.SetActive(false);
         coll.enabled = false;
         isMovingTowardsPlace = true;

@@ -76,7 +76,7 @@ public class Patient_Bleeding : MonoBehaviour
         bleedingWithoutEmbeddedItem.DeactivateFirstAid();
         if(FirstAidCoroutine_WithItem != null)StopCoroutine(FirstAidCoroutine_WithItem);
         BleedWithItemMgr.DeactivateBandageWithItem_WithoutSnapZone();
-        patientBleedingQuestUI.CloseAllUI();
+        patientBleedingQuestUI.CloseALL();
     }
     private IEnumerator FirstAid_CleanHands_WithItem()
     {

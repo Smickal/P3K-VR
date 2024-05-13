@@ -210,6 +210,7 @@ public class DialogueManager : MonoBehaviour, ITurnOffStatic
                     screenFader.ResetEvent();
                     gameManager.ChangeGameState(GameState.InGame);
                     PlayerRestriction.LiftAllRestriction();
+                    PlayerRestriction.LiftRotationRestriction();
                     robot.ActivateLookAt();
                     robot.ActivateFollowPlayer();
                     PlayDialogueScene(DialogueListTypeParent.Choking_Intro, DialogueListType_Choking_Intro.Choking_Intro_3);

@@ -22,6 +22,7 @@ public class UIOption : BaseKitUI
     [Header("Reference")]
     [SerializeField] GameObject _masterContainerOBJ;
     [SerializeField] GameObject _resetYesNoContainerOBJ;
+    [SerializeField] SceneMoveManager sceneMoveManager;
 
     private void Start() 
     {
@@ -72,6 +73,7 @@ public class UIOption : BaseKitUI
         PlayerManager.ResetPlayerSave();
         if(_resetYesNoContainerOBJ.activeSelf)HideResetYesNo();
         GameManager.PauseGame();
+        sceneMoveManager.GoBackHome();
         //fade out
         //scene ke home;
         //scenemanagement

@@ -10104,6 +10104,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 8248169623128697926}
+        m_TargetAssemblyTypeName: BriefCaseInteractableEvent, Assembly-CSharp
+        m_MethodName: OnGrabHT
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   _whenUnselect:
     m_PersistentCalls:
       m_Calls:
@@ -10111,6 +10123,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: IsBeingGrabHandTrack, Assembly-CSharp
         m_MethodName: ChangeIsBeingGrab
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8248169623128697926}
+        m_TargetAssemblyTypeName: BriefCaseInteractableEvent, Assembly-CSharp
+        m_MethodName: OnReleaseHT
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -10189,6 +10213,8 @@ MonoBehaviour:
   MaximumVolume: 1
   RecentlyPlayedSound: 0
   LastRelativeVelocity: 0
+  SFXAudioMixer: {fileID: -4771527605152261280, guid: bed32c7cabe57e94aa2c2b1e971474f7,
+    type: 2}
 --- !u!114 &8248169623128697926
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10212,6 +10238,10 @@ MonoBehaviour:
   - {fileID: 9053560536650857130}
   - {fileID: 1468696320068329418}
   - {fileID: 6755194352821408380}
+  briefColls:
+  - {fileID: 2788282102446649330}
+  - {fileID: 2349906988921525837}
+  - {fileID: 1562428706065547478}
   leftGrabberHT: {fileID: 0}
   rightGrabberHT: {fileID: 0}
   leftDistanceGrabberHT: {fileID: 0}
@@ -29920,16 +29950,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3235759610136223479, guid: 4bc9ffb71854a004a949bf0735894cc1,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3235759610136223479, guid: 4bc9ffb71854a004a949bf0735894cc1,
-        type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5266766001686271571, guid: 4bc9ffb71854a004a949bf0735894cc1,
         type: 3}

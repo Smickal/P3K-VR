@@ -34,12 +34,15 @@ public class QuestManagerUI : MonoBehaviour, ITurnOffStatic
     [SerializeField] GameObject _chokingHelperContainer;
     [SerializeField] Image _chokingDescIMG;
     [SerializeField] TMP_Text _counterText, _followProcedureText;
+    [SerializeField] GameObject _chokingEmotionScoreTracker;
     [Tooltip("0 - Backblow, 1 - Heimlich")]
     [SerializeField] Sprite[] _chokingDescSprite;
     [Header("Bleeding")]
     [SerializeField] GameObject _bleedingHelperContainer_WithItem;
     [SerializeField] GameObject _bleedingHelperContainer_WithoutItem;
     [SerializeField] Slider _timerSlider_bleeding;
+    [SerializeField] GameObject _bleedingEmotionScoreTracker;
+    [SerializeField] GameObject[] _bleedingWithItem_DoubleSmallHappyFace, _bleedingWithoutItem_DoubleSmallHappyFace;
 
     public static Action<String> ChangeHelperDesc_Choking;
     
@@ -47,6 +50,33 @@ public class QuestManagerUI : MonoBehaviour, ITurnOffStatic
     {
         ActiveQuestBtn_Robot(false);
         ChangeHelperDesc_Choking += ChangeHelper_ChokingDesc;
+    }
+    private void Start()
+    {
+        if(GameManager.CheckLevelTypeNow() == LevelP3KType.Choking)
+        {
+            _chokingEmotionScoreTracker.SetActive(true);
+            _bleedingEmotionScoreTracker.SetActive(false);
+        }
+        else if(GameManager.CheckLevelTypeNow() == LevelP3KType.Bleeding)
+        {
+            _chokingEmotionScoreTracker.SetActive(false);
+            _bleedingEmotionScoreTracker.SetActive(true);
+
+            _bleedingWithItem_DoubleSmallHappyFace[0].SetActive(true);
+            _bleedingWithoutItem_DoubleSmallHappyFace[0].SetActive(true);
+
+            _bleedingWithItem_DoubleSmallHappyFace[1].SetActive(false);
+            _bleedingWithoutItem_DoubleSmallHappyFace[1].SetActive(false);
+        }
+    }
+    public void Change_BleedingEmotionScoreTracker_Place()
+    {
+        _bleedingWithItem_DoubleSmallHappyFace[0].SetActive(false);
+        _bleedingWithoutItem_DoubleSmallHappyFace[0].SetActive(false);
+
+        _bleedingWithItem_DoubleSmallHappyFace[1].SetActive(true);
+        _bleedingWithoutItem_DoubleSmallHappyFace[1].SetActive(true);
     }
     public void TurnOffStatic()
     {

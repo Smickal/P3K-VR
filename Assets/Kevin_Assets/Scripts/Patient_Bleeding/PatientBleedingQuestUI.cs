@@ -6,6 +6,7 @@ public class PatientBleedingQuestUI : MonoBehaviour
 {
     [SerializeField]GameObject[] _tooltipContainers;
     [SerializeField]GameObject _tooltipBriefCase;
+    [SerializeField]GameObject _tooltipBriefItem;
     [SerializeField]GameObject _tooltipWithoutItem;
     [SerializeField]GameObject[] _tooltipWithoutItemContainers;
     [SerializeField]GameObject _tooltipWithItem;
@@ -21,9 +22,16 @@ public class PatientBleedingQuestUI : MonoBehaviour
     {
         _tooltipBriefCase.SetActive(false);
     }
+    public void ActivateBriefItem()
+    {
+        _tooltipBriefItem.SetActive(true);
+    }
+    public void DeactivateBriefItem()
+    {
+        _tooltipBriefItem.SetActive(false);
+    }
     public void ActivateTrashCan()
     {
-        CloseAllUI();
         _toolTipTrashcan.SetActive(true);
     }
     public void DeactivateTrashCan()
@@ -80,6 +88,15 @@ public class PatientBleedingQuestUI : MonoBehaviour
         {
             tooltipContainer.SetActive(false);
         }
+    }
+    public void CloseALL()
+    {
+        foreach(GameObject tooltipContainer in _tooltipContainers)
+        {
+            tooltipContainer.SetActive(false);
+        }
+        DeactivateBriefItem();
+        DeactivateTrashCan();
     }
 
     
