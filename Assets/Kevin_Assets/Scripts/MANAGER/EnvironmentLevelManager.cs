@@ -41,6 +41,17 @@ public class EnvironmentLevelManager : MonoBehaviour, ITurnOffStatic
         }
         
     }
+    public void SetHomeAwake(bool hasFinishIntro_Home)
+    {
+        if(!hasFinishIntro_Home)
+        {
+            returnRobot.SetStartingPos(robotPositionEveryEnvironment[0]);
+        }
+        else
+        {
+            returnRobot.SetStartingPos(robotPositionEveryEnvironment[1]);
+        }
+    }
     public void SetEnvironmentEndQuest()
     {
         CloseAllGameObject();

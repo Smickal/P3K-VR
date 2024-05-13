@@ -64,6 +64,7 @@ public class PlayerRestriction : MonoBehaviour, ITurnOffStatic
             if(!playerManager.IsFinish_TutorialMain() && gameManager.LevelModeNow() == LevelMode.Home)
             {
                 DisableAll();
+                DisableAllRotation();
             }
             else if(gameManager.LevelModeNow() == LevelMode.Level)
             {
