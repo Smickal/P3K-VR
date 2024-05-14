@@ -37,7 +37,7 @@ public class KitP3K : GrabbableEvents
         {
             UIKotakP3K.CheckUnlock(_scriptableData);
             wasGrabHT = true;
-            if(GameManager.CheckLevelModeNow() == LevelMode.Home)UIKotakP3K.OpenDescriptioninRoom(_scriptableData);
+            if(GameManager.CheckLevelModeNow != null && GameManager.CheckLevelModeNow() == LevelMode.Home)UIKotakP3K.OpenDescriptioninRoom(_scriptableData);
         }
     }
     public void OnReleaseHT()
@@ -45,7 +45,7 @@ public class KitP3K : GrabbableEvents
         if(wasGrabHT)
         {
             wasGrabHT = false;
-            if(GameManager.CheckLevelModeNow() == LevelMode.Home)UIKotakP3K.CloseDescriptioninRoom(_scriptableData);
+            if(GameManager.CheckLevelModeNow != null && GameManager.CheckLevelModeNow() == LevelMode.Home)UIKotakP3K.CloseDescriptioninRoom(_scriptableData);
         }
         
     }

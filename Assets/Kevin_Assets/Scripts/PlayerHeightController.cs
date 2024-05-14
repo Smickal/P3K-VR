@@ -23,6 +23,7 @@ public class PlayerHeightController : MonoBehaviour, ITurnOffStatic
     {
         float startsHeight = PlayerPrefs.GetFloat(SaveStateKey, startHeight);
         _heightConnectOBJ.ChangeCharacterControllerY(startsHeight);
+        if(PlayerManager.LastInGameMode() != InGame_Mode.FirstAid)ResetHeight();
     }
     public void TurnOffStatic()
     {

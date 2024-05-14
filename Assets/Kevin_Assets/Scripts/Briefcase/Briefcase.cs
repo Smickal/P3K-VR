@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Oculus.Interaction;
+using UnityEngine.Events;
 
 public class Briefcase : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class Briefcase : MonoBehaviour
     bool isOpen = false, isInventEnabled = true, isAnimPlay = false;
     public bool IsOpen { get { return isOpen; } }
     public bool canOnlyOpenInCertainSpot;
+    public UnityEvent OnBriefOpen, OnBriefClose;
 
     private void Start() {
         if(canOnlyOpenInCertainSpot)
@@ -55,6 +57,7 @@ public class Briefcase : MonoBehaviour
             EnableInventory();
             isOpen = true;
             isAnimPlay = true;
+            OnBriefOpen?.Invoke();
         }
         else
         {
@@ -62,6 +65,7 @@ public class Briefcase : MonoBehaviour
             DisableInventory();
             isOpen = false;
             isAnimPlay = true;
+            OnBriefClose?.Invoke();
         }
     }
     public void AnimationFinish()

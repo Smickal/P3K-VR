@@ -1197,6 +1197,7 @@ MonoBehaviour:
 
     -------------------------------------------------------'
   graphicRaycaster: {fileID: 1661932678}
+  rayInteractable: {fileID: 0}
   _baseUI: {fileID: 1582538021}
   _titleBase: {fileID: 1206325298}
   _baseContainers:
@@ -1209,12 +1210,16 @@ MonoBehaviour:
   _chokingDescIMG: {fileID: 388497404}
   _counterText: {fileID: 810863917}
   _followProcedureText: {fileID: 511123087}
+  _chokingEmotionScoreTracker: {fileID: 0}
   _chokingDescSprite:
   - {fileID: 21300000, guid: 25e30dbacceadec4a93a8804aaa57def, type: 3}
   - {fileID: 21300000, guid: ed815b175ce32414eb480b93ce39c010, type: 3}
   _bleedingHelperContainer_WithItem: {fileID: 1091774408}
   _bleedingHelperContainer_WithoutItem: {fileID: 518993231}
   _timerSlider_bleeding: {fileID: 621056928}
+  _bleedingEmotionScoreTracker: {fileID: 0}
+  _bleedingWithItem_DoubleSmallHappyFace: []
+  _bleedingWithoutItem_DoubleSmallHappyFace: []
 --- !u!114 &204367945
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1230,6 +1235,7 @@ MonoBehaviour:
   _kitUIMgr: {fileID: 990936895}
   _uiLangkahP3K: {fileID: 990936899}
   _stepTransform: {fileID: 1509650061}
+  dialogueManager: {fileID: 0}
   _endingContainer:
   - {fileID: 1229299138}
   - {fileID: 1006706860}
@@ -9948,10 +9954,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bcc7dae09eb746458b319b4194142af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerManager: {fileID: 0}
-  gameManager: {fileID: 0}
-  screenFader: {fileID: 0}
-  robot: {fileID: 0}
+  playerManager: {fileID: 1066109241}
+  gameManager: {fileID: 1066109239}
+  screenFader: {fileID: 4276642493770886526}
+  robot: {fileID: 2052949414}
   SODialogueList: {fileID: 11400000, guid: 493dbc40276aa3f49a4b8f91437d8fdb, type: 2}
   dialogueHolder: {fileID: 1026722215}
   dialogueFinishActions:
@@ -9981,6 +9987,10 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+  playerChecker: {fileID: 0}
+  playerTeleport: {fileID: 0}
+  positionForIntro3Bleed: {x: 0, y: 0, z: 0}
+  rotationforIntro3Bleed: {x: 0, y: 0, z: 0, w: 0}
   isPlayScene1AtStart: 0
   isPlayScene2: 0
   isFinishTaskScene2: 0
@@ -12777,6 +12787,7 @@ MonoBehaviour:
   _resetPlayerSaveButton_No: {fileID: 1949609322}
   _masterContainerOBJ: {fileID: 698732966}
   _resetYesNoContainerOBJ: {fileID: 2054568714}
+  sceneMoveManager: {fileID: 1066109246}
 --- !u!114 &990936897
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13444,12 +13455,16 @@ MonoBehaviour:
       m_Calls: []
   Startq: 0
   screenFader: {fileID: 4276642493770886526}
+  audioSource: {fileID: 0}
   patientChoking: {fileID: 1789048275}
   progressTotal: 150
   _minusProgress: 0.5
   timerTarget:
   - 50
   - 25
+  skinnedMesh: {fileID: 0}
+  materials_RedSkin: []
+  materials_RedderSkin: []
 --- !u!114 &1066109244
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13482,9 +13497,14 @@ MonoBehaviour:
       m_Calls: []
   Startq: 0
   screenFader: {fileID: 4276642493770886526}
+  audioSource: {fileID: 0}
   isTrashEverywhere: 0
   totalDissatisfactionMax: 0
   patient_Bleeding: {fileID: 1706366130}
+  patientBleedingQuestUI: {fileID: 0}
+  SoundOnDissatisfy: {fileID: 0}
+  timeToFinish_WithoutItem: 0
+  timeToFinish_WithItem: 0
 --- !u!114 &1066109245
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13504,8 +13524,8 @@ MonoBehaviour:
   bleeding_QuestManager: {fileID: 1066109244}
   choking_QuestManager: {fileID: 1066109243}
   sceneMoveManager: {fileID: 1066109246}
-  dialogueManager: {fileID: 0}
-  robot: {fileID: 0}
+  dialogueManager: {fileID: 723106684}
+  robot: {fileID: 2052949414}
   timerInSecsMax: 0
   isQuestStart: 0
   isTimerUp: 0
@@ -13541,6 +13561,7 @@ MonoBehaviour:
         m_CallState: 2
   Startq: 0
   screenFader: {fileID: 4276642493770886526}
+  audioSource: {fileID: 0}
 --- !u!114 &1066109246
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13555,6 +13576,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bGMManager: {fileID: 0}
   screenFader: {fileID: 4276642493770886526}
+  playerHeightController: {fileID: 3469582195863069423}
+  playerManager: {fileID: 1066109241}
 --- !u!1 &1067655405
 GameObject:
   m_ObjectHideFlags: 0
@@ -27987,6 +28010,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d38c86c219f77c34685aa09c68f7d65d, type: 3}
+--- !u!114 &2052949414 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5798878545848706029, guid: d38c86c219f77c34685aa09c68f7d65d,
+    type: 3}
+  m_PrefabInstance: {fileID: 2052949413}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 334c8628e598690438171b16b1b80a65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2054568714 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2434254086419351250, guid: 82f000d783bda1349b0245a941e15904,
@@ -30455,6 +30490,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4fb573fcaf0634d48bdff59547bb0079, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3469582195863069423 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7851872888609263741, guid: d44fbf779a16b734f91d8ecbe3f16cbd,
+    type: 3}
+  m_PrefabInstance: {fileID: 3469582195863069421}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be1d097403b424b46b1c90b1c01eb010, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &3499047983261508922

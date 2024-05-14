@@ -8,8 +8,10 @@ using Unity.Mathematics;
 public class OnPutBriefCase : MonoBehaviour
 {
     [SerializeField]GameObject checker;
+    [SerializeField]Collider coll;
     private bool isThereBriefCase, isMovingTowardsPlace;
     public bool IsThereBriefCase{get{return isThereBriefCase;}}
+    [SerializeField]GameObject BriefCaseStart;
     Rigidbody rb;
     Briefcase briefcase;
     BriefCaseInteractableEvent briefInteractable;
@@ -17,88 +19,73 @@ public class OnPutBriefCase : MonoBehaviour
     [SerializeField]private Quaternion rotationBriefCase;
     [SerializeField] float _lerpSpeed = 15f;
     [SerializeField] float _snapDistance = 0.05f;
+    
+    private void Start() 
+    {
+        if(BriefCaseStart != null)
+        {
+            briefInteractable = BriefCaseStart.GetComponent<BriefCaseInteractableEvent>();
+            PutInPlace(BriefCaseStart);
+            
+        }
+    }
     private void Update() 
     {
-        // if(!isMovingTowardsPlace)return;
-        // Vector3 moveDir = positionBriefCase.position - briefcase.transform.position;
+        if(!isMovingTowardsPlace)return;
+        rb.useGravity = false;
+        briefcase.transform.position = Vector3.MoveTowards(briefcase.transform.position, positionBriefCase.transform.position, Time.deltaTime * _lerpSpeed);
+        
+        if (Vector3.Distance(briefcase.transform.position, positionBriefCase.transform.position) < _snapDistance) {
+            rb.useGravity = true;
+            briefcase.transform.position = positionBriefCase.transform.position;
+            // Debug.Log("Posisi biref" + briefcase.transform.position + " adala " + positionBriefCase.transform.position);
 
-        // //rigid.AddForce(moveDir * Time.deltaTime * _lerpSpeed, ForceMode.Force);
-        // rb.velocity = moveDir * Time.deltaTime * _lerpSpeed;
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+            rb.isKinematic = true;
+            rb.constraints = RigidbodyConstraints.FreezeAll;
+            briefcase.transform.position = positionBriefCase.transform.position;
+            briefcase.transform.rotation = rotationBriefCase;
+            if(briefcase)briefcase.ChangeButtonCollEnableOnPlace(true);
+            isMovingTowardsPlace = false;
 
-        // //transform.position = Vector3.MoveTowards(transform.position, _startingPos.transform.position, Time.deltaTime * _lerpSpeed);
-
-
-
-        // if (Vector3.Distance(briefcase.transform.position, positionBriefCase.transform.position) <= _snapDistance)
-        // {
-        //     isMovingTowardsPlace = false;
-        //     rb.velocity = Vector3.zero;
-        //     rb.angularVelocity = Vector3.zero;
-        //     rb.isKinematic = true;
-        //     briefcase.transform.position = positionBriefCase.transform.position;
-        //     briefcase.transform.rotation = rotationBriefCase;
-        //     if(briefcase)briefcase.ChangeButtonCollEnableOnPlace(true);
-        //     checker.SetActive(false);
-        // }  
+            
+        }
+        // Debug.Log("Posisi biref" + briefcase.transform.position + " adala " + positionBriefCase.transform.position);
+        
     }
     public void PutInPlace(GameObject briefCase)
     {
         isThereBriefCase = true;
-        // PlayerRestriction.RemoveData(briefCase);
-        
-        // grabs = briefCase.GetComponentsInChildren<HandGrabInteractable>(true);
-        // foreach(HandGrabInteractable grab in grabs)
-        // {
-        //     grab.enabled = false;
-        // }
-        // distanceGrabs = briefCase.GetComponentsInChildren<DistanceHandGrabInteractable>(true);
-        // foreach(DistanceHandGrabInteractable grab in distanceGrabs)
-        // {
-        //     grab.enabled = false;
-        // }
 
-        // grabBNGs = briefCase.GetComponentsInChildren<Grabbable>(true);
-        // foreach(Grabbable grab in grabBNGs)
-        // {
-        //     grab.enabled = false;
-        // }
         briefInteractable.TurnOffAll();
         rb = briefCase.GetComponent<Rigidbody>();
         briefcase = briefCase.GetComponent<Briefcase>();
-        // isMovingTowardsPlace = true;
+        
 
-        isMovingTowardsPlace = false;
-        rb.velocity = Vector3.zero;
-        rb.angularVelocity = Vector3.zero;
-        rb.isKinematic = true;
-        rb.constraints = RigidbodyConstraints.FreezeAll;
-        briefcase.transform.position = positionBriefCase.transform.position;
-        briefcase.transform.rotation = rotationBriefCase;
-        if(briefcase)briefcase.ChangeButtonCollEnableOnPlace(true);
-        checker.SetActive(false);
+        
+        if(checker)checker.SetActive(false);
+        if(coll)coll.enabled = false;
+        isMovingTowardsPlace = true;
     }
     private void OnTriggerStay(Collider other)
     {
         if(isThereBriefCase)return;
         if(other.gameObject.name.Contains("BriefCase"))
         {
-            Debug.Log("yes");
+            // Debug.Log("yes");
             if(other.gameObject.transform.parent != null && other.gameObject.transform.parent.GetComponent<SnapZone>() != null) return;
-            Debug.Log("lewat");
+            // Debug.Log("lewat");
             Grabbable grabHere = other.GetComponent<Grabbable>();
             // IsBeingGrabHandTrack _isBeing = other.GetComponent<IsBeingGrabHandTrack>();
             // if((grabHere != null && grabHere.BeingHeld) || (_isBeing != null && _isBeing.IsBeingGrab()))return;
             // Debug.Log("lewat");
             briefInteractable = other.gameObject.GetComponent<BriefCaseInteractableEvent>();
-            if(grabHere != null && grabHere.BeingHeld) 
-            {
-                Grabber grabber = grabHere.GetPrimaryGrabber();
-                if(grabber != null)grabber.TryRelease();
-            }
-            else
-            {
-                briefInteractable.ReleaseHandGrabNow();
-            }
+
+            Grabber grabber = grabHere.GetPrimaryGrabber();
+            if(grabber != null)grabber.TryRelease();
+            briefInteractable.ReleaseHandGrabNow();
+            
             PutInPlace(other.gameObject);
         }
     }

@@ -69,7 +69,7 @@ public class Robot : GrabbableEvents
         {
             if(!playerManager.IsFinish_TutorialMain())
             {
-                _controller.TriggerFrozeAnim();
+                
                 
             }
             else

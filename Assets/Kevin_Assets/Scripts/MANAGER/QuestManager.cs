@@ -103,19 +103,23 @@ public class QuestManager : MonoBehaviour
         if(choice)
         {
             StartQuest();
-            robot.DeactivateFollowPlayer();
+            
         }
         
         questYesNoUI.CloseUI();
     }
     public void StartQuest()
     {
+        robot.DeactivateFollowPlayer();
         OnStartQuest.Invoke();
         BGMManager.ChangeBGMAudio(BGM_Type.tense);
         if(PlayerManager.LastInGameMode() != InGame_Mode.FirstAid)
         {
             PlayerManager.ChangeInGame_Mode_Now(InGame_Mode.FirstAid);
+            ResetQuest();
+            //cek apakah bsk bikin aneh ato ga -> nyalakan ini jika ketemu bug yg kalo lsg ga kebaca grabbable eventnya
             PlayerManager.SetPlayerPosition_DoP3k();
+            
             EnvironmentLevelManager.SetEnvironment_FirstAid();
             
         }
@@ -131,6 +135,7 @@ public class QuestManager : MonoBehaviour
             // PlayerRestriction.LiftGrabableRestriction();
             bleeding_QuestManager.Quest();
         }
+        gameManager.ChangeInGameMode(InGame_Mode.FirstAid);
         
 
     }
