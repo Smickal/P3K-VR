@@ -36,6 +36,32 @@ public class LocalSaveFileHandler
         writer.Close();
         stream.Close();
 
-        Debug.Log($"GameSavedTo = {fullPath}");
+        //Debug.Log($"GameSavedTo = {fullPath}");
+    }
+
+
+    public GameData LoadGameDataFromLocal(string fileID)
+    {
+        string fullPath = Path.Combine(dataDirPath, fileID);
+        GameData deserelizeData = null;
+
+        try
+        {
+            FileStream stream = File.OpenRead(fullPath);
+            BinaryFormatter bf = new BinaryFormatter();
+
+            deserelizeData = (GameData)bf.Deserialize(stream);
+
+            stream.Close();
+
+            //Debug.Log($"Successfully Load Data From = {fullPath}");
+        }
+        catch (Exception e)
+        {
+            //Debug.Log(e);
+        }
+
+
+        return deserelizeData;
     }
 }

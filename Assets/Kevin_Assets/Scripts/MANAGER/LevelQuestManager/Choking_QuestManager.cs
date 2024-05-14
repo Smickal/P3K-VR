@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Choking_QuestManager : QuestManager, ITurnOffStatic
+public class Choking_QuestManager : QuestManager, IPersistanceDataSave, ITurnOffStatic
 {
     private IEnumerator chokingCourotine;
     [Header("Reference")]
@@ -141,5 +141,19 @@ public class Choking_QuestManager : QuestManager, ITurnOffStatic
     {
         if(!isQuestStart)return;
         dialogueManager.PlayDialogueScene(DialogueListTypeParent.Choking_Explanation, DialogueListType_Choking_Explanation.Choking_Exp_Heimlich);
+    }
+
+    public void SaveData(GameData data)
+    {
+        data.Level1Name = LevelP3KType.Choking.ToString();
+        data.Level1Score = score.ToString();
+        data.Level1TimeToFinish = timerInSecs;
+
+        data.IsLevel1Done = true;
+    }
+
+    public void LoadData(GameData data)
+    {
+        
     }
 }
