@@ -62,11 +62,11 @@ public class UIOption : BaseKitUI
 
     public void PlayerHeight(bool addPlayerHeight)
     {
-        PlayerHeightController.AddPlayerHeight(addPlayerHeight);
+        if(PlayerHeightController.AddPlayerHeight != null)PlayerHeightController.AddPlayerHeight(addPlayerHeight);
     }
     public void ResetPlayerHeight()
     {
-        PlayerHeightController.ResetPlayerHeight();
+        if(PlayerHeightController.AddPlayerHeight != null)PlayerHeightController.ResetPlayerHeight();
     }
     public void ResetPlayerSaveData()
     {

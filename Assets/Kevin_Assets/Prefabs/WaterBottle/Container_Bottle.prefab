@@ -8069,6 +8069,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 4096440515035175592}
+        m_TargetAssemblyTypeName: BottleWater, Assembly-CSharp
+        m_MethodName: Handtrack_isKinematicWhenGrab
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   _whenUnselect:
     m_PersistentCalls:
       m_Calls:
@@ -8088,6 +8100,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: KitP3K, Assembly-CSharp
         m_MethodName: OnReleaseHT
         m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4096440515035175592}
+        m_TargetAssemblyTypeName: BottleWater, Assembly-CSharp
+        m_MethodName: Handtrack_isKinematicWhenGrab
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -8182,6 +8206,9 @@ MonoBehaviour:
     type: 3}
   _waterSplashParticlePrefab: {fileID: 9172945383840291633, guid: c2840f524bbb94048a69f467055e4bd1,
     type: 3}
+  isBeingGrabHandTrack: {fileID: 4364522142549201955}
+  rb: {fileID: 2393633507203754170}
+  _wasGrab: 0
   _cleaner: {fileID: 2899524884972505762}
   isBottleOpened: 0
 --- !u!114 &2899524884972505762

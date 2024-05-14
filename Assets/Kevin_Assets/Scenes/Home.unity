@@ -3786,7 +3786,7 @@ Transform:
   m_GameObject: {fileID: 577162655}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.54270726, y: -0.1783, z: -1.025}
+  m_LocalPosition: {x: 1.143, y: -0.1783, z: -1.412}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4146,6 +4146,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &640425792 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 6598925727401535863, guid: 06bbd138adbc4d74db7e070d9c11485a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1112551527}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &650829556
 GameObject:
   m_ObjectHideFlags: 0
@@ -4426,7 +4432,7 @@ Transform:
   m_GameObject: {fileID: 689258633}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.3709993, y: 0.809, z: -0.714}
+  m_LocalPosition: {x: -0.769, y: 0.809, z: -1.124}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5078,6 +5084,8 @@ MonoBehaviour:
   positionForIntro3Bleed: {x: 0, y: 0, z: 0}
   rotationforIntro3Bleed: {x: 0, y: 0, z: 0, w: 0}
   toolTipHomeManager: {fileID: 650829558}
+  teleportInteractable: {fileID: 0}
+  reticleDataTeleport: {fileID: 0}
   isPlayScene1AtStart: 0
   isPlayScene2: 0
   isFinishTaskScene2: 0
@@ -7364,7 +7372,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isActivated: 0
   _maxTimeSlider: 30
-  _maxTimerSliderNormal: 15
+  _maxTimerSliderNormal: 12
   dialogueManager: {fileID: 723106684}
   _kitUiManager: {fileID: 990936895}
   SoundOnRight: {fileID: 8300000, guid: 6ca498364b2fdf64091c153c9a18cb91, type: 3}
@@ -9379,6 +9387,11 @@ PrefabInstance:
       propertyPath: rightGrabberHT
       value: 
       objectReference: {fileID: 787151350}
+    - target: {fileID: 750065004909094999, guid: 06bbd138adbc4d74db7e070d9c11485a,
+        type: 3}
+      propertyPath: alcoholWipeCollider
+      value: 
+      objectReference: {fileID: 640425792}
     - target: {fileID: 2084359348541723600, guid: 06bbd138adbc4d74db7e070d9c11485a,
         type: 3}
       propertyPath: leftGrabberHT
@@ -9399,6 +9412,11 @@ PrefabInstance:
       propertyPath: rightDistanceGrabberHT
       value: 
       objectReference: {fileID: 1300792525}
+    - target: {fileID: 2150171417464074473, guid: 06bbd138adbc4d74db7e070d9c11485a,
+        type: 3}
+      propertyPath: alcoholWipeCollider
+      value: 
+      objectReference: {fileID: 640425792}
     - target: {fileID: 2341450316699657387, guid: 06bbd138adbc4d74db7e070d9c11485a,
         type: 3}
       propertyPath: _handTrackLeft
@@ -19019,6 +19037,11 @@ PrefabInstance:
       propertyPath: dialogueManager
       value: 
       objectReference: {fileID: 723106684}
+    - target: {fileID: 4605574066887840448, guid: d44fbf779a16b734f91d8ecbe3f16cbd,
+        type: 3}
+      propertyPath: delayTypeText
+      value: 0.0225
+      objectReference: {fileID: 0}
     - target: {fileID: 5178015071670007574, guid: d44fbf779a16b734f91d8ecbe3f16cbd,
         type: 3}
       propertyPath: m_Name
@@ -19139,6 +19162,11 @@ PrefabInstance:
       propertyPath: pointableCanvasModule
       value: 
       objectReference: {fileID: 2083147193}
+    - target: {fileID: 8405022345090797818, guid: d44fbf779a16b734f91d8ecbe3f16cbd,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0.78431374
+      objectReference: {fileID: 0}
     - target: {fileID: 8590060970460801682, guid: d44fbf779a16b734f91d8ecbe3f16cbd,
         type: 3}
       propertyPath: m_IsActive

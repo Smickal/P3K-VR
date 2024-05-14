@@ -7,8 +7,8 @@ using UnityEngine;
 
 public class AlcoholWipesInteractableEvent : MonoBehaviour
 {
-    [SerializeField]GameObject Lid, WipeOut, SnapPoint;
-    [SerializeField]Collider Lid_Collider;
+    [SerializeField]GameObject Lid, WipeOut;
+    [SerializeField]Collider Lid_Collider, snapPoint_Collider, alcoholWipeCollider;
     [Header("Reference")]
     [SerializeField]private HandGrabInteractable[] handGrabs;
     [SerializeField]private HandGrabInteractor leftGrabberHT;
@@ -27,7 +27,9 @@ public class AlcoholWipesInteractableEvent : MonoBehaviour
         {
             Lid_Collider.enabled = false;
             WipeOut.SetActive(true);
-            SnapPoint.SetActive(true);
+            // SnapPoint.SetActive(true);
+            snapPoint_Collider.enabled = true;
+            alcoholWipeCollider.enabled = true;
 
             Lid.SetActive(false);
             // Debug.Log(currHand + " Hands ");

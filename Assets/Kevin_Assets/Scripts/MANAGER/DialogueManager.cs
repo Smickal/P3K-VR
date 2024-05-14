@@ -6,7 +6,8 @@ using UnityEngine;
 using UnityEditor;
 using UnityEngine.Events;
 using BNG;
-using UnityEditor.Rendering.LookDev;
+using Oculus.Interaction.Locomotion;
+using Oculus.Interaction.DistanceReticles;
 
 [Serializable]
 public class DialogueFinishActions
@@ -54,6 +55,8 @@ public class DialogueManager : MonoBehaviour, ITurnOffStatic
     [SerializeField]Vector3 positionForIntro3Bleed;
     [SerializeField]Quaternion rotationforIntro3Bleed;
     [SerializeField]ToolTipHomeManager toolTipHomeManager;
+    [SerializeField]TeleportInteractable teleportInteractable;
+    [SerializeField]ReticleDataTeleport reticleDataTeleport;
 
     [Header("DEBUG ONLY")]
     public bool isPlayScene1AtStart;
@@ -65,6 +68,13 @@ public class DialogueManager : MonoBehaviour, ITurnOffStatic
         DoSomethingAfterFinish += DoSomethingAfterDialogueFinish;
         HideFinishedDialogue_AfterFinishingTask += HideFinishedDialogueNow;
         // PlaySceneDialogueNew += PlayDialogueScene;
+    }
+    private void Update() {
+        if(isPlayScene1AtStart)
+        {
+            isPlayScene1AtStart = false;
+            PlayDialogueScene(DialogueListTypeParent.Home_QuizExplanation, DialogueListType_Home_QuizExplanation.Home_QuizExplanation_2_1);
+        }
     }
 
     
@@ -211,8 +221,8 @@ public class DialogueManager : MonoBehaviour, ITurnOffStatic
                 {
                     screenFader.ResetEvent();
                     gameManager.ChangeGameState(GameState.InGame);
-                    PlayerRestriction.LiftAllRestriction();
-                    PlayerRestriction.LiftRotationRestriction();
+                    if(PlayerRestriction.LiftAllRestriction != null)PlayerRestriction.LiftAllRestriction();
+                    if(PlayerRestriction.LiftRotationRestriction != null)PlayerRestriction.LiftRotationRestriction();
                     robot.ActivateLookAt();
                     robot.ActivateFollowPlayer();
                     PlayDialogueScene(DialogueListTypeParent.Choking_Intro, DialogueListType_Choking_Intro.Choking_Intro_3);
@@ -237,7 +247,7 @@ public class DialogueManager : MonoBehaviour, ITurnOffStatic
         {
             if((DialogueListType_Bleeding_Intro)dialogueSceneTypeNow == DialogueListType_Bleeding_Intro.Bleeding_Intro_1)
             {
-                PlayerRestriction.LiftMovementRestriction();
+                if(PlayerRestriction.LiftMovementRestriction != null)PlayerRestriction.LiftMovementRestriction();
                 return;
             }
             if((DialogueListType_Bleeding_Intro)dialogueSceneTypeNow == DialogueListType_Bleeding_Intro.Bleeding_Intro_3_2)
@@ -247,8 +257,10 @@ public class DialogueManager : MonoBehaviour, ITurnOffStatic
                 {
                     screenFader.ResetEvent();
                     gameManager.ChangeGameState(GameState.InGame);
-                    PlayerRestriction.LiftAllRestriction();
-                    PlayerRestriction.LiftRotationRestriction();
+                    if(PlayerRestriction.LiftAllRestriction != null)PlayerRestriction.LiftAllRestriction();
+                    if(PlayerRestriction.LiftRotationRestriction != null)PlayerRestriction.LiftRotationRestriction();
+                    teleportInteractable.AllowTeleport = true;
+                    reticleDataTeleport.ChangeReticleModeToValid();
                     robot.ActivateLookAt();
                     robot.ActivateFollowPlayer();
                     PlayDialogueScene(DialogueListTypeParent.Bleeding_Intro, DialogueListType_Bleeding_Intro.Bleeding_Intro_4);
@@ -276,8 +288,8 @@ public class DialogueManager : MonoBehaviour, ITurnOffStatic
                 {
                     screenFader.ResetEvent();
                     gameManager.ChangeGameState(GameState.InGame);
-                    PlayerRestriction.LiftAllRestriction();
-                    PlayerRestriction.LiftRotationRestriction();
+                    if(PlayerRestriction.LiftAllRestriction != null)PlayerRestriction.LiftAllRestriction();
+                    if(PlayerRestriction.LiftRotationRestriction != null)PlayerRestriction.LiftRotationRestriction();
                     robot.ActivateLookAt();
 
                 };
@@ -345,8 +357,8 @@ public class DialogueManager : MonoBehaviour, ITurnOffStatic
         UnityAction afterIntro_fadeIn = ()=>
         {
             screenFader.ResetEvent();
-            PlayerRestriction.ApplyMovementRestriction();
-            PlayerRestriction.ApplyRotationRestriction();
+            if(PlayerRestriction.ApplyMovementRestriction != null)PlayerRestriction.ApplyMovementRestriction();
+            if(PlayerRestriction.ApplyRotationRestriction != null)PlayerRestriction.ApplyRotationRestriction();
 
             HideFinishedDialogueNow();
 

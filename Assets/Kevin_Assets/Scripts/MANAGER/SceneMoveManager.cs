@@ -70,6 +70,7 @@ public class SceneMoveManager : MonoBehaviour
     {
         if(GameManager.CheckGameStateNow() != GameState.InGame || GameManager.CheckInGameModeNow() == InGame_Mode.FirstAid) return;
         TurnOffAllStatics();
+        bGMManager.DestroyInstance();
         questGoToSceneAfterFade = ()=>
         {
             screenFader.ResetEvent();

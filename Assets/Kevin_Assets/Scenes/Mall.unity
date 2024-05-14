@@ -1528,6 +1528,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0276ad8be4f92074b8058c9b730f3fe3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isDeleteAllPlayerID: 0
 --- !u!1001 &86240237
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5989,6 +5990,8 @@ MonoBehaviour:
   positionForIntro3Bleed: {x: 0, y: 0, z: 0}
   rotationforIntro3Bleed: {x: 0, y: 0, z: 0, w: 0}
   toolTipHomeManager: {fileID: 0}
+  teleportInteractable: {fileID: 0}
+  reticleDataTeleport: {fileID: 0}
   isPlayScene1AtStart: 0
   isPlayScene2: 0
   isFinishTaskScene2: 0
@@ -9714,6 +9717,11 @@ PrefabInstance:
       propertyPath: rightGrabberHT
       value: 
       objectReference: {fileID: 787151350}
+    - target: {fileID: 750065004909094999, guid: 06bbd138adbc4d74db7e070d9c11485a,
+        type: 3}
+      propertyPath: alcoholWipeCollider
+      value: 
+      objectReference: {fileID: 1112551528}
     - target: {fileID: 2084359348541723600, guid: 06bbd138adbc4d74db7e070d9c11485a,
         type: 3}
       propertyPath: leftGrabberHT
@@ -9734,6 +9742,11 @@ PrefabInstance:
       propertyPath: rightDistanceGrabberHT
       value: 
       objectReference: {fileID: 1300792525}
+    - target: {fileID: 2150171417464074473, guid: 06bbd138adbc4d74db7e070d9c11485a,
+        type: 3}
+      propertyPath: alcoholWipeCollider
+      value: 
+      objectReference: {fileID: 1112551528}
     - target: {fileID: 2341450316699657387, guid: 06bbd138adbc4d74db7e070d9c11485a,
         type: 3}
       propertyPath: _handTrackLeft
@@ -9747,17 +9760,17 @@ PrefabInstance:
     - target: {fileID: 2372586002341510177, guid: 06bbd138adbc4d74db7e070d9c11485a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -14.2901
+      value: -0.21
       objectReference: {fileID: 0}
     - target: {fileID: 2372586002341510177, guid: 06bbd138adbc4d74db7e070d9c11485a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.0547
+      value: 0.085999995
       objectReference: {fileID: 0}
     - target: {fileID: 2372586002341510177, guid: 06bbd138adbc4d74db7e070d9c11485a,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -8.7448
+      value: 0.122999996
       objectReference: {fileID: 0}
     - target: {fileID: 2372586002341510177, guid: 06bbd138adbc4d74db7e070d9c11485a,
         type: 3}
@@ -9767,17 +9780,17 @@ PrefabInstance:
     - target: {fileID: 2372586002341510177, guid: 06bbd138adbc4d74db7e070d9c11485a,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2372586002341510177, guid: 06bbd138adbc4d74db7e070d9c11485a,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2372586002341510177, guid: 06bbd138adbc4d74db7e070d9c11485a,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2372586002341510177, guid: 06bbd138adbc4d74db7e070d9c11485a,
         type: 3}
@@ -9894,6 +9907,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 06bbd138adbc4d74db7e070d9c11485a, type: 3}
+--- !u!65 &1112551528 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 6598925727401535863, guid: 06bbd138adbc4d74db7e070d9c11485a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1112551527}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1132669450 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3958196610198697978, guid: 82f000d783bda1349b0245a941e15904,

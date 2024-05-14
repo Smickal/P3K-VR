@@ -13,7 +13,10 @@ public class BottleWater : MonoBehaviour
     [SerializeField] Transform _dropWaterTransform;
     [SerializeField] ParticleSystem _waterLeakParticlePrefab;
     [SerializeField] ParticleSystem _waterSplashParticlePrefab;
-
+    [SerializeField] IsBeingGrabHandTrack isBeingGrabHandTrack;
+    [SerializeField] Rigidbody rb;
+    [SerializeField] bool _wasGrab;
+ 
 
     [Header("FILL THIS IF THIS ITEM IS A CLEANER")]
     [SerializeField] DirtyCleaner _cleaner;
@@ -99,6 +102,19 @@ public class BottleWater : MonoBehaviour
         if(!_waterSplashParticlePrefab.isEmitting || !_waterSplashParticlePrefab.isPlaying)
         {
             curSpawnedWSplash.Play();
+        }
+    }
+    public void Handtrack_isKinematicWhenGrab(bool change)
+    {
+        if(change && isBeingGrabHandTrack.IsBeingGrab())
+        {
+            _wasGrab = true;
+            rb.isKinematic = true;
+        }
+        else if(!change && !isBeingGrabHandTrack.IsBeingGrab() && _wasGrab)
+        {
+            _wasGrab = false;
+            rb.isKinematic = false;
         }
     }
 

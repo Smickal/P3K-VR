@@ -965,6 +965,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0276ad8be4f92074b8058c9b730f3fe3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isDeleteAllPlayerID: 0
 --- !u!114 &169444103 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8088468556811971203, guid: d44fbf779a16b734f91d8ecbe3f16cbd,
@@ -1593,6 +1594,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &267201713 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 6598925727401535863, guid: 06bbd138adbc4d74db7e070d9c11485a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1112551527}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &305083115 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2817930169400887550, guid: 82f000d783bda1349b0245a941e15904,
@@ -9973,38 +9980,14 @@ MonoBehaviour:
     dialogueListType_Bleeding_Ending: 0
     OnDialogueFinish:
       m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 2147413382}
-          m_TargetAssemblyTypeName: Oculus.Interaction.Locomotion.TeleportInteractable,
-            Oculus.Interaction
-          m_MethodName: set_AllowTeleport
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
-        - m_Target: {fileID: 2147413380}
-          m_TargetAssemblyTypeName: Oculus.Interaction.DistanceReticles.ReticleDataTeleport,
-            Oculus.Interaction
-          m_MethodName: ChangeReticleModeToValid
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+        m_Calls: []
   playerChecker: {fileID: 575138898}
   playerTeleport: {fileID: 4095492990934596406}
   positionForIntro3Bleed: {x: 3.86, y: -1, z: -2.32}
   rotationforIntro3Bleed: {x: 0, y: 0.70710677, z: 0, w: 0.70710677}
   toolTipHomeManager: {fileID: 0}
+  teleportInteractable: {fileID: 0}
+  reticleDataTeleport: {fileID: 0}
   isPlayScene1AtStart: 0
   isPlayScene2: 0
   isFinishTaskScene2: 0
@@ -12311,6 +12294,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isActivated: 0
   _maxTimeSlider: 10
+  _maxTimerSliderNormal: 10
   dialogueManager: {fileID: 0}
   _kitUiManager: {fileID: 990936895}
   SoundOnRight: {fileID: 0}
@@ -14080,6 +14064,11 @@ PrefabInstance:
       propertyPath: rightGrabberHT
       value: 
       objectReference: {fileID: 787151350}
+    - target: {fileID: 750065004909094999, guid: 06bbd138adbc4d74db7e070d9c11485a,
+        type: 3}
+      propertyPath: alcoholWipeCollider
+      value: 
+      objectReference: {fileID: 267201713}
     - target: {fileID: 2084359348541723600, guid: 06bbd138adbc4d74db7e070d9c11485a,
         type: 3}
       propertyPath: leftGrabberHT
@@ -14100,6 +14089,11 @@ PrefabInstance:
       propertyPath: rightDistanceGrabberHT
       value: 
       objectReference: {fileID: 1300792525}
+    - target: {fileID: 2150171417464074473, guid: 06bbd138adbc4d74db7e070d9c11485a,
+        type: 3}
+      propertyPath: alcoholWipeCollider
+      value: 
+      objectReference: {fileID: 267201713}
     - target: {fileID: 2341450316699657387, guid: 06bbd138adbc4d74db7e070d9c11485a,
         type: 3}
       propertyPath: _handTrackLeft
@@ -14113,17 +14107,17 @@ PrefabInstance:
     - target: {fileID: 2372586002341510177, guid: 06bbd138adbc4d74db7e070d9c11485a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -14.2901
+      value: -0.21
       objectReference: {fileID: 0}
     - target: {fileID: 2372586002341510177, guid: 06bbd138adbc4d74db7e070d9c11485a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.0547
+      value: 0.085999995
       objectReference: {fileID: 0}
     - target: {fileID: 2372586002341510177, guid: 06bbd138adbc4d74db7e070d9c11485a,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -8.7448
+      value: 0.122999996
       objectReference: {fileID: 0}
     - target: {fileID: 2372586002341510177, guid: 06bbd138adbc4d74db7e070d9c11485a,
         type: 3}
@@ -14133,17 +14127,17 @@ PrefabInstance:
     - target: {fileID: 2372586002341510177, guid: 06bbd138adbc4d74db7e070d9c11485a,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2372586002341510177, guid: 06bbd138adbc4d74db7e070d9c11485a,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2372586002341510177, guid: 06bbd138adbc4d74db7e070d9c11485a,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2372586002341510177, guid: 06bbd138adbc4d74db7e070d9c11485a,
         type: 3}
@@ -23218,12 +23212,12 @@ PrefabInstance:
     - target: {fileID: 8853225535009696856, guid: d6e05b4c107ab234e90e7b2d7fa98f8a,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 900
+      value: 850
       objectReference: {fileID: 0}
     - target: {fileID: 8853225535009696856, guid: d6e05b4c107ab234e90e7b2d7fa98f8a,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 300
+      value: 225
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -23689,22 +23683,22 @@ PrefabInstance:
     - target: {fileID: 3060052882041439675, guid: 790ac53c30f27144bb9722c36f6d228a,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 747.43
+      value: 810
       objectReference: {fileID: 0}
     - target: {fileID: 3060052882041439675, guid: 790ac53c30f27144bb9722c36f6d228a,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 226.45
+      value: 271.74
       objectReference: {fileID: 0}
     - target: {fileID: 3060052882041439675, guid: 790ac53c30f27144bb9722c36f6d228a,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 393.715
+      value: 425
       objectReference: {fileID: 0}
     - target: {fileID: 3060052882041439675, guid: 790ac53c30f27144bb9722c36f6d228a,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -133.225
+      value: -155.87
       objectReference: {fileID: 0}
     - target: {fileID: 4301473763812615514, guid: 790ac53c30f27144bb9722c36f6d228a,
         type: 3}
@@ -23729,12 +23723,12 @@ PrefabInstance:
     - target: {fileID: 5930669787630828198, guid: 790ac53c30f27144bb9722c36f6d228a,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 787.43
+      value: 850
       objectReference: {fileID: 0}
     - target: {fileID: 5930669787630828198, guid: 790ac53c30f27144bb9722c36f6d228a,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 266.45
+      value: 311.74
       objectReference: {fileID: 0}
     - target: {fileID: 5930669787630828198, guid: 790ac53c30f27144bb9722c36f6d228a,
         type: 3}
@@ -23744,7 +23738,7 @@ PrefabInstance:
     - target: {fileID: 5930669787630828198, guid: 790ac53c30f27144bb9722c36f6d228a,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -158.225
+      value: -180.87
       objectReference: {fileID: 0}
     - target: {fileID: 6124519427578882459, guid: 790ac53c30f27144bb9722c36f6d228a,
         type: 3}
@@ -23754,14 +23748,16 @@ PrefabInstance:
     - target: {fileID: 6124519427578882459, guid: 790ac53c30f27144bb9722c36f6d228a,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 316.45
+      value: 361.74
       objectReference: {fileID: 0}
     - target: {fileID: 7325536202624735502, guid: 790ac53c30f27144bb9722c36f6d228a,
         type: 3}
       propertyPath: m_text
-      value: "<align=\"center\">Tips When Opening a lid or wrapper :</align>\n- Controller
-        : Grab the object \n                    while doing it.\n- Handtrack : Easier
-        when let go object and \n                    grab the lid or wrapper only."
+      value: '<color=red>Controller</color> -> Grab the item, then grab the lid/wrapper/item.
+
+        <color=purple>Handtrack</color>
+        -> Grab the item, then grab the lid/wrapper/item or to make it easier, put
+        the item down, and grab the parts that you want to grab/remove.'
       objectReference: {fileID: 0}
     - target: {fileID: 7325536202624735502, guid: 790ac53c30f27144bb9722c36f6d228a,
         type: 3}
@@ -24200,7 +24196,7 @@ PrefabInstance:
     - target: {fileID: 5535879352898505364, guid: d38c86c219f77c34685aa09c68f7d65d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.123
+      value: 2.54
       objectReference: {fileID: 0}
     - target: {fileID: 5535879352898505364, guid: d38c86c219f77c34685aa09c68f7d65d,
         type: 3}
@@ -24210,27 +24206,27 @@ PrefabInstance:
     - target: {fileID: 5535879352898505364, guid: d38c86c219f77c34685aa09c68f7d65d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.259
+      value: -3.644
       objectReference: {fileID: 0}
     - target: {fileID: 5535879352898505364, guid: d38c86c219f77c34685aa09c68f7d65d,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.18830241
       objectReference: {fileID: 0}
     - target: {fileID: 5535879352898505364, guid: d38c86c219f77c34685aa09c68f7d65d,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5535879352898505364, guid: d38c86c219f77c34685aa09c68f7d65d,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.9821111
       objectReference: {fileID: 0}
     - target: {fileID: 5535879352898505364, guid: d38c86c219f77c34685aa09c68f7d65d,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5535879352898505364, guid: d38c86c219f77c34685aa09c68f7d65d,
         type: 3}
@@ -24240,7 +24236,7 @@ PrefabInstance:
     - target: {fileID: 5535879352898505364, guid: d38c86c219f77c34685aa09c68f7d65d,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 158.293
       objectReference: {fileID: 0}
     - target: {fileID: 5535879352898505364, guid: d38c86c219f77c34685aa09c68f7d65d,
         type: 3}
@@ -26333,10 +26329,10 @@ PrefabInstance:
     - target: {fileID: 1516779714896338874, guid: d44fbf779a16b734f91d8ecbe3f16cbd,
         type: 3}
       propertyPath: m_text
-      value: Put your first aid kit right at the <color=#02D4BA><i><size=100%>(BLUE
-        LIGHT)</i></size></color>. Change your <color=#02D4BA>height</color> through
-        option if you don't want to crouch in real life. There will also be many
-        tooltips that will help you throughout the gameplay.
+      value: Put your first aid kit right at the <color=#02D4BA><i><size=110%>(BLUE
+        LIGHT)</i></size></color>. Change your height through option if you don't
+        want to crouch in real life.There will also be many tooltips that will help
+        you throughout the gameplay.
       objectReference: {fileID: 0}
     - target: {fileID: 3101866133312832325, guid: d44fbf779a16b734f91d8ecbe3f16cbd,
         type: 3}
