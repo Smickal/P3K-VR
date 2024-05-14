@@ -27,6 +27,7 @@ public class CheckingTakeCorrectItem : MonoBehaviour
     public void CheckingState()
     {
         // Debug.Log("Lewat sini ga checking");
+        if(GameManager.CheckGameStateNow == null || GameManager.CheckLevelTypeNow == null || GameManager.CheckInGameModeNow == null)return;
         if(GameManager.CheckGameStateNow() != GameState.InGame || GameManager.CheckLevelTypeNow() != LevelP3KType.Bleeding || GameManager.CheckInGameModeNow() != InGame_Mode.FirstAid)return;
         
         if(patient_Bleeding.BleedingQuest_State == BleedingQuest_State.WithItem)
@@ -37,7 +38,7 @@ public class CheckingTakeCorrectItem : MonoBehaviour
                 {
                     if(CorrectState(BleedingWithoutEmbeddedItem_State.CleanHands))
                     {
-                        DialogueManager.HideFinishedDialogue_AfterFinishingTask();
+                        if(DialogueManager.HideFinishedDialogue_AfterFinishingTask != null)DialogueManager.HideFinishedDialogue_AfterFinishingTask();
                         return;
                     }
                     else
@@ -55,7 +56,7 @@ public class CheckingTakeCorrectItem : MonoBehaviour
             }
             else
             {
-                DialogueManager.HideFinishedDialogue_AfterFinishingTask();
+                if(DialogueManager.HideFinishedDialogue_AfterFinishingTask != null)DialogueManager.HideFinishedDialogue_AfterFinishingTask();
                 return;
             }
             // if(!CorrectState(BleedingWithoutEmbeddedItem_State.BandageTime))
@@ -75,7 +76,7 @@ public class CheckingTakeCorrectItem : MonoBehaviour
             // CleanHands, WearGloves, StopBleed, CleanBlood, DryWater, BandageTime, PuttingLegOnTopSomethingTime
             if(CorrectState(BleedingWithoutEmbeddedItem_State.None))
             {
-                DialogueManager.HideFinishedDialogue_AfterFinishingTask();
+                if(DialogueManager.HideFinishedDialogue_AfterFinishingTask != null)DialogueManager.HideFinishedDialogue_AfterFinishingTask();
                 return;
             }
             

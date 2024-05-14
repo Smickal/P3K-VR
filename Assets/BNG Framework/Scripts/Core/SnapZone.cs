@@ -492,7 +492,7 @@ namespace BNG {
             if (DisableColliders && disabledColliders != null) {
                 foreach (var c in disabledColliders) {
                     if (c) {
-                        Debug.Log(c.name);
+                        // Debug.Log(c.name);
                         if(c.gameObject.name == "SnapInteractor") c.enabled = false;
                         else c.enabled = true;
                     }
@@ -515,7 +515,7 @@ namespace BNG {
                     if(!returns.OnlyReturnOnce)returns.enabled = true;
                 }
             }
-            Debug.Log("atau ini + yg non HT");
+            // Debug.Log("atau ini + yg non HT");
             HeldItem.enabled = true;
             HeldItem.transform.parent = null;
             
@@ -584,15 +584,15 @@ namespace BNG {
             }
 
             HeldItem.ResetScale();
-            int x = 0;
+            // int x = 0;
             if (DisableColliders && disabledColliders != null) {
                 foreach (var c in disabledColliders) {
                     if (c) {
-                        Debug.Log(c.name);
+                        // Debug.Log(c.name);
                         if(c.name == "SnapInteractor")
                         {
                             c.enabled = false;
-                            Debug.Log(++x);
+                            // Debug.Log(++x);
                             
                         }
                          
@@ -721,7 +721,7 @@ namespace BNG {
             }
 
             // Set the parent of the object 
-            Debug.Log("ini yg bikin masalah ya? pas mati ato dr");
+            // Debug.Log("ini yg bikin masalah ya? pas mati ato dr");
             grab.transform.parent = transform;
 
             // Set scale factor            

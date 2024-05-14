@@ -16,7 +16,13 @@ public class ChestPullInteractableEvent : MonoBehaviour
 
     public void OnGrabHT()
     {
-        if(!PlayerRestriction.IsRestrictMovement())PlayerRestriction.ApplyMovementRestriction();
+        if(PlayerRestriction.IsRestrictMovement != null)
+        {
+            if(!PlayerRestriction.IsRestrictMovement())
+            {
+                if(PlayerRestriction.ApplyMovementRestriction != null)PlayerRestriction.ApplyMovementRestriction();
+            }
+        }
         if(handGrab.HasSelectingInteractor(leftGrabberHT))currGrabber = leftGrabber;
         else if (handGrab.HasSelectingInteractor(rightGrabberHT))currGrabber = rightGrabber;
         // Debug.Log(handGrab.HasSelectingInteractor(leftGrabberHT) + "apakah iya");
@@ -31,7 +37,16 @@ public class ChestPullInteractableEvent : MonoBehaviour
     public void OnReleaseHT()
     {
         // base.OnRelease();
-        if(PlayerRestriction.IsRestrictMovement())PlayerRestriction.LiftMovementRestriction();
+        if(PlayerRestriction.IsRestrictMovement != null)
+        {
+            if(PlayerRestriction.IsRestrictMovement())
+            {
+                if(PlayerRestriction.LiftMovementRestriction != null)
+                {
+                    PlayerRestriction.LiftMovementRestriction();
+                }
+            }
+        }
         currGrabber = null;
         _bacBlowMov.SetPullGrabber(currGrabber);
         

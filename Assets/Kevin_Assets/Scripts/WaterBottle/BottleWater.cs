@@ -91,7 +91,7 @@ public class BottleWater : MonoBehaviour
 
         //Update Splash Position
         Vector3 hitPos = hitInfo.point;
-        Debug.Log("Drop Water Posnya adalah " + _dropWaterTransform.position);
+        // Debug.Log("Drop Water Posnya adalah " + _dropWaterTransform.position);
         curSpawnedWSplash.transform.position = hitPos;
 
     }

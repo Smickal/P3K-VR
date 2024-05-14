@@ -76,14 +76,14 @@ public class DirtyObject : MonoBehaviour
         //Checks if the cleaningType has the same type as the dirty Object
         if (cleaner.GetTypeOfCleaning() != _typeOfCleaning)
         {
-            Debug.Log($"FAILED_TO_CLEAN \n Cleaner = {cleaner.GetTypeOfCleaning()},\n Object {_typeOfCleaning}");
+            // Debug.Log($"FAILED_TO_CLEAN \n Cleaner = {cleaner.GetTypeOfCleaning()},\n Object {_typeOfCleaning}");
             return;
         }
 
         //Checks if the Cleaner has the same type as the object
         if(cleaner.GetTypeOfService() != _typeOfCleaner)
         {
-            Debug.Log($"FAILED_TO_CLEAN \n Cleaner = {cleaner.GetTypeOfService()},\n Object {_typeOfCleaner}");
+            // Debug.Log($"FAILED_TO_CLEAN \n Cleaner = {cleaner.GetTypeOfService()},\n Object {_typeOfCleaner}");
             return;
         }
 
@@ -94,12 +94,12 @@ public class DirtyObject : MonoBehaviour
             switch(_typeOfCleaner)
             {
                 case ETypeOfCleaner.WaterBottle:
-                    Debug.Log("registered WaterBootle");
+                    // Debug.Log("registered WaterBootle");
                     cleaner.OnCleaning += ReduceTransparancyOnHit;                   
                     break;
 
                 case ETypeOfCleaner.GauzePads:
-                    Debug.Log("Registered GauzePads");
+                    // Debug.Log("Registered GauzePads");
                     cleaner.OnCleaning += ReduceGauzeTime;
                     break;
             }
@@ -133,13 +133,13 @@ public class DirtyObject : MonoBehaviour
             //TRIGGER DONE CLEANING HERE!
             
             isDoneCleaning = true;
-            Debug.Log($"Done Clean -> {name}");
+            // Debug.Log($"Done Clean -> {name}");
 
             if(DirtyObjectManager.Instance)DirtyObjectManager.Instance.CheckIsDoneCleaning();
 
             return;
         }
-        Debug.Log("REDUCING TRANPARANCY!!");
+        // Debug.Log("REDUCING TRANPARANCY!!");
 
         curTransparancy -= _reduceMultiplier;
         SetTransparancy(curTransparancy);      
@@ -151,11 +151,11 @@ public class DirtyObject : MonoBehaviour
         if(curGauzePadTime < 0f && !isDoneCleaning)
         {
             isDoneCleaning = true;
-            Debug.Log($"Done Clean -> {name}");
+            // Debug.Log($"Done Clean -> {name}");
             if(DirtyObjectManager.Instance)DirtyObjectManager.Instance.CheckIsDoneCleaning();
             return;
         }
-        Debug.Log("REDUCING GAUZE PAADS!");
+        // Debug.Log("REDUCING GAUZE PAADS!");
 
         curGauzePadTime -= _reduceMultiplier;
         SetTransparancy(curGauzePadTime); 

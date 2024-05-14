@@ -51,7 +51,7 @@ namespace DialogueSystem
             hasSceneDialogueFinish = true;
 
             if(SceneDialogue.isCloseAfterFinished) HideDialogue();
-            DialogueManager.DoSomethingAfterFinish();
+            if(DialogueManager.DoSomethingAfterFinish != null)DialogueManager.DoSomethingAfterFinish();
         }
         private void Deactivate()
         {

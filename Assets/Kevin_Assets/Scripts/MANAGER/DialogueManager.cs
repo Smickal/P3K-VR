@@ -232,8 +232,8 @@ public class DialogueManager : MonoBehaviour, ITurnOffStatic
                 UnityAction afterIntro2_fadeIn = ()=>
                 {
                     screenFader.ResetEvent();
-                    PlayerManager.HasFinishedIntroLevel((int)gameManager.LevelTypeNow());
-                    EnvironmentLevelManager.SetEnvironment_AfterIntro();
+                    if(PlayerManager.HasFinishedIntroLevel != null)PlayerManager.HasFinishedIntroLevel((int)gameManager.LevelTypeNow());
+                    if(EnvironmentLevelManager.SetEnvironment_AfterIntro != null)EnvironmentLevelManager.SetEnvironment_AfterIntro();
                     screenFader.AddEvent(afterIntro2_fadeOut);
                     screenFader.DoFadeOut();
                 };
@@ -269,7 +269,7 @@ public class DialogueManager : MonoBehaviour, ITurnOffStatic
                 UnityAction afterIntro2_fadeIn = ()=>
                 {
                     screenFader.ResetEvent();
-                    PlayerManager.HasFinishedIntroLevel((int)gameManager.LevelTypeNow());
+                    if(PlayerManager.HasFinishedIntroLevel != null)PlayerManager.HasFinishedIntroLevel((int)gameManager.LevelTypeNow());
                     playerChecker.SetActive(true);
                     screenFader.AddEvent(afterIntro2_fadeOut);
                     screenFader.DoFadeOut();
@@ -296,9 +296,9 @@ public class DialogueManager : MonoBehaviour, ITurnOffStatic
                 UnityAction afterIntro2_fadeIn = ()=>
                 {
                     screenFader.ResetEvent();
-                    PlayerManager.HasFinishedTutorialMain();
+                    if(PlayerManager.HasFinishedTutorialMain != null)PlayerManager.HasFinishedTutorialMain();
                     toolTipHomeManager.Activate();
-                    EnvironmentLevelManager.SetEnvironment_HomeAfterIntro();
+                    if(EnvironmentLevelManager.SetEnvironment_HomeAfterIntro != null)EnvironmentLevelManager.SetEnvironment_HomeAfterIntro();
                     screenFader.AddEvent(afterIntro2_fadeOut);
                     screenFader.DoFadeOut();
                 };
@@ -372,7 +372,7 @@ public class DialogueManager : MonoBehaviour, ITurnOffStatic
     }
     public void PlayAfterIntro3_1()
     {
-        EnvironmentLevelManager.SetEnvironment_AfterIntro();
+        if(EnvironmentLevelManager.SetEnvironment_AfterIntro != null)EnvironmentLevelManager.SetEnvironment_AfterIntro();
         robot.SetPosForIntro();
         playerChecker.SetActive(false);
     }

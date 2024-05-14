@@ -15,6 +15,7 @@ public class KitP3K : GrabbableEvents
     public override void OnTriggerDown()
     {
         // Debug.Log(_scriptableData.KitName+ "huh");
+        if(UIKotakP3K.CheckUnlock == null)return;
         UIKotakP3K.CheckUnlock(_scriptableData);
 
         base.OnTriggerDown();
@@ -23,21 +24,35 @@ public class KitP3K : GrabbableEvents
     public override void OnGrab(Grabber grabber)
     {
             // Debug.Log("is this first?");
+            if(UIKotakP3K.CheckUnlock == null)return;
             UIKotakP3K.CheckUnlock(_scriptableData);
-            if(GameManager.CheckLevelModeNow() == LevelMode.Home)UIKotakP3K.OpenDescriptioninRoom(_scriptableData);
+            if(GameManager.CheckLevelModeNow() == LevelMode.Home)
+            {
+                if(UIKotakP3K.OpenDescriptioninRoom == null)return;
+                UIKotakP3K.OpenDescriptioninRoom(_scriptableData);
+            }
     }
 
     public override void OnRelease()
     {
-        if(GameManager.CheckLevelModeNow() == LevelMode.Home)UIKotakP3K.CloseDescriptioninRoom(_scriptableData);
+        if(GameManager.CheckLevelModeNow() == LevelMode.Home)
+        {
+            if(UIKotakP3K.CloseDescriptioninRoom == null)return;
+            UIKotakP3K.CloseDescriptioninRoom(_scriptableData);
+        }
     }
     public void OnGrabHT()
     {
         if(isBeingGrabHandTrack.IsBeingGrab())
         {
+            if(UIKotakP3K.CheckUnlock == null)return;
             UIKotakP3K.CheckUnlock(_scriptableData);
             wasGrabHT = true;
-            if(GameManager.CheckLevelModeNow != null && GameManager.CheckLevelModeNow() == LevelMode.Home)UIKotakP3K.OpenDescriptioninRoom(_scriptableData);
+            if(GameManager.CheckLevelModeNow != null && GameManager.CheckLevelModeNow() == LevelMode.Home)
+            {
+                if(UIKotakP3K.OpenDescriptioninRoom == null)return;
+                UIKotakP3K.OpenDescriptioninRoom(_scriptableData);
+            }
         }
     }
     public void OnReleaseHT()
@@ -45,7 +60,11 @@ public class KitP3K : GrabbableEvents
         if(wasGrabHT)
         {
             wasGrabHT = false;
-            if(GameManager.CheckLevelModeNow != null && GameManager.CheckLevelModeNow() == LevelMode.Home)UIKotakP3K.CloseDescriptioninRoom(_scriptableData);
+            if(GameManager.CheckLevelModeNow != null && GameManager.CheckLevelModeNow() == LevelMode.Home)
+            {
+                if(UIKotakP3K.CloseDescriptioninRoom == null)return;
+                UIKotakP3K.CloseDescriptioninRoom(_scriptableData);
+            }
         }
         
     }

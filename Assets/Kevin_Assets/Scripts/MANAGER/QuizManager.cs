@@ -134,6 +134,7 @@ public class QuizManager : MonoBehaviour
 
     private void Update()
     {
+        if(GameManager.CheckGameStateNow == null)return;
         if (isTimerActivated && GameManager.CheckGameStateNow() == GameState.Cinematic)
         {
             curTime -= Time.deltaTime;
@@ -158,7 +159,7 @@ public class QuizManager : MonoBehaviour
 
     public void CreateQuestion()
     {
-        DialogueManager.HideFinishedDialogue_AfterFinishingTask();
+        if(DialogueManager.HideFinishedDialogue_AfterFinishingTask != null)DialogueManager.HideFinishedDialogue_AfterFinishingTask();
         if (questionQ.Count == 0)
         {
             //NO MORE QUESTION;
@@ -274,7 +275,7 @@ public class QuizManager : MonoBehaviour
     private void PlayDialogueNeeded<T>(DialogueListTypeParent parent, T enumValue)where T : struct, System.Enum
     {
         // Debug.Log("Masuk sinikan?");
-        DialogueManager.HideFinishedDialogue_AfterFinishingTask();
+        if(DialogueManager.HideFinishedDialogue_AfterFinishingTask != null)DialogueManager.HideFinishedDialogue_AfterFinishingTask();
         dialogueManager.PlayDialogueScene(parent, enumValue);
         Debug.Log("Saat ini adalah " + parent + "aa" + enumValue);
         // DialogueManager.PlaySceneDialogue(dialogueListType);

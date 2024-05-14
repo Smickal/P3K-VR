@@ -44,13 +44,13 @@ public class GameManager : MonoBehaviour, ITurnOffStatic
         OnPause.AddListener(
             ()=>
             {
-                PlayerRestriction.ApplyAllRestriction();
+                if(PlayerRestriction.ApplyAllRestriction != null)PlayerRestriction.ApplyAllRestriction();
             }
         );
         OnUnPause.AddListener(
             ()=>
             {
-                PlayerRestriction.LiftAllRestriction();
+                if(PlayerRestriction.LiftAllRestriction != null)PlayerRestriction.LiftAllRestriction();
             }
         );
     }

@@ -137,14 +137,18 @@ public class UIKotakP3K : BaseKitUI, ITurnOffStatic
     {
         if(scriptableData != null && scriptableOBJ_OutsideGlossary_Now == scriptableData)
         {
-            if(GameManager.CheckGameStateNow() != GameState.Pause)
+            if(GameManager.CheckGameStateNow != null)
             {
-                if(_kitUiManager.IsBaseUIOpen())
+                if(GameManager.CheckGameStateNow() != GameState.Pause)
                 {
-                    Debug.Log("P3K Item Description - CLOSE");
-                    _kitUiManager.DeactivateBaseUI();
+                    if(_kitUiManager.IsBaseUIOpen())
+                    {
+                        // Debug.Log("P3K Item Description - CLOSE");
+                        _kitUiManager.DeactivateBaseUI();
+                    }
                 }
             }
+            
             
             scriptableOBJ_OutsideGlossary_Now = null;
         }

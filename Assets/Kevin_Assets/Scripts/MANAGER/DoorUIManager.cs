@@ -19,6 +19,7 @@ public class DoorUIManager : MonoBehaviour
 
     private void Start() 
     {
+        if(PlayerManager.TotalLevels == null || PlayerManager.LevelDataNow == null)return;
         int totalLevel = PlayerManager.TotalLevels();
         hasClickTeleport = false;
         for(int i = 1; i < totalLevel; i++)

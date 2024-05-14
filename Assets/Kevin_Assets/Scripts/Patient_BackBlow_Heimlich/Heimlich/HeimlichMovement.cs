@@ -126,7 +126,7 @@ public class HeimlichMovement : MonoBehaviour
     public void SetGrabber(GameObject grabber)
     {
         if(grabber == null) return;
-
+        if(InteractToolsController.CheckIsHandTrackOn == null)return;
         if(!InteractToolsController.CheckIsHandTrackOn())
         {
             if (grabber == _leftGrabber) curLeftGrabber = grabber;
@@ -143,7 +143,7 @@ public class HeimlichMovement : MonoBehaviour
     public void ReleaseGrabber(GameObject grabber)
     {
         if(grabber == null) return;
-
+        if(InteractToolsController.CheckIsHandTrackOn == null)return;
         if(!InteractToolsController.CheckIsHandTrackOn())
         {
             if (grabber == _rightGrabber) curRightGrabber = null;
@@ -189,7 +189,13 @@ public class HeimlichMovement : MonoBehaviour
                 leftVisualHT.SetActive(false);
                 rightVisualHT.SetActive(false);
             }
-            if(!PlayerRestriction.IsRestrictMovement())PlayerRestriction.ApplyMovementRestriction();
+            if(PlayerRestriction.IsRestrictMovement != null)
+            {
+                if(!PlayerRestriction.IsRestrictMovement())
+                {
+                    if(PlayerRestriction.ApplyMovementRestriction != null)PlayerRestriction.ApplyMovementRestriction();
+                }
+            }
         }
         
         else 
@@ -255,11 +261,11 @@ public class HeimlichMovement : MonoBehaviour
             // }
             float score = 0;
             heimlichCount++;
-            Debug.Log("REDUCED PROGRESS_H");
+            // Debug.Log("REDUCED PROGRESS_H");
             score = _reducedScore;
             if(_heimlichColliderFull.HitFull)
             {
-                Debug.Log("FULL PROGRESS_H");
+                // Debug.Log("FULL PROGRESS_H");
                 score = _fullScore;
             }
             _totalScore += score;
@@ -293,7 +299,7 @@ public class HeimlichMovement : MonoBehaviour
         
         if (grabber == null) return;
         
-        Debug.Log("Collider HT Kah ? " + grabber.gameObject);
+        // Debug.Log("Collider HT Kah ? " + grabber.gameObject);
         if(grabber == _rightGrabbable)
         {
             isRightHandHit = true;

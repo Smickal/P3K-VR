@@ -114,12 +114,12 @@ public class BGMManager : MonoBehaviour, IChangeVolume
         if(bGM_Type == BGM_Type.main)
         {
             BGM.clip = BGM_Main;
-            Debug.Log("change to main");
+            // Debug.Log("change to main");
         }
         else if(bGM_Type == BGM_Type.tense)
         {
             BGM.clip = BGM_Tense;
-            Debug.Log("change to tense");
+            // Debug.Log("change to tense");
         }
         
     }

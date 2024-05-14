@@ -11,7 +11,7 @@ public class HeimlichColliderFull : MonoBehaviour
     [SerializeField] Grabbable _rightGrabbable;
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.gameObject);
+        // Debug.Log(other.gameObject);
         if(!(other.gameObject == _leftGrabbable.gameObject || other.gameObject == _rightGrabbable.gameObject)) return;
         hitFull = true;
 

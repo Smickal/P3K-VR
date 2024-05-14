@@ -121,7 +121,7 @@ public class Choking_QuestManager : QuestManager, IPersistanceDataSave, ITurnOff
             {
                 patientChoking.UnActivateAll();
                 QuestDone();
-                Debug.Log("Quest Selesai coii");
+                // Debug.Log("Quest Selesai coii");
             }
         }
         

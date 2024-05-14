@@ -135,11 +135,11 @@ public class Briefcase : MonoBehaviour
     {
         if(canOnlyOpenInCertainSpot)
         {
-            Debug.Log("here");
+            // Debug.Log("here");
             ChangeButtonCollEnable(false);
             return;
         }
-        Debug.Log("Kan ga bisa lwt sini");
+        // Debug.Log("Kan ga bisa lwt sini");
         ChangeButtonCollEnable(true);
     }
     private void PlaySound()

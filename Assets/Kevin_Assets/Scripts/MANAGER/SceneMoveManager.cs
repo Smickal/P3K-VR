@@ -68,6 +68,7 @@ public class SceneMoveManager : MonoBehaviour
     }
     public void GoBackHome()
     {
+        if(GameManager.CheckGameStateNow == null || GameManager.CheckInGameModeNow == null)return;
         if(GameManager.CheckGameStateNow() != GameState.InGame || GameManager.CheckInGameModeNow() == InGame_Mode.FirstAid) return;
         TurnOffAllStatics();
         bGMManager.DestroyInstance();

@@ -34,6 +34,7 @@ public class AlcoholWipesHT : MonoBehaviour
 
     public void OnGrabHT()
     {
+        if(GameManager.CheckLevelTypeNow == null || GameManager.CheckInGameModeNow == null)return;
         if((GameManager.CheckLevelTypeNow() != LevelP3KType.Bleeding || 
             GameManager.CheckInGameModeNow() != InGame_Mode.FirstAid))return;
         HandGrabInteractor currHand = CheckHandGrabInteractor();

@@ -20,11 +20,12 @@ public class BackBlowFullCollider : MonoBehaviour
     Collider firstColliderWhoTrigger;
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Yang Collider adalah Atas" + other.gameObject);
+        // Debug.Log("Yang Collider adalah Atas" + other.gameObject);
+        if(InteractToolsController.CheckIsHandTrackOn == null)return;
         if(!InteractToolsController.CheckIsHandTrackOn()) if(!(other == _leftGrabber || other == _rightGrabber || other == _leftGrabberFull || other == _rightGrabberFull)) return;
         else if(InteractToolsController.CheckIsHandTrackOn()) if(!(other == _leftGrabberHT || other == _rightGrabberHT || other == _leftGrabberHTFull || other == _rightGrabberHTFull)) return;
 
-        Debug.Log("Yang Collider adalah" + other.gameObject);
+        // Debug.Log("Yang Collider adalah" + other.gameObject);
         firstColliderWhoTrigger = other;
         hitFull = true;
 
@@ -33,6 +34,7 @@ public class BackBlowFullCollider : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        if(InteractToolsController.CheckIsHandTrackOn == null)return;
         if(!InteractToolsController.CheckIsHandTrackOn()) if(!(other == _leftGrabber || other == _rightGrabber || other == _leftGrabberFull || other == _rightGrabberFull)) return;
         else if(InteractToolsController.CheckIsHandTrackOn()) if(!(other == _leftGrabberHT || other == _rightGrabberHT || other == _leftGrabberHTFull || other == _rightGrabberHTFull)) return;
         // if(other != firstColliderWhoTrigger)return;

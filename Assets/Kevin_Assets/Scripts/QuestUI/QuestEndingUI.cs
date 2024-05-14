@@ -56,7 +56,7 @@ public class QuestEndingUI : MonoBehaviour, ITurnOffStatic
     public void SetData(ScoreName scoreNow, LevelP3KType levelP3KTypeNow)
     {
         SOLangkahP3K selectedData = _soLangkahData[(int)levelP3KTypeNow-1];
-        UILangkahP3K.UnlockLangkahSave(selectedData);
+        if(UILangkahP3K.UnlockLangkahSave != null)UILangkahP3K.UnlockLangkahSave(selectedData);
         scoreNowName = scoreNow;
         _scoreIMG.sprite = _scoreSprite[(int)scoreNow-1];
 
@@ -82,26 +82,26 @@ public class QuestEndingUI : MonoBehaviour, ITurnOffStatic
         _kitUIMgr.ActivateBaseUI("Evaluation");
         _kitUIMgr.OpenQuestEnding();
         _evalContainer.gameObject.SetActive(true);
-
+        if(GameManager.CheckLevelTypeNow == null)return;
         if(GameManager.CheckLevelTypeNow() == LevelP3KType.Choking)
         {
             if(scoreNowName == ScoreName.Sad_Face)
             {
                 
                 dialogueManager.PlayDialogueScene(DialogueListTypeParent.Choking_Ending, DialogueListType_Choking_Ending.Ending_Sad);
-                Debug.Log("Sad");
+                // Debug.Log("Sad");
             }
             else if(scoreNowName == ScoreName.Small_Happy_Face)
             {
                 
                 dialogueManager.PlayDialogueScene(DialogueListTypeParent.Choking_Ending, DialogueListType_Choking_Ending.Ending_SmallHappy);
-                Debug.Log("Small_Happy_Face");
+                // Debug.Log("Small_Happy_Face");
             }
             else if(scoreNowName == ScoreName.Big_Happy_Face)
             {
                 
                 dialogueManager.PlayDialogueScene(DialogueListTypeParent.Choking_Ending, DialogueListType_Choking_Ending.Ending_Happy);
-                Debug.Log("Big_Happy_Face");
+                // Debug.Log("Big_Happy_Face");
             }
             
         }
@@ -126,7 +126,7 @@ public class QuestEndingUI : MonoBehaviour, ITurnOffStatic
     {
         _evalContainer.gameObject.SetActive(false);
         _GlossaryContainer.gameObject.SetActive(true);
-
+        if(GameManager.CheckLevelTypeNow == null)return;
         if(GameManager.CheckLevelTypeNow() == LevelP3KType.Choking)
         {
             dialogueManager.PlayDialogueScene(DialogueListTypeParent.Choking_Ending, DialogueListType_Choking_Ending.EndingAfter);
