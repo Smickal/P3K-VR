@@ -59,7 +59,8 @@ public class QuestManager : MonoBehaviour
 
     protected virtual void Update() 
     {
-        if(Startq)
+
+        if (Startq)
         {
             Startq = false;
             Restart();
@@ -177,7 +178,7 @@ public class QuestManager : MonoBehaviour
     {
         PlayerManager.HasBeatenLvl((int)levelP3KTypeNow, score);
         QuestEndingUI.SetUIData(score, levelP3KTypeNow);
-        DataSaveManager.Instance.SaveScoreAndTime(levelP3KTypeNow, score, timerInSecs);
+        DataSaveManager.Instance.Save();
     }
 
     public virtual void Restart()
