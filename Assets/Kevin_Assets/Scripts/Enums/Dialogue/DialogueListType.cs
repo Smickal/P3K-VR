@@ -14,8 +14,7 @@ public enum DialogueListTypeParent
 
 public enum DialogueListType_Home_Intro
 {
-    None, Home_Intro_Wake, Home_Intro_AfterTakeLetter,//grab tutor
-    Home_Intro_AfterWakeUpRobot, //interact button with hand
+    None, Home_Intro_Wake, Home_Intro_AfterRobotWakeUp, //interact button with hand
     Home_Intro_AfterQuiz, Home_Intro_TutorMove,//try to go to the place
     Home_Intro_FirstAid, //open all grab
     Home_Intro_GoToDoor
@@ -30,7 +29,7 @@ public enum DialogueListType_Home_QuizExplanation
 {
     None, Home_QuizExplanation_1_1, Home_QuizExplanation_1_2, Home_QuizExplanation_1_3, Home_QuizExplanation_1_4, Home_QuizExplanation_1_5,
     Home_QuizExplanation_2_1, Home_QuizExplanation_2_2, Home_QuizExplanation_2_3, Home_QuizExplanation_2_4, Home_QuizExplanation_2_5,
-    Home_QuizExplanation_3_1, Home_QuizExplanation_3_2, Home_QuizExplanation_3_3, Home_QuizExplanation_3_4, Home_QuizExplanation_3_5, Home_QuizExplanation_3_6, Home_QuizExplanation_3_7, Home_QuizExplanation_3_8, Home_QuizExplanation_3_9, Home_QuizExplanation_3_10, Home_QuizExplanation_3_11, Home_QuizExplanation_3_12, Home_QuizExplanation_3_13, Home_QuizExplanation_3_14 
+    Home_QuizExplanation_3_1, Home_QuizExplanation_3_2, Home_QuizExplanation_3_3, Home_QuizExplanation_3_4, Home_QuizExplanation_3_5, Home_QuizExplanation_3_6, Home_QuizExplanation_3_7, Home_QuizExplanation_3_8
 
 }
 
@@ -69,9 +68,9 @@ public enum DialogueListType_Choking_Explanation
 public enum DialogueListType_Bleeding_Explanation
 {
     None, 
-    Bleeding_WithItem_CleanHands,
-    Bleeding_WithItem_Bandage,
-    Bleeding_WithoutItem_CleanHands, Bleeding_WithoutItem_WearGloves, Bleeding_WithoutItem_StopBleed, Bleeding_WithoutItem_CleanBlood, Bleeding_WithoutItem_DryWater, Bleeding_WithoutItem_BandageTime, Bleeding_WithoutItem_PuttingLegOnTopSomethingTime, Bleeding_WithoutItem_Done,
+    Bleeding_WithItem_Start, Bleeding_WithoutItem_Start,
+    Bleeding_NextStep,
+    
     Bleeding_PatientDissatisfied
 }
 public enum DialogueListType_Choking_Ending

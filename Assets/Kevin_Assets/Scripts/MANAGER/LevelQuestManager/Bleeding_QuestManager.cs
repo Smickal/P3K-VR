@@ -1,24 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using BNG;
 using UnityEngine;
 
 public class Bleeding_QuestManager : QuestManager
 {
     IEnumerator bleedingCoroutine;
+    [Header("target time")]
+    private float timeTarget_WithoutItem, timeTarget_WithItem;
     [SerializeField] bool isTrashEverywhere = true;
     private int totalDissatisfaction;
     [SerializeField] int totalDissatisfactionMax;
     [Header ("All Bleeding GameObject and Manager - Without Item")]
     [SerializeField]private Patient_Bleeding patient_Bleeding;
-    
+    [SerializeField]PatientBleedingQuestUI patientBleedingQuestUI;
+    public AudioClip SoundOnDissatisfy;
+    [SerializeField]private float timeToFinish_WithoutItem, timeToFinish_WithItem; 
     protected override void Quest()
     {
         OnStartQuest.Invoke();// krn ud ga berhubungan ama questmanager jd hrsnya aman..
         timerInSecs = 0;
+        timeToFinish_WithoutItem = 0;
+        timeToFinish_WithItem = 0;
         questManagerUI.SetTimerSlider(timerInSecsMax);
         
-        isQuestStart = true;
+        
         
         // questManagerUI.OpenHelper_Bleeding_All();
         
@@ -28,14 +35,19 @@ public class Bleeding_QuestManager : QuestManager
         
 
         bleedingCoroutine = Bleeding();
+        dialogueManager.PlayDialogueScene(DialogueListTypeParent.Bleeding_Explanation, DialogueListType_Bleeding_Explanation.Bleeding_WithoutItem_Start);
         StartCoroutine(bleedingCoroutine);
+    }
+    public void StartTimer()
+    {
+        isQuestStart = true;
     }
     protected override void ScoreCounter()
     {
-        if(TrashCountManager.Instance)
-        {
-            isTrashEverywhere = TrashCountManager.Instance.IsThereAnySmallTrash();
-        }
+        // if(TrashCountManager.Instance)
+        // {
+        //     isTrashEverywhere = TrashCountManager.Instance.IsThereAnySmallTrash();
+        // }
         questManagerUI.CloseHelper_Bleeding_WithItem();
         if(isTimerUp)
         {
@@ -46,7 +58,9 @@ public class Bleeding_QuestManager : QuestManager
             if(patient_Bleeding.IsDoneFirstAid)
             {
                 score = ScoreName.Small_Happy_Face;
-                if(!isTrashEverywhere && totalDissatisfaction <= totalDissatisfactionMax) score = ScoreName.Big_Happy_Face;
+                // if(!isTrashEverywhere && totalDissatisfaction <= totalDissatisfactionMax) score = ScoreName.Big_Happy_Face;
+                if(timeToFinish_WithoutItem <= timeTarget_WithoutItem && timeToFinish_WithItem <= timeTarget_WithItem)score = ScoreName.Big_Happy_Face;
+                
             }
         }
         base.ScoreCounter();
@@ -54,9 +68,8 @@ public class Bleeding_QuestManager : QuestManager
 
     private IEnumerator Bleeding()
     {
-        yield return new WaitUntil(()=> patient_Bleeding.IsDoneFirstAid && isQuestStart && !TrashCountManager.Instance.IsThereAnySmallTrash());
-
-
+        yield return new WaitUntil(()=> patient_Bleeding.IsDoneFirstAid && isQuestStart);
+        patientBleedingQuestUI.CloseALL();
         bleedingCoroutine = null;
         
         if(isQuestStart)
@@ -74,6 +87,31 @@ public class Bleeding_QuestManager : QuestManager
     }
     public void PatientDissatisfy()
     {
+        dialogueManager.PlayDialogueScene(DialogueListTypeParent.Bleeding_Explanation, DialogueListType_Bleeding_Explanation.Bleeding_PatientDissatisfied);
+        PlaySoundDissatisfy();
         totalDissatisfaction++;
     }
+    public void PlaySoundDissatisfy()
+    {
+        if (SoundOnDissatisfy) {
+            // Only play the sound if not just starting the scene
+            if (Time.timeSinceLevelLoad > 0.1f) {
+                VRUtils.Instance.PlaySpatialClipAt(SoundOnDissatisfy, transform.position, 0.75f);
+            }
+        }
+    }
+    public void SaveFinish_WithoutItem()
+    {
+        timeToFinish_WithoutItem = timerInSecs;
+        if(timeToFinish_WithoutItem <= timeTarget_WithoutItem)
+        {
+            questManagerUI.Change_BleedingEmotionScoreTracker_Place();
+        }
+    }
+    public void SaveFinish_WithItem()
+    {
+        timeToFinish_WithItem = timerInSecs;
+    }
+
+
 }

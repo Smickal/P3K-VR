@@ -53,6 +53,10 @@ public class TrashCountManager : MonoBehaviour
     {
         return SmallTrashItems.Count != 0;
     }
+    public int TotalSmallTrash()
+    {
+        return SmallTrashItems.Count;
+    }
     public void AddTrash(SmallTrashItem item)
     {
         if(!SmallTrashItems.Contains(item))

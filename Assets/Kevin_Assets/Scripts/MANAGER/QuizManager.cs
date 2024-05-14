@@ -4,6 +4,7 @@ using System.Runtime.InteropServices;
 using TMPro;
 using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class QuizManager : MonoBehaviour
@@ -16,10 +17,11 @@ public class QuizManager : MonoBehaviour
     [Header("Reference")]
     [SerializeField] private DialogueManager dialogueManager;
     [SerializeField] KitUiManager _kitUiManager;
-
+    public AudioClip SoundOnRight, SoundOnWrong;
     [SerializeField] GameObject _questionContainer;
     [SerializeField] GameObject _resultContainer;
     [SerializeField] GameObject _explainContainer;
+    [SerializeField] GameObject _toolTipContainer;
  
     [Space(5)]
     [Header("Questions")]
@@ -67,6 +69,7 @@ public class QuizManager : MonoBehaviour
 
     float curTime;
     bool isTimerActivated;
+    public UnityEvent OnFinishQuiz;
     private void Awake() 
     {
         if(dialogueManager == null)dialogueManager = GameObject.FindObjectOfType<DialogueManager>();
@@ -123,6 +126,7 @@ public class QuizManager : MonoBehaviour
 
         _kitUiManager.ActivateBaseUI("Quiz");
         _kitUiManager.OpenQuizUI();
+        _toolTipContainer.SetActive(true);
 
         CreateQuestion();
     }
@@ -138,7 +142,9 @@ public class QuizManager : MonoBehaviour
             if(curTime < 0)
             {
                 //Activate
+                
                 RunOutOfTime();
+                
             }    
         }
     }
@@ -151,16 +157,20 @@ public class QuizManager : MonoBehaviour
 
     public void CreateQuestion()
     {
+        DialogueManager.HideFinishedDialogue_AfterFinishingTask();
         if (questionQ.Count == 0)
         {
-            //NO MORE QUESTION
-            PlayerManager.HasFinishedTutorialMain();
+            //NO MORE QUESTION;
+            _toolTipContainer.SetActive(false);
             _kitUiManager.DeactivateBaseUI();
+            
+            OnFinishQuiz?.Invoke();
             return;
         }
         
         curQuestion = questionQ.Dequeue();
         PlayDialogueNeeded(DialogueListTypeParent.Home_Quiz, curQuestion.dialogueListTypeQuestionStart);
+        
 
         //Create Question UI
         _questionContainer.SetActive(true);
@@ -196,6 +206,7 @@ public class QuizManager : MonoBehaviour
             //Right Answer!!!
             _answerText.SetText(_answerRightText);
             _answerText.color = _answerRightColor;
+            PlaySoundRight();
             PlayDialogueNeeded(DialogueListTypeParent.Home_Quiz,DialogueListType_Home_Quiz.Home_QuizRight);
         }
         else
@@ -203,6 +214,7 @@ public class QuizManager : MonoBehaviour
             //Wrong Answer!!
             _answerText.SetText(_answerWrongText);
             _answerText.color = _answerWrongColor;
+            PlaySoundWrong();
             PlayDialogueNeeded(DialogueListTypeParent.Home_Quiz,DialogueListType_Home_Quiz.Home_QuizWrong);
 
         }
@@ -217,6 +229,7 @@ public class QuizManager : MonoBehaviour
         _questionContainer.SetActive(false);
         _resultContainer.SetActive(true);
         _answerText.SetText(_answerNotInTimeText);
+        PlaySoundWrong();
         PlayDialogueNeeded(DialogueListTypeParent.Home_Quiz, DialogueListType_Home_Quiz.Home_QuizLate);
         _resultAnswer.SetText(curQuestion.GetAnswer());
 
@@ -261,6 +274,25 @@ public class QuizManager : MonoBehaviour
         // Debug.Log("Masuk sinikan?");
         DialogueManager.HideFinishedDialogue_AfterFinishingTask();
         dialogueManager.PlayDialogueScene(parent, enumValue);
+        Debug.Log("Saat ini adalah " + parent + "aa" + enumValue);
         // DialogueManager.PlaySceneDialogue(dialogueListType);
+    }
+    private void PlaySoundRight()
+    {
+        if (SoundOnRight) {
+            // Only play the sound if not just starting the scene
+            if (Time.timeSinceLevelLoad > 0.1f) {
+                BNG.VRUtils.Instance.PlaySpatialClipAt(SoundOnRight, transform.position, 0.75f);
+            }
+        }
+    }
+    private void PlaySoundWrong()
+    {
+        if (SoundOnWrong) {
+            // Only play the sound if not just starting the scene
+            if (Time.timeSinceLevelLoad > 0.1f) {
+                BNG.VRUtils.Instance.PlaySpatialClipAt(SoundOnWrong, transform.position, 0.75f);
+            }
+        }
     }
 }

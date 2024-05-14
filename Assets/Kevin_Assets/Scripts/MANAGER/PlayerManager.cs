@@ -77,6 +77,10 @@ public class PlayerManager : MonoBehaviour, ITurnOffStatic
         {
             environmentLevelManager.SetEnvironmentAwake(realFile.levelPlayerDataList[(int)gameManager.LevelTypeNow()].hasFinishIntro, realFile.lastInGameMode == InGame_Mode.FirstAid);
         }
+        else if(gameManager.LevelModeNow() == LevelMode.Home)
+        {
+            environmentLevelManager.SetHomeAwake(realFile.isTutorialFinish);
+        }
         if(!WantToExploreWorld)SetPlayerPositionAwake();
     }
     public void TurnOffStatic()

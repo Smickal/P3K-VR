@@ -10,12 +10,14 @@ public class EnvironmentLevelManager : MonoBehaviour, ITurnOffStatic
     [SerializeField] private Transform[] robotPositionEveryEnvironment;
     [Header("Reference")]
     [SerializeField] ReturnRobotToStartingPos returnRobot;
-    public static Action SetEnvironment_FinishQuest, SetEnvironment_FirstAid, SetEnvironment_AfterIntro;
+    [SerializeField] ToolTipHomeManager toolTipHomeManager;
+    public static Action SetEnvironment_FinishQuest, SetEnvironment_FirstAid, SetEnvironment_AfterIntro, SetEnvironment_HomeAfterIntro;
     private void Awake() 
     {
         SetEnvironment_FirstAid += SetEnvironmentFirstAid;
         SetEnvironment_FinishQuest += SetEnvironmentEndQuest;
         SetEnvironment_AfterIntro += SetEnvironmentAfterIntro;
+        SetEnvironment_HomeAfterIntro += SetHomeAfterIntro;
     }
     
     public void SetEnvironmentAwake(bool hasFinishIntro_ThisLevel, bool isPlayerLastModeFirstAid)
@@ -40,6 +42,23 @@ public class EnvironmentLevelManager : MonoBehaviour, ITurnOffStatic
             }
         }
         
+    }
+    public void SetHomeAwake(bool hasFinishIntro_Home)
+    {
+        if(!hasFinishIntro_Home)
+        {
+            returnRobot.SetStartingPos(robotPositionEveryEnvironment[0]);
+        }
+        else
+        {
+            returnRobot.SetStartingPos(robotPositionEveryEnvironment[1]);
+            toolTipHomeManager.Activate();
+        }
+    }
+    public void SetHomeAfterIntro()
+    {
+        returnRobot.SetStartingPos(robotPositionEveryEnvironment[1]);
+        toolTipHomeManager.Activate();
     }
     public void SetEnvironmentEndQuest()
     {
@@ -72,5 +91,6 @@ public class EnvironmentLevelManager : MonoBehaviour, ITurnOffStatic
         SetEnvironment_FirstAid -= SetEnvironmentFirstAid;
         SetEnvironment_FinishQuest -= SetEnvironmentEndQuest;
         SetEnvironment_AfterIntro -= SetEnvironmentAfterIntro;
+        SetEnvironment_HomeAfterIntro -= SetHomeAfterIntro;
     }
 }

@@ -11,7 +11,9 @@ public class BandageWithItemManager : MonoBehaviour
     [SerializeField] BandageMovement _bandageMovement;
     [SerializeField] private GameObject circleMovement;
 
-
+    [SerializeField]Patient_Bleeding patient_Bleeding;
+    [SerializeField]PatientBleedingQuestUI patientBleedingQuestUI;
+    [SerializeField]DialogueManager dialogueManager;
 
     bool isDoneBandageMovement = false;
     public bool IsDoneBandageMovement{get{return isDoneBandageMovement;}}
@@ -37,6 +39,10 @@ public class BandageWithItemManager : MonoBehaviour
     {
         if(AllSnapZoneHeldItem() && isBandageSnappedToHold == false)
         {
+            if(patient_Bleeding.BleedingQuest_State == BleedingQuest_State.WithItem)patientBleedingQuestUI.ActivateToolTipWithItem(2);
+            
+            dialogueManager.PlayDialogueScene(DialogueListTypeParent.Bleeding_Explanation, DialogueListType_Bleeding_Explanation.Bleeding_NextStep);
+
             isBandageSnappedToHold = true;
             _bandageMovement.gameObject.SetActive(true);
             SetSnapZone_CantRemoveItem();
@@ -72,6 +78,7 @@ public class BandageWithItemManager : MonoBehaviour
 
     public void ActivateBandageWithItem()
     {
+        
         foreach(SnapZone _bandageSnapZone in _bandageSnapZones)
         {
             _bandageSnapZone.gameObject.SetActive(true);

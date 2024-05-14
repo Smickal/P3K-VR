@@ -64,6 +64,7 @@ public class PlayerRestriction : MonoBehaviour, ITurnOffStatic
             if(!playerManager.IsFinish_TutorialMain() && gameManager.LevelModeNow() == LevelMode.Home)
             {
                 DisableAll();
+                DisableAllRotation();
             }
             else if(gameManager.LevelModeNow() == LevelMode.Level)
             {
@@ -72,7 +73,7 @@ public class PlayerRestriction : MonoBehaviour, ITurnOffStatic
                     if(gameManager.LevelTypeNow() == LevelP3KType.Choking)
                     {
                         DisableAll();
-                        Debug.Log(playerMovement_BNG.enabled + " OI APA SIStart");
+                        DisableAllRotation();
                     }
                     else if(gameManager.LevelTypeNow() == LevelP3KType.Bleeding)
                     {
@@ -105,7 +106,7 @@ public class PlayerRestriction : MonoBehaviour, ITurnOffStatic
         
     }
     private void Update() {
-        Debug.Log(playerMovement_BNG.enabled + " OI APA SI");
+        // Debug.Log(playerMovement_BNG.enabled + " OI APA SI");
         if(enableNow)
         {
             enableNow = false;
