@@ -4,19 +4,27 @@ using UnityEngine.UI;
 using BNG;
 using UnityEngine;
 
-public class Bleeding_QuestManager : QuestManager
+public class Bleeding_QuestManager : QuestManager, IPersistanceDataSave
 {
-    IEnumerator bleedingCoroutine;
     [Header("target time")]
     private float timeTarget_WithoutItem, timeTarget_WithItem;
+
     [SerializeField] bool isTrashEverywhere = true;
-    private int totalDissatisfaction;
     [SerializeField] int totalDissatisfactionMax;
+
     [Header ("All Bleeding GameObject and Manager - Without Item")]
     [SerializeField]private Patient_Bleeding patient_Bleeding;
+
     [SerializeField]PatientBleedingQuestUI patientBleedingQuestUI;
     public AudioClip SoundOnDissatisfy;
     [SerializeField]private float timeToFinish_WithoutItem, timeToFinish_WithItem; 
+    
+
+    IEnumerator bleedingCoroutine;
+    private int totalDissatisfaction;
+
+
+
     protected override void Quest()
     {
         OnStartQuest.Invoke();// krn ud ga berhubungan ama questmanager jd hrsnya aman..
@@ -91,6 +99,7 @@ public class Bleeding_QuestManager : QuestManager
         PlaySoundDissatisfy();
         totalDissatisfaction++;
     }
+
     public void PlaySoundDissatisfy()
     {
         if (SoundOnDissatisfy) {
@@ -113,5 +122,22 @@ public class Bleeding_QuestManager : QuestManager
         timeToFinish_WithItem = timerInSecs;
     }
 
+
+    public void SaveData(GameData data)
+    {
+        data.Level2Name = LevelP3KType.Bleeding.ToString();
+        data.Level2TimeToFinish = timerInSecs;
+        data.Level2TimeToFinish_WithoutItem = timeToFinish_WithoutItem;
+        data.Level2TimeToFinish_WithItem = timeToFinish_WithItem;
+        data.TotalSmallTrashCount = TrashCountManager.Instance.TotalSmallTrash();
+        data.TotalDissastifaction = totalDissatisfaction;
+
+        data.IsLevel2Done = true;
+    }
+
+    public void LoadData(GameData data)
+    {
+        
+    }
 
 }

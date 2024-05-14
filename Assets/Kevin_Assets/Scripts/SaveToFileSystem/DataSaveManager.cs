@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text.RegularExpressions;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Android;
 using UnityEngine.SceneManagement;
@@ -16,13 +17,22 @@ public class DataSaveManager : MonoBehaviour
     public static DataSaveManager Instance;
 
     GameData gameData;
-    LocalSaveFileHandler dataHandler;
+    LocalSaveFileHandler localDataHandler;
     string currentFileSaveID;
     int playerID;
+    List<IPersistanceDataSave> dataSaveList;
+
+    [Header("Turn this ON to Reset Player ID")]
+    [SerializeField] bool _isDeleteAllPlayerID = false;
 
     private void Awake()
     {
         Instance = this;
+
+        if(_isDeleteAllPlayerID)
+        {
+            PlayerPrefs.DeleteAll();
+        }
 
         if(!PlayerPrefs.HasKey(PlayerIDKey))
         {
@@ -34,32 +44,63 @@ public class DataSaveManager : MonoBehaviour
             playerID = PlayerPrefs.GetInt(PlayerIDKey);
         }
 
-        dataHandler = new LocalSaveFileHandler(Application.persistentDataPath);
+        dataSaveList = FindAllPersistantDataSave();
+        localDataHandler = new LocalSaveFileHandler(Application.persistentDataPath);
+
+        //Tries to load a localSaveData
+        gameData = localDataHandler.LoadGameDataFromLocal(Player + playerID.ToString());
+        if(gameData == null)
+        {
+            gameData = new GameData(CreatePersonID());
+        }
+        else if(gameData.IsLevel1Done && gameData.IsLevel2Done)
+        {
+            playerID++;
+
+            gameData = new GameData(CreatePersonID());
+        }
+
     }
 
 
-    public void SaveScoreAndTime(LevelP3KType levelType, ScoreName scoreName, float TimeFinished)
+    public void Save()
     {
-        gameData = new GameData();
-        gameData.PlayerID = CreatePersonID();
+        foreach(var dataSave in dataSaveList)
+        {
+            dataSave.SaveData(gameData);
+        }
 
-        gameData.LevelName = levelType.ToString();
-        gameData.LevelScore = scoreName.ToString();
-        gameData.TimeToFinish = TimeFinished;
+        
+        localDataHandler.SaveGameDataToLocal(gameData.PlayerID, gameData);
+    }
 
-        dataHandler.SaveGameDataToLocal(gameData.PlayerID, gameData);
+    private List<IPersistanceDataSave> FindAllPersistantDataSave()
+    {
+        IEnumerable<IPersistanceDataSave> temp = FindObjectsOfType<MonoBehaviour>().OfType<IPersistanceDataSave>();
+
+
+
+        return new List<IPersistanceDataSave>(temp);
     }
 
     private string CreatePersonID()
     {
         currentFileSaveID = Player + playerID.ToString();
-        playerID++;
+       
 
-        Debug.Log($"Created New ID => {currentFileSaveID}");
+        //Debug.Log($"Created New ID => {currentFileSaveID}");
 
         PlayerPrefs.SetInt(PlayerIDKey, playerID);
         PlayerPrefs.Save();
 
         return currentFileSaveID;
+    }
+
+    private void OnApplicationQuit()
+    {
+        playerID++;
+
+        PlayerPrefs.SetInt(PlayerIDKey, playerID);
+        PlayerPrefs.Save();
     }
 }
