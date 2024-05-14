@@ -1356,7 +1356,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 37bff197a27573f4a8cb6e7199212fae,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.99
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 37bff197a27573f4a8cb6e7199212fae,
         type: 3}
@@ -6462,12 +6462,17 @@ PrefabInstance:
     - target: {fileID: 2868623363106260079, guid: 790ac53c30f27144bb9722c36f6d228a,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 425
+      value: 450
       objectReference: {fileID: 0}
     - target: {fileID: 2868623363106260079, guid: 790ac53c30f27144bb9722c36f6d228a,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 325
+      value: 475
+      objectReference: {fileID: 0}
+    - target: {fileID: 2868623363106260079, guid: 790ac53c30f27144bb9722c36f6d228a,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.062
       objectReference: {fileID: 0}
     - target: {fileID: 3060052882041439675, guid: 790ac53c30f27144bb9722c36f6d228a,
         type: 3}
@@ -6487,7 +6492,7 @@ PrefabInstance:
     - target: {fileID: 3060052882041439675, guid: 790ac53c30f27144bb9722c36f6d228a,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 271.75
+      value: 427.03
       objectReference: {fileID: 0}
     - target: {fileID: 3060052882041439675, guid: 790ac53c30f27144bb9722c36f6d228a,
         type: 3}
@@ -6497,7 +6502,7 @@ PrefabInstance:
     - target: {fileID: 3060052882041439675, guid: 790ac53c30f27144bb9722c36f6d228a,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -155.875
+      value: -233.515
       objectReference: {fileID: 0}
     - target: {fileID: 4301473763812615514, guid: 790ac53c30f27144bb9722c36f6d228a,
         type: 3}
@@ -6527,7 +6532,7 @@ PrefabInstance:
     - target: {fileID: 5930669787630828198, guid: 790ac53c30f27144bb9722c36f6d228a,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 311.75
+      value: 467.03
       objectReference: {fileID: 0}
     - target: {fileID: 5930669787630828198, guid: 790ac53c30f27144bb9722c36f6d228a,
         type: 3}
@@ -6537,7 +6542,7 @@ PrefabInstance:
     - target: {fileID: 5930669787630828198, guid: 790ac53c30f27144bb9722c36f6d228a,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -180.875
+      value: -258.515
       objectReference: {fileID: 0}
     - target: {fileID: 6124519427578882459, guid: 790ac53c30f27144bb9722c36f6d228a,
         type: 3}
@@ -6547,14 +6552,15 @@ PrefabInstance:
     - target: {fileID: 6124519427578882459, guid: 790ac53c30f27144bb9722c36f6d228a,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 361.75
+      value: 517.03
       objectReference: {fileID: 0}
     - target: {fileID: 7325536202624735502, guid: 790ac53c30f27144bb9722c36f6d228a,
         type: 3}
       propertyPath: m_text
       value: "<align=center>==Tooltip - Move Around==</align>\n<color=red>Controller</color>
         -> Use \nRight Joystick\n\n<color=purple>Handtrack</color> -> Form this \npose
-        until rotate \npointer shows up"
+        until rotate \npointer shows up\n(easier when you form\nmove pose until pointer
+        \nshows up, then change to\nthis pose)"
       objectReference: {fileID: 0}
     - target: {fileID: 7325536202624735502, guid: 790ac53c30f27144bb9722c36f6d228a,
         type: 3}
@@ -7357,7 +7363,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isActivated: 0
-  _maxTimeSlider: 20
+  _maxTimeSlider: 30
+  _maxTimerSliderNormal: 15
   dialogueManager: {fileID: 723106684}
   _kitUiManager: {fileID: 990936895}
   SoundOnRight: {fileID: 8300000, guid: 6ca498364b2fdf64091c153c9a18cb91, type: 3}
@@ -18292,7 +18299,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2147413373}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1

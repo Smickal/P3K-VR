@@ -224,6 +224,7 @@ namespace Oculus.Interaction.UnityCanvas
                 if (_camera?.gameObject != null)
                 {
                     Destroy(_camera.gameObject);
+                    _camera = null;
                 }
                 if (_tex != null)
                 {

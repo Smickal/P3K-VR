@@ -13,6 +13,7 @@ public class QuizManager : MonoBehaviour
 
     [SerializeField] bool _isActivated = false;
     [SerializeField] float _maxTimeSlider = 10f;
+    [SerializeField] float _maxTimerSliderNormal = 10f;
 
     [Header("Reference")]
     [SerializeField] private DialogueManager dialogueManager;
@@ -133,7 +134,7 @@ public class QuizManager : MonoBehaviour
 
     private void Update()
     {
-        if (isTimerActivated && GameManager.CheckGameStateNow() == GameState.InGame)
+        if (isTimerActivated && GameManager.CheckGameStateNow() == GameState.Cinematic)
         {
             curTime -= Time.deltaTime;
 
@@ -142,7 +143,7 @@ public class QuizManager : MonoBehaviour
             if(curTime < 0)
             {
                 //Activate
-                
+                _maxTimeSlider = _maxTimerSliderNormal;
                 RunOutOfTime();
                 
             }    
@@ -196,6 +197,7 @@ public class QuizManager : MonoBehaviour
         //2. Check Answer
         //3. 
         isTimerActivated = false;
+        _maxTimeSlider = _maxTimerSliderNormal;
         curTime = _maxTimeSlider;
 
         _questionContainer.SetActive(false);
