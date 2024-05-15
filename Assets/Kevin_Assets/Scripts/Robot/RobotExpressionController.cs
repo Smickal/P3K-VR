@@ -31,7 +31,7 @@ public class RobotExpressionController : MonoBehaviour
         {
             if(!playerManager.IsFinish_TutorialMain() && gameManager.LevelModeNow() == LevelMode.Home)
             {
-                _eye.SetActive(false);
+                // _eye.SetActive(false);
                 _eyeMesh.Opacity = 0;
                 isTurnOn = false;
             }
@@ -57,7 +57,7 @@ public class RobotExpressionController : MonoBehaviour
     public void TurnOnEyes()
     {
         if(isFading || isTurnOn)return;
-        _eye.SetActive(true);
+        // _eye.SetActive(true);
         PlaySoundTurnOn();
         StartCoroutine(doFade(0,1));
         robot.ActivateLookAt();

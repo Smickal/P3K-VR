@@ -21,10 +21,11 @@ public class DirtyObject : MonoBehaviour
     public bool IsDoneCleaning {  get { return isDoneCleaning; } }
 
     [Tooltip("If Bleeding -> bakal bisa balik ke maks lagi")]
-    [SerializeField]bool isBleeding;
+    [SerializeField]bool isBleeding, isManyBlood;
     [SerializeField]float _bleedingMultiplier = 0.02f;
     [SerializeField]int MAX_COUNTDOWN = 2;
     int bleedCountdown;
+    public bool IsManyBlood{ get { return isManyBlood;}}
     
 
     private void Start()
