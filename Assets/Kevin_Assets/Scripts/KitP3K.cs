@@ -26,6 +26,7 @@ public class KitP3K : GrabbableEvents
             // Debug.Log("is this first?");
             if(UIKotakP3K.CheckUnlock == null)return;
             UIKotakP3K.CheckUnlock(_scriptableData);
+            if(GameManager.CheckLevelModeNow == null)return;
             if(GameManager.CheckLevelModeNow() == LevelMode.Home)
             {
                 if(UIKotakP3K.OpenDescriptioninRoom == null)return;
@@ -35,6 +36,7 @@ public class KitP3K : GrabbableEvents
 
     public override void OnRelease()
     {
+        if(GameManager.CheckLevelModeNow == null)return;
         if(GameManager.CheckLevelModeNow() == LevelMode.Home)
         {
             if(UIKotakP3K.CloseDescriptioninRoom == null)return;
@@ -48,7 +50,8 @@ public class KitP3K : GrabbableEvents
             if(UIKotakP3K.CheckUnlock == null)return;
             UIKotakP3K.CheckUnlock(_scriptableData);
             wasGrabHT = true;
-            if(GameManager.CheckLevelModeNow != null && GameManager.CheckLevelModeNow() == LevelMode.Home)
+            if(GameManager.CheckLevelModeNow == null)return;
+            if(GameManager.CheckLevelModeNow() == LevelMode.Home)
             {
                 if(UIKotakP3K.OpenDescriptioninRoom == null)return;
                 UIKotakP3K.OpenDescriptioninRoom(_scriptableData);
@@ -60,7 +63,8 @@ public class KitP3K : GrabbableEvents
         if(wasGrabHT)
         {
             wasGrabHT = false;
-            if(GameManager.CheckLevelModeNow != null && GameManager.CheckLevelModeNow() == LevelMode.Home)
+            if(GameManager.CheckLevelModeNow == null)return;
+            if(GameManager.CheckLevelModeNow() == LevelMode.Home)
             {
                 if(UIKotakP3K.CloseDescriptioninRoom == null)return;
                 UIKotakP3K.CloseDescriptioninRoom(_scriptableData);

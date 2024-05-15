@@ -73,7 +73,7 @@ public class UIOption : BaseKitUI
         if(PlayerManager.ResetPlayerSave != null)PlayerManager.ResetPlayerSave();
         if(_resetYesNoContainerOBJ.activeSelf)HideResetYesNo();
         if(GameManager.PauseGame != null)GameManager.PauseGame();
-        sceneMoveManager.GoBackHome();
+        sceneMoveManager.GoBackHomeReset();
         //fade out
         //scene ke home;
         //scenemanagement

@@ -149,6 +149,7 @@ public class LegMoveManager : MonoBehaviour
 
     public void OnReleaseFoot()
     {
+        if(currentGrabber == null)return;
         if(!isDonePuttingBrick)
         {
             _brickSnapZone.gameObject.SetActive(false);

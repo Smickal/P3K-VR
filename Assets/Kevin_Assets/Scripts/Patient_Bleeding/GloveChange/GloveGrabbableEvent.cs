@@ -16,7 +16,7 @@ public class GloveGrabbableEvent : GrabbableEvents
 
         if(!DebugOnly)
         {
-            if(GameManager.CheckLevelTypeNow == null || GameManager.CheckInGameModeNow == null || BleedingWithoutEmbeddedItem.StateFirstAidNow != null)return;
+            if(GameManager.CheckLevelTypeNow == null || GameManager.CheckInGameModeNow == null || BleedingWithoutEmbeddedItem.StateFirstAidNow == null)return;
             if((GameManager.CheckLevelTypeNow() != LevelP3KType.Bleeding || 
             GameManager.CheckInGameModeNow() != InGame_Mode.FirstAid || 
             BleedingWithoutEmbeddedItem.StateFirstAidNow() != BleedingWithoutEmbeddedItem_State.WearGloves))return;

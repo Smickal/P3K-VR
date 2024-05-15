@@ -55,8 +55,8 @@ public class DialogueManager : MonoBehaviour, ITurnOffStatic
     [SerializeField]Vector3 positionForIntro3Bleed;
     [SerializeField]Quaternion rotationforIntro3Bleed;
     [SerializeField]ToolTipHomeManager toolTipHomeManager;
-    [SerializeField]TeleportInteractable teleportInteractable;
-    [SerializeField]ReticleDataTeleport reticleDataTeleport;
+    // [SerializeField]TeleportInteractable teleportInteractable;
+    // [SerializeField]ReticleDataTeleport reticleDataTeleport;
 
     [Header("DEBUG ONLY")]
     public bool isPlayScene1AtStart;
@@ -259,8 +259,8 @@ public class DialogueManager : MonoBehaviour, ITurnOffStatic
                     gameManager.ChangeGameState(GameState.InGame);
                     if(PlayerRestriction.LiftAllRestriction != null)PlayerRestriction.LiftAllRestriction();
                     if(PlayerRestriction.LiftRotationRestriction != null)PlayerRestriction.LiftRotationRestriction();
-                    teleportInteractable.AllowTeleport = true;
-                    reticleDataTeleport.ChangeReticleModeToValid();
+                    // teleportInteractable.AllowTeleport = true;
+                    // reticleDataTeleport.ChangeReticleModeToValid();
                     robot.ActivateLookAt();
                     robot.ActivateFollowPlayer();
                     PlayDialogueScene(DialogueListTypeParent.Bleeding_Intro, DialogueListType_Bleeding_Intro.Bleeding_Intro_4);

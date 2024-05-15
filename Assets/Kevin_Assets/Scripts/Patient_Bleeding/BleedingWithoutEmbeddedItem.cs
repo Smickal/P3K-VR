@@ -1,7 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using BNG;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 
 public enum BleedingWithoutEmbeddedItem_State
 {
@@ -37,17 +40,23 @@ public class BleedingWithoutEmbeddedItem : MonoBehaviour, ITurnOffStatic
     [Header("BandageTime")]
     [SerializeField]BandageWithItemManager bandageTime;
     [Header("PuttingLegOnTopSomethingTime")]
+    [SerializeField]SnapZone[] snapZonesLeg;
     [SerializeField]GameObject Leg;
     [SerializeField]LegMoveManager leftLeg, rightLeg;
     //put collider dr snapzone yg hrs di grab
     public bool isPuttingLegDone;
 
     public static Func<BleedingWithoutEmbeddedItem_State> StateFirstAidNow;
+    public UnityAction<Grabbable> awakeSnapLeg;
 
     private void Awake() 
     {
         StateFirstAidNow += StateNow;
-        
+        awakeSnapLeg = SetLegOff;
+        foreach(SnapZone snap in snapZonesLeg)
+        {
+            snap.OnSnapEvent.AddListener(awakeSnapLeg);
+        }
     }
     private void Start()
     {
@@ -55,15 +64,28 @@ public class BleedingWithoutEmbeddedItem : MonoBehaviour, ITurnOffStatic
         _cleanColl.enabled = false;
         _dryColl.enabled = false;
         Leg.SetActive(false);
+
+
         bandageTime.DeactivateBandageWithItem();
     }
-
+    public void SetLegOff(Grabbable grabbable)
+    {
+        foreach(SnapZone snap in snapZonesLeg)
+        {
+            if(snap.HeldItem == null)return;
+        }
+        Leg.SetActive(false);
+        foreach(SnapZone snap in snapZonesLeg)
+        {
+            snap.OnSnapEvent.RemoveListener(awakeSnapLeg);
+        }
+    }
     public BleedingWithoutEmbeddedItem_State StateNow(){return state;}
     
     public void ActivateFirstAid()
     {
         
-        Leg.SetActive(false);
+        // Leg.SetActive(false);
         _bleedingColl.enabled = false;
         _cleanColl.enabled = false;
         _dryColl.enabled = false;
