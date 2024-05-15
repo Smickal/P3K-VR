@@ -10,6 +10,9 @@ namespace BNG {
     /// Shows a ring at the grab point of a grabbable if within a certain distance
     /// </summary>
     public class RingHelper : MonoBehaviour {
+        [Tooltip("Is Looking At camera")]
+        [SerializeField] bool _isLookingAtCamera = true;
+
         [Tooltip("The Grabbable Object to Observe")]
         public Grabbable grabbable;
 
@@ -134,7 +137,10 @@ namespace BNG {
             // Animate ring opacity in / out
             if(showRings) {
                 canvas.enabled = true;
-                canvas.transform.LookAt(mainCam);
+                if(_isLookingAtCamera)
+                {
+                    canvas.transform.LookAt(mainCam);
+                }
 
                 // Resetting the text refreshes the render
                 text.text = "o";

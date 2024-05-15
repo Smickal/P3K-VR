@@ -473,14 +473,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HeldItem: {fileID: 0}
   StartingItem: {fileID: 0}
+  canBriefCaseSnapToHere: 0
   CanDropItem: 1
   CanSwapItem: 1
   CanRemoveItem: 1
+  OnlyThisGrabberCan_TakeFromThisSnap: {fileID: 0}
+  UseOffset: 1
   ScaleItem: 1
   DisableColliders: 1
   DuplicateItemOnGrab: 0
+  ChangeNameWhenDropToSnapZone: 0
+  ChangeNameWhenDuplicate: 0
+  nameChange: 
+  isThereSnapZoneinChild: 0
   MaxDropTime: 0.1
   LastSnapTime: 0
+  turnOffReturnTo: 1
   OnlyAllowNames: []
   ExcludeTransformNames:
   - TargetMovement_BackBlow
@@ -518,6 +526,13 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  OnSnapHTEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDetachHTEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  wasKinematicKeepFalse: 0
   ClosestGrabbable: {fileID: 0}
 --- !u!114 &3042628808976699566
 MonoBehaviour:
@@ -552,6 +567,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BeingHeld: 0
+  wasKinematicKeepFalse: 0
+  originalParentKeepNull: 0
   GrabButton: 0
   Grabtype: 0
   GrabPhysics: 2
@@ -599,6 +616,8 @@ MonoBehaviour:
   LastGrabTime: 0
   LastDropTime: 0
   AddControllerVelocityOnDrop: 1
+  ChangeToThisScale: 0
+  WantThisScale: {x: 0, y: 0, z: 0}
   collisions: []
   ActiveGrabPoint: {fileID: 0}
   SecondaryLookOffset: {x: 0, y: 0, z: 0}
@@ -678,9 +697,11 @@ MonoBehaviour:
   _maxInteractors: 2
   _maxSelectingInteractors: 1
   _data: {fileID: 0}
+  isOnDisable: 0
   _rigidbody: {fileID: 8506763896555737043}
   _snapPoseDelegate: {fileID: 0}
   _movementProvider: {fileID: 1628452172311250312}
+  transformZero: 0
 --- !u!114 &1628452172311250312
 MonoBehaviour:
   m_ObjectHideFlags: 0
