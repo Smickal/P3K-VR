@@ -37,8 +37,7 @@ public class DataSaveManager : MonoBehaviour
         if(!PlayerPrefs.HasKey(PlayerIDKey))
         {
             playerID = 1;
-        }
-        
+        }       
         else
         {
             playerID = PlayerPrefs.GetInt(PlayerIDKey);
@@ -49,6 +48,7 @@ public class DataSaveManager : MonoBehaviour
 
         //Tries to load a localSaveData
         gameData = localDataHandler.LoadGameDataFromLocal(Player + playerID.ToString());
+
         if(gameData == null)
         {
             gameData = new GameData(CreatePersonID());
@@ -61,7 +61,20 @@ public class DataSaveManager : MonoBehaviour
         }
 
     }
+    //private void Update()
+    //{
+    //    if(Input.GetKeyDown(KeyCode.I))
+    //    {
+    //        gameData.IsLevel1Done = true;
+    //        localDataHandler.SaveGameDataToLocal(gameData.PlayerID, gameData);
+    //    }
 
+    //    if(Input.GetKeyDown(KeyCode.O))
+    //    {
+    //        gameData.IsLevel2Done= true;
+    //        localDataHandler.SaveGameDataToLocal(gameData.PlayerID, gameData);
+    //    }
+    //}
 
     public void Save()
     {
