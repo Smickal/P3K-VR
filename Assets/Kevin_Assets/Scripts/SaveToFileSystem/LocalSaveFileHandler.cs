@@ -43,22 +43,26 @@ public class LocalSaveFileHandler
     public GameData LoadGameDataFromLocal(string fileID)
     {
         string fullPath = Path.Combine(dataDirPath, fileID);
+        string dataToLoad = "";
         GameData deserelizeData = null;
 
         try
         {
             FileStream stream = File.OpenRead(fullPath);
-            BinaryFormatter bf = new BinaryFormatter();
+            StreamReader reader = new StreamReader(stream);
 
-            deserelizeData = (GameData)bf.Deserialize(stream);
+            dataToLoad = reader.ReadToEnd();
 
             stream.Close();
+            reader.Close();
+
+            deserelizeData = JsonUtility.FromJson<GameData>(dataToLoad);
 
             //Debug.Log($"Successfully Load Data From = {fullPath}");
         }
         catch (Exception e)
         {
-            //Debug.Log(e);
+            Debug.Log(e);
         }
 
 
