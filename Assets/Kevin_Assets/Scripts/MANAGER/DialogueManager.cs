@@ -374,6 +374,7 @@ public class DialogueManager : MonoBehaviour, ITurnOffStatic
     {
         if(EnvironmentLevelManager.SetEnvironment_AfterIntro != null)EnvironmentLevelManager.SetEnvironment_AfterIntro();
         robot.SetPosForIntro();
+        robot.ActivateLookAt();
         playerChecker.SetActive(false);
     }
     

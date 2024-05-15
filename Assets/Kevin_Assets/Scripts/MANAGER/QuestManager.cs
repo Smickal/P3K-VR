@@ -155,7 +155,7 @@ public class QuestManager : MonoBehaviour
         if(levelP3KTypeNow == LevelP3KType.Choking) choking_QuestManager.ScoreCounter();
         else if (levelP3KTypeNow == LevelP3KType.Bleeding) bleeding_QuestManager.ScoreCounter();
         if(PlayerRestriction.ApplyAllRestriction != null)PlayerRestriction.ApplyAllRestriction();
-
+        if(DialogueManager.HideFinishedDialogue_AfterFinishingTask != null)DialogueManager.HideFinishedDialogue_AfterFinishingTask();
         screenFader.AddEvent(questDoneMethodAfterFade);
         screenFader.DoFadeIn();
         //ntr perlu dinyalain fader sendiri di sini

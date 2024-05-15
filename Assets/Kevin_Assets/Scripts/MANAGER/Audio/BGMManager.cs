@@ -98,7 +98,7 @@ public class BGMManager : MonoBehaviour, IChangeVolume
     public void ChangeVolume(float volume)
     {
         volumeBGM = 1;
-        BGM.volume = 1;
+        if(BGM)BGM.volume = 1;
     }
     public void DestroyInstance(){
         ChangeBGMAudio -= ChangeBGMClip;

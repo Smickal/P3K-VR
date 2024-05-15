@@ -63,7 +63,7 @@ public class BleedingWithoutEmbeddedItem : MonoBehaviour, ITurnOffStatic
         _bleedingColl.enabled = false;
         _cleanColl.enabled = false;
         _dryColl.enabled = false;
-        Leg.SetActive(false);
+        // Leg.SetActive(false);
 
 
         bandageTime.DeactivateBandageWithItem();

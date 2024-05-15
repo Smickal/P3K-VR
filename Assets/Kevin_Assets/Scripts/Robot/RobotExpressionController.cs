@@ -10,6 +10,7 @@ public class RobotExpressionController : MonoBehaviour
 {
     [SerializeField] DecalProjector _eyeProjector;
     [SerializeField] DecalMesh _eyeMesh;
+    [SerializeField]GameObject _eye;
     [SerializeField] float _fadeSpeed;
     bool isFading, isTurnOn = true;
     public UnityEvent OnFadeDone;
@@ -30,6 +31,7 @@ public class RobotExpressionController : MonoBehaviour
         {
             if(!playerManager.IsFinish_TutorialMain() && gameManager.LevelModeNow() == LevelMode.Home)
             {
+                _eye.SetActive(false);
                 _eyeMesh.Opacity = 0;
                 isTurnOn = false;
             }
@@ -55,6 +57,7 @@ public class RobotExpressionController : MonoBehaviour
     public void TurnOnEyes()
     {
         if(isFading || isTurnOn)return;
+        _eye.SetActive(true);
         PlaySoundTurnOn();
         StartCoroutine(doFade(0,1));
         robot.ActivateLookAt();
@@ -67,6 +70,7 @@ public class RobotExpressionController : MonoBehaviour
     }
 
     IEnumerator doFade(float from, float To) {
+        
         isFading = true;
         float alphaStart = from;
 
@@ -99,6 +103,8 @@ public class RobotExpressionController : MonoBehaviour
         isFading = false;
         if(from < To)isTurnOn = true;
         else isTurnOn = false;
+
+        // if(from > To)_eyeMesh.gameObject.SetActive(false);
         OnFadeDone?.Invoke();
     }
     private void PlaySoundTurnOn()

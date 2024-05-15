@@ -5084,8 +5084,6 @@ MonoBehaviour:
   positionForIntro3Bleed: {x: 0, y: 0, z: 0}
   rotationforIntro3Bleed: {x: 0, y: 0, z: 0, w: 0}
   toolTipHomeManager: {fileID: 650829558}
-  teleportInteractable: {fileID: 0}
-  reticleDataTeleport: {fileID: 0}
   isPlayScene1AtStart: 0
   isPlayScene2: 0
   isFinishTaskScene2: 0
@@ -7372,7 +7370,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isActivated: 0
   _maxTimeSlider: 30
-  _maxTimerSliderNormal: 12
+  _maxTimerSliderNormal: 30
   dialogueManager: {fileID: 723106684}
   _kitUiManager: {fileID: 990936895}
   SoundOnRight: {fileID: 8300000, guid: 6ca498364b2fdf64091c153c9a18cb91, type: 3}
@@ -12251,18 +12249,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1448398553}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1454398297 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 226651902625417456, guid: d38c86c219f77c34685aa09c68f7d65d,
-    type: 3}
-  m_PrefabInstance: {fileID: 2052949413}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1208bbe937c3a54488f1d85a7931055a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1461713579 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4439107204833578861, guid: d44fbf779a16b734f91d8ecbe3f16cbd,
@@ -17408,29 +17394,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1623193278978018954, guid: d38c86c219f77c34685aa09c68f7d65d,
         type: 3}
-      propertyPath: robot
-      value: 
-      objectReference: {fileID: 2052949414}
-    - target: {fileID: 1623193278978018954, guid: d38c86c219f77c34685aa09c68f7d65d,
-        type: 3}
-      propertyPath: _eyeMesh
-      value: 
-      objectReference: {fileID: 1454398297}
-    - target: {fileID: 1623193278978018954, guid: d38c86c219f77c34685aa09c68f7d65d,
-        type: 3}
-      propertyPath: _fadeSpeed
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1623193278978018954, guid: d38c86c219f77c34685aa09c68f7d65d,
-        type: 3}
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 1066109239}
-    - target: {fileID: 1623193278978018954, guid: d38c86c219f77c34685aa09c68f7d65d,
-        type: 3}
-      propertyPath: SoundOnTurnOn
-      value: 
-      objectReference: {fileID: 8300000, guid: 4150c1e8d31da514db62d8dce1f9ed95, type: 3}
     - target: {fileID: 1623193278978018954, guid: d38c86c219f77c34685aa09c68f7d65d,
         type: 3}
       propertyPath: playerManager
@@ -17438,45 +17404,20 @@ PrefabInstance:
       objectReference: {fileID: 1066109241}
     - target: {fileID: 1623193278978018954, guid: d38c86c219f77c34685aa09c68f7d65d,
         type: 3}
-      propertyPath: OnFadeDone.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1623193278978018954, guid: d38c86c219f77c34685aa09c68f7d65d,
-        type: 3}
-      propertyPath: OnFadeDone.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1623193278978018954, guid: d38c86c219f77c34685aa09c68f7d65d,
-        type: 3}
       propertyPath: OnFadeDone.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 723106684}
     - target: {fileID: 1623193278978018954, guid: d38c86c219f77c34685aa09c68f7d65d,
         type: 3}
-      propertyPath: OnFadeDone.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1623193278978018954, guid: d38c86c219f77c34685aa09c68f7d65d,
-        type: 3}
-      propertyPath: OnFadeDone.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: PlayDialogueSceneOnEvent
-      objectReference: {fileID: 0}
-    - target: {fileID: 1623193278978018954, guid: d38c86c219f77c34685aa09c68f7d65d,
-        type: 3}
-      propertyPath: OnFadeDone.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: DialogueManager, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 1623193278978018954, guid: d38c86c219f77c34685aa09c68f7d65d,
-        type: 3}
       propertyPath: OnFadeDone.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
       objectReference: {fileID: 459738949}
-    - target: {fileID: 1623193278978018954, guid: d38c86c219f77c34685aa09c68f7d65d,
-        type: 3}
-      propertyPath: OnFadeDone.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: GetDialogueListType, Assembly-CSharp
-      objectReference: {fileID: 0}
     - target: {fileID: 2528984094277304700, guid: d38c86c219f77c34685aa09c68f7d65d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2707094062675279352, guid: d38c86c219f77c34685aa09c68f7d65d,
         type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -17606,6 +17547,11 @@ PrefabInstance:
       propertyPath: rightDistanceGrabberHT
       value: 
       objectReference: {fileID: 1300792525}
+    - target: {fileID: 6157833137182512004, guid: d38c86c219f77c34685aa09c68f7d65d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -19040,7 +18986,7 @@ PrefabInstance:
     - target: {fileID: 4605574066887840448, guid: d44fbf779a16b734f91d8ecbe3f16cbd,
         type: 3}
       propertyPath: delayTypeText
-      value: 0.0225
+      value: 0.03
       objectReference: {fileID: 0}
     - target: {fileID: 5178015071670007574, guid: d44fbf779a16b734f91d8ecbe3f16cbd,
         type: 3}

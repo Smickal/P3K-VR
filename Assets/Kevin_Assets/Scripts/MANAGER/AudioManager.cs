@@ -132,10 +132,10 @@ public class AudioManager : MonoBehaviour
     {
         sfxVol = vol;
         audioMixer.SetFloat(Mixer_SFX, Mathf.Log10(sfxVol)*20);
-        foreach(IChangeVolume _SFXICh in _SFXIChange)
-        {
-            _SFXICh.ChangeVolume(vol);
-        }
+        // foreach(IChangeVolume _SFXICh in _SFXIChange)
+        // {
+        //     if(_SFXICh != null)_SFXICh.ChangeVolume(vol);
+        // }
         PlayerPrefs.SetFloat(SaveStateKeySFX, vol);
     }
     

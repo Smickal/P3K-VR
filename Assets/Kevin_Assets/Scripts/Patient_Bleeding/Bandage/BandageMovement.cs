@@ -31,6 +31,7 @@ public class BandageMovement : MonoBehaviour
 
     public UnityAction OnMovementDone;
     public bool IsDoneMovement {  get { return isDoneMovement; } }
+    public AudioClip SoundOnRight;
 
 
     private void Update()
@@ -44,6 +45,7 @@ public class BandageMovement : MonoBehaviour
         if (Vector3.Distance(curBandageGrabbable.transform.position, _circleTransform.CircleTransforms[targetIdx].position) <= _detectionZone)
         {
             _bandageDraw.CreateMeshesByIndex(0, targetIdx);
+            PlaySound();
 
             currentIdx++;
             SetSnapZoneToIdx(currentIdx);
@@ -153,6 +155,15 @@ public class BandageMovement : MonoBehaviour
     {
         if (curBandageGrabbable == null) return;
         _bandageDraw.DeleteCustomPosMesh();
+    }
+    private void PlaySound()
+    {
+        if (SoundOnRight) {
+            // Only play the sound if not just starting the scene
+            if (Time.timeSinceLevelLoad > 0.1f) {
+                VRUtils.Instance.PlaySpatialClipAt(SoundOnRight, transform.position, 0.75f);
+            }
+        }
     }
 }
 

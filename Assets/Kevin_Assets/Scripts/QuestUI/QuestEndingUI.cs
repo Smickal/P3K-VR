@@ -82,6 +82,7 @@ public class QuestEndingUI : MonoBehaviour, ITurnOffStatic
         _kitUIMgr.ActivateBaseUI("Evaluation");
         _kitUIMgr.OpenQuestEnding();
         _evalContainer.gameObject.SetActive(true);
+        
         if(GameManager.CheckLevelTypeNow == null)return;
         if(GameManager.CheckLevelTypeNow() == LevelP3KType.Choking)
         {

@@ -980,17 +980,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _eyeProjector: {fileID: 5700131347621771237}
-  _eyeMesh: {fileID: 0}
-  _fadeSpeed: 0
+  _eyeMesh: {fileID: 226651902625417456}
+  _eye: {fileID: 6157833137182512004}
+  _fadeSpeed: 0.2
   OnFadeDone:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: DialogueManager, Assembly-CSharp
+        m_MethodName: PlayDialogueSceneOnEvent
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: GetDialogueListType, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _normalExpressionMaterial: {fileID: 2100000, guid: c66b9cecd8e9f78469d3a4ce0e7a75d3,
     type: 2}
   playerManager: {fileID: 0}
   gameManager: {fileID: 0}
-  robot: {fileID: 0}
-  SoundOnTurnOn: {fileID: 0}
+  robot: {fileID: 5798878545848706029}
+  SoundOnTurnOn: {fileID: 8300000, guid: 4150c1e8d31da514db62d8dce1f9ed95, type: 3}
   TurnOn: 0
   TurnOff: 0
 --- !u!114 &8350606809709081011
