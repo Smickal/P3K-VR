@@ -50,7 +50,7 @@ public class DialogueManager : MonoBehaviour, ITurnOffStatic
     [Header("Action To Do When DialogueFinish")]
     [SerializeField]private DialogueFinishActions[] dialogueFinishActions;
     [Header("References for Action Finish")]
-    [SerializeField]GameObject playerChecker;
+    [SerializeField]GameObject playerChecker, doorChecker;
     [SerializeField]PlayerTeleport playerTeleport;
     [SerializeField]Vector3 positionForIntro3Bleed;
     [SerializeField]Quaternion rotationforIntro3Bleed;
@@ -234,6 +234,7 @@ public class DialogueManager : MonoBehaviour, ITurnOffStatic
                     screenFader.ResetEvent();
                     if(PlayerManager.HasFinishedIntroLevel != null)PlayerManager.HasFinishedIntroLevel((int)gameManager.LevelTypeNow());
                     if(EnvironmentLevelManager.SetEnvironment_AfterIntro != null)EnvironmentLevelManager.SetEnvironment_AfterIntro();
+                    if(doorChecker)doorChecker.SetActive(true);
                     screenFader.AddEvent(afterIntro2_fadeOut);
                     screenFader.DoFadeOut();
                 };
@@ -271,6 +272,7 @@ public class DialogueManager : MonoBehaviour, ITurnOffStatic
                     screenFader.ResetEvent();
                     if(PlayerManager.HasFinishedIntroLevel != null)PlayerManager.HasFinishedIntroLevel((int)gameManager.LevelTypeNow());
                     playerChecker.SetActive(true);
+                    if(doorChecker)doorChecker.SetActive(true);
                     screenFader.AddEvent(afterIntro2_fadeOut);
                     screenFader.DoFadeOut();
                 };
@@ -333,6 +335,7 @@ public class DialogueManager : MonoBehaviour, ITurnOffStatic
         {
             if(!playerManager.IsFinish_IntroLevel((int)gameManager.LevelTypeNow()))
             {
+                if(doorChecker)doorChecker.SetActive(false);
                 if(gameManager.LevelTypeNow() == LevelP3KType.Choking)
                 {
                     gameManager.ChangeGameState(GameState.Cinematic);

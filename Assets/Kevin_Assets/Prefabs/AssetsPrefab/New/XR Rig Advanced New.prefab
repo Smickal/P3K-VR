@@ -88833,6 +88833,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 950785042372272393, guid: c2ba382097f06114c8ca184c7f00afaf,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0b07c337f1845ca448c029c2db157c7f, type: 2}
     - target: {fileID: 1078844873291735372, guid: c2ba382097f06114c8ca184c7f00afaf,
         type: 3}
       propertyPath: m_Layer
@@ -89149,7 +89154,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 1e73eec22136c1441b1a6c22ff5318ff, type: 2}
+      objectReference: {fileID: 2100000, guid: 4777b52f1de50f04a9894e557a118681, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -90105,11 +90110,6 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: bb512fe3350bcb8479ad97e466039877, type: 2}
-    - target: {fileID: 7397768948356387252, guid: 79777ae0bfe4829409a6a8db9a83b871,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 66a4166703d30414c9b224a6b5289ccc, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -91057,6 +91057,11 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: bb512fe3350bcb8479ad97e466039877, type: 2}
+    - target: {fileID: 7397768948356387252, guid: 79777ae0bfe4829409a6a8db9a83b871,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0b07c337f1845ca448c029c2db157c7f, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -91569,11 +91574,6 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 950785042372272393, guid: c2ba382097f06114c8ca184c7f00afaf,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 66a4166703d30414c9b224a6b5289ccc, type: 2}
     - target: {fileID: 1078844873291735372, guid: c2ba382097f06114c8ca184c7f00afaf,
         type: 3}
       propertyPath: m_Layer
@@ -92240,7 +92240,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 1e73eec22136c1441b1a6c22ff5318ff, type: 2}
+      objectReference: {fileID: 2100000, guid: 4777b52f1de50f04a9894e557a118681, type: 2}
     - target: {fileID: 1078844873291735372, guid: c2ba382097f06114c8ca184c7f00afaf,
         type: 3}
       propertyPath: m_Layer
@@ -92947,11 +92947,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 692fc52bb2c4fcc4d9316a1af98fce7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  materialHands:
-  - {fileID: 2100000, guid: 05ba4ea569cc7f246a17c767d5353c1f, type: 2}
-  - {fileID: 2100000, guid: 12fefa7cbff43d542a64d99f878051c9, type: 2}
-  normalMaterial: {fileID: 2100000, guid: d641a50c4fe4ee3489a64cf52b76ae79, type: 2}
-  glovesMaterial: {fileID: 2100000, guid: 091a452a197fd364284751404f9fba87, type: 2}
+  skinnedMeshLeft: {fileID: 8070449642634161943}
+  skinnedMeshRight: {fileID: 4919744097039255533}
+  materials_Normal:
+  - {fileID: 2100000, guid: d641a50c4fe4ee3489a64cf52b76ae79, type: 2}
+  materials_Gloves:
+  - {fileID: 2100000, guid: 22f2bc0a640a1f94fb6c3b358ad71362, type: 2}
   normalOn: 0
   glovesOn: 0
 --- !u!1001 &8947389856498676696

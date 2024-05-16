@@ -5996,6 +5996,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
   playerChecker: {fileID: 0}
+  doorChecker: {fileID: 1880766449}
   playerTeleport: {fileID: 0}
   positionForIntro3Bleed: {x: 0, y: 0, z: 0}
   rotationforIntro3Bleed: {x: 0, y: 0, z: 0, w: 0}
@@ -14711,6 +14712,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1880766447}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1880766449 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4301473763812615514, guid: 790ac53c30f27144bb9722c36f6d228a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1880766447}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1881175859
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16857,6 +16864,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Prototype_Robot
       objectReference: {fileID: 0}
+    - target: {fileID: 1623193278978018954, guid: d38c86c219f77c34685aa09c68f7d65d,
+        type: 3}
+      propertyPath: gameManager
+      value: 
+      objectReference: {fileID: 1066109239}
+    - target: {fileID: 1623193278978018954, guid: d38c86c219f77c34685aa09c68f7d65d,
+        type: 3}
+      propertyPath: playerManager
+      value: 
+      objectReference: {fileID: 1066109241}
     - target: {fileID: 4752707567812459714, guid: d38c86c219f77c34685aa09c68f7d65d,
         type: 3}
       propertyPath: gameManager
