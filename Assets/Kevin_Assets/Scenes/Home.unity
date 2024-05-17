@@ -5163,6 +5163,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
   playerChecker: {fileID: 0}
+  doorChecker: {fileID: 0}
   playerTeleport: {fileID: 0}
   positionForIntro3Bleed: {x: 0, y: 0, z: 0}
   rotationforIntro3Bleed: {x: 0, y: 0, z: 0, w: 0}
@@ -6352,12 +6353,12 @@ PrefabInstance:
     - target: {fileID: 3060052882041439675, guid: 790ac53c30f27144bb9722c36f6d228a,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3060052882041439675, guid: 790ac53c30f27144bb9722c36f6d228a,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3060052882041439675, guid: 790ac53c30f27144bb9722c36f6d228a,
         type: 3}
@@ -6392,12 +6393,12 @@ PrefabInstance:
     - target: {fileID: 5930669787630828198, guid: 790ac53c30f27144bb9722c36f6d228a,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5930669787630828198, guid: 790ac53c30f27144bb9722c36f6d228a,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5930669787630828198, guid: 790ac53c30f27144bb9722c36f6d228a,
         type: 3}
@@ -6412,7 +6413,7 @@ PrefabInstance:
     - target: {fileID: 5930669787630828198, guid: 790ac53c30f27144bb9722c36f6d228a,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 450
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5930669787630828198, guid: 790ac53c30f27144bb9722c36f6d228a,
         type: 3}
@@ -6422,7 +6423,7 @@ PrefabInstance:
     - target: {fileID: 6124519427578882459, guid: 790ac53c30f27144bb9722c36f6d228a,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 900
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6124519427578882459, guid: 790ac53c30f27144bb9722c36f6d228a,
         type: 3}
@@ -6556,7 +6557,7 @@ PrefabInstance:
     - target: {fileID: 2868623363106260079, guid: 790ac53c30f27144bb9722c36f6d228a,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 475
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 2868623363106260079, guid: 790ac53c30f27144bb9722c36f6d228a,
         type: 3}
@@ -6581,7 +6582,7 @@ PrefabInstance:
     - target: {fileID: 3060052882041439675, guid: 790ac53c30f27144bb9722c36f6d228a,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 427.03
+      value: 465.85
       objectReference: {fileID: 0}
     - target: {fileID: 3060052882041439675, guid: 790ac53c30f27144bb9722c36f6d228a,
         type: 3}
@@ -6591,7 +6592,7 @@ PrefabInstance:
     - target: {fileID: 3060052882041439675, guid: 790ac53c30f27144bb9722c36f6d228a,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -233.515
+      value: -252.925
       objectReference: {fileID: 0}
     - target: {fileID: 4301473763812615514, guid: 790ac53c30f27144bb9722c36f6d228a,
         type: 3}
@@ -6621,7 +6622,7 @@ PrefabInstance:
     - target: {fileID: 5930669787630828198, guid: 790ac53c30f27144bb9722c36f6d228a,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 467.03
+      value: 505.84998
       objectReference: {fileID: 0}
     - target: {fileID: 5930669787630828198, guid: 790ac53c30f27144bb9722c36f6d228a,
         type: 3}
@@ -6631,7 +6632,7 @@ PrefabInstance:
     - target: {fileID: 5930669787630828198, guid: 790ac53c30f27144bb9722c36f6d228a,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -258.515
+      value: -277.925
       objectReference: {fileID: 0}
     - target: {fileID: 6124519427578882459, guid: 790ac53c30f27144bb9722c36f6d228a,
         type: 3}
@@ -6641,15 +6642,16 @@ PrefabInstance:
     - target: {fileID: 6124519427578882459, guid: 790ac53c30f27144bb9722c36f6d228a,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 517.03
+      value: 555.85
       objectReference: {fileID: 0}
     - target: {fileID: 7325536202624735502, guid: 790ac53c30f27144bb9722c36f6d228a,
         type: 3}
       propertyPath: m_text
       value: "<align=center>==Tooltip - Move Around==</align>\n<color=red>Controller</color>
-        -> Use \nRight Joystick\n\n<color=purple>Handtrack</color> -> Form this \npose
-        until rotate \npointer shows up\n(easier when you form\nmove pose until pointer
-        \nshows up, then change to\nthis pose)"
+        -> Use \nRight Thumbstick\n\n<color=purple>Handtrack</color> -> Form this
+        \npose until rotate \npointer shows up\n(easier when you form\nmove pose
+        until pointer \nshows up, then change to\nthis pose) \n<color=#B8E6FF><b>[BOTH
+        HAND WORK]</b></color>"
       objectReference: {fileID: 0}
     - target: {fileID: 7325536202624735502, guid: 790ac53c30f27144bb9722c36f6d228a,
         type: 3}
@@ -14148,7 +14150,7 @@ PrefabInstance:
     - target: {fileID: 3060052882041439675, guid: 790ac53c30f27144bb9722c36f6d228a,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 427.03
+      value: 465.85
       objectReference: {fileID: 0}
     - target: {fileID: 3060052882041439675, guid: 790ac53c30f27144bb9722c36f6d228a,
         type: 3}
@@ -14158,7 +14160,7 @@ PrefabInstance:
     - target: {fileID: 3060052882041439675, guid: 790ac53c30f27144bb9722c36f6d228a,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -233.515
+      value: -252.925
       objectReference: {fileID: 0}
     - target: {fileID: 4301473763812615514, guid: 790ac53c30f27144bb9722c36f6d228a,
         type: 3}
@@ -14188,7 +14190,7 @@ PrefabInstance:
     - target: {fileID: 5930669787630828198, guid: 790ac53c30f27144bb9722c36f6d228a,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 467.03
+      value: 505.84998
       objectReference: {fileID: 0}
     - target: {fileID: 5930669787630828198, guid: 790ac53c30f27144bb9722c36f6d228a,
         type: 3}
@@ -14198,7 +14200,7 @@ PrefabInstance:
     - target: {fileID: 5930669787630828198, guid: 790ac53c30f27144bb9722c36f6d228a,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -258.515
+      value: -277.925
       objectReference: {fileID: 0}
     - target: {fileID: 6124519427578882459, guid: 790ac53c30f27144bb9722c36f6d228a,
         type: 3}
@@ -14208,7 +14210,7 @@ PrefabInstance:
     - target: {fileID: 6124519427578882459, guid: 790ac53c30f27144bb9722c36f6d228a,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 517.03
+      value: 555.85
       objectReference: {fileID: 0}
     - target: {fileID: 6124519427578882459, guid: 790ac53c30f27144bb9722c36f6d228a,
         type: 3}
@@ -14219,9 +14221,9 @@ PrefabInstance:
         type: 3}
       propertyPath: m_text
       value: "<align=center>==Tooltip - Move Around==</align>\n<color=red>Controller</color>
-        -> Use \nLeft Joystick\n\n<color=purple>Handtrack</color> -> Form this \npose
-        until teleport \npointer shows up.\n\nTry to point straight\nto floor or
-        the white circle \nand see the differences"
+        -> Use \nLeft Thumbstick\n\n<color=purple>Handtrack</color> -> Form this
+        \npose until teleport \npointer shows up.\n<color=#B8E6FF><b>[BOTH HAND WORK]</b></color>\n\nTry
+        to point straight\nto floor or the white circle \nand see the differences"
       objectReference: {fileID: 0}
     - target: {fileID: 7325536202624735502, guid: 790ac53c30f27144bb9722c36f6d228a,
         type: 3}
