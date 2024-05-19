@@ -5,11 +5,14 @@ using UnityEngine;
 using BNG;
 using UnityEngine.Events;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.UI;
 
 public class RobotExpressionController : MonoBehaviour
 {
     [SerializeField] DecalProjector _eyeProjector;
     [SerializeField] DecalMesh _eyeMesh;
+    [SerializeField]Image _eye;
+    Color _eyeColor;
     [SerializeField] float _fadeSpeed;
     bool isFading, isTurnOn = true;
     public UnityEvent OnFadeDone;
@@ -26,11 +29,16 @@ public class RobotExpressionController : MonoBehaviour
     public bool TurnOn, TurnOff;
     private void Awake() 
     {
-        if(_eyeMesh != null)
+        if(_eye != null)
         {
+            
             if(!playerManager.IsFinish_TutorialMain() && gameManager.LevelModeNow() == LevelMode.Home)
             {
-                _eyeMesh.Opacity = 0;
+                _eyeColor = _eye.color;
+                _eyeColor.a = 0f;
+                _eye.color = _eyeColor;
+                // _eye.SetActive(false);
+                // _eyeMesh.Opacity = 0;
                 isTurnOn = false;
             }
         }
@@ -55,6 +63,7 @@ public class RobotExpressionController : MonoBehaviour
     public void TurnOnEyes()
     {
         if(isFading || isTurnOn)return;
+        // _eye.SetActive(true);
         PlaySoundTurnOn();
         StartCoroutine(doFade(0,1));
         robot.ActivateLookAt();
@@ -67,10 +76,12 @@ public class RobotExpressionController : MonoBehaviour
     }
 
     IEnumerator doFade(float from, float To) {
+        
         isFading = true;
         float alphaStart = from;
 
-        _eyeMesh.Opacity = alphaStart;
+        // _eyeMesh.Opacity = alphaStart;
+        _eyeColor.a = alphaStart;
 
         while (alphaStart != To) {
 
@@ -87,18 +98,25 @@ public class RobotExpressionController : MonoBehaviour
                 }
             }
 
-            _eyeMesh.Opacity = alphaStart;
-
+            // _eyeMesh.Opacity = alphaStart;
+            _eyeColor.a = alphaStart;
+            _eye.color = _eyeColor;
+            Debug.Log("Opacity Mata " + _eyeColor.a);
             yield return new WaitForEndOfFrame();
         }
 
         yield return new WaitForEndOfFrame();
 
         // Ensure alpha is always applied
-        _eyeMesh.Opacity = To;
+        // _eyeMesh.Opacity = To;
+        _eyeColor.a = To;
+        _eye.color = _eyeColor;
+
         isFading = false;
         if(from < To)isTurnOn = true;
         else isTurnOn = false;
+
+        // if(from > To)_eyeMesh.gameObject.SetActive(false);
         OnFadeDone?.Invoke();
     }
     private void PlaySoundTurnOn()

@@ -54,7 +54,7 @@ public class QuestManager : MonoBehaviour
 
     private void Start()
     {
-        if(PlayerManager.LastInGameMode() == InGame_Mode.FirstAid)StartQuest();
+        if(PlayerManager.LastInGameMode != null)if(PlayerManager.LastInGameMode() == InGame_Mode.FirstAid)StartQuest();
     }
 
     protected virtual void Update() 
@@ -84,6 +84,7 @@ public class QuestManager : MonoBehaviour
     }
     public void CheckStartQuest()
     {
+        if(PlayerManager.LastInGameMode == null) return;
         if(!(PlayerManager.LastInGameMode() == InGame_Mode.FirstAid))
         {
             if(!levelPlayerDataNow.hasBeatenLevelOnce)
@@ -93,14 +94,14 @@ public class QuestManager : MonoBehaviour
             else
             {
                 questYesNoUI.ActivateUI();
-                PlayerRestriction.ApplyAllRestriction();
+                if(PlayerRestriction.ApplyAllRestriction != null)PlayerRestriction.ApplyAllRestriction();
             }
         }
         
     }
     public void YesNoStartQuest(bool choice)
     {
-        PlayerRestriction.LiftAllRestriction();
+        if(PlayerRestriction.LiftAllRestriction != null)PlayerRestriction.LiftAllRestriction();
         if(choice)
         {
             StartQuest();
@@ -114,16 +115,21 @@ public class QuestManager : MonoBehaviour
         robot.DeactivateFollowPlayer();
         OnStartQuest.Invoke();
         BGMManager.ChangeBGMAudio(BGM_Type.tense);
-        if(PlayerManager.LastInGameMode() != InGame_Mode.FirstAid)
+        if(PlayerManager.LastInGameMode != null)
         {
-            PlayerManager.ChangeInGame_Mode_Now(InGame_Mode.FirstAid);
-            ResetQuest();
-            //cek apakah bsk bikin aneh ato ga -> nyalakan ini jika ketemu bug yg kalo lsg ga kebaca grabbable eventnya
-            PlayerManager.SetPlayerPosition_DoP3k();
-            
-            EnvironmentLevelManager.SetEnvironment_FirstAid();
-            
+            if(PlayerManager.LastInGameMode() != InGame_Mode.FirstAid)
+            {
+                if(PlayerManager.ChangeInGame_Mode_Now != null)PlayerManager.ChangeInGame_Mode_Now(InGame_Mode.FirstAid);
+                ResetQuest();
+                return;
+                //cek apakah bsk bikin aneh ato ga -> nyalakan ini jika ketemu bug yg kalo lsg ga kebaca grabbable eventnya
+                // PlayerManager.SetPlayerPosition_DoP3k();
+                
+                // EnvironmentLevelManager.SetEnvironment_FirstAid();
+                
+            }
         }
+        
         
         if(levelP3KTypeNow == LevelP3KType.Choking)
         {
@@ -145,11 +151,11 @@ public class QuestManager : MonoBehaviour
         OnFinishQuest.Invoke();
         isQuestStart = false;
         audioSource.volume = 1f;
-        PlayerManager.ChangeInGame_Mode_Now(InGame_Mode.NormalWalk);
+        if(PlayerManager.ChangeInGame_Mode_Now != null)PlayerManager.ChangeInGame_Mode_Now(InGame_Mode.NormalWalk);
         if(levelP3KTypeNow == LevelP3KType.Choking) choking_QuestManager.ScoreCounter();
         else if (levelP3KTypeNow == LevelP3KType.Bleeding) bleeding_QuestManager.ScoreCounter();
-        PlayerRestriction.ApplyAllRestriction();
-
+        if(PlayerRestriction.ApplyAllRestriction != null)PlayerRestriction.ApplyAllRestriction();
+        if(DialogueManager.HideFinishedDialogue_AfterFinishingTask != null)DialogueManager.HideFinishedDialogue_AfterFinishingTask();
         screenFader.AddEvent(questDoneMethodAfterFade);
         screenFader.DoFadeIn();
         //ntr perlu dinyalain fader sendiri di sini
@@ -160,8 +166,8 @@ public class QuestManager : MonoBehaviour
     {
         questManagerUI.DeactivateBaseUI();
         questManagerUI.CloseHelper_Bleeding_WithoutItem();
-        EnvironmentLevelManager.SetEnvironment_FinishQuest();
-        PlayerManager.SetPlayerPosition_FinishP3k();
+        if(EnvironmentLevelManager.SetEnvironment_FinishQuest != null)EnvironmentLevelManager.SetEnvironment_FinishQuest();
+        if(PlayerManager.SetPlayerPosition_FinishP3k != null)PlayerManager.SetPlayerPosition_FinishP3k();
         if(soundHasStart)
         {
             soundHasStart = false;
@@ -176,8 +182,8 @@ public class QuestManager : MonoBehaviour
     protected virtual void Quest(){}
     protected virtual void ScoreCounter()
     {
-        PlayerManager.HasBeatenLvl((int)levelP3KTypeNow, score);
-        QuestEndingUI.SetUIData(score, levelP3KTypeNow);
+        if(PlayerManager.HasBeatenLvl != null)PlayerManager.HasBeatenLvl((int)levelP3KTypeNow, score);
+        if(QuestEndingUI.SetUIData != null)QuestEndingUI.SetUIData(score, levelP3KTypeNow);
         DataSaveManager.Instance.Save();
     }
 
@@ -186,7 +192,7 @@ public class QuestManager : MonoBehaviour
         if(hasClickRestartQuit)return;
         hasClickRestartQuit = true;
 
-        PlayerManager.ChangeInGame_Mode_Now(InGame_Mode.FirstAid);
+        if(PlayerManager.ChangeInGame_Mode_Now != null)PlayerManager.ChangeInGame_Mode_Now(InGame_Mode.FirstAid);
         if(levelP3KTypeNow == LevelP3KType.Choking) choking_QuestManager.ResetQuest();
         else if (levelP3KTypeNow == LevelP3KType.Bleeding) bleeding_QuestManager.ResetQuest();
     }
@@ -195,7 +201,7 @@ public class QuestManager : MonoBehaviour
         if(hasClickRestartQuit)return;
         hasClickRestartQuit = true;
 
-        PlayerManager.ChangeInGame_Mode_Now(InGame_Mode.NormalWalk);
+        if(PlayerManager.ChangeInGame_Mode_Now != null)PlayerManager.ChangeInGame_Mode_Now(InGame_Mode.NormalWalk);
         BGMManager.ChangeBGMAudio(BGM_Type.main);
         if(levelP3KTypeNow == LevelP3KType.Choking) choking_QuestManager.ResetQuest();
         else if (levelP3KTypeNow == LevelP3KType.Bleeding) bleeding_QuestManager.ResetQuest();

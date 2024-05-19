@@ -6,7 +6,8 @@ using UnityEngine;
 using UnityEditor;
 using UnityEngine.Events;
 using BNG;
-using UnityEditor.Rendering.LookDev;
+using Oculus.Interaction.Locomotion;
+using Oculus.Interaction.DistanceReticles;
 
 [Serializable]
 public class DialogueFinishActions
@@ -49,11 +50,13 @@ public class DialogueManager : MonoBehaviour, ITurnOffStatic
     [Header("Action To Do When DialogueFinish")]
     [SerializeField]private DialogueFinishActions[] dialogueFinishActions;
     [Header("References for Action Finish")]
-    [SerializeField]GameObject playerChecker;
+    [SerializeField]GameObject playerChecker, doorChecker;
     [SerializeField]PlayerTeleport playerTeleport;
     [SerializeField]Vector3 positionForIntro3Bleed;
     [SerializeField]Quaternion rotationforIntro3Bleed;
     [SerializeField]ToolTipHomeManager toolTipHomeManager;
+    // [SerializeField]TeleportInteractable teleportInteractable;
+    // [SerializeField]ReticleDataTeleport reticleDataTeleport;
 
     [Header("DEBUG ONLY")]
     public bool isPlayScene1AtStart;
@@ -65,6 +68,13 @@ public class DialogueManager : MonoBehaviour, ITurnOffStatic
         DoSomethingAfterFinish += DoSomethingAfterDialogueFinish;
         HideFinishedDialogue_AfterFinishingTask += HideFinishedDialogueNow;
         // PlaySceneDialogueNew += PlayDialogueScene;
+    }
+    private void Update() {
+        if(isPlayScene1AtStart)
+        {
+            isPlayScene1AtStart = false;
+            PlayDialogueScene(DialogueListTypeParent.Home_QuizExplanation, DialogueListType_Home_QuizExplanation.Home_QuizExplanation_2_1);
+        }
     }
 
     
@@ -211,8 +221,8 @@ public class DialogueManager : MonoBehaviour, ITurnOffStatic
                 {
                     screenFader.ResetEvent();
                     gameManager.ChangeGameState(GameState.InGame);
-                    PlayerRestriction.LiftAllRestriction();
-                    PlayerRestriction.LiftRotationRestriction();
+                    if(PlayerRestriction.LiftAllRestriction != null)PlayerRestriction.LiftAllRestriction();
+                    if(PlayerRestriction.LiftRotationRestriction != null)PlayerRestriction.LiftRotationRestriction();
                     robot.ActivateLookAt();
                     robot.ActivateFollowPlayer();
                     PlayDialogueScene(DialogueListTypeParent.Choking_Intro, DialogueListType_Choking_Intro.Choking_Intro_3);
@@ -222,8 +232,9 @@ public class DialogueManager : MonoBehaviour, ITurnOffStatic
                 UnityAction afterIntro2_fadeIn = ()=>
                 {
                     screenFader.ResetEvent();
-                    PlayerManager.HasFinishedIntroLevel((int)gameManager.LevelTypeNow());
-                    EnvironmentLevelManager.SetEnvironment_AfterIntro();
+                    if(PlayerManager.HasFinishedIntroLevel != null)PlayerManager.HasFinishedIntroLevel((int)gameManager.LevelTypeNow());
+                    if(EnvironmentLevelManager.SetEnvironment_AfterIntro != null)EnvironmentLevelManager.SetEnvironment_AfterIntro();
+                    if(doorChecker)doorChecker.SetActive(true);
                     screenFader.AddEvent(afterIntro2_fadeOut);
                     screenFader.DoFadeOut();
                 };
@@ -237,7 +248,7 @@ public class DialogueManager : MonoBehaviour, ITurnOffStatic
         {
             if((DialogueListType_Bleeding_Intro)dialogueSceneTypeNow == DialogueListType_Bleeding_Intro.Bleeding_Intro_1)
             {
-                PlayerRestriction.LiftMovementRestriction();
+                if(PlayerRestriction.LiftMovementRestriction != null)PlayerRestriction.LiftMovementRestriction();
                 return;
             }
             if((DialogueListType_Bleeding_Intro)dialogueSceneTypeNow == DialogueListType_Bleeding_Intro.Bleeding_Intro_3_2)
@@ -247,8 +258,10 @@ public class DialogueManager : MonoBehaviour, ITurnOffStatic
                 {
                     screenFader.ResetEvent();
                     gameManager.ChangeGameState(GameState.InGame);
-                    PlayerRestriction.LiftAllRestriction();
-                    PlayerRestriction.LiftRotationRestriction();
+                    if(PlayerRestriction.LiftAllRestriction != null)PlayerRestriction.LiftAllRestriction();
+                    if(PlayerRestriction.LiftRotationRestriction != null)PlayerRestriction.LiftRotationRestriction();
+                    // teleportInteractable.AllowTeleport = true;
+                    // reticleDataTeleport.ChangeReticleModeToValid();
                     robot.ActivateLookAt();
                     robot.ActivateFollowPlayer();
                     PlayDialogueScene(DialogueListTypeParent.Bleeding_Intro, DialogueListType_Bleeding_Intro.Bleeding_Intro_4);
@@ -257,8 +270,9 @@ public class DialogueManager : MonoBehaviour, ITurnOffStatic
                 UnityAction afterIntro2_fadeIn = ()=>
                 {
                     screenFader.ResetEvent();
-                    PlayerManager.HasFinishedIntroLevel((int)gameManager.LevelTypeNow());
+                    if(PlayerManager.HasFinishedIntroLevel != null)PlayerManager.HasFinishedIntroLevel((int)gameManager.LevelTypeNow());
                     playerChecker.SetActive(true);
+                    if(doorChecker)doorChecker.SetActive(true);
                     screenFader.AddEvent(afterIntro2_fadeOut);
                     screenFader.DoFadeOut();
                 };
@@ -276,17 +290,17 @@ public class DialogueManager : MonoBehaviour, ITurnOffStatic
                 {
                     screenFader.ResetEvent();
                     gameManager.ChangeGameState(GameState.InGame);
-                    PlayerRestriction.LiftAllRestriction();
-                    PlayerRestriction.LiftRotationRestriction();
+                    if(PlayerRestriction.LiftAllRestriction != null)PlayerRestriction.LiftAllRestriction();
+                    if(PlayerRestriction.LiftRotationRestriction != null)PlayerRestriction.LiftRotationRestriction();
                     robot.ActivateLookAt();
 
                 };
                 UnityAction afterIntro2_fadeIn = ()=>
                 {
                     screenFader.ResetEvent();
-                    PlayerManager.HasFinishedTutorialMain();
+                    if(PlayerManager.HasFinishedTutorialMain != null)PlayerManager.HasFinishedTutorialMain();
                     toolTipHomeManager.Activate();
-                    EnvironmentLevelManager.SetEnvironment_HomeAfterIntro();
+                    if(EnvironmentLevelManager.SetEnvironment_HomeAfterIntro != null)EnvironmentLevelManager.SetEnvironment_HomeAfterIntro();
                     screenFader.AddEvent(afterIntro2_fadeOut);
                     screenFader.DoFadeOut();
                 };
@@ -321,6 +335,7 @@ public class DialogueManager : MonoBehaviour, ITurnOffStatic
         {
             if(!playerManager.IsFinish_IntroLevel((int)gameManager.LevelTypeNow()))
             {
+                if(doorChecker)doorChecker.SetActive(false);
                 if(gameManager.LevelTypeNow() == LevelP3KType.Choking)
                 {
                     gameManager.ChangeGameState(GameState.Cinematic);
@@ -345,8 +360,8 @@ public class DialogueManager : MonoBehaviour, ITurnOffStatic
         UnityAction afterIntro_fadeIn = ()=>
         {
             screenFader.ResetEvent();
-            PlayerRestriction.ApplyMovementRestriction();
-            PlayerRestriction.ApplyRotationRestriction();
+            if(PlayerRestriction.ApplyMovementRestriction != null)PlayerRestriction.ApplyMovementRestriction();
+            if(PlayerRestriction.ApplyRotationRestriction != null)PlayerRestriction.ApplyRotationRestriction();
 
             HideFinishedDialogueNow();
 
@@ -360,8 +375,9 @@ public class DialogueManager : MonoBehaviour, ITurnOffStatic
     }
     public void PlayAfterIntro3_1()
     {
-        EnvironmentLevelManager.SetEnvironment_AfterIntro();
+        if(EnvironmentLevelManager.SetEnvironment_AfterIntro != null)EnvironmentLevelManager.SetEnvironment_AfterIntro();
         robot.SetPosForIntro();
+        robot.ActivateLookAt();
         playerChecker.SetActive(false);
     }
     

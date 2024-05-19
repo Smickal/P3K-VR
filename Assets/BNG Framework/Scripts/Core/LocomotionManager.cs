@@ -135,11 +135,15 @@ namespace BNG {
 
         void toggleSmoothLocomotion(bool enabled) {
             if (smoothLocomotion) {
-                if(PlayerRestriction.IsRestrictGrabable() == true)
+                if(PlayerRestriction.IsRestrictGrabable != null)
                 {
-                    smoothLocomotion.enabled = false;
-                    return;
+                    if(PlayerRestriction.IsRestrictGrabable() == true)
+                    {
+                        smoothLocomotion.enabled = false;
+                        return;
+                    }
                 }
+                
                 smoothLocomotion.enabled = enabled;
             }
         }

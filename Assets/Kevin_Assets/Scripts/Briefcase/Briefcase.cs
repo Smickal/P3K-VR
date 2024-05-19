@@ -39,7 +39,7 @@ public class Briefcase : MonoBehaviour
         // }
         if(isOpen)
         {
-            if((PlayerRestriction.IsRestrictGrabable != null) && !PlayerRestriction.IsRestrictGrabable()) EnableInventory();
+            if(PlayerRestriction.IsRestrictGrabable != null)if(!PlayerRestriction.IsRestrictGrabable()) EnableInventory();
             else DisableInventory();
         }
         else if(!isOpen)
@@ -135,11 +135,11 @@ public class Briefcase : MonoBehaviour
     {
         if(canOnlyOpenInCertainSpot)
         {
-            Debug.Log("here");
+            // Debug.Log("here");
             ChangeButtonCollEnable(false);
             return;
         }
-        Debug.Log("Kan ga bisa lwt sini");
+        // Debug.Log("Kan ga bisa lwt sini");
         ChangeButtonCollEnable(true);
     }
     private void PlaySound()

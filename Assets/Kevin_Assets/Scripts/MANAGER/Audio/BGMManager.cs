@@ -98,7 +98,7 @@ public class BGMManager : MonoBehaviour, IChangeVolume
     public void ChangeVolume(float volume)
     {
         volumeBGM = 1;
-        BGM.volume = 1;
+        if(BGM)BGM.volume = 1;
     }
     public void DestroyInstance(){
         ChangeBGMAudio -= ChangeBGMClip;
@@ -114,12 +114,12 @@ public class BGMManager : MonoBehaviour, IChangeVolume
         if(bGM_Type == BGM_Type.main)
         {
             BGM.clip = BGM_Main;
-            Debug.Log("change to main");
+            // Debug.Log("change to main");
         }
         else if(bGM_Type == BGM_Type.tense)
         {
             BGM.clip = BGM_Tense;
-            Debug.Log("change to tense");
+            // Debug.Log("change to tense");
         }
         
     }

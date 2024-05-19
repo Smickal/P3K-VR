@@ -28,6 +28,8 @@ public class AlcoholWipesInteractableEvent : MonoBehaviour
             Lid_Collider.enabled = false;
             WipeOut.SetActive(true);
             SnapPoint.SetActive(true);
+            // snapPoint_Collider.enabled = true;
+            // alcoholWipeCollider.enabled = true;
 
             Lid.SetActive(false);
             // Debug.Log(currHand + " Hands ");

@@ -71,7 +71,7 @@ public class OnPutBriefCase : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         if(isThereBriefCase)return;
-        if(other.gameObject.name.Contains("BriefCase"))
+        if(other.gameObject.name.Contains("FirstAidKit"))
         {
             // Debug.Log("yes");
             if(other.gameObject.transform.parent != null && other.gameObject.transform.parent.GetComponent<SnapZone>() != null) return;

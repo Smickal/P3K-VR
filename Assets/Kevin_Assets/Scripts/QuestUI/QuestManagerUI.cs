@@ -53,6 +53,7 @@ public class QuestManagerUI : MonoBehaviour, ITurnOffStatic
     }
     private void Start()
     {
+        if(GameManager.CheckLevelTypeNow == null)return;
         if(GameManager.CheckLevelTypeNow() == LevelP3KType.Choking)
         {
             _chokingEmotionScoreTracker.SetActive(true);
@@ -172,7 +173,7 @@ public class QuestManagerUI : MonoBehaviour, ITurnOffStatic
     public void ChangeTimerSlider(float curTime)
     {
         _timerSlider.value = curTime/_maxTimer;
-        Debug.Log(curTime + " " + _maxTimer);
+        // Debug.Log(curTime + " " + _maxTimer);
         if(gameManager.LevelTypeNow() == LevelP3KType.Bleeding)_timerSlider_bleeding.value = curTime/_maxTimer;
     }
     public void ActiveQuestBtn_Robot(bool change)

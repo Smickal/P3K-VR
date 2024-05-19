@@ -1146,6 +1146,7 @@ MonoBehaviour:
   _reduceMultiplier: 0.00625
   _myModel: {fileID: 2979741240866433769}
   isBleeding: 0
+  isManyBlood: 0
   _bleedingMultiplier: 0.015
   MAX_COUNTDOWN: 2
 --- !u!64 &8767506017515090948
@@ -1951,6 +1952,7 @@ MonoBehaviour:
   _reduceMultiplier: 0.00625
   _myModel: {fileID: 2266589780355465631}
   isBleeding: 0
+  isManyBlood: 0
   _bleedingMultiplier: 0.015
   MAX_COUNTDOWN: 2
 --- !u!64 &8853741064855787806
@@ -2595,7 +2597,7 @@ Transform:
   m_GameObject: {fileID: 631117671518793401}
   serializedVersion: 2
   m_LocalRotation: {x: 0.46867576, y: 0.505018, z: 0.5380259, w: 0.4856213}
-  m_LocalPosition: {x: -0.1648, y: 0.024, z: -0.0005}
+  m_LocalPosition: {x: -0.1648, y: 0.0076, z: -0.0005}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4179,6 +4181,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3095334127835645b7cf59160ee807b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bleeding_QuestManager: {fileID: 0}
   questManagerUI: {fileID: 0}
   BleedWithItemMgr: {fileID: 7299782238272180942}
   bleedingWithoutEmbeddedItem: {fileID: 3750653394578205817}
@@ -9991,6 +9994,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f57cd469a3bbd2f4ba8503b9c8be7b58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bleeding_QuestManager: {fileID: 0}
   patient_Bleeding: {fileID: 2617095254580400147}
   state: 0
   patientBleedingQuestUI: {fileID: 0}
@@ -10005,6 +10009,9 @@ MonoBehaviour:
   _dryColl: {fileID: 8853741064855787806}
   _dryObj: {fileID: 6484407116701442941}
   bandageTime: {fileID: 7762887750615232579}
+  snapZonesLeg:
+  - {fileID: 5300857740650641151}
+  - {fileID: 3590958588266288619}
   Leg: {fileID: 6011807188549135183}
   leftLeg: {fileID: 1022190928877565407}
   rightLeg: {fileID: 6424803051865783482}
@@ -10175,6 +10182,7 @@ MonoBehaviour:
   _reduceMultiplier: 0.00625
   _myModel: {fileID: 2299029674750816543}
   isBleeding: 1
+  isManyBlood: 1
   _bleedingMultiplier: 0.015
   MAX_COUNTDOWN: 2
 --- !u!64 &8592518413774770035
@@ -18491,7 +18499,6 @@ GameObject:
   - component: {fileID: 2924732856824585656}
   - component: {fileID: 734568387887030000}
   - component: {fileID: 3582996432788619856}
-  - component: {fileID: 8997808933956705491}
   m_Layer: 0
   m_Name: shard hand
   m_TagString: Untagged
@@ -18586,20 +18593,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -7347890877915972557, guid: 4838bd0e993f65745b41085c3f6ce449, type: 3}
---- !u!114 &8997808933956705491
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6205219931563424664}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2caa1282db1012e4588b52a5d62e37c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bleeding_QuestManager: {fileID: 0}
-  bandageMovement: {fileID: 4930123467833421039}
 --- !u!1 &6235015148141397112
 GameObject:
   m_ObjectHideFlags: 0
@@ -19349,8 +19342,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.7075618, y: 0.5, z: 1.6455233}
-  m_Center: {x: 0.012281686, y: -0.25, z: -0.745363}
+  m_Size: {x: 0.7075618, y: 0.399218, z: 1.6455233}
+  m_Center: {x: 0.012281686, y: -0.30039102, z: -0.745363}
 --- !u!54 &1691911974486735941
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -19466,7 +19459,7 @@ Transform:
   m_GameObject: {fileID: 6597025100401500085}
   serializedVersion: 2
   m_LocalRotation: {x: 0.46867567, y: 0.505018, z: 0.5380259, w: 0.48562127}
-  m_LocalPosition: {x: 0.172, y: 0.024, z: -0.00050002337}
+  m_LocalPosition: {x: 0.172, y: 0.007600138, z: -0.0005000252}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -22711,8 +22704,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.56716335, y: 0.5, z: 0.25070152}
-  m_Center: {x: -0.0070421696, y: -0.25, z: 0.031088933}
+  m_Size: {x: 0.56716335, y: 0.40259856, z: 0.25070152}
+  m_Center: {x: -0.0070421603, y: -0.29870072, z: 0.031088937}
 --- !u!54 &3745139096982229447
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -28722,6 +28715,11 @@ PrefabInstance:
       objectReference: {fileID: 2426592125244816261}
     - target: {fileID: 5457082310263247524, guid: d2c9bb6e24cd39c4d866b90236483d1b,
         type: 3}
+      propertyPath: patient_Bleeding
+      value: 
+      objectReference: {fileID: 2617095254580400147}
+    - target: {fileID: 5457082310263247524, guid: d2c9bb6e24cd39c4d866b90236483d1b,
+        type: 3}
       propertyPath: snapZonesRings.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -30377,6 +30375,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5457082310263247524, guid: d2c9bb6e24cd39c4d866b90236483d1b,
         type: 3}
+      propertyPath: patient_Bleeding
+      value: 
+      objectReference: {fileID: 2617095254580400147}
+    - target: {fileID: 5457082310263247524, guid: d2c9bb6e24cd39c4d866b90236483d1b,
+        type: 3}
       propertyPath: snapZonesRings.Array.size
       value: 4
       objectReference: {fileID: 0}
@@ -30981,18 +30984,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 3383745075248119914}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4930123467833421039 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7682625411915934853, guid: d2c9bb6e24cd39c4d866b90236483d1b,
-    type: 3}
-  m_PrefabInstance: {fileID: 3383745075248119914}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8688f98fcd840e04abdcdf9a59b9c990, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &5270685260607288621 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7480556386804708679, guid: d2c9bb6e24cd39c4d866b90236483d1b,

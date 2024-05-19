@@ -11,6 +11,8 @@ public class GauzeWipesCollision : MonoBehaviour
     [SerializeField]Grabbable grabbable;
     [SerializeField]IsBeingGrabHandTrack isBeingGrabHandTrack;
     private bool isChange;
+    [SerializeField]MeshRenderer meshKasa;
+    [SerializeField]Material[] materials_LessBlood, materials_ManyBlood;
 
     public void RegisterCleaner(GauzeWipes gauzeWipes, DirtyCleaner cleaner)
     {
@@ -33,6 +35,14 @@ public class GauzeWipesCollision : MonoBehaviour
         {
             isChange = true;
             gameObject.name = DirtyGauzeName;
+            if(collision.gameObject.GetComponent<DirtyObject>().IsManyBlood)
+            {
+                meshKasa.materials = materials_ManyBlood;
+            }
+            else
+            {
+                meshKasa.materials = materials_LessBlood;
+            }
         }
         if(grabbable.BeingHeld || isBeingGrabHandTrack.IsBeingGrab())cleaner.OnCleaning?.Invoke();
         
@@ -49,6 +59,14 @@ public class GauzeWipesCollision : MonoBehaviour
         {
             isChange = true;
             gameObject.name = DirtyGauzeName;
+            if(other.gameObject.GetComponent<DirtyObject>().IsManyBlood)
+            {
+                meshKasa.materials = materials_ManyBlood;
+            }
+            else
+            {
+                meshKasa.materials = materials_LessBlood;
+            }
         }
         if(grabbable.BeingHeld || isBeingGrabHandTrack.IsBeingGrab())cleaner.OnCleaning?.Invoke();
     }

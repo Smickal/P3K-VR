@@ -7,7 +7,7 @@ using UnityEngine;
 public class Bleeding_QuestManager : QuestManager, IPersistanceDataSave
 {
     [Header("target time")]
-    private float timeTarget_WithoutItem, timeTarget_WithItem;
+    [SerializeField]private float timeTarget_WithoutItem, timeTarget_WithItem;
 
     [SerializeField] bool isTrashEverywhere = true;
     [SerializeField] int totalDissatisfactionMax;

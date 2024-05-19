@@ -107,7 +107,7 @@ public class UIKotakP3K : BaseKitUI, ITurnOffStatic
                 //Debug.Log(scriptableData.KitName + " Unlocked");
 
                 kitInstance.SetState(true);
-                UnlockedKitSavedData[(int)kitInstance.Data.KitName] = true;
+                UnlockedKitSavedData[(int)kitInstance.Data.KitName-1] = true;
 
                 Save();
                 break;
@@ -120,7 +120,7 @@ public class UIKotakP3K : BaseKitUI, ITurnOffStatic
     {
         if(!_kitUiManager.IsBaseUIOpen())
         {
-            _kitUiManager.ActivateBaseUI("P3K Item Description");
+            _kitUiManager.ActivateBaseUI("P3K Item Description - OPEN");
             _kitUiManager.OpenDesc_OutsideGlossary();
         }
         
@@ -137,7 +137,19 @@ public class UIKotakP3K : BaseKitUI, ITurnOffStatic
     {
         if(scriptableData != null && scriptableOBJ_OutsideGlossary_Now == scriptableData)
         {
-            if(GameManager.CheckGameStateNow() != GameState.Pause) _kitUiManager.DeactivateBaseUI();
+            if(GameManager.CheckGameStateNow != null)
+            {
+                if(GameManager.CheckGameStateNow() != GameState.Pause)
+                {
+                    if(_kitUiManager.IsBaseUIOpen())
+                    {
+                        // Debug.Log("P3K Item Description - CLOSE");
+                        _kitUiManager.DeactivateBaseUI();
+                    }
+                }
+            }
+            
+            
             scriptableOBJ_OutsideGlossary_Now = null;
         }
     }

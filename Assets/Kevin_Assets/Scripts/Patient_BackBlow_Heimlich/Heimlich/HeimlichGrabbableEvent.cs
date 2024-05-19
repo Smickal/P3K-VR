@@ -20,7 +20,16 @@ public class HeimlichGrabbableEvent : GrabbableEvents
     public override void OnRelease()
     {
         base.OnRelease();
-        if(PlayerRestriction.IsRestrictMovement())PlayerRestriction.LiftMovementRestriction();
+        if(PlayerRestriction.IsRestrictMovement != null)
+        {
+            if(PlayerRestriction.IsRestrictMovement())
+            {
+                if(PlayerRestriction.LiftMovementRestriction != null)
+                {
+                    PlayerRestriction.LiftMovementRestriction();
+                }
+            }
+        }
         _heimlichMovement.ReleaseGrabber(grabber.gameObject);
     }
     

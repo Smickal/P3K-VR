@@ -137,6 +137,7 @@ public class BackBlowMovement : MonoBehaviour
         // Debug.Log(" " + col);
 
         // if(!(col.gameObject == _leftGrabberFull || col.gameObject == _rightGrabberFull || col == _leftGrabber || col == _rightGrabber)) return;
+        if(InteractToolsController.CheckIsHandTrackOn == null)return;
         if(!InteractToolsController.CheckIsHandTrackOn())
         {
             if(col == _leftGrabberFull || col == _rightGrabberFull || col == _leftGrabber || col == _rightGrabber)
@@ -215,8 +216,8 @@ public class BackBlowMovement : MonoBehaviour
 
         float distance = Vector3.Distance(endPos, startPos);
         velocity = distance / curTime;
-        Debug.Log("Test 4" + isTurnOff);
-        Debug.Log(velocity + " dan " + distance + " dan " + curTime); 
+        // Debug.Log("Test 4" + isTurnOff);
+        // Debug.Log(velocity + " dan " + distance + " dan " + curTime); 
         if(currentGrabberForBackBlow && currentGrabberForPull && 
             velocity > _minSmackVelocity && velocity < _maxSmackVelocity
             && prevBlowDistance <= blowDistance)
@@ -225,7 +226,7 @@ public class BackBlowMovement : MonoBehaviour
             // Debug.Log(col +"yang masuk"); 
             float scoreTemp = 0;
             backblowCount++;
-            Debug.Log("ReducedBackBlow_Shoulder" + _reducedScore/2f);
+            // Debug.Log("ReducedBackBlow_Shoulder" + _reducedScore/2f);
             scoreTemp = (_reducedScore/2f);
             if(_bbFull.HitFull)
             {
@@ -233,7 +234,7 @@ public class BackBlowMovement : MonoBehaviour
                 if(isFullScores)
                 {
                     // backblowCount++;
-                    Debug.Log("FullBackBlow_BB" + _fullScore);
+                    // Debug.Log("FullBackBlow_BB" + _fullScore);
                     scoreTemp = _fullScore;
                 }
 
@@ -241,7 +242,7 @@ public class BackBlowMovement : MonoBehaviour
                 else
                 {
                     // backblowCount++;
-                    Debug.Log("ReducedBackBlow_BB" + _reducedScore);
+                    // Debug.Log("ReducedBackBlow_BB" + _reducedScore);
                     scoreTemp = _reducedScore;
                 }
             }
@@ -261,7 +262,7 @@ public class BackBlowMovement : MonoBehaviour
             StartCoroutine(BackBlowCoolDown());
         }
         TurnAll();
-        Debug.Log("Test 5" + isTurnOff);
+        // Debug.Log("Test 5" + isTurnOff);
     }
 
     public void CheckForExitingCollider(Collider collider)
@@ -332,6 +333,7 @@ public class BackBlowMovement : MonoBehaviour
             StopCalc();
             return;
         }
+        if(InteractToolsController.CheckIsHandTrackOn == null)return;
         if(!InteractToolsController.CheckIsHandTrackOn())
         {
             if (grabber == _leftGrabber.gameObject)
@@ -375,7 +377,7 @@ public class BackBlowMovement : MonoBehaviour
     {
         StopCalc ();
         yield return new WaitForSeconds(_backBlowCooldown);
-        Debug.Log("what???");
+        // Debug.Log("what???");
         TurnAll();
         StartCalc();
         

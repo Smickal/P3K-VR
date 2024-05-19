@@ -181,7 +181,7 @@ public class AlcoholCleanManager : MonoBehaviour
                 _whiteSparkleParticle.transform.SetParent(this.transform);
                 _whiteSparkleParticle.transform.localPosition = Vector3.zero;
             }
-            Debug.Log("A Hand is Cleared!");
+            // Debug.Log("A Hand is Cleared!");
 
             _yellowSparkleParticle.Stop();
             _yellowSparkleParticle.transform.position = currentGrabber.transform.position;
@@ -202,7 +202,7 @@ public class AlcoholCleanManager : MonoBehaviour
             _yellowSparkleParticle.Stop();
             _yellowSparkleParticle.transform.position = currentGrabber.transform.position;
             _yellowSparkleParticle.Play();
-            Debug.Log("All Done");
+            // Debug.Log("All Done");
         }
     }
     public void Reset()

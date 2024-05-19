@@ -25,6 +25,7 @@ public class GloveInteractableEvent : MonoBehaviour
     {
         if(!DebugOnly)
         {
+            if(GameManager.CheckLevelTypeNow == null || GameManager.CheckInGameModeNow == null|| BleedingWithoutEmbeddedItem.StateFirstAidNow == null)return;
             if((GameManager.CheckLevelTypeNow() != LevelP3KType.Bleeding || 
             GameManager.CheckInGameModeNow() != InGame_Mode.FirstAid || 
             BleedingWithoutEmbeddedItem.StateFirstAidNow() != BleedingWithoutEmbeddedItem_State.WearGloves))return;
@@ -49,7 +50,7 @@ public class GloveInteractableEvent : MonoBehaviour
     }
     IEnumerator GrabRelease(HandGrabInteractor grabber)
     {
-        Debug.Log("What");
+        // Debug.Log("What");
         yield return new WaitForSeconds(.1f);
         grabber.ForceRelease();
     }

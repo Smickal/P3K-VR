@@ -43,10 +43,10 @@ public class AudioManager : MonoBehaviour
         }
         else if(BGM.Length > 1)
         {
-            Debug.Log("di sini");
+            // Debug.Log("di sini");
             foreach(GameObject gameObject in BGM)
             {
-                Debug.Log(gameObject);
+                // Debug.Log(gameObject);
                 if(gameObject != null && gameObject.GetComponent<BGMManager>().IsInstance)
                 {
                     
@@ -124,7 +124,7 @@ public class AudioManager : MonoBehaviour
     {
         bgmVol = vol;
         audioMixer.SetFloat(Mixer_BGM, Mathf.Log10(bgmVol)*20-1);
-        Debug.Log(bgmVol + "waht");
+        // Debug.Log(bgmVol + "waht");
         _BGMIChange.ChangeVolume(vol);
         PlayerPrefs.SetFloat(SaveStateKeyBGM, vol);
     }
@@ -132,10 +132,10 @@ public class AudioManager : MonoBehaviour
     {
         sfxVol = vol;
         audioMixer.SetFloat(Mixer_SFX, Mathf.Log10(sfxVol)*20);
-        foreach(IChangeVolume _SFXICh in _SFXIChange)
-        {
-            _SFXICh.ChangeVolume(vol);
-        }
+        // foreach(IChangeVolume _SFXICh in _SFXIChange)
+        // {
+        //     if(_SFXICh != null)_SFXICh.ChangeVolume(vol);
+        // }
         PlayerPrefs.SetFloat(SaveStateKeySFX, vol);
     }
     

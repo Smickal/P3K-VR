@@ -192,7 +192,7 @@ public class PlayerManager : MonoBehaviour, ITurnOffStatic
     {
         if (PlayerPrefs.HasKey(SaveStateKey))
         {
-            Debug.Log("Test");
+            // Debug.Log("Test");
             string loadString = PlayerPrefs.GetString(SaveStateKey);
             playerLevelSave = JsonConvert.DeserializeObject<PlayerLevelSave>(loadString);
 
@@ -207,7 +207,7 @@ public class PlayerManager : MonoBehaviour, ITurnOffStatic
         }
         else
         {
-            Debug.Log("Test");
+            // Debug.Log("Test");
             playerLevelSave = new PlayerLevelSave();
             playerLevelSave.levelDataMiniList = new PlayerLevelSave.LevelDataMini[realFile.levelPlayerDataList.Count];
             for(int i=1;i<realFile.levelPlayerDataList.Count;i++)
@@ -218,7 +218,10 @@ public class PlayerManager : MonoBehaviour, ITurnOffStatic
     }
     private void ResetSavePlayer()
     {
+        if(UIKotakP3K.ResetSaveData == null)return;
         UIKotakP3K.ResetSaveData();
+
+        if(UILangkahP3K.ResetSaveData == null)return;
         UILangkahP3K.ResetSaveData();
 
         realFile.lastLevel = LevelMode.Home;
@@ -336,9 +339,9 @@ public class PlayerManager : MonoBehaviour, ITurnOffStatic
 
 
         gameManager.ChangeGameState(GameState.Cinematic);
-        PlayerRestriction.ApplyAllRestriction();
+        if(PlayerRestriction.ApplyAllRestriction != null)PlayerRestriction.ApplyAllRestriction();
 
-        QuestEndingUI.ShowQuestEnding();
+        if(QuestEndingUI.ShowQuestEnding != null)QuestEndingUI.ShowQuestEnding();
 
     }
 

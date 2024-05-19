@@ -62,18 +62,18 @@ public class UIOption : BaseKitUI
 
     public void PlayerHeight(bool addPlayerHeight)
     {
-        PlayerHeightController.AddPlayerHeight(addPlayerHeight);
+        if(PlayerHeightController.AddPlayerHeight != null)PlayerHeightController.AddPlayerHeight(addPlayerHeight);
     }
     public void ResetPlayerHeight()
     {
-        PlayerHeightController.ResetPlayerHeight();
+        if(PlayerHeightController.ResetPlayerHeight != null)PlayerHeightController.ResetPlayerHeight();
     }
     public void ResetPlayerSaveData()
     {
-        PlayerManager.ResetPlayerSave();
+        if(PlayerManager.ResetPlayerSave != null)PlayerManager.ResetPlayerSave();
         if(_resetYesNoContainerOBJ.activeSelf)HideResetYesNo();
-        GameManager.PauseGame();
-        sceneMoveManager.GoBackHome();
+        if(GameManager.PauseGame != null)GameManager.PauseGame();
+        sceneMoveManager.GoBackHomeReset();
         //fade out
         //scene ke home;
         //scenemanagement

@@ -13,6 +13,7 @@ public class GlassShardsCollide : MonoBehaviour
     [SerializeField]SnapZone bandageSnapZone;
     private void OnCollisionEnter(Collision other) 
     {
+        if(GameManager.CheckGameStateNow == null || GameManager.CheckLevelTypeNow == null || GameManager.CheckInGameModeNow == null)return;
         if(GameManager.CheckGameStateNow() != GameState.InGame || GameManager.CheckLevelTypeNow() != LevelP3KType.Bleeding || GameManager.CheckInGameModeNow() != InGame_Mode.FirstAid)return;
         
         // Debug.Log(other.gameObject + " Collideee ");
@@ -37,6 +38,7 @@ public class GlassShardsCollide : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
+        if(GameManager.CheckGameStateNow == null || GameManager.CheckLevelTypeNow == null || GameManager.CheckInGameModeNow == null)return;
         if(GameManager.CheckGameStateNow() != GameState.InGame || GameManager.CheckLevelTypeNow() != LevelP3KType.Bleeding || GameManager.CheckInGameModeNow() != InGame_Mode.FirstAid)return;
         
         
@@ -54,7 +56,7 @@ public class GlassShardsCollide : MonoBehaviour
             if(other == bandageMovement.BandageCollider)
             {
                 if(bandageSnapZone.HeldItem != null && bandageSnapZone.HeldItem == other.gameObject)return;
-                Debug.Log("Patient Dissatisfied");
+                // Debug.Log("Patient Dissatisfied");
                 if(bleeding_QuestManager)bleeding_QuestManager.PatientDissatisfy();
             }
         }

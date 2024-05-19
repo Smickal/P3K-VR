@@ -42,10 +42,10 @@ public class TrashCountManager : MonoBehaviour
                     }
                     
                 }
-                else
-                {
-                    Debug.Log("harusnya ga trjadi");
-                }
+                // else
+                // {
+                //     Debug.Log("harusnya ga trjadi");
+                // }
             }
         }
     }

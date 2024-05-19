@@ -120,11 +120,11 @@ public class LegTargetConstraint : MonoBehaviour
         //->Find m
         //->Find b
 
-        float y1 = 1f;
+        // float y1 = 1f;
         float m1 = (endEdgePoint.y - startEdgePoint.y) / (endEdgePoint.x - startEdgePoint.x);
         float b1 = (endEdgePoint.y) - (endEdgePoint.x * m1);
 
-        float y2 = 1f;
+        // float y2 = 1f;
         float m2 = (point.y - _middlePoint.localPosition.y) / (point.x - _middlePoint.localPosition.x);
         float b2 = (point.y) - (point.x * m2);
 

@@ -49,7 +49,7 @@ public class PatientBackBlowHeimlich : MonoBehaviour
     int i =0;
     public void ActivateBackBlowRig()
     {
-        Debug.Log("ini i " + i + " cek");
+        // Debug.Log("ini i " + i + " cek");
         i++;
         // _heimlichContainerOBJ.SetActive(false);
         // _backBlowContainerOBJ.SetActive(true);
@@ -61,7 +61,7 @@ public class PatientBackBlowHeimlich : MonoBehaviour
         _heimlichMove.ResetCount();
         _backBlowMove.ResetCount();
         choking_QuestManager.PlayDialogueBackBlow();
-        QuestManagerUI.ChangeHelperDesc_Choking(titleChokingBackblow);
+        if(QuestManagerUI.ChangeHelperDesc_Choking != null)QuestManagerUI.ChangeHelperDesc_Choking(titleChokingBackblow);
     }
 
     public void ActivateHeimlich()
@@ -76,7 +76,7 @@ public class PatientBackBlowHeimlich : MonoBehaviour
         _heimlichMove.ResetCount();
         _backBlowMove.ResetCount();
         choking_QuestManager.PlayDialogueHeimlich();
-        QuestManagerUI.ChangeHelperDesc_Choking(titleChokingHeimlich);
+        if(QuestManagerUI.ChangeHelperDesc_Choking != null)QuestManagerUI.ChangeHelperDesc_Choking(titleChokingHeimlich);
     }
     public void UnActivateAll()
     {
@@ -103,7 +103,7 @@ public class PatientBackBlowHeimlich : MonoBehaviour
             ActivateContainerHeimlichOnly();
             TurnOffGrabber();
             
-            Choking_QuestManager.AddProgressBar(score);
+            if(Choking_QuestManager.AddProgressBar != null)Choking_QuestManager.AddProgressBar(score);
             ActivateHeimlich();
             _backBlowDone = true;
             
@@ -119,7 +119,7 @@ public class PatientBackBlowHeimlich : MonoBehaviour
             ActivateContainerBackblowOnly();
             TurnOffGrabber();
             
-            Choking_QuestManager.AddProgressBar(score);
+            if(Choking_QuestManager.AddProgressBar != null)Choking_QuestManager.AddProgressBar(score);
             ActivateBackBlowRig();
             _heimlichDone = true;
             
@@ -128,6 +128,7 @@ public class PatientBackBlowHeimlich : MonoBehaviour
 
     private void TurnOffGrabber()
     {
+        if(InteractToolsController.CheckIsHandTrackOn == null)return;
         if(!InteractToolsController.CheckIsHandTrackOn())
         {
             grabbers[0].TryRelease();

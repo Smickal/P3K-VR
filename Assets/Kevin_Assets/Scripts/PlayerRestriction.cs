@@ -191,7 +191,7 @@ public class PlayerRestriction : MonoBehaviour, ITurnOffStatic
         isRestrictMovement = true;
         // Debug.Log("WHAT DO YOU MEAN THERE'S NO PLAYER MOVEMENT" + playerMovement_BNG + "???");
         if(playerMovement_BNG)playerMovement_BNG.enabled = false;
-        Debug.Log(playerMovement_BNG.enabled + " HALOOO");
+        // Debug.Log(playerMovement_BNG.enabled + " HALOOO");
         // Debug.Log(playerMovements_OVR + " Kok bisa i;ang???");
         foreach(GameObject playermovement_OVR in playerMovements_OVR)
         {
@@ -272,7 +272,7 @@ public class PlayerRestriction : MonoBehaviour, ITurnOffStatic
             if(!all_BNG_Grabable.Contains(grab))
             {
                 all_BNG_Grabable.Add(grab);
-                Debug.Log("I add bngGrab " + gameObject);
+                // Debug.Log("I add bngGrab " + gameObject);
             }
         }
 
@@ -284,7 +284,7 @@ public class PlayerRestriction : MonoBehaviour, ITurnOffStatic
                 if(!all_Grabable_Rigidbody.Contains(getRigid))
                 {
                     all_Grabable_Rigidbody.Add(getRigid);
-                    Debug.Log("I add rb " + gameObject);
+                    // Debug.Log("I add rb " + gameObject);
                 }
                 
             }
@@ -299,7 +299,7 @@ public class PlayerRestriction : MonoBehaviour, ITurnOffStatic
             if(all_OVR_Grabable.Contains(grab))
             {
                 all_OVR_Grabable.Remove(grab);
-                Debug.Log("I remove handgrab " + grab+ gameObject);
+                // Debug.Log("I remove handgrab " + grab+ gameObject);
             }
             
         }
@@ -310,7 +310,7 @@ public class PlayerRestriction : MonoBehaviour, ITurnOffStatic
             if(all_OVR_DistanceGrabable.Contains(grab))
             {
                 all_OVR_DistanceGrabable.Remove(grab);
-                Debug.Log("I remove handgrabdis " + grab + gameObject);
+                // Debug.Log("I remove handgrabdis " + grab + gameObject);
             }
         }
 
@@ -320,7 +320,7 @@ public class PlayerRestriction : MonoBehaviour, ITurnOffStatic
             if(all_BNG_Grabable.Contains(grab))
             {
                 all_BNG_Grabable.Remove(grab);
-                Debug.Log("I remove rb " + grab+ gameObject);
+                // Debug.Log("I remove rb " + grab+ gameObject);
             }
         }
 
@@ -332,7 +332,7 @@ public class PlayerRestriction : MonoBehaviour, ITurnOffStatic
                 if(all_Grabable_Rigidbody.Contains(getRigid))
                 {
                     all_Grabable_Rigidbody.Remove(getRigid);
-                    Debug.Log("I remove rb " + getRigid+ gameObject);
+                    // Debug.Log("I remove rb " + getRigid+ gameObject);
                 }
             }
             // if(initial_BNG_GrabbableStates.ContainsKey(grabbable))initial_BNG_GrabbableStates.Remove(grabbable);
@@ -343,7 +343,7 @@ public class PlayerRestriction : MonoBehaviour, ITurnOffStatic
         if(all_OVR_Grabable.Contains(grab))
         {
             all_OVR_Grabable.Remove(grab);
-            Debug.Log("I remove handgrab " + grab+ gameObject);
+            // Debug.Log("I remove handgrab " + grab+ gameObject);
         }
     }
     public void DeleteDistanceHandGrab(DistanceHandGrabInteractable grab)
@@ -351,7 +351,7 @@ public class PlayerRestriction : MonoBehaviour, ITurnOffStatic
         if(all_OVR_DistanceGrabable.Contains(grab))
         {
             all_OVR_DistanceGrabable.Remove(grab);
-            Debug.Log("I remove handgrabdis " + grab + gameObject);
+            // Debug.Log("I remove handgrabdis " + grab + gameObject);
         }
     }
     public void DeleteGrabbable(Grabbable grab)
@@ -359,7 +359,7 @@ public class PlayerRestriction : MonoBehaviour, ITurnOffStatic
         if(all_BNG_Grabable.Contains(grab))
         {
             all_BNG_Grabable.Remove(grab);
-            Debug.Log("I remove rb " + grab+ gameObject);
+            // Debug.Log("I remove rb " + grab+ gameObject);
         }
         Rigidbody getRigid = grab.GetComponent<Rigidbody>();
         if(getRigid)
@@ -367,7 +367,7 @@ public class PlayerRestriction : MonoBehaviour, ITurnOffStatic
             if(all_Grabable_Rigidbody.Contains(getRigid))
             {
                 all_Grabable_Rigidbody.Remove(getRigid);
-                Debug.Log("I remove rb " + getRigid+ gameObject);
+                // Debug.Log("I remove rb " + getRigid+ gameObject);
             }
         }
     }

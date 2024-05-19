@@ -30,7 +30,16 @@ public class HeimlichInteractableEvent : MonoBehaviour
     public void OnReleaseHT()
     {
         // base.OnRelease();
-        if(PlayerRestriction.IsRestrictMovement())PlayerRestriction.LiftMovementRestriction();
+        if(PlayerRestriction.IsRestrictMovement != null)
+        {
+            if(PlayerRestriction.IsRestrictMovement())
+            {
+                if(PlayerRestriction.LiftMovementRestriction != null)
+                {
+                    PlayerRestriction.LiftMovementRestriction();
+                }
+            }
+        }
         _heimlichMovement.ReleaseGrabber(currGrabber);
         currGrabber = null;
         

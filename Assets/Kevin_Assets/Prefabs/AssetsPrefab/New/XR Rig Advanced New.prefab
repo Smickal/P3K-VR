@@ -22071,6 +22071,7 @@ MonoBehaviour:
   - {fileID: 6949636756477856537}
   - {fileID: 8840659838333815106}
   gameManager: {fileID: 0}
+  debugOpen: 0
 --- !u!1 &2491807059115966325
 GameObject:
   m_ObjectHideFlags: 0
@@ -37932,6 +37933,7 @@ MonoBehaviour:
   - Grabbable_LeftLeg
   - Grabbable_RightLeg
   - Prototype_Robot
+  - FirstAidKit
   SoundOnSnap: {fileID: 8300000, guid: 3ceadf14726b0864fb39bb646c0f9ba0, type: 3}
   SoundOnUnsnap: {fileID: 8300000, guid: 3ceadf14726b0864fb39bb646c0f9ba0, type: 3}
   OnSnapEvent:
@@ -38287,6 +38289,7 @@ MonoBehaviour:
   - Grabbable_LeftLeg
   - Grabbable_RightLeg
   - Prototype_Robot
+  - FirstAidKit
 --- !u!114 &4119481673528245812
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -53099,8 +53102,8 @@ Camera:
   m_GameObject: {fileID: 5637021313188027639}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0.019607844}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0.67597723, g: 0.7520909, b: 0.87169814, a: 0.019607844}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -53129,7 +53132,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967263
+    m_Bits: 1834839
   m_RenderingPath: 1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -74007,7 +74010,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7958841110636707669}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 494e659c238ebc5428bdb4e8d43de9ca, type: 3}
   m_Name: 
@@ -74143,7 +74146,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7958841110636707669}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ce69dd88838504c4c988eb0d63cad28a, type: 3}
   m_Name: 
@@ -80678,6 +80681,7 @@ MonoBehaviour:
   - Grabbable_LeftLeg
   - Grabbable_RightLeg
   - Prototype_Robot
+  - FirstAidKit
   SoundOnSnap: {fileID: 8300000, guid: 3ceadf14726b0864fb39bb646c0f9ba0, type: 3}
   SoundOnUnsnap: {fileID: 8300000, guid: 3ceadf14726b0864fb39bb646c0f9ba0, type: 3}
   OnSnapEvent:
@@ -81073,6 +81077,7 @@ MonoBehaviour:
   - Grabbable_LeftLeg
   - Grabbable_RightLeg
   - Prototype_Robot
+  - FirstAidKit
 --- !u!114 &8217336639563750581
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -88828,6 +88833,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 950785042372272393, guid: c2ba382097f06114c8ca184c7f00afaf,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0b07c337f1845ca448c029c2db157c7f, type: 2}
     - target: {fileID: 1078844873291735372, guid: c2ba382097f06114c8ca184c7f00afaf,
         type: 3}
       propertyPath: m_Layer
@@ -89144,7 +89154,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 1e73eec22136c1441b1a6c22ff5318ff, type: 2}
+      objectReference: {fileID: 2100000, guid: 4777b52f1de50f04a9894e557a118681, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -90100,11 +90110,6 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: bb512fe3350bcb8479ad97e466039877, type: 2}
-    - target: {fileID: 7397768948356387252, guid: 79777ae0bfe4829409a6a8db9a83b871,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 66a4166703d30414c9b224a6b5289ccc, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -91052,6 +91057,11 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: bb512fe3350bcb8479ad97e466039877, type: 2}
+    - target: {fileID: 7397768948356387252, guid: 79777ae0bfe4829409a6a8db9a83b871,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0b07c337f1845ca448c029c2db157c7f, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -91564,11 +91574,6 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 950785042372272393, guid: c2ba382097f06114c8ca184c7f00afaf,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 66a4166703d30414c9b224a6b5289ccc, type: 2}
     - target: {fileID: 1078844873291735372, guid: c2ba382097f06114c8ca184c7f00afaf,
         type: 3}
       propertyPath: m_Layer
@@ -92235,7 +92240,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 1e73eec22136c1441b1a6c22ff5318ff, type: 2}
+      objectReference: {fileID: 2100000, guid: 4777b52f1de50f04a9894e557a118681, type: 2}
     - target: {fileID: 1078844873291735372, guid: c2ba382097f06114c8ca184c7f00afaf,
         type: 3}
       propertyPath: m_Layer
@@ -92779,10 +92784,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 5796676597164561039}
-    - targetCorrespondingSourceObject: {fileID: 2429524573110555198, guid: ea16c3c8c1688234fa81a4f39339bf1b,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6749875101099492912}
     - targetCorrespondingSourceObject: {fileID: 4104369205668538801, guid: ea16c3c8c1688234fa81a4f39339bf1b,
         type: 3}
       insertIndex: -1
@@ -92873,22 +92874,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 8907681077250610837}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6749875101099492912
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6496749245766010027}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ac558de6fb637548a9e3e0483939688, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _interactors: []
-  _activeState: {fileID: 0}
-  _candidateComparer: {fileID: 0}
-  _maxIterationsPerFrame: 3
 --- !u!114 &7331898605036956657 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2188276980142914916, guid: ea16c3c8c1688234fa81a4f39339bf1b,
@@ -92962,11 +92947,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 692fc52bb2c4fcc4d9316a1af98fce7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  materialHands:
-  - {fileID: 2100000, guid: 05ba4ea569cc7f246a17c767d5353c1f, type: 2}
-  - {fileID: 2100000, guid: 12fefa7cbff43d542a64d99f878051c9, type: 2}
-  normalMaterial: {fileID: 2100000, guid: d641a50c4fe4ee3489a64cf52b76ae79, type: 2}
-  glovesMaterial: {fileID: 2100000, guid: 091a452a197fd364284751404f9fba87, type: 2}
+  skinnedMeshLeft: {fileID: 8070449642634161943}
+  skinnedMeshRight: {fileID: 4919744097039255533}
+  materials_Normal:
+  - {fileID: 2100000, guid: d641a50c4fe4ee3489a64cf52b76ae79, type: 2}
+  materials_Gloves:
+  - {fileID: 2100000, guid: 22f2bc0a640a1f94fb6c3b358ad71362, type: 2}
   normalOn: 0
   glovesOn: 0
 --- !u!1001 &8947389856498676696

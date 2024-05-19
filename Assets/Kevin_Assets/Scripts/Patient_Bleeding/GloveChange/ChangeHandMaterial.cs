@@ -8,13 +8,17 @@ public enum HandsMaterial
 }
 public class ChangeHandMaterial : MonoBehaviour
 {
-    [SerializeField]private Material[] materialHands;
-    [SerializeField]private Material normalMaterial, glovesMaterial;
+    // [SerializeField]private Material[] materialHands;
+    // [SerializeField]private Material normalMaterial, glovesMaterial;
+
+    [SerializeField]SkinnedMeshRenderer skinnedMeshLeft, skinnedMeshRight;
+    [SerializeField]Material[] materials_Normal, materials_Gloves;
     [Header("Debug ONLY")]
     public bool normalOn, glovesOn;
+    
     private void Awake() 
     {
-        ChangeHandsMaterial(HandsMaterial.Normal);
+        // ChangeHandsMaterial(HandsMaterial.Normal);
     }
     private void Update() 
     {
@@ -32,21 +36,33 @@ public class ChangeHandMaterial : MonoBehaviour
 
     public void ChangeHandsMaterial(HandsMaterial handsMaterial)
     {
-        for(int i=0;i<materialHands.Length;i++)
+        // for(int i=0;i<materialHands.Length;i++)
+        // {
+        //     if(handsMaterial == HandsMaterial.Normal)
+        //     {
+        //         materialHands[i].shader = normalMaterial.shader;
+        //         // materialHands[i].CopyPropertiesFromMaterial(normalMaterial);
+        //         // materialHands[i].parent = normalMaterial;
+        //     }
+        //     else if(handsMaterial == HandsMaterial.Gloves)
+        //     {
+        //         materialHands[i].shader = glovesMaterial.shader;
+        //         // materialHands[i].CopyPropertiesFromMaterial(glovesMaterial);
+        //         // materialHands[i].parent = glovesMaterial;
+        //     }
+        // }
+
+        if(handsMaterial == HandsMaterial.Normal)
         {
-            if(handsMaterial == HandsMaterial.Normal)
-            {
-                materialHands[i].shader = normalMaterial.shader;
-                // materialHands[i].CopyPropertiesFromMaterial(normalMaterial);
-                // materialHands[i].parent = normalMaterial;
-            }
-            else if(handsMaterial == HandsMaterial.Gloves)
-            {
-                materialHands[i].shader = glovesMaterial.shader;
-                // materialHands[i].CopyPropertiesFromMaterial(glovesMaterial);
-                // materialHands[i].parent = glovesMaterial;
-            }
+            skinnedMeshLeft.materials = materials_Normal;
+            skinnedMeshRight.materials = materials_Normal;
+        }
+        else if(handsMaterial == HandsMaterial.Gloves)
+        {
+            skinnedMeshLeft.materials = materials_Gloves;
+            skinnedMeshRight.materials = materials_Gloves;
         }
         
+
     }
 }

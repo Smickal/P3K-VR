@@ -211,10 +211,14 @@ public class Robot : GrabbableEvents
 
     public void ReleaseRobot()
     {
-        if(GameManager.CheckGameStateNow() == GameState.Cinematic)
+        if(GameManager.CheckGameStateNow != null)
         {
-            return;
+            if(GameManager.CheckGameStateNow() == GameState.Cinematic)
+            {
+                return;
+            }
         }
+        
         ActivateLookAt();
         if(grab)grab.DropItem(thisGrabber, true, false);
         if(currHand != null)

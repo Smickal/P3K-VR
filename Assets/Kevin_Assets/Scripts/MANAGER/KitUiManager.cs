@@ -44,7 +44,7 @@ public class KitUiManager : MonoBehaviour
 
     public void ActivateBaseUI(String titleBase)
     {
-        Debug.Log(titleBase);
+        // Debug.Log(titleBase);
         _titleBase.text = titleBase;
         _baseUI.SetActive(true);
     }
