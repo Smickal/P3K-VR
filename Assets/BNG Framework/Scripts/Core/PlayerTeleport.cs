@@ -279,7 +279,7 @@ namespace BNG {
         }
 
         public void EnableTeleportation() {
-            teleportationEnabled = true;
+            // teleportationEnabled = true;
         }
 
         public void DisableTeleportation() {
