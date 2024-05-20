@@ -9,6 +9,7 @@ public class GameData
     //Datas_Choking
     public string Level1Name;
     public string Level1Score;
+    public float level1ProgressFinal;
     public float  Level1TimeToFinish;
     public bool IsLevel1Done;
 

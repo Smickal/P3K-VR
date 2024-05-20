@@ -148,6 +148,7 @@ public class Choking_QuestManager : QuestManager, IPersistanceDataSave, ITurnOff
         data.Level1Name = LevelP3KType.Choking.ToString();
         data.Level1Score = score.ToString();
         data.Level1TimeToFinish = timerInSecs;
+        data.level1ProgressFinal = progressNow;
 
         data.IsLevel1Done = true;
     }
