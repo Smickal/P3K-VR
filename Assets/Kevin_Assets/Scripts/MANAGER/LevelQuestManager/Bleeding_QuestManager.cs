@@ -126,6 +126,8 @@ public class Bleeding_QuestManager : QuestManager, IPersistanceDataSave
     public void SaveData(GameData data)
     {
         data.Level2Name = LevelP3KType.Bleeding.ToString();
+
+        data.Level2Score = score.ToString();
         data.Level2TimeToFinish = timerInSecs;
         data.Level2TimeToFinish_WithoutItem = timeToFinish_WithoutItem;
         data.Level2TimeToFinish_WithItem = timeToFinish_WithItem;
